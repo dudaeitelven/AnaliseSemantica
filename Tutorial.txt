@@ -1,0 +1,17 @@
+execute analisador.exe
+
+ao executar irá solicitar ao usuário o endereço de um arquivo de texto
+onde está localizado o programa a ser verificado por exemplo:
+C:\User\Programa\teste.txt
+
+o analisador irá verificar se possui algum erro lexico, caso possuir 
+irá ser mostrado no proprio aplicativo, contendo a linha e a posição 
+do token invalido encontrado.
+
+após concluída a verificação lexica, o programa irá verificar se possui 
+algum erro sintático, caso possuir irá ser mostrado no proprio aplicativo,
+com mensagem aproprieda conforme erro encontrado, contendo a linha e a 
+posição do erro encontrado.
+
+ao final da verificação sintática, caso nenhum erro for encontrado, irá 
+mostrar a mensagem "Nenhum erro foi encontrado no programa".
