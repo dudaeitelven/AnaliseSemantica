@@ -1,0 +1,2051 @@
+
+;; Function le_char (le_char, funcdef_no=17, decl_uid=4913, cgraph_uid=17, symbol_order=24)
+
+le_char ()
+{
+  char c;
+  char D.5021;
+  struct FILE * arqin.0_1;
+  long long unsigned int _2;
+  char c.1_3;
+  int linlex.2_4;
+  int _5;
+  int collex.3_6;
+  int _7;
+  char _8;
+  char _13;
+  char _17;
+
+  <bb 2> :
+  arqin.0_1 = arqin;
+  _2 = fread (&c, 1, 1, arqin.0_1);
+  if (_2 == 0)
+    goto <bb 3>; [INV]
+  else
+    goto <bb 4>; [INV]
+
+  <bb 3> :
+  _13 = -1;
+  // predicted unlikely by early return (on trees) predictor.
+  goto <bb 8>; [INV]
+
+  <bb 4> :
+  c.1_3 = c;
+  if (c.1_3 == 10)
+    goto <bb 5>; [INV]
+  else
+    goto <bb 6>; [INV]
+
+  <bb 5> :
+  linlex.2_4 = linlex;
+  _5 = linlex.2_4 + 1;
+  linlex = _5;
+  collex = 1;
+  goto <bb 7>; [INV]
+
+  <bb 6> :
+  collex.3_6 = collex;
+  _7 = collex.3_6 + 1;
+  collex = _7;
+
+  <bb 7> :
+  _17 = c;
+
+  <bb 8> :
+  # _8 = PHI <_13(3), _17(7)>
+  c ={v} {CLOBBER};
+
+  <bb 9> :
+<L6>:
+  return _8;
+
+}
+
+
+
+;; Function pal_res (pal_res, funcdef_no=18, decl_uid=4917, cgraph_uid=18, symbol_order=25)
+
+pal_res (char * lex)
+{
+  int tk;
+  int D.5029;
+  char[20] * _1;
+  int _2;
+  char[20] * _3;
+  int _4;
+  int _6;
+  int _10;
+  int _12;
+
+  <bb 2> :
+  tk_7 = 0;
+  goto <bb 6>; [INV]
+
+  <bb 3> :
+  _1 = &reservadas[tk_5].palavra;
+  _2 = strcmp (lex_9(D), _1);
+  if (_2 == 0)
+    goto <bb 4>; [INV]
+  else
+    goto <bb 5>; [INV]
+
+  <bb 4> :
+  _10 = reservadas[tk_5].token;
+  // predicted unlikely by early return (on trees) predictor.
+  goto <bb 8>; [INV]
+
+  <bb 5> :
+  tk_11 = tk_5 + 1;
+
+  <bb 6> :
+  # tk_5 = PHI <tk_7(2), tk_11(5)>
+  _3 = &reservadas[tk_5].palavra;
+  _4 = strcmp (_3, "fim");
+  if (_4 != 0)
+    goto <bb 3>; [INV]
+  else
+    goto <bb 7>; [INV]
+
+  <bb 7> :
+  _12 = 28;
+
+  <bb 8> :
+  # _6 = PHI <_10(4), _12(7)>
+<L5>:
+  return _6;
+
+}
+
+
+
+;; Function le_token (le_token, funcdef_no=19, decl_uid=4923, cgraph_uid=19, symbol_order=26)
+
+le_token ()
+{
+  static char c = 0;
+  static int estado = 0;
+  static int pos = 0;
+  int D.5033;
+  int estado.4_1;
+  char c.5_2;
+  char _3;
+  char c.6_4;
+  char _5;
+  char c.7_6;
+  char _7;
+  char c.8_8;
+  char _9;
+  char c.9_10;
+  char _11;
+  char c.10_12;
+  char _13;
+  char c.11_14;
+  char _15;
+  char c.12_16;
+  char _17;
+  char c.13_18;
+  char _19;
+  char c.14_20;
+  char _21;
+  char c.15_22;
+  char _23;
+  char c.16_24;
+  char _25;
+  char c.17_26;
+  char _27;
+  char c.18_28;
+  char _29;
+  char c.19_30;
+  char _31;
+  char c.20_32;
+  char _33;
+  char c.21_34;
+  char _35;
+  char c.22_36;
+  char _37;
+  char c.23_38;
+  char _39;
+  char c.24_40;
+  char c.25_41;
+  char c.26_42;
+  char c.27_43;
+  char _44;
+  char c.28_45;
+  char c.29_46;
+  char c.30_47;
+  char _48;
+  char c.31_49;
+  char c.32_50;
+  char c.33_51;
+  char c.34_52;
+  char c.35_53;
+  char c.36_54;
+  char _55;
+  char c.37_56;
+  char c.38_57;
+  char c.39_58;
+  char c.40_59;
+  char c.41_60;
+  int pos.42_61;
+  int pos.43_62;
+  int _63;
+  char c.44_64;
+  char _65;
+  int pos.45_66;
+  char c.46_67;
+  char c.47_68;
+  int pos.48_69;
+  int pos.49_70;
+  int _71;
+  char c.50_72;
+  char _73;
+  int pos.51_74;
+  int _75;
+  int _84;
+  int _87;
+  int _90;
+  int _93;
+  int _96;
+  int _99;
+  int _102;
+  int _105;
+  int _108;
+  int _111;
+  int _114;
+  int _119;
+  int _120;
+  int _125;
+  int _126;
+  int _131;
+  int _132;
+  int _137;
+  int _143;
+  int _154;
+  int _165;
+
+  <bb 2> :
+  estado.4_1 = estado;
+  switch (estado.4_1) <default: <L67> [INV], case 0: <L1> [INV], case 1: <L55> [INV], case 2: <L63> [INV]>
+
+  <bb 3> :
+<L1>:
+  c.5_2 = c;
+  if (c.5_2 == 44)
+    goto <bb 4>; [INV]
+  else
+    goto <bb 5>; [INV]
+
+  <bb 4> :
+  _3 = le_char ();
+  c = _3;
+  _84 = 20;
+  // predicted unlikely by early return (on trees) predictor.
+  goto <bb 67>; [INV]
+
+  <bb 5> :
+  c.6_4 = c;
+  if (c.6_4 == 43)
+    goto <bb 6>; [INV]
+  else
+    goto <bb 7>; [INV]
+
+  <bb 6> :
+  _5 = le_char ();
+  c = _5;
+  _87 = 15;
+  // predicted unlikely by early return (on trees) predictor.
+  goto <bb 67>; [INV]
+
+  <bb 7> :
+  c.7_6 = c;
+  if (c.7_6 == 45)
+    goto <bb 8>; [INV]
+  else
+    goto <bb 9>; [INV]
+
+  <bb 8> :
+  _7 = le_char ();
+  c = _7;
+  _90 = 16;
+  // predicted unlikely by early return (on trees) predictor.
+  goto <bb 67>; [INV]
+
+  <bb 9> :
+  c.8_8 = c;
+  if (c.8_8 == 42)
+    goto <bb 10>; [INV]
+  else
+    goto <bb 11>; [INV]
+
+  <bb 10> :
+  _9 = le_char ();
+  c = _9;
+  _93 = 17;
+  // predicted unlikely by early return (on trees) predictor.
+  goto <bb 67>; [INV]
+
+  <bb 11> :
+  c.9_10 = c;
+  if (c.9_10 == 123)
+    goto <bb 12>; [INV]
+  else
+    goto <bb 13>; [INV]
+
+  <bb 12> :
+  _11 = le_char ();
+  c = _11;
+  _96 = 10;
+  // predicted unlikely by early return (on trees) predictor.
+  goto <bb 67>; [INV]
+
+  <bb 13> :
+  c.10_12 = c;
+  if (c.10_12 == 125)
+    goto <bb 14>; [INV]
+  else
+    goto <bb 15>; [INV]
+
+  <bb 14> :
+  _13 = le_char ();
+  c = _13;
+  _99 = 11;
+  // predicted unlikely by early return (on trees) predictor.
+  goto <bb 67>; [INV]
+
+  <bb 15> :
+  c.11_14 = c;
+  if (c.11_14 == 59)
+    goto <bb 16>; [INV]
+  else
+    goto <bb 17>; [INV]
+
+  <bb 16> :
+  _15 = le_char ();
+  c = _15;
+  _102 = 21;
+  // predicted unlikely by early return (on trees) predictor.
+  goto <bb 67>; [INV]
+
+  <bb 17> :
+  c.12_16 = c;
+  if (c.12_16 == 91)
+    goto <bb 18>; [INV]
+  else
+    goto <bb 19>; [INV]
+
+  <bb 18> :
+  _17 = le_char ();
+  c = _17;
+  _105 = 8;
+  // predicted unlikely by early return (on trees) predictor.
+  goto <bb 67>; [INV]
+
+  <bb 19> :
+  c.13_18 = c;
+  if (c.13_18 == 93)
+    goto <bb 20>; [INV]
+  else
+    goto <bb 21>; [INV]
+
+  <bb 20> :
+  _19 = le_char ();
+  c = _19;
+  _108 = 9;
+  // predicted unlikely by early return (on trees) predictor.
+  goto <bb 67>; [INV]
+
+  <bb 21> :
+  c.14_20 = c;
+  if (c.14_20 == 40)
+    goto <bb 22>; [INV]
+  else
+    goto <bb 23>; [INV]
+
+  <bb 22> :
+  _21 = le_char ();
+  c = _21;
+  _111 = 18;
+  // predicted unlikely by early return (on trees) predictor.
+  goto <bb 67>; [INV]
+
+  <bb 23> :
+  c.15_22 = c;
+  if (c.15_22 == 41)
+    goto <bb 24>; [INV]
+  else
+    goto <bb 25>; [INV]
+
+  <bb 24> :
+  _23 = le_char ();
+  c = _23;
+  _114 = 19;
+  // predicted unlikely by early return (on trees) predictor.
+  goto <bb 67>; [INV]
+
+  <bb 25> :
+  c.16_24 = c;
+  if (c.16_24 == 61)
+    goto <bb 26>; [INV]
+  else
+    goto <bb 29>; [INV]
+
+  <bb 26> :
+  _25 = le_char ();
+  c = _25;
+  c.17_26 = c;
+  if (c.17_26 == 61)
+    goto <bb 27>; [INV]
+  else
+    goto <bb 28>; [INV]
+
+  <bb 27> :
+  _27 = le_char ();
+  c = _27;
+  _119 = 26;
+  // predicted unlikely by early return (on trees) predictor.
+  goto <bb 67>; [INV]
+
+  <bb 28> :
+  _120 = 13;
+  // predicted unlikely by early return (on trees) predictor.
+  goto <bb 67>; [INV]
+
+  <bb 29> :
+  c.18_28 = c;
+  if (c.18_28 == 60)
+    goto <bb 30>; [INV]
+  else
+    goto <bb 33>; [INV]
+
+  <bb 30> :
+  _29 = le_char ();
+  c = _29;
+  c.19_30 = c;
+  if (c.19_30 == 61)
+    goto <bb 31>; [INV]
+  else
+    goto <bb 32>; [INV]
+
+  <bb 31> :
+  _31 = le_char ();
+  c = _31;
+  _125 = 24;
+  // predicted unlikely by early return (on trees) predictor.
+  goto <bb 67>; [INV]
+
+  <bb 32> :
+  _126 = 23;
+  // predicted unlikely by early return (on trees) predictor.
+  goto <bb 67>; [INV]
+
+  <bb 33> :
+  c.20_32 = c;
+  if (c.20_32 == 62)
+    goto <bb 34>; [INV]
+  else
+    goto <bb 37>; [INV]
+
+  <bb 34> :
+  _33 = le_char ();
+  c = _33;
+  c.21_34 = c;
+  if (c.21_34 == 61)
+    goto <bb 35>; [INV]
+  else
+    goto <bb 36>; [INV]
+
+  <bb 35> :
+  _35 = le_char ();
+  c = _35;
+  _131 = 25;
+  // predicted unlikely by early return (on trees) predictor.
+  goto <bb 67>; [INV]
+
+  <bb 36> :
+  _132 = 22;
+  // predicted unlikely by early return (on trees) predictor.
+  goto <bb 67>; [INV]
+
+  <bb 37> :
+  c.22_36 = c;
+  if (c.22_36 == 33)
+    goto <bb 38>; [INV]
+  else
+    goto <bb 40>; [INV]
+
+  <bb 38> :
+  _37 = le_char ();
+  c = _37;
+  c.23_38 = c;
+  if (c.23_38 == 61)
+    goto <bb 39>; [INV]
+  else
+    goto <bb 40>; [INV]
+
+  <bb 39> :
+  _39 = le_char ();
+  c = _39;
+  _137 = 27;
+  // predicted unlikely by early return (on trees) predictor.
+  goto <bb 67>; [INV]
+
+  <bb 40> :
+  c.24_40 = c;
+  if (c.24_40 > 96)
+    goto <bb 41>; [INV]
+  else
+    goto <bb 42>; [INV]
+
+  <bb 41> :
+  c.25_41 = c;
+  if (c.25_41 <= 122)
+    goto <bb 43>; [INV]
+  else
+    goto <bb 42>; [INV]
+
+  <bb 42> :
+  c.26_42 = c;
+  if (c.26_42 == 95)
+    goto <bb 43>; [INV]
+  else
+    goto <bb 44>; [INV]
+
+  <bb 43> :
+  c.27_43 = c;
+  lex[0] = c.27_43;
+  _44 = le_char ();
+  c = _44;
+  pos = 1;
+  estado = 1;
+  goto <bb 66>; [INV]
+
+  <bb 44> :
+  c.28_45 = c;
+  if (c.28_45 > 47)
+    goto <bb 45>; [INV]
+  else
+    goto <bb 47>; [INV]
+
+  <bb 45> :
+  c.29_46 = c;
+  if (c.29_46 <= 57)
+    goto <bb 46>; [INV]
+  else
+    goto <bb 47>; [INV]
+
+  <bb 46> :
+  c.30_47 = c;
+  lex[0] = c.30_47;
+  _48 = le_char ();
+  c = _48;
+  pos = 1;
+  estado = 2;
+  goto <bb 66>; [INV]
+
+  <bb 47> :
+  c.31_49 = c;
+  if (c.31_49 == -1)
+    goto <bb 48>; [INV]
+  else
+    goto <bb 49>; [INV]
+
+  <bb 48> :
+  _143 = 12;
+  // predicted unlikely by early return (on trees) predictor.
+  goto <bb 67>; [INV]
+
+  <bb 49> :
+  c.32_50 = c;
+  if (c.32_50 == 10)
+    goto <bb 54>; [INV]
+  else
+    goto <bb 50>; [INV]
+
+  <bb 50> :
+  c.33_51 = c;
+  if (c.33_51 == 13)
+    goto <bb 54>; [INV]
+  else
+    goto <bb 51>; [INV]
+
+  <bb 51> :
+  c.34_52 = c;
+  if (c.34_52 == 9)
+    goto <bb 54>; [INV]
+  else
+    goto <bb 52>; [INV]
+
+  <bb 52> :
+  c.35_53 = c;
+  if (c.35_53 == 0)
+    goto <bb 54>; [INV]
+  else
+    goto <bb 53>; [INV]
+
+  <bb 53> :
+  c.36_54 = c;
+  if (c.36_54 == 32)
+    goto <bb 54>; [INV]
+  else
+    goto <bb 55>; [INV]
+
+  <bb 54> :
+  _55 = le_char ();
+  c = _55;
+  goto <bb 66>; [INV]
+
+  <bb 55> :
+<L55>:
+  c.37_56 = c;
+  if (c.37_56 > 96)
+    goto <bb 56>; [INV]
+  else
+    goto <bb 57>; [INV]
+
+  <bb 56> :
+  c.38_57 = c;
+  if (c.38_57 <= 122)
+    goto <bb 60>; [INV]
+  else
+    goto <bb 57>; [INV]
+
+  <bb 57> :
+  c.39_58 = c;
+  if (c.39_58 == 95)
+    goto <bb 60>; [INV]
+  else
+    goto <bb 58>; [INV]
+
+  <bb 58> :
+  c.40_59 = c;
+  if (c.40_59 > 47)
+    goto <bb 59>; [INV]
+  else
+    goto <bb 61>; [INV]
+
+  <bb 59> :
+  c.41_60 = c;
+  if (c.41_60 <= 57)
+    goto <bb 60>; [INV]
+  else
+    goto <bb 61>; [INV]
+
+  <bb 60> :
+  pos.42_61 = pos;
+  pos.43_62 = pos.42_61;
+  _63 = pos.43_62 + 1;
+  pos = _63;
+  c.44_64 = c;
+  lex[pos.43_62] = c.44_64;
+  _65 = le_char ();
+  c = _65;
+  goto <bb 66>; [INV]
+
+  <bb 61> :
+  estado = 0;
+  pos.45_66 = pos;
+  lex[pos.45_66] = 0;
+  _154 = pal_res (&lex);
+  // predicted unlikely by early return (on trees) predictor.
+  goto <bb 67>; [INV]
+
+  <bb 62> :
+<L63>:
+  c.46_67 = c;
+  if (c.46_67 > 47)
+    goto <bb 63>; [INV]
+  else
+    goto <bb 65>; [INV]
+
+  <bb 63> :
+  c.47_68 = c;
+  if (c.47_68 <= 57)
+    goto <bb 64>; [INV]
+  else
+    goto <bb 65>; [INV]
+
+  <bb 64> :
+  pos.48_69 = pos;
+  pos.49_70 = pos.48_69;
+  _71 = pos.49_70 + 1;
+  pos = _71;
+  c.50_72 = c;
+  lex[pos.49_70] = c.50_72;
+  _73 = le_char ();
+  c = _73;
+  goto <bb 66>; [INV]
+
+  <bb 65> :
+  estado = 0;
+  pos.51_74 = pos;
+  lex[pos.51_74] = 0;
+  _165 = 14;
+  // predicted unlikely by early return (on trees) predictor.
+  goto <bb 67>; [INV]
+
+  <bb 66> :
+<L67>:
+  goto <bb 2>; [INV]
+
+  <bb 67> :
+  # _75 = PHI <_84(4), _87(6), _90(8), _93(10), _96(12), _99(14), _102(16), _105(18), _108(20), _111(22), _114(24), _119(27), _120(28), _125(31), _126(32), _131(35), _132(36), _137(39), _143(48), _154(61), _165(65)>
+<L69>:
+  return _75;
+
+}
+
+
+
+;; Function mostra_t (mostra_t, funcdef_no=20, decl_uid=4933, cgraph_uid=20, symbol_order=27)
+
+mostra_t ()
+{
+  int collex.52_1;
+  int linlex.53_2;
+  int token.54_3;
+  char[20] * _4;
+
+  <bb 2> :
+  collex.52_1 = collex;
+  linlex.53_2 = linlex;
+  token.54_3 = token;
+  _4 = &tokens[token.54_3];
+  printf ("%s lex=%s na lin %d, col %d\n", _4, &lex, linlex.53_2, collex.52_1);
+  return;
+
+}
+
+
+
+;; Function F (F, funcdef_no=26, decl_uid=4943, cgraph_uid=26, symbol_order=33)
+
+F (char * F_c)
+{
+  char E_c[1000];
+  long long unsigned int D.5180;
+  int D.5177;
+  long long unsigned int D.5175;
+  char * D.5181;
+  char * D.5176;
+  int token.72_1;
+  int _2;
+  int token.73_3;
+  int _4;
+  int token.74_5;
+  int _6;
+  int _7;
+  int token.75_8;
+  int _9;
+  int _10;
+  long long unsigned int _18;
+  char * _19;
+  int _23;
+  long long unsigned int _26;
+  char * _27;
+  int _31;
+  int _38;
+  int _41;
+
+  <bb 2> :
+  __builtin_puts (&"Entrei no F"[0]);
+  token.72_1 = token;
+  if (token.72_1 == 14)
+    goto <bb 3>; [INV]
+  else
+    goto <bb 4>; [INV]
+
+  <bb 3> :
+  __builtin_memcpy (F_c_15(D), "\tpush ", 7);
+  strcat (F_c_15(D), &lex);
+  _18 = __builtin_strlen (F_c_15(D));
+  _19 = F_c_15(D) + _18;
+  __builtin_memcpy (_19, "\n", 2);
+  _2 = le_token ();
+  token = _2;
+  _23 = 1;
+  // predicted unlikely by early return (on trees) predictor.
+  goto <bb 12>; [INV]
+
+  <bb 4> :
+  token.73_3 = token;
+  if (token.73_3 == 28)
+    goto <bb 5>; [INV]
+  else
+    goto <bb 6>; [INV]
+
+  <bb 5> :
+  __builtin_memcpy (F_c_15(D), "\tvalor-r ", 10);
+  strcat (F_c_15(D), &lex);
+  _26 = __builtin_strlen (F_c_15(D));
+  _27 = F_c_15(D) + _26;
+  __builtin_memcpy (_27, "\n", 2);
+  _4 = le_token ();
+  token = _4;
+  _31 = 1;
+  // predicted unlikely by early return (on trees) predictor.
+  goto <bb 12>; [INV]
+
+  <bb 6> :
+  token.74_5 = token;
+  if (token.74_5 == 18)
+    goto <bb 7>; [INV]
+  else
+    goto <bb 11>; [INV]
+
+  <bb 7> :
+  _6 = le_token ();
+  token = _6;
+  _7 = E (&E_c);
+  if (_7 != 0)
+    goto <bb 8>; [INV]
+  else
+    goto <bb 10>; [INV]
+
+  <bb 8> :
+  token.75_8 = token;
+  if (token.75_8 == 19)
+    goto <bb 9>; [INV]
+  else
+    goto <bb 10>; [INV]
+
+  <bb 9> :
+  _9 = le_token ();
+  token = _9;
+  strcpy (F_c_15(D), &E_c);
+  _38 = 1;
+  // predicted unlikely by early return (on trees) predictor.
+  E_c ={v} {CLOBBER};
+  goto <bb 12>; [INV]
+
+  <bb 10> :
+  E_c ={v} {CLOBBER};
+
+  <bb 11> :
+  _41 = 0;
+
+  <bb 12> :
+  # _10 = PHI <_23(3), _31(5), _38(9), _41(11)>
+<L12>:
+  return _10;
+
+}
+
+
+
+;; Function S (S, funcdef_no=25, decl_uid=4946, cgraph_uid=25, symbol_order=32)
+
+S (char * S_h, char * S_s)
+{
+  char S1_s[1000];
+  char S1_h[1000];
+  char F_c[1000];
+  int D.5170;
+  long long unsigned int D.5166;
+  char[1000] * D.5167;
+  int token.71_1;
+  int _2;
+  int _3;
+  int _4;
+  int _5;
+  long long unsigned int _16;
+  char[1000] * _17;
+  int _22;
+  int _23;
+  int _26;
+
+  <bb 2> :
+  __builtin_puts (&"Entrei no S (*FS)"[0]);
+  token.71_1 = token;
+  if (token.71_1 == 17)
+    goto <bb 3>; [INV]
+  else
+    goto <bb 7>; [INV]
+
+  <bb 3> :
+  _2 = le_token ();
+  token = _2;
+  _3 = F (&F_c);
+  if (_3 != 0)
+    goto <bb 4>; [INV]
+  else
+    goto <bb 6>; [INV]
+
+  <bb 4> :
+  strcpy (&S1_h, S_h_13(D));
+  strcat (&S1_h, &F_c);
+  _16 = __builtin_strlen (&S1_h);
+  _17 = &S1_h + _16;
+  __builtin_memcpy (_17, "\t*\n", 4);
+  _4 = S (&S1_h, &S1_s);
+  if (_4 != 0)
+    goto <bb 5>; [INV]
+  else
+    goto <bb 6>; [INV]
+
+  <bb 5> :
+  strcpy (S_s_20(D), &S1_s);
+  _22 = 1;
+  // predicted unlikely by early return (on trees) predictor.
+  goto <bb 8>; [INV]
+
+  <bb 6> :
+  _23 = 0;
+  // predicted unlikely by early return (on trees) predictor.
+  goto <bb 8>; [INV]
+
+  <bb 7> :
+  strcpy (S_s_20(D), S_h_13(D));
+  __builtin_puts (&"Vou retornar 1 no S"[0]);
+  _26 = 1;
+
+  <bb 8> :
+  # _5 = PHI <_22(5), _23(6), _26(7)>
+  F_c ={v} {CLOBBER};
+  S1_h ={v} {CLOBBER};
+  S1_s ={v} {CLOBBER};
+
+  <bb 9> :
+<L7>:
+  return _5;
+
+}
+
+
+
+;; Function T (T, funcdef_no=24, decl_uid=4936, cgraph_uid=24, symbol_order=31)
+
+T (char * T_c)
+{
+  char S_s[1000];
+  char S_h[1000];
+  char F_c[1000];
+  int D.5159;
+  int _1;
+  int _2;
+  int _3;
+  int _13;
+  int _14;
+
+  <bb 2> :
+  __builtin_puts (&"Entrei no T"[0]);
+  _1 = F (&F_c);
+  if (_1 != 0)
+    goto <bb 3>; [INV]
+  else
+    goto <bb 5>; [INV]
+
+  <bb 3> :
+  strcpy (&S_h, &F_c);
+  _2 = S (&S_h, &S_s);
+  if (_2 != 0)
+    goto <bb 4>; [INV]
+  else
+    goto <bb 5>; [INV]
+
+  <bb 4> :
+  strcpy (T_c_11(D), &S_s);
+  _13 = 1;
+  // predicted unlikely by early return (on trees) predictor.
+  goto <bb 6>; [INV]
+
+  <bb 5> :
+  _14 = 0;
+
+  <bb 6> :
+  # _3 = PHI <_13(4), _14(5)>
+  F_c ={v} {CLOBBER};
+  S_h ={v} {CLOBBER};
+  S_s ={v} {CLOBBER};
+
+  <bb 7> :
+<L5>:
+  return _3;
+
+}
+
+
+
+;; Function R (R, funcdef_no=23, decl_uid=4941, cgraph_uid=23, symbol_order=30)
+
+R (char * R_h, char * R_s)
+{
+  char R1_s[1000];
+  char R1_h[1000];
+  char T_c[1000];
+  long long unsigned int D.5149;
+  int D.5144;
+  long long unsigned int D.5140;
+  char[1000] * D.5150;
+  char[1000] * D.5141;
+  int token.69_1;
+  int _2;
+  int _3;
+  int _4;
+  int token.70_5;
+  int _6;
+  int _7;
+  int _8;
+  int _9;
+  long long unsigned int _21;
+  char[1000] * _22;
+  int _27;
+  int _28;
+  long long unsigned int _34;
+  char[1000] * _35;
+  int _39;
+  int _40;
+  int _43;
+
+  <bb 2> :
+  __builtin_puts (&"Entrei no R (+TR | -TR)"[0]);
+  token.69_1 = token;
+  if (token.69_1 == 15)
+    goto <bb 3>; [INV]
+  else
+    goto <bb 7>; [INV]
+
+  <bb 3> :
+  _2 = le_token ();
+  token = _2;
+  _3 = T (&T_c);
+  if (_3 != 0)
+    goto <bb 4>; [INV]
+  else
+    goto <bb 6>; [INV]
+
+  <bb 4> :
+  strcpy (&R1_h, R_h_18(D));
+  strcat (&R1_h, &T_c);
+  _21 = __builtin_strlen (&R1_h);
+  _22 = &R1_h + _21;
+  __builtin_memcpy (_22, "\t+\n", 4);
+  _4 = R (&R1_h, &R1_s);
+  if (_4 != 0)
+    goto <bb 5>; [INV]
+  else
+    goto <bb 6>; [INV]
+
+  <bb 5> :
+  strcpy (R_s_25(D), &R1_s);
+  _27 = 1;
+  // predicted unlikely by early return (on trees) predictor.
+  goto <bb 13>; [INV]
+
+  <bb 6> :
+  _28 = 0;
+  // predicted unlikely by early return (on trees) predictor.
+  goto <bb 13>; [INV]
+
+  <bb 7> :
+  token.70_5 = token;
+  if (token.70_5 == 16)
+    goto <bb 8>; [INV]
+  else
+    goto <bb 12>; [INV]
+
+  <bb 8> :
+  _6 = le_token ();
+  token = _6;
+  _7 = T (&T_c);
+  if (_7 != 0)
+    goto <bb 9>; [INV]
+  else
+    goto <bb 11>; [INV]
+
+  <bb 9> :
+  strcpy (&R1_h, R_h_18(D));
+  strcat (&R1_h, &T_c);
+  _34 = __builtin_strlen (&R1_h);
+  _35 = &R1_h + _34;
+  __builtin_memcpy (_35, "\t-\n", 4);
+  _8 = R (&R1_h, &R1_s);
+  if (_8 != 0)
+    goto <bb 10>; [INV]
+  else
+    goto <bb 11>; [INV]
+
+  <bb 10> :
+  strcpy (R_s_25(D), &R1_s);
+  _39 = 1;
+  // predicted unlikely by early return (on trees) predictor.
+  goto <bb 13>; [INV]
+
+  <bb 11> :
+  _40 = 0;
+  // predicted unlikely by early return (on trees) predictor.
+  goto <bb 13>; [INV]
+
+  <bb 12> :
+  strcpy (R_s_25(D), R_h_18(D));
+  __builtin_puts (&"Vou retornar 1 no R"[0]);
+  _43 = 1;
+
+  <bb 13> :
+  # _9 = PHI <_27(5), _28(6), _39(10), _40(11), _43(12)>
+  T_c ={v} {CLOBBER};
+  R1_h ={v} {CLOBBER};
+  R1_s ={v} {CLOBBER};
+
+  <bb 14> :
+<L13>:
+  return _9;
+
+}
+
+
+
+;; Function E (E, funcdef_no=22, decl_uid=4938, cgraph_uid=22, symbol_order=29)
+
+E (char * E_c)
+{
+  char R_s[1000];
+  char R_h[1000];
+  char T_c[1000];
+  int D.5133;
+  int _1;
+  int _2;
+  int _3;
+  int _14;
+  int _15;
+
+  <bb 2> :
+  __builtin_puts (&"Entrei no E"[0]);
+  _1 = T (&T_c);
+  if (_1 != 0)
+    goto <bb 3>; [INV]
+  else
+    goto <bb 5>; [INV]
+
+  <bb 3> :
+  strcpy (&R_h, &T_c);
+  _2 = R (&R_h, &R_s);
+  if (_2 != 0)
+    goto <bb 4>; [INV]
+  else
+    goto <bb 5>; [INV]
+
+  <bb 4> :
+  strcpy (E_c_11(D), &R_s);
+  __builtin_puts (&"Vou retornar 1 no E"[0]);
+  _14 = 1;
+  // predicted unlikely by early return (on trees) predictor.
+  goto <bb 6>; [INV]
+
+  <bb 5> :
+  _15 = 0;
+
+  <bb 6> :
+  # _3 = PHI <_14(4), _15(5)>
+  T_c ={v} {CLOBBER};
+  R_h ={v} {CLOBBER};
+  R_s ={v} {CLOBBER};
+
+  <bb 7> :
+<L5>:
+  return _3;
+
+}
+
+
+
+;; Function Rel (Rel, funcdef_no=21, decl_uid=4948, cgraph_uid=21, symbol_order=28)
+
+Rel (char * Rel_c)
+{
+  char op[10];
+  char R_s[1000];
+  char E2_c[1000];
+  char E1_c[1000];
+  int D.5125;
+  int _1;
+  int token.55_2;
+  int token.56_3;
+  int token.57_4;
+  int token.58_5;
+  int token.59_6;
+  int token.60_7;
+  int token.61_8;
+  char[20] * _9;
+  int token.62_10;
+  int token.63_11;
+  int token.64_12;
+  int token.65_13;
+  int token.66_14;
+  int token.67_15;
+  int _16;
+  int _17;
+  int token.68_18;
+  char[20] * _19;
+  int _20;
+  int _21;
+  int _38;
+  int _44;
+  int _45;
+  int _47;
+
+  <bb 2> :
+  __builtin_puts (&"Entrei no Rel"[0]);
+  _1 = E (&E1_c);
+  if (_1 != 0)
+    goto <bb 3>; [INV]
+  else
+    goto <bb 26>; [INV]
+
+  <bb 3> :
+  token.55_2 = token;
+  if (token.55_2 == 22)
+    goto <bb 4>; [INV]
+  else
+    goto <bb 5>; [INV]
+
+  <bb 4> :
+  __builtin_memcpy (&op, ">", 2);
+  goto <bb 15>; [INV]
+
+  <bb 5> :
+  token.56_3 = token;
+  if (token.56_3 == 23)
+    goto <bb 6>; [INV]
+  else
+    goto <bb 7>; [INV]
+
+  <bb 6> :
+  __builtin_memcpy (&op, "<", 2);
+  goto <bb 15>; [INV]
+
+  <bb 7> :
+  token.57_4 = token;
+  if (token.57_4 == 26)
+    goto <bb 8>; [INV]
+  else
+    goto <bb 9>; [INV]
+
+  <bb 8> :
+  __builtin_memcpy (&op, "=", 2);
+  goto <bb 15>; [INV]
+
+  <bb 9> :
+  token.58_5 = token;
+  if (token.58_5 == 27)
+    goto <bb 10>; [INV]
+  else
+    goto <bb 11>; [INV]
+
+  <bb 10> :
+  __builtin_memcpy (&op, "<>", 3);
+  goto <bb 15>; [INV]
+
+  <bb 11> :
+  token.59_6 = token;
+  if (token.59_6 == 25)
+    goto <bb 12>; [INV]
+  else
+    goto <bb 13>; [INV]
+
+  <bb 12> :
+  __builtin_memcpy (&op, ">=", 3);
+  goto <bb 15>; [INV]
+
+  <bb 13> :
+  token.60_7 = token;
+  if (token.60_7 == 24)
+    goto <bb 14>; [INV]
+  else
+    goto <bb 15>; [INV]
+
+  <bb 14> :
+  __builtin_memcpy (&op, "<=", 3);
+
+  <bb 15> :
+  token.61_8 = token;
+  _9 = &tokens[token.61_8];
+  printf ("Voltei do E, token \xef\xbf\xbd %s op \xef\xbf\xbd %s", _9, &op);
+  token.62_10 = token;
+  if (token.62_10 == 22)
+    goto <bb 21>; [INV]
+  else
+    goto <bb 16>; [INV]
+
+  <bb 16> :
+  token.63_11 = token;
+  if (token.63_11 == 23)
+    goto <bb 21>; [INV]
+  else
+    goto <bb 17>; [INV]
+
+  <bb 17> :
+  token.64_12 = token;
+  if (token.64_12 == 26)
+    goto <bb 21>; [INV]
+  else
+    goto <bb 18>; [INV]
+
+  <bb 18> :
+  token.65_13 = token;
+  if (token.65_13 == 27)
+    goto <bb 21>; [INV]
+  else
+    goto <bb 19>; [INV]
+
+  <bb 19> :
+  token.66_14 = token;
+  if (token.66_14 == 25)
+    goto <bb 21>; [INV]
+  else
+    goto <bb 20>; [INV]
+
+  <bb 20> :
+  token.67_15 = token;
+  if (token.67_15 == 24)
+    goto <bb 21>; [INV]
+  else
+    goto <bb 24>; [INV]
+
+  <bb 21> :
+  _16 = le_token ();
+  token = _16;
+  _17 = E (&E2_c);
+  if (_17 != 0)
+    goto <bb 22>; [INV]
+  else
+    goto <bb 23>; [INV]
+
+  <bb 22> :
+  token.68_18 = token;
+  _19 = &tokens[token.68_18];
+  printf ("Voltei do E2, token \xef\xbf\xbd %s", _19);
+  sprintf (Rel_c_35(D), "%s%s\t%s\n", &E1_c, &E2_c, &op);
+  _44 = 1;
+  // predicted unlikely by early return (on trees) predictor.
+  goto <bb 25>; [INV]
+
+  <bb 23> :
+  _45 = 0;
+  // predicted unlikely by early return (on trees) predictor.
+  goto <bb 25>; [INV]
+
+  <bb 24> :
+  strcpy (Rel_c_35(D), &E1_c);
+  __builtin_puts (&"Vou retornar 1 no E"[0]);
+  _38 = 1;
+  // predicted unlikely by early return (on trees) predictor.
+
+  <bb 25> :
+  # _20 = PHI <_44(22), _45(23), _38(24)>
+  op ={v} {CLOBBER};
+  goto <bb 27>; [INV]
+
+  <bb 26> :
+  _47 = 0;
+
+  <bb 27> :
+  # _21 = PHI <_20(25), _47(26)>
+  E1_c ={v} {CLOBBER};
+  E2_c ={v} {CLOBBER};
+  R_s ={v} {CLOBBER};
+
+  <bb 28> :
+<L30>:
+  return _21;
+
+}
+
+
+
+;; Function geralabel (geralabel, funcdef_no=28, decl_uid=4994, cgraph_uid=28, symbol_order=35)
+
+geralabel (char * label)
+{
+  static int numlabel = 0;
+  int numlabel.86_1;
+  int numlabel.87_2;
+  int _3;
+
+  <bb 2> :
+  numlabel.86_1 = numlabel;
+  numlabel.87_2 = numlabel.86_1;
+  _3 = numlabel.87_2 + 1;
+  numlabel = _3;
+  sprintf (label_6(D), "LB%03d", numlabel.87_2);
+  return;
+
+}
+
+
+
+;; Function Com (Com, funcdef_no=29, decl_uid=4985, cgraph_uid=29, symbol_order=36)
+
+Com (char * Com_c)
+{
+  char Lista_Com_c[1000];
+  char E_c[1000];
+  char id[10];
+  char Com1_c[1000];
+  char labelfim[10];
+  char labelinicio[10];
+  char Com2_c[1000];
+  char Com3_c[1000];
+  char labelfim[10];
+  char labelelse[10];
+  char Rel_c[1000];
+  long long unsigned int D.5245;
+  long long unsigned int D.5243;
+  int D.5224;
+  char * D.5246;
+  char * D.5244;
+  int token.88_1;
+  int _2;
+  int token.89_3;
+  int _4;
+  int _5;
+  int token.90_6;
+  int _7;
+  int _8;
+  int token.91_9;
+  int _10;
+  int _11;
+  int token.92_12;
+  int _13;
+  int token.93_14;
+  int _15;
+  int _16;
+  int token.94_17;
+  int _18;
+  int _19;
+  int token.95_20;
+  int _21;
+  int token.96_22;
+  int _23;
+  int _24;
+  int token.97_25;
+  int _26;
+  int token.98_27;
+  int _28;
+  int _29;
+  int token.99_30;
+  char[20] * _31;
+  int token.100_32;
+  int _33;
+  int linlex.101_34;
+  int token.102_35;
+  int _36;
+  int token.103_37;
+  char[20] * _38;
+  int _39;
+  int _40;
+  int _41;
+  int _42;
+  int _43;
+  int _44;
+  int _45;
+  int _46;
+  int _74;
+  int _76;
+  int _79;
+  int _81;
+  int _84;
+  int _86;
+  int _88;
+  int _102;
+  int _104;
+  int _107;
+  int _109;
+  int _111;
+  long long unsigned int _124;
+  char * _125;
+  long long unsigned int _128;
+  char * _129;
+  int _132;
+  int _134;
+  int _148;
+  int _150;
+  int _156;
+  int _158;
+
+  <bb 2> :
+  __builtin_puts (&"Entrei no Com"[0]);
+  token.88_1 = token;
+  if (token.88_1 == 5)
+    goto <bb 3>; [INV]
+  else
+    goto <bb 19>; [INV]
+
+  <bb 3> :
+  geralabel (&labelelse);
+  geralabel (&labelfim);
+  _2 = le_token ();
+  token = _2;
+  token.89_3 = token;
+  if (token.89_3 == 18)
+    goto <bb 4>; [INV]
+  else
+    goto <bb 17>; [INV]
+
+  <bb 4> :
+  _4 = le_token ();
+  token = _4;
+  _5 = Rel (&Rel_c);
+  if (_5 != 0)
+    goto <bb 5>; [INV]
+  else
+    goto <bb 16>; [INV]
+
+  <bb 5> :
+  token.90_6 = token;
+  if (token.90_6 == 19)
+    goto <bb 6>; [INV]
+  else
+    goto <bb 15>; [INV]
+
+  <bb 6> :
+  _7 = le_token ();
+  token = _7;
+  _8 = Com (&Com3_c);
+  if (_8 != 0)
+    goto <bb 7>; [INV]
+  else
+    goto <bb 13>; [INV]
+
+  <bb 7> :
+  token.91_9 = token;
+  if (token.91_9 == 6)
+    goto <bb 8>; [INV]
+  else
+    goto <bb 12>; [INV]
+
+  <bb 8> :
+  _10 = le_token ();
+  token = _10;
+  _11 = Com (&Com2_c);
+  if (_11 != 0)
+    goto <bb 9>; [INV]
+  else
+    goto <bb 10>; [INV]
+
+  <bb 9> :
+  sprintf (Com_c_72(D), "%s\tgofalse %s\n%s\tgoto %s\nrotulo %s\n%srotulo %s", &Rel_c, &labelelse, &Com3_c, &labelfim, &labelelse, &Com2_c, &labelfim);
+  _74 = 1;
+  // predicted unlikely by early return (on trees) predictor.
+  goto <bb 11>; [INV]
+
+  <bb 10> :
+  __builtin_puts (&"Erro no comando do else"[0]);
+  _76 = 0;
+  // predicted unlikely by early return (on trees) predictor.
+
+  <bb 11> :
+  # _39 = PHI <_74(9), _76(10)>
+  Com2_c ={v} {CLOBBER};
+  goto <bb 14>; [INV]
+
+  <bb 12> :
+  __builtin_puts (&"Esperava palavra else"[0]);
+  _79 = 0;
+  // predicted unlikely by early return (on trees) predictor.
+  goto <bb 14>; [INV]
+
+  <bb 13> :
+  __builtin_puts (&"Esperava fecha par\xef\xbf\xbdnteses"[0]);
+  _81 = 0;
+  // predicted unlikely by early return (on trees) predictor.
+
+  <bb 14> :
+  # _40 = PHI <_39(11), _79(12), _81(13)>
+  Com3_c ={v} {CLOBBER};
+  goto <bb 18>; [INV]
+
+  <bb 15> :
+  __builtin_puts (&"Erro na express\xef\xbf\xbdo do if "[0]);
+  _84 = 0;
+  // predicted unlikely by early return (on trees) predictor.
+  goto <bb 18>; [INV]
+
+  <bb 16> :
+  __builtin_puts (&"Esperava abre par\xef\xbf\xbdnteses"[0]);
+  _86 = 0;
+  // predicted unlikely by early return (on trees) predictor.
+  goto <bb 18>; [INV]
+
+  <bb 17> :
+  __builtin_puts (&"Esperava abre par\xef\xbf\xbdnteses"[0]);
+  _88 = 0;
+  // predicted unlikely by early return (on trees) predictor.
+
+  <bb 18> :
+  # _41 = PHI <_40(14), _84(15), _86(16), _88(17)>
+  labelelse ={v} {CLOBBER};
+  labelfim ={v} {CLOBBER};
+  goto <bb 51>; [INV]
+
+  <bb 19> :
+  token.92_12 = token;
+  if (token.92_12 == 7)
+    goto <bb 20>; [INV]
+  else
+    goto <bb 31>; [INV]
+
+  <bb 20> :
+  geralabel (&labelinicio);
+  geralabel (&labelfim);
+  _13 = le_token ();
+  token = _13;
+  token.93_14 = token;
+  if (token.93_14 == 18)
+    goto <bb 21>; [INV]
+  else
+    goto <bb 29>; [INV]
+
+  <bb 21> :
+  _15 = le_token ();
+  token = _15;
+  _16 = Rel (&Rel_c);
+  if (_16 != 0)
+    goto <bb 22>; [INV]
+  else
+    goto <bb 28>; [INV]
+
+  <bb 22> :
+  token.94_17 = token;
+  if (token.94_17 == 19)
+    goto <bb 23>; [INV]
+  else
+    goto <bb 27>; [INV]
+
+  <bb 23> :
+  _18 = le_token ();
+  token = _18;
+  _19 = Com (&Com1_c);
+  if (_19 != 0)
+    goto <bb 24>; [INV]
+  else
+    goto <bb 25>; [INV]
+
+  <bb 24> :
+  sprintf (Com_c_72(D), "rotulo %s\n%s\tgofalse %s\n%s\tgoto %s\nrotulo %s\n", &labelinicio, &Rel_c, &labelfim, &Com1_c, &labelinicio, &labelfim);
+  _102 = 1;
+  // predicted unlikely by early return (on trees) predictor.
+  goto <bb 26>; [INV]
+
+  <bb 25> :
+  __builtin_puts (&"Esperava fecha par\xef\xbf\xbdnteses"[0]);
+  _104 = 0;
+  // predicted unlikely by early return (on trees) predictor.
+
+  <bb 26> :
+  # _42 = PHI <_102(24), _104(25)>
+  Com1_c ={v} {CLOBBER};
+  goto <bb 30>; [INV]
+
+  <bb 27> :
+  __builtin_puts (&"Erro na condi\xef\xbf\xbd\xef\xbf\xbdo do while"[0]);
+  _107 = 0;
+  // predicted unlikely by early return (on trees) predictor.
+  goto <bb 30>; [INV]
+
+  <bb 28> :
+  __builtin_puts (&"Esperava abre par\xef\xbf\xbdnteses"[0]);
+  _109 = 0;
+  // predicted unlikely by early return (on trees) predictor.
+  goto <bb 30>; [INV]
+
+  <bb 29> :
+  __builtin_puts (&"Esperava abre par\xef\xbf\xbdnteses"[0]);
+  _111 = 0;
+  // predicted unlikely by early return (on trees) predictor.
+
+  <bb 30> :
+  # _43 = PHI <_42(26), _107(27), _109(28), _111(29)>
+  labelinicio ={v} {CLOBBER};
+  labelfim ={v} {CLOBBER};
+  goto <bb 51>; [INV]
+
+  <bb 31> :
+  token.95_20 = token;
+  if (token.95_20 == 28)
+    goto <bb 32>; [INV]
+  else
+    goto <bb 40>; [INV]
+
+  <bb 32> :
+  strcpy (&id, &lex);
+  _21 = le_token ();
+  token = _21;
+  token.96_22 = token;
+  if (token.96_22 == 13)
+    goto <bb 33>; [INV]
+  else
+    goto <bb 39>; [INV]
+
+  <bb 33> :
+  _23 = le_token ();
+  token = _23;
+  _24 = Rel (&E_c);
+  if (_24 != 0)
+    goto <bb 34>; [INV]
+  else
+    goto <bb 37>; [INV]
+
+  <bb 34> :
+  token.97_25 = token;
+  if (token.97_25 == 21)
+    goto <bb 35>; [INV]
+  else
+    goto <bb 36>; [INV]
+
+  <bb 35> :
+  _26 = le_token ();
+  token = _26;
+  __builtin_memcpy (Com_c_72(D), "\tvalor-l ", 10);
+  strcat (Com_c_72(D), &id);
+  _124 = __builtin_strlen (Com_c_72(D));
+  _125 = Com_c_72(D) + _124;
+  __builtin_memcpy (_125, "\n", 2);
+  strcat (Com_c_72(D), &E_c);
+  _128 = __builtin_strlen (Com_c_72(D));
+  _129 = Com_c_72(D) + _128;
+  __builtin_memcpy (_129, "\t:=\n\tpop\n", 10);
+  __builtin_puts (&"Vou retornar 1 no Com"[0]);
+  _132 = 1;
+  // predicted unlikely by early return (on trees) predictor.
+  goto <bb 38>; [INV]
+
+  <bb 36> :
+  __builtin_puts (&"Faltou ponto-e-v\xef\xbf\xbdrgula ap\xef\xbf\xbds atribui\xef\xbf\xbd\xef\xbf\xbdo"[0]);
+  _134 = 0;
+  // predicted unlikely by early return (on trees) predictor.
+  goto <bb 38>; [INV]
+
+  <bb 37> :
+  E_c ={v} {CLOBBER};
+  goto <bb 39>; [INV]
+
+  <bb 38> :
+  # _44 = PHI <_132(35), _134(36)>
+  E_c ={v} {CLOBBER};
+  id ={v} {CLOBBER};
+  goto <bb 51>; [INV]
+
+  <bb 39> :
+  id ={v} {CLOBBER};
+  goto <bb 50>; [INV]
+
+  <bb 40> :
+  token.98_27 = token;
+  if (token.98_27 == 10)
+    goto <bb 41>; [INV]
+  else
+    goto <bb 47>; [INV]
+
+  <bb 41> :
+  _28 = le_token ();
+  token = _28;
+  __builtin_puts (&"Consumi o abre chaves"[0]);
+  _29 = Lista_Com (&Lista_Com_c);
+  if (_29 != 0)
+    goto <bb 42>; [INV]
+  else
+    goto <bb 45>; [INV]
+
+  <bb 42> :
+  token.99_30 = token;
+  _31 = &tokens[token.99_30];
+  printf ("Voltei do Lista_Com. Token=%s\n", _31);
+  token.100_32 = token;
+  if (token.100_32 == 11)
+    goto <bb 43>; [INV]
+  else
+    goto <bb 44>; [INV]
+
+  <bb 43> :
+  _33 = le_token ();
+  token = _33;
+  __builtin_puts (&"Consumi o fecha chaves"[0]);
+  strcpy (Com_c_72(D), &Lista_Com_c);
+  _148 = 1;
+  // predicted unlikely by early return (on trees) predictor.
+  goto <bb 46>; [INV]
+
+  <bb 44> :
+  linlex.101_34 = linlex;
+  printf ("Esperava fecha chaves na linha %d", linlex.101_34);
+  _150 = 0;
+  // predicted unlikely by early return (on trees) predictor.
+  goto <bb 46>; [INV]
+
+  <bb 45> :
+  Lista_Com_c ={v} {CLOBBER};
+  goto <bb 50>; [INV]
+
+  <bb 46> :
+  # _45 = PHI <_148(43), _150(44)>
+  Lista_Com_c ={v} {CLOBBER};
+  goto <bb 51>; [INV]
+
+  <bb 47> :
+  token.102_35 = token;
+  if (token.102_35 == 21)
+    goto <bb 48>; [INV]
+  else
+    goto <bb 49>; [INV]
+
+  <bb 48> :
+  __builtin_puts (&"Vou retornar 1 no Com com ponto e virgula"[0]);
+  _36 = le_token ();
+  token = _36;
+  _156 = 1;
+  // predicted unlikely by early return (on trees) predictor.
+  goto <bb 51>; [INV]
+
+  <bb 49> :
+  token.103_37 = token;
+  _38 = &tokens[token.103_37];
+  printf ("Vou retornar 0 no Com vazio - token \xef\xbf\xbd %s\n", _38);
+  _158 = 1;
+  // predicted unlikely by early return (on trees) predictor.
+  goto <bb 51>; [INV]
+
+  <bb 50> :
+  Rel_c ={v} {CLOBBER};
+  return;
+
+  <bb 51> :
+  # _46 = PHI <_41(18), _43(30), _44(38), _45(46), _156(48), _158(49)>
+  Rel_c ={v} {CLOBBER};
+
+  <bb 52> :
+<L55>:
+  return _46;
+
+}
+
+
+
+;; Function Lista_Com (Lista_Com, funcdef_no=27, decl_uid=4987, cgraph_uid=27, symbol_order=34)
+
+Lista_Com (char * Lista_Com_c)
+{
+  char Com_c[1000];
+  char LL_c[1000];
+  int D.5193;
+  int token.76_1;
+  char[20] * _2;
+  int token.77_3;
+  int token.78_4;
+  int token.79_5;
+  int token.80_6;
+  int token.81_7;
+  int _8;
+  int token.82_9;
+  char[20] * _10;
+  int _11;
+  int token.83_12;
+  char[20] * _13;
+  int token.84_14;
+  char[20] * _15;
+  int token.85_16;
+  int _17;
+  int _22;
+  int _25;
+  int _32;
+  int _34;
+  int _35;
+  int _37;
+
+  <bb 2> :
+  __builtin_puts (&"Entrei no Lista_Com"[0]);
+  token.76_1 = token;
+  _2 = &tokens[token.76_1];
+  printf ("Vou testar Com - token \xef\xbf\xbd %s\n", _2);
+  token.77_3 = token;
+  if (token.77_3 == 12)
+    goto <bb 3>; [INV]
+  else
+    goto <bb 4>; [INV]
+
+  <bb 3> :
+  _22 = 1;
+  // predicted unlikely by early return (on trees) predictor.
+  goto <bb 16>; [INV]
+
+  <bb 4> :
+  token.78_4 = token;
+  if (token.78_4 != 28)
+    goto <bb 5>; [INV]
+  else
+    goto <bb 9>; [INV]
+
+  <bb 5> :
+  token.79_5 = token;
+  if (token.79_5 != 21)
+    goto <bb 6>; [INV]
+  else
+    goto <bb 9>; [INV]
+
+  <bb 6> :
+  token.80_6 = token;
+  if (token.80_6 != 5)
+    goto <bb 7>; [INV]
+  else
+    goto <bb 9>; [INV]
+
+  <bb 7> :
+  token.81_7 = token;
+  if (token.81_7 != 7)
+    goto <bb 8>; [INV]
+  else
+    goto <bb 9>; [INV]
+
+  <bb 8> :
+  __builtin_memcpy (Lista_Com_c_23(D), "", 1);
+  _25 = 1;
+  // predicted unlikely by early return (on trees) predictor.
+  goto <bb 16>; [INV]
+
+  <bb 9> :
+  _8 = Com (&Com_c);
+  if (_8 != 0)
+    goto <bb 10>; [INV]
+  else
+    goto <bb 13>; [INV]
+
+  <bb 10> :
+  token.82_9 = token;
+  _10 = &tokens[token.82_9];
+  printf ("B - token \xef\xbf\xbd %s\n", _10);
+  _11 = Lista_Com (&LL_c);
+  if (_11 != 0)
+    goto <bb 11>; [INV]
+  else
+    goto <bb 12>; [INV]
+
+  <bb 11> :
+  strcpy (Lista_Com_c_23(D), &Com_c);
+  strcat (Lista_Com_c_23(D), &LL_c);
+  token.83_12 = token;
+  _13 = &tokens[token.83_12];
+  printf ("Vou retornar 1 no Lista_Com. Token \xef\xbf\xbd %s\n", _13);
+  _32 = 1;
+  // predicted unlikely by early return (on trees) predictor.
+  goto <bb 16>; [INV]
+
+  <bb 12> :
+  token.84_14 = token;
+  _15 = &tokens[token.84_14];
+  printf ("Vou retornar 0 no Lista_Com-1 - token \xef\xbf\xbd %s\n", _15);
+  _34 = 0;
+  // predicted unlikely by early return (on trees) predictor.
+  goto <bb 16>; [INV]
+
+  <bb 13> :
+  token.85_16 = token;
+  if (token.85_16 == 12)
+    goto <bb 14>; [INV]
+  else
+    goto <bb 15>; [INV]
+
+  <bb 14> :
+  _35 = 1;
+  // predicted unlikely by early return (on trees) predictor.
+  goto <bb 16>; [INV]
+
+  <bb 15> :
+  __builtin_puts (&"Vou retornar 0 no Lista_Com-2"[0]);
+  _37 = 0;
+
+  <bb 16> :
+  # _17 = PHI <_22(3), _25(8), _32(11), _34(12), _35(14), _37(15)>
+  LL_c ={v} {CLOBBER};
+  Com_c ={v} {CLOBBER};
+
+  <bb 17> :
+<L17>:
+  return _17;
+
+}
+
+
+
+;; Function main (main, funcdef_no=30, decl_uid=5011, cgraph_uid=30, symbol_order=37)
+
+main ()
+{
+  char Com_C[1000];
+  struct FILE * arqout;
+  int D.5278;
+  struct FILE * _1;
+  struct FILE * arqin.104_2;
+  int _3;
+  int _4;
+  int token.105_5;
+  struct FILE * arqin.106_6;
+  int _29;
+
+  <bb 2> :
+  _1 = fopen ("c:\\teste\\prog.cpp", "rt");
+  arqin = _1;
+  arqin.104_2 = arqin;
+  if (arqin.104_2 == 0B)
+    goto <bb 3>; [INV]
+  else
+    goto <bb 4>; [INV]
+
+  <bb 3> :
+  printf ("Erro na abertura do arquivo");
+  exit (0);
+
+  <bb 4> :
+  arqout_15 = fopen ("c:\\teste\\saida.kvmp", "wt");
+  if (arqout_15 == 0B)
+    goto <bb 5>; [INV]
+  else
+    goto <bb 6>; [INV]
+
+  <bb 5> :
+  printf ("Erro na abertura do arquivo de saida");
+  exit (0);
+
+  <bb 6> :
+  _3 = le_token ();
+  token = _3;
+  goto <bb 11>; [INV]
+
+  <bb 7> :
+  _4 = Lista_Com (&Com_C);
+  if (_4 == 0)
+    goto <bb 8>; [INV]
+  else
+    goto <bb 9>; [INV]
+
+  <bb 8> :
+  __builtin_puts (&"Erro no comando!!!"[0]);
+  goto <bb 10>; [INV]
+
+  <bb 9> :
+  __builtin_fputs (&Com_C, arqout_15);
+  printf ("%s", &Com_C);
+
+  <bb 10> :
+  getch ();
+
+  <bb 11> :
+  token.105_5 = token;
+  if (token.105_5 != 12)
+    goto <bb 7>; [INV]
+  else
+    goto <bb 12>; [INV]
+
+  <bb 12> :
+  arqin.106_6 = arqin;
+  fclose (arqin.106_6);
+  fclose (arqout_15);
+  system ("pause");
+  Com_C ={v} {CLOBBER};
+  _29 = 0;
+
+  <bb 13> :
+<L10>:
+  return _29;
+
+}
+
+

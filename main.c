@@ -1,1626 +1,653 @@
-/*
- ============================================================================
- Name        : analisador.c
- Author      : Eduardo Eitelven
- Version     : 1.0
- Copyright   : Your copyright notice
- Description : Hello World in C, Ansi-style
- ============================================================================
- */
-
-#define FALSE 0
-#define TRUE 1
-#define TKVoid 2
-#define TKInt 3
-#define TKFloat 4
-#define TKVirgula 5
-#define TKDoisPontos 6
-#define TKAbrePar 7
-#define TKFechaPar 8
-#define TKAtribui 9
-#define TKPontoeVirg 10
-#define TKAbreChave 11
-#define TKFechaChave 12
-#define TKSoma 13
-#define TKId 14
-#define TKLong 16
-#define TKDouble 17
-#define TKShort 18
-#define TKPrintf 22
-#define TKScanf 23
-#define TKFflush 24
-#define TKStdin 25
-#define TKNULL 26
-#define TKDo 29
-#define TKWhile 30
-#define TKFor 31
-#define TKIf 35
-#define TKConstante 36
-#define TKReturn 37
-#define TKAspaSimples 38
-#define TKPonto 42
-#define TKAspaDupla 43
-#define TKPontoExclamacao 45
-#define TKDiferente 46
-#define TKAbreColchete 47
-#define TKFechaColchete 47
-#define TKMenos 50
-#define TKDecremento 51
-#define TKMultiplica 52
-#define TKDivisao 53
-#define TKMaisIgual 54
-#define TKMenosIgual 55
-#define TKVezesIgual 56
-#define TKDivideIgual 57
-#define TKRestoDivisao 58
-#define TKMaior 59
-#define TKMaiorIgual 60
-#define TKMenor 61
-#define TKMenorIgual 62
-#define TKMenorBinario 63
-#define TKMaiorBinario 64
-#define TKComparacao 65
-#define TKIncremento 66
-#define TKDefault 67
-#define TKCase 68
-#define TKSwitch 69
-#define TKGets 79
-#define TKElse 80
-#define TKBreak 85
-#define TKEComers 87
-#define TKFree 88
-#define TKE 89
-#define TKOu 90
-#define TKTraco 91
-#define TKSetbuf 90
-#define TKStdout 91
-
 #include <string.h>
 #include <stdio.h>
+#include <conio.h>
 #include <stdlib.h>
 
-int tk, pos=0, linha=1, erro=0;
-long check=0;
-char exp1[200], lex[20], local[100];
+#define TK_int 1
+#define TK_float 2
+#define TK_char 3
+#define TK_struct 4
+#define TK_if 5
+#define TK_else 6
+#define TK_while 7
 
-struct pal_res {
-	char palavra[20];
-	int tk;
+#define TK_Abre_Colch 8
+#define TK_Fecha_Colch 9
+#define TK_Abre_Chaves 10
+#define TK_Fecha_Chaves 11
+#define TK_Fim_Arquivo 12
+#define TK_Atrib 13
+#define TK_Const_Int 14
+#define TK_Mais 15
+#define TK_Menos 16
+#define TK_Mult 17
+#define TK_Abre_Par 18
+#define TK_Fecha_Par 19
+#define TK_virgula 20
+#define TK_pv 21
+#define TK_Maior 22
+#define TK_Menor 23
+#define TK_Menor_Igual 24
+#define TK_Maior_Igual 25
+#define TK_Igual 26
+#define TK_Diferente 27
+#define TK_id 28
+
+
+/***********************************************************************************/
+/*                                                                                 */
+/*  INï¿½CIO DO Lï¿½XICO - Nï¿½o entre a nï¿½o ser que tenha interesse pessoal em lï¿½xicos  */
+/*                                                                                 */
+/***********************************************************************************/
+
+int linlex=0,collex=1;
+
+char tokens[][20]={"","TK_int",
+                      "TK_float",
+					  "TK_char",
+					  "TK_struct",
+					  "TK_if",
+					  "TK_else",
+					  "TK_while",
+					  "TK_Abre_Colch",
+					  "TK_Fecha_Colch",
+					  "TK_Abre_Chaves",
+					  "TK_Fecha_Chaves",
+					  "TK_Fim_Arquivo",
+					  "TK_Atrib",
+					  "TK_Const_Int",
+					  "TK_Mais",
+					  "TK_Menos",
+					  "TK_Mult",
+					  "TK_Abre_Par",
+					  "TK_Fecha_Par",
+					  "TK_virgula",
+					  "TK_pv",
+					  "TK_Maior",
+					  "TK_Menor",
+					  "TK_Menor_Igual",
+					  "TK_Maior_Igual",
+					  "TK_Igual",
+					  "TK_Diferente",
+					  "TK_id"
+					  };
+
+typedef struct pal{char palavra[20]; int token;} tpal;
+tpal reservadas[]={{"",0},
+				   {"int",TK_int},
+				   {"float",TK_float},
+				   {"char",TK_char},
+				   {"struct",TK_struct},
+				   {"if",TK_if},
+				   {"else",TK_else},
+				   {"while",TK_while},
+				   {"fim",-1}};
+
+FILE *arqin;
+int token;
+char lex[20];
+
+char le_char()
+{
+char c;
+
+if (fread(&c,1,1,arqin)==0) return -1;
+if (c=='\n') {linlex++;collex=1;}
+else collex++;
+return c;
 };
-struct pal_res lista_pal[] = {
-		{ "void", TKVoid },
-		{ "int", TKInt },
-		{ "float", TKFloat },
-		{ "long", TKLong },
-		{ "double", TKDouble },
-		{ "short", TKShort },
-		{ "printf", TKPrintf },
-		{ "scanf", TKScanf },
-		{ "fflush", TKFflush },
-		{ "stdin", TKStdin },
-		{ "NULL", TKNULL },
-		{ "do", TKDo },
-		{ "free", TKFree },
-		{ "while", TKWhile },
-		{ "for", TKFor },
-		{ "if", TKIf },
-		{ "case", TKCase },
-		{ "return", TKReturn },
-		{ "default", TKDefault },
-		{ "fflush", TKFflush },
-		{ "setbuf", TKSetbuf },
-		{ "stdin", TKStdin },
-		{ "stdout", TKStdout },
-		{ "switch", TKSwitch },
-		{ "gets", TKGets },
-		{ "break", TKBreak },
-		{ "else", TKElse },
-		{ "fimtabela", TKId }};
 
-int palavra_reservada(char lex[]) {
-	int postab = 0;
-
-	while (strcmp("fimtabela", lista_pal[postab].palavra) != 0) {
-		if (strcmp(lex, lista_pal[postab].palavra) == 0)
-			return lista_pal[postab].tk;
-		postab++;
-	}
-	return TKId;
+int pal_res(char lex[])
+{
+int tk=0;
+while (strcmp(reservadas[tk].palavra,"fim")!=0)
+   {
+   	if (strcmp(lex,reservadas[tk].palavra)==0) return reservadas[tk].token;
+	tk++;
+   }
+return TK_id;
 }
 
-int rec_equ(char st[]) {
-	int estado = 0, fim = 0, posl = 0;
-	//free(st);
-
-	while (!fim) {
-		char c = st[pos];
-
-		lex[posl++] = c;
-
-		switch (estado) {
-		case 0: {
-			if ((c >= 'a' && c <= 'z') || (c >= 'A' && c <= 'Z') || (c == '_')) {
-				pos++;
-				estado = 1;
-				break;
-			}
-
-			if (c >= '0' && c <= '9') {
-				pos++;
-				estado = 2;
-				break;
-			}
-
-			if (c == '=') {
-				c = st[++pos];
-				if (c == '=') {
-					lex[posl++] = '=';
-					lex[posl] = '\0';
-					pos++;
-					return TKComparacao;
-				} else {
-					lex[posl] = '\0';
-					return TKAtribui;
-				}
-			}
-
-			if (c == '+') {
-				c = st[++pos];
-				if (c == '+') {
-					lex[posl++] = '+';
-					lex[posl] = '\0';
-					pos++;
-					return TKIncremento;
-				} else if (c == '=') {
-					lex[posl++] = '=';
-					lex[posl] = '\0';
-					pos++;
-					return TKMaisIgual;
-				} else {
-					lex[posl] = '\0';
-					return TKSoma;
-				}
-			}
-
-			if (c == '!') {
-				c = st[++pos];
-				if (c == '=') {
-					lex[posl++] = '=';
-					lex[posl] = '\0';
-					pos++;
-					return TKDiferente;
-				} else {
-					lex[posl] = '\0';
-					return TKPontoExclamacao;
-				}
-			}
-
-			if (c == '(') {
-				lex[posl] = '\0';
-				pos++;
-				return TKAbrePar;
-			}
-
-			if (c == ')') {
-				lex[posl] = '\0';
-				pos++;
-				return TKFechaPar;
-			}
-
-			if (c == '{') {
-				lex[posl] = '\0';
-				pos++;
-				return TKAbreChave;
-			}
-
-			if (c == '}') {
-				lex[posl] = '\0';
-				pos++;
-				return TKFechaChave;
-			}
-
-			if (c == ',') {
-				lex[posl] = '\0';
-				pos++;
-				return TKVirgula;
-			}
-
-			if (c == ';') {
-				lex[posl] = '\0';
-				pos++;
-				return TKPontoeVirg;
-			}
-
-			if (c == ':') {
-				lex[posl] = '\0';
-				pos++;
-				return TKDoisPontos;
-			}
-
-			if (c == '.') {
-				lex[posl] = '\0';
-				pos++;
-				return TKPonto;
-			}
-
-			if (c == '"') {
-				lex[posl] = '\0';
-				pos++;
-				return TKAspaDupla;
-			}
-
-			if (c == '[') {
-				lex[posl] = '\0';
-				pos++;
-				return TKAbreColchete;
-			}
-
-			if (c == '&') {
-				c = st[++pos];
-				if (c == '&') {
-					lex[posl++] = '&';
-					lex[posl] = '\0';
-					pos++;
-					return TKE;
-				} else {
-					lex[posl] = '\0';
-					return TKEComers;
-				}
-			}
-
-			if (c == '|') {
-				c = st[++pos];
-				if (c == '|') {
-					lex[posl++] = '|';
-					lex[posl] = '\0';
-					pos++;
-					return TKOu;
-				} else {
-					lex[posl] = '\0';
-					return TKTraco;
-				}
-			}
-
-			if (c == ']') {
-				lex[posl] = '\0';
-				pos++;
-				return TKFechaColchete;
-			}
-
-			if (c == '-') {
-				c = st[++pos];
-				if (c == '-') {
-					lex[posl++] = '-';
-					lex[posl] = '\0';
-					pos++;
-					return TKDecremento;
-				} else if (c == '=') {
-					lex[posl++] = '=';
-					lex[posl] = '\0';
-					pos++;
-					return TKMenosIgual;
-				} else {
-					lex[posl] = '\0';
-					return TKMenos;
-				}
-			}
-
-			if (c == '*') {
-				c = st[++pos];
-				if (c == '=') {
-					lex[posl++] = '=';
-					lex[posl] = '\0';
-					pos++;
-					return TKVezesIgual;
-				} else {
-					lex[posl] = '\0';
-					return TKMultiplica;
-				}
-			}
-
-			if (c == '/') {
-				c = st[++pos];
-				if (c == '=') {
-					lex[posl++] = '=';
-					lex[posl] = '\0';
-					pos++;
-					return TKDivideIgual;
-				} else {
-					lex[posl] = '\0';
-					return TKDivisao;
-				}
-			}
-
-			if (c == '%') {
-				lex[posl] = '\0';
-				pos++;
-				return TKRestoDivisao;
-			}
-
-			if (c == 27) {
-				lex[posl] = '\0';
-				pos++;
-				return TKAspaSimples;
-			}
-
-			if (c == '>') {
-				c = st[++pos];
-				if (c == '=') {
-					lex[posl++] = '=';
-					lex[posl] = '\0';
-					pos++;
-					return TKMaiorIgual;
-				} else if (c == '>') {
-					lex[posl++] = '>';
-					lex[posl] = '\0';
-					pos++;
-					return TKMaiorBinario;
-				} else {
-					lex[posl] = '\0';
-					return TKMaior;
-				}
-			}
-
-			if (c == '<') {
-				c = st[++pos];
-				if (c == '=') {
-					lex[posl++] = '=';
-					lex[posl] = '\0';
-					pos++;
-					return TKMenorIgual;
-				} else if (c == '<') {
-					lex[posl++] = '<';
-					lex[posl] = '\0';
-					pos++;
-					return TKMenorBinario;
-				} else {
-					lex[posl] = '\0';
-					return TKMenor;
-				}
-			}
-
-			if ((c == ' ') || (c == '\n') || (c == '\t') || (c == '\r')) {
-				pos++;
-				posl--;
-				break;
-			}
-
-			if (c == '\0')
-				return -1;
-			return -2;
-			break;
-		}
-		case 1:
-			while ((c >= 'a' && c <= 'z') || (c >= 'A' && c <= 'Z') || (c == '_') || (c >= '0' && c <= '9')) {
-				pos++;
-				c = st[pos];
-				lex[posl++] = c;
-
-				if ((c < 'a' || c > 'z') && (c < 'A' || c > 'Z') && c != '_' && (c < '0' || c > '9') && c == ' '&& c == '\n' && c == '\t' && c == '\0') {
-					printf("ERRO: Programa encontrou o lexema %c na linha %d na posicao %d\n", c, linha, pos);
-					erro=1;
-					return -1;
-				}
-			}
-			lex[--posl] = '\0';
-			return palavra_reservada(lex);
-		case 2:
-			while ((c >= '0' && c <= '9')) {
-				pos++;
-				c = st[pos];
-				lex[posl++] = c;
-			}
-			lex[--posl] = '\0';
-			return TKConstante;
-		} //switch
-	} // while
-	return -1;
-} // função
-
-void recebe_token() {
-	tk = rec_equ(exp1);
-	//if (tk < 2)
-	//	recebe_token();
-	//printf("%d \n", tk);
+int le_token()
+{
+static int pos=0;
+static int estado=0;
+static char c='\0';
+while(1)
+{
+switch (estado)
+{
+case 0:if (c==',') {c=le_char();return TK_virgula;}
+       if (c=='+') {c=le_char();return TK_Mais;}
+       if (c=='-') {c=le_char();return TK_Menos;}
+       if (c=='*') {c=le_char();return TK_Mult;}
+       if (c=='{') {c=le_char();return TK_Abre_Chaves;}
+       if (c=='}') {c=le_char();return TK_Fecha_Chaves;}
+       if (c==';') {c=le_char();return TK_pv;}
+       if (c=='[') {c=le_char();return TK_Abre_Colch;}
+       if (c==']') {c=le_char();return TK_Fecha_Colch;}
+       if (c=='(') {c=le_char();return TK_Abre_Par;}
+       if (c==')') {c=le_char();return TK_Fecha_Par;}
+       if (c=='=')
+	      {
+		  c=le_char();
+		  if (c=='=')
+		     {
+             c=le_char();
+		     return TK_Igual;
+			 }
+		  return TK_Atrib;
+		  }
+       if (c=='<')
+	      {
+		  c=le_char();
+		  if (c=='=')
+		     {
+             c=le_char();
+		     return TK_Menor_Igual;
+			 }
+		  return TK_Menor;
+		  }
+       if (c=='>')
+	      {
+		  c=le_char();
+		  if (c=='=')
+		     {
+             c=le_char();
+		     return TK_Maior_Igual;
+			 }
+		  return TK_Maior;
+		  }
+       if (c=='!')
+	      {
+		  c=le_char();
+		  if (c=='=')
+		     {
+             c=le_char();
+		     return TK_Diferente;
+			 }
+		  }
+       if (c>='a' && c<='z' || c=='_')
+          {
+          lex[0]=c;
+          c=le_char();
+		  pos=1;
+		  estado=1;
+		  break;
+		  }
+       if (c>='0' && c<='9')
+          {
+          lex[0]=c;
+          c=le_char();
+		  pos=1;
+		  estado=2;
+		  break;
+		  }
+	   if (c==-1) return TK_Fim_Arquivo;
+	   if (c=='\n'||c=='\r'||c=='\t'||c=='\0'||c==' '){c=le_char();break;}
+case 1:if (c>='a' && c<='z' || c=='_' || c>='0' && c<='9')
+          {
+          lex[pos++]=c;
+          c=le_char();
+		  break;
+		  }
+	   else
+	      {
+		  estado=0;
+		  lex[pos]='\0';
+		  return pal_res(lex);
+		  }
+case 2:if (c>='0' && c<='9')
+          {
+          lex[pos++]=c;
+          c=le_char();
+		  break;
+		  }
+	   else
+	      {
+		  estado=0;
+		  lex[pos]='\0';
+		  return TK_Const_Int;
+		  }
+}
+}
 }
 
-int abre_chave() {
-	if (tk == TKAbreChave)
-		return 1;
+/********************/
+/*                  */
+/*  FIM DO Lï¿½XICO   */
+/*                  */
+/********************/
+
+#define MAX_COD 1000
+
+void mostra_t()
+{
+printf("%s lex=%s na lin %d, col %d\n",tokens[token],lex,linlex,collex);
+}
+
+/****************/
+/*              */
+/*  EXPRESSï¿½ES  */
+/*              */
+/****************/
+
+int T(char T_c[MAX_COD]);
+int E(char E_c[MAX_COD]);
+int R(char R_h[MAX_COD],char R_s[MAX_COD]);
+int F(char F_c[MAX_COD]);
+int S(char S_h[MAX_COD],char S_s[MAX_COD]);
+
+int Rel(char Rel_c[MAX_COD])
+{
+printf("Entrei no Rel\n");
+char E1_c[MAX_COD],E2_c[MAX_COD],R_s[MAX_COD];
+if (E(E1_c))
+   {
+   char op[10];
+   if (token==TK_Maior) strcpy(op,">");
+   else if (token==TK_Menor) strcpy(op,"<");
+   else if (token==TK_Igual) strcpy(op,"=");
+   else if (token==TK_Diferente) strcpy(op,"<>");
+   else if (token==TK_Maior_Igual) strcpy(op,">=");
+   else if (token==TK_Menor_Igual) strcpy(op,"<=");
+   printf("Voltei do E, token ï¿½ %s op ï¿½ %s",tokens[token],op);
+   if (token==TK_Maior||token==TK_Menor||token==TK_Igual||token==TK_Diferente||token==TK_Maior_Igual||token==TK_Menor_Igual)
+      {
+      token=le_token();
+      if (E(E2_c))
+         {
+         printf("Voltei do E2, token ï¿½ %s",tokens[token]);
+         sprintf(Rel_c,"%s%s\t%s\n",E1_c,E2_c,op);
+         return 1;
+		 }
+		 return 0;
+	  }
+   else
+      {
+	  strcpy(Rel_c,E1_c);
+      printf("Vou retornar 1 no E\n");
+      return 1;
+	  }
+   }
+return 0;
+}
+
+int E(char E_c[MAX_COD])
+{
+printf("Entrei no E\n");
+char T_c[MAX_COD],R_h[MAX_COD],R_s[MAX_COD];
+if (T(T_c))
+   {
+   strcpy(R_h,T_c);
+   if (R(R_h,R_s))
+      {
+      strcpy(E_c,R_s);
+      printf("Vou retornar 1 no E\n");
+      return 1;
+	  }
+   }
+return 0;
+}
+
+int R(char R_h[MAX_COD],char R_s[MAX_COD])
+{
+printf("Entrei no R (+TR | -TR)\n");
+char T_c[MAX_COD],R1_h[MAX_COD],R1_s[MAX_COD];
+if (token==TK_Mais)
+   {
+   token=le_token();
+   if (T(T_c))
+      {
+      strcpy(R1_h,R_h);
+      strcat(R1_h,T_c);
+      strcat(R1_h,"\t+\n");
+      if (R(R1_h,R1_s))
+         {
+         strcpy(R_s,R1_s);
+         return 1;
+	     }
+      }
+   return 0;
+   }
+if (token==TK_Menos)
+   {
+   token=le_token();
+   if (T(T_c))
+      {
+      strcpy(R1_h,R_h);
+      strcat(R1_h,T_c);
+      strcat(R1_h,"\t-\n");
+      if (R(R1_h,R1_s))
+         {
+         strcpy(R_s,R1_s);
+         return 1;
+	     }
+      }
+   return 0;
+   }
+strcpy(R_s,R_h);
+printf("Vou retornar 1 no R\n");
+return 1;
+}
+
+int T(char T_c[MAX_COD])
+{
+char F_c[MAX_COD],S_h[MAX_COD],S_s[MAX_COD];
+printf("Entrei no T\n");
+if (F(F_c))
+   {
+   strcpy(S_h,F_c);
+   if (S(S_h,S_s))
+      {
+      strcpy(T_c,S_s);
+      return 1;
+	  }
+   }
+return 0;
+}
+
+int S(char S_h[MAX_COD],char S_s[MAX_COD])
+{
+printf("Entrei no S (*FS)\n");
+char F_c[MAX_COD],S1_h[MAX_COD],S1_s[MAX_COD];
+if (token==TK_Mult)
+   {
+   token=le_token();
+   if (F(F_c))
+      {
+      strcpy(S1_h,S_h);
+      strcat(S1_h,F_c);
+      strcat(S1_h,"\t*\n");
+      if (S(S1_h,S1_s))
+         {
+         strcpy(S_s,S1_s);
+         return 1;
+	     }
+      }
+   return 0;
+   }
+strcpy(S_s,S_h);
+printf("Vou retornar 1 no S\n");
+return 1;
+}
+
+int F(char F_c[MAX_COD])
+{
+printf("Entrei no F\n");
+
+if (token==TK_Const_Int)
+   {
+   strcpy(F_c,"\tpush ");
+   strcat(F_c,lex);
+   strcat(F_c,"\n");
+   token=le_token();
+   return 1;
+   }
+if (token==TK_id)
+   {
+   strcpy(F_c,"\tvalor-r ");
+   strcat(F_c,lex);
+   strcat(F_c,"\n");
+   token=le_token();
+   return 1;
+   }
+if (token==TK_Abre_Par)
+   {
+   char E_c[MAX_COD];
+   token=le_token();
+   if (E(E_c))
+      if (token==TK_Fecha_Par)
+         {
+         token=le_token();
+         strcpy(F_c,E_c);
+         return 1;
+		 }
+   }
+
+return 0;
+}
+
+/**************/
+/*            */
+/*  COMANDOS  */
+/*            */
+/**************/
+
+int Com(char Com_c[MAX_COD]);
+int Lista_Com(char Lista_Com_c[MAX_COD]);
+
+/* Lista_Com ->
+
+*/
+
+int Lista_Com(char Lista_Com_c[MAX_COD])
+{
+printf("Entrei no Lista_Com\n");
+
+char LL_c[MAX_COD];
+	char Com_c[MAX_COD];
+	printf("Vou testar Com - token ï¿½ %s\n",tokens[token]);
+	if (token==TK_Fim_Arquivo) return 1;
+    if (token!=TK_id && token!=TK_pv && token!=TK_if && token!=TK_while)
+       {
+       	strcpy(Lista_Com_c,"");
+       	return 1;
+	   }
+
+	if (Com(Com_c))
+	   {
+       printf("B - token ï¿½ %s\n",tokens[token]);
+	      if (Lista_Com(LL_c))
+		     {
+		     strcpy(Lista_Com_c,Com_c);
+		     strcat(Lista_Com_c,LL_c);
+	         printf("Vou retornar 1 no Lista_Com. Token ï¿½ %s\n",tokens[token]);
+	   	     return 1;
+			 }
+		  printf("Vou retornar 0 no Lista_Com-1 - token ï¿½ %s\n",tokens[token]);
+	      return 0;
+	   }
+	if (token==TK_Fim_Arquivo) return 1;
+	printf("Vou retornar 0 no Lista_Com-2\n");
 	return 0;
 }
 
-int fecha_chave() {
-	if (tk == TKFechaChave)
-		return 1;
-	return 0;
+void geralabel(char label[])
+{
+static int numlabel=0;
+sprintf(label,"LB%03d",numlabel++);
 }
 
-int idd() {
-	if (tk == TKId)
-		return 1;
-	else
-		return 0;
-}
-
-int abre_par() {
-	if (tk == TKAbrePar)
-		return 1;
-	else
-		return 0;
-}
-
-int fecha_par() {
-	if (tk == TKFechaPar)
-		return 1;
-	else
-		return 0;
-}
-
-int abre_col() {
-	if (tk == TKAbreColchete)
-		return 1;
-	else
-		return 0;
-}
-
-int fecha_col() {
-	if (tk == TKFechaColchete)
-		return 1;
-	else
-		return 0;
-}
-
-int pto_vir() {
-	if (tk == TKPontoeVirg)
-		return 1;
-	else
-		return 0;
-}
-
-int virgula() {
-	if (tk == TKVirgula)
-		return 1;
-	else
-		return 0;
-}
-
-int declara_func() {
-	if ((tk == TKInt) || (tk == TKFloat) || (TKLong) || (TKDouble)) {
-		recebe_token();
-
-		if (tk == TKId) {
-			recebe_token();
-
-			if (pto_vir() == 0) {
-				recebe_token();
-				declara_func();
-			} else if (fecha_par() == 1) {
-				return 1;
-			}
-		}
-	} else if (fecha_par() == 1) {
-		return 1;
-	} else {
-		printf("ERRO: Esperava fechar parenteses na linha %d posicao %d\n", linha, pos);
-		system("pause");
-
-		erro = 1;
-		return 0;
-	}
-	return 0;
-}
-
-int var_printf() {
-	if (tk == TKId) {
-		recebe_token();
-
-		if (virgula() == 1) {
-			recebe_token();
-			var_printf();
-		} else if (fecha_par() == 1) {
-			return 1;
-		} else {
-			printf("ERRO: Esperava fechar parenteses na linha %d posicao %d\n", linha, pos);
-			system("pause");
-
-			erro = 1;
-			return 0;
-		}
-	} else {
-		printf("ERRO: Esperava um identificador na linha %d posicao %d\n", linha, pos);
-		system("pause");
-
-		erro=1;
-		return 0;
-	}
-	return 0;
-}
-
-int _printf() {
-	if (tk == TKPrintf) {
-		recebe_token();
-
-		if (abre_par() == 1) {
-			recebe_token();
-
-			if (tk == TKAspaDupla) {
-				recebe_token();
-
-				while (tk != TKAspaDupla || tk == -1) {
-					recebe_token();
-				}
-
-				if (tk == TKAspaDupla) {
-					recebe_token();
-
-					if (fecha_par() == 1) {
-						return 1;
-					} else if (virgula() == 1) {
-						recebe_token();
-						if (var_printf() == 1) {
-							recebe_token();
-							if (pto_vir() == 1) {
-								return 1;
-							} else {
-								printf("ERRO: Esperava um ponto e virgula na linha %d posicao %d\n", linha, pos);
-								system("pause");
-								erro=1;
-								return 0;
-							}
-						}
-					} else {
-						printf("ERRO: Esperava fechar parenteses ou virgula na linha %d posicao %d\n", linha, pos);
-						system("pause");
-						erro=1;
-						return 0;
+int Com(char Com_c[MAX_COD])
+{
+printf("Entrei no Com\n");
+char Rel_c[MAX_COD];
+if (token==TK_if)
+   {
+   char labelelse[10],labelfim[10];
+   geralabel(labelelse);
+   geralabel(labelfim);
+   token=le_token();
+   if (token==TK_Abre_Par)
+      {
+      token=le_token();
+      if (Rel(Rel_c))
+	     if (token==TK_Fecha_Par)
+	        {
+            token=le_token();
+	        char Com3_c[MAX_COD];
+      		if (Com(Com3_c))
+	           {
+	           	if (token==TK_else)
+					{
+					token=le_token();
+					char Com2_c[MAX_COD];
+      				if (Com(Com2_c))
+      				   {
+      				   sprintf(Com_c,"%s\tgofalse %s\n%s\tgoto %s\nrotulo %s\n%srotulo %s",
+						       Rel_c,labelelse,Com3_c,labelfim,labelelse,Com2_c,labelfim);
+      				   return 1;
+					   }
+					else
+					   {
+					   printf("Erro no comando do else\n");
+					   return 0;
+					   }
 					}
-				} else {
-					printf("ERRO: Esperava aspa dupla na linha %d posicao %d\n", linha, pos);
-					system("pause");
-					erro=1;
-					return 0;
-				}
-			} else {
-				printf("ERRO: Esperava aspa dupla na linha %d posicao %d\n", linha, pos);
-				system("pause");
-				erro=1;
-				return 0;
+				else
+				    {
+					   printf("Esperava palavra else\n");
+					   return 0;
+				    }
+			   }
+            	else
+				  {
+	              printf("Esperava fecha parï¿½nteses\n");
+				  return 0;
+                  }
 			}
-		} else {
-			printf("ERRO: Esperava abrir parenteses na linha %d posicao %d\n", linha, pos);
-			system("pause");
-			erro=1;
-			return 0;
-		}
-	}
-	return 0;
-}
-
-int declara() {
-	if (tk == TKId) {
-		recebe_token();
-		if (virgula() == 1) {
-			recebe_token();
-			declara();
-		} else if (pto_vir() == 1) {
-			return 1;
-		} else if (abre_col() == 1) {
-			recebe_token();
-			if (tk == TKConstante || tk == TKId) {
-				recebe_token();
-				if (fecha_col() == 1) {
-					recebe_token();
-					if (pto_vir() == 1) {
-						return 1;
-					} else if (virgula() == 1) {
-						recebe_token();
-						declara();
-					} else {
-						printf("ERRO: Esperava um ponto e virgula na linha %d posicao %d\n", linha, pos);
-						system("pause");
-						erro=1;
-						return 0;
-					}
-				} else {
-					printf("ERRO: Esperava fechar colchete na linha %d posicao %d\n", linha, pos);
-					system("pause");
-					erro=1;
-					return 0;
-				}
-			} else {
-				printf("ERRO: Esperava um identificador ou constante na linha %d posicao %d\n", linha, pos);
-				system("pause");
-				erro=1;
-				return 0;
-			}
-		} else if (abre_par() == 1) {
-			recebe_token();
-			while(fecha_par() == 1) {
-				recebe_token();
-			}
-			if (fecha_par() == 1) {
-				return 1;
-			}
-		} else {
-			printf("ERRO: Esperava um ponto e virgula na linha %d posicao %d\n", linha, pos);
-			system("pause");
-			erro=1;
-			return 0;
-		}
-	} else {
-		printf("ERRO: Esperava um identificador na linha %d posicao %d\n", linha, pos);
-		system("pause");
-		erro=1;
+			else
+			   {
+			   printf("Erro na expressï¿½o do if \n");
+               return 0;
+		       }
+		{
+	    printf("Esperava abre parï¿½nteses\n");
 		return 0;
-	}
-	return 0;
-}
-
-int declara_var() {
-	if (tk  ==  TKInt || tk  ==  TKFloat || TKLong || TKDouble) {
-		recebe_token();
-		if (declara() == 1) {
-			return 1;
 		}
-	}
-	return 0;
+	  }
+else
+   {
+   printf("Esperava abre parï¿½nteses\n");
+   return 0;
+   }
 }
+if (token==TK_while)
+   {
+   char labelinicio[10],labelfim[10];
+   geralabel(labelinicio);
+   geralabel(labelfim);
+   token=le_token();
+   if (token==TK_Abre_Par)
+      {
+      token=le_token();
+      if (Rel(Rel_c))
+	     if (token==TK_Fecha_Par)
+	        {
+            token=le_token();
+            char Com1_c[MAX_COD];
+	        if (Com(Com1_c))
+      				   {
+      				   sprintf(Com_c,"rotulo %s\n%s\tgofalse %s\n%s\tgoto %s\nrotulo %s\n",
+						 labelinicio,Rel_c,labelfim,Com1_c,labelinicio,labelfim);
+      				   return 1;
+					   }
 
-int fre() {
-	if (tk == TKFree) {
-		recebe_token();
-		if (abre_par() == 0) {
-			printf("ERRO: Esperava um abre parenteses na linha %d posicao %d\n", linha, pos);
-			system("pause");
-			erro=1;
-			return 0;
-		} else {
-			recebe_token();
-			if (idd()  ==  0) {
-				printf("ERRO: Esperava identificador na linha %d posicao %d\n", linha, pos);
-				system("pause");
-				erro=1;
-				return 0;
-			} else {
-				recebe_token();
-				if (fecha_par() == 0) {
-					printf("ERRO: Esperava um fecha parenteses na linha %d posicao %d\n", linha, pos);
-					system("pause");
-					erro=1;
-					return 0;
-				} else {
-					recebe_token();
-					if (pto_vir() == 0) {
-						printf("ERRO: Esperava um ponto e virgula na linha %d posicao %d\n", linha, pos);
-						system("pause");
-						erro=1;
-						return 0;
-					} else {
-						return 1;
-					}
-				}
+            	else
+				  {
+	              printf("Esperava fecha parï¿½nteses\n");
+				  return 0;
+                  }
 			}
-		}
-	}else
+			else
+			   {
+			   printf("Erro na condiï¿½ï¿½o do while\n");
+               return 0;
+		       }
+		{
+	    printf("Esperava abre parï¿½nteses\n");
 		return 0;
-}
-
-int igual() {
-	if (tk == TKAtribui)
-		return 1;
-	else
-	 return 0;
-}
-
-int ini() {
-	if (tk == TKId) {
-		recebe_token();
-		if (igual() == 0) {
-			printf("ERRO: Esperava um igual na linha %d posicao %d\n", linha, pos);
-			system("pause");
-			erro=1;
-			return 0;
-		} else {
-			recebe_token();
-			if (tk == TKId || tk == TKConstante) {
-				recebe_token();
-				if (virgula() == 1) {
-					recebe_token();
-					ini();
-				} else {
-					return 1;
-				}
-			} else {
-				printf("ERRO: Esperava um identificador ou uma constante na linha %d posicao %d\n", linha, pos);
-				system("pause");
-				erro=1;
-				return 0;
-			}
 		}
-	}
-	return 0;
+	  }
+else
+   {
+   printf("Esperava abre parï¿½nteses\n");
+   return 0;
+   }
 }
-
-int lista_inc() {
-	if (tk == TKSoma)
-		return 1;
-	else if (tk == TKMaisIgual)
-		return 1;
-	else if (tk == TKMenos)
-		return 1;
-	else if (tk == TKMenosIgual)
-		return 1;
-	else if (tk == TKMultiplica)
-		return 1;
-	else if (tk == TKVezesIgual)
-		return 1;
-	else if (tk == TKDivisao)
-		return 1;
-	else if (tk == TKDivideIgual)
-		return 1;
-	else if (tk == TKRestoDivisao)
-		return 1;
-	return 0;
-}
-
-int lista_operadores() {
-	if (tk == TKSoma)
-		return 1;
-	else if (tk == TKMenos)
-		return 1;
-	else if (tk == TKMultiplica)
-		return 1;
-	else if (tk == TKDivisao)
-		return 1;
-	else if (tk == TKRestoDivisao)
-		return 1;
-	return 0;
-}
-
-int inc() {
-	if (tk == TKId) {
-		recebe_token();
-		if (tk == TKDecremento || tk == TKIncremento) {
-			recebe_token();
-			if (virgula() == 1) {
-				recebe_token();
-				inc();
-			} else {
-				return 1;
-			}
-		} else if (lista_inc() == 0) {
-			printf("ERRO: Esperava +, +=, -, -=, *, *=, /, /=, ou (por cento) na linha %d posicao %d\n", linha, pos);
-			system("pause");
-			erro=1;
-			return 0;
-		} else {
-			recebe_token();
-			if (tk == TKId || tk == TKConstante) {
-				recebe_token();
-				if (virgula() == 1) {
-					recebe_token();
-					inc();
-				} else {
-					return 1;
-				}
-			} else {
-				printf("ERRO: Esperava um identificador ou uma constante na linha %d posicao %d\n", linha, pos);
-				system("pause");
-				erro=1;
-				return 0;
-			}
+else if (token==TK_id)
+   {
+   char id[10];
+   strcpy(id,lex);
+   token=le_token();
+	if (token==TK_Atrib)
+	   {
+        token=le_token();
+        char E_c[MAX_COD];
+	   	if (Rel(E_c))
+	   	   {
+	   	   if (token==TK_pv)
+	           {
+               token=le_token();
+               strcpy(Com_c,"\tvalor-l ");
+		       strcat(Com_c,id);
+		       strcat(Com_c,"\n");
+		       strcat(Com_c,E_c);
+		       strcat(Com_c,"\t:=\n\tpop\n");
+		       printf("Vou retornar 1 no Com\n");
+		       return 1;
+		       }
+		    else
+		       {
+		       	printf("Faltou ponto-e-vï¿½rgula apï¿½s atribuiï¿½ï¿½o\n");
+		       	return 0;
+			   }
+		   }
+	   }
+   }
+else if (token==TK_Abre_Chaves)
+        {
+        char Lista_Com_c[MAX_COD];
+		token=le_token();
+        printf("Consumi o abre chaves\n");
+	    if (Lista_Com(Lista_Com_c))
+           {
+           printf("Voltei do Lista_Com. Token=%s\n",tokens[token]);
+	       if (token==TK_Fecha_Chaves)
+	          {
+	          token=le_token();
+              printf("Consumi o fecha chaves\n");
+	          strcpy(Com_c,Lista_Com_c);
+			  return 1;
+			  }
+			else
+			{
+		printf("Esperava fecha chaves na linha %d",linlex);
+           return 0;
+       }
+		   }
 		}
-	}
-	return 0;
+else   	   if (token==TK_pv)
+	           {
+		       printf("Vou retornar 1 no Com com ponto e virgula\n");
+               token=le_token();
+    return 1; }
+   else {
+		       printf("Vou retornar 0 no Com vazio - token ï¿½ %s\n",tokens[token]);
+
+   return 1;
+   }
 }
-
-int dois_pontos() {
-	if (tk == TKDoisPontos) {
-		return 1;
-	}
-	return 0;
-}
-
-
-int lista_exp() {
-	if (tk == TKDiferente)
-		return 1;
-	else if (tk == TKMaior)
-		return 1;
-	else if (tk == TKMaiorIgual)
-		return 1;
-	else if (tk == TKMenor)
-		return 1;
-	else if (tk == TKMenorIgual)
-		return 1;
-	else if (tk == TKComparacao)
-		return 1;
-	else if (tk == TKMaiorBinario)
-		return 1;
-	else if (tk == TKMenorBinario)
-		return 1;
-	return 0;
-}
-
-int logica() {
-	if (tk == TKE)
-		return 1;
-	else if (tk == TKOu)
-		return 1;
-	return 0;
-}
-
-int expp() {
-	if (tk == TKId) {
-		recebe_token();
-		if (lista_exp() == 0) {
-			printf("ERRO: Esperava  == , !=, <, <=, <<, >, >=, ou >> na linha %d posicao %d\n", linha, pos);
-			system("pause");
-			erro=1;
-			return 0;
-		} else {
-			recebe_token();
-			if (tk == TKId || tk == TKConstante) {
-				recebe_token();
-				if (logica() == 1) {
-					recebe_token();
-					expp();
-				} else {
-					return 1;
-				}
-			} else {
-				printf("ERRO: Esperava um identificador ou uma constante na linha %d posicao %d\n", linha, pos);
-				system("pause");
-				erro=1;
-				return 0;
-			}
-		}
-	}
-	return 0;
-}
-
-int lista_atrib() {
-	if (tk == TKAtribui)
-		return 1;
-	else if (tk == TKMaisIgual)
-		return 1;
-	else if (tk == TKMenosIgual)
-		return 1;
-	else if (tk == TKVezesIgual)
-		return 1;
-	else if (tk == TKDivideIgual)
-		return 1;
-	return 0;
-}
-
-int atrib2() {
-	if (tk == TKId || tk == TKConstante) {
-		recebe_token();
-		if (lista_operadores() == 0) {
-			if (pto_vir() == 0) {
-				printf("ERRO: Esperava um ponto e virgula na linha %d posicao %d\n", linha, pos);
-				system("pause");
-				erro=1;
-				return 0;
-			} else {
-				return 1;
-			}
-		} else {
-			recebe_token();
-			atrib2();
-		}
-	} else {
-		printf("ERRO: Esperava identificador ou constante na linha %d posicao %d\n", linha, pos);
-		system("pause");
-		erro=1;
-		return 0;
-	}
-	return 0;
-}
-
-int _identificador() {
-	if (tk == TKId) {
-		recebe_token();
-		if (tk == TKIncremento || tk == TKDecremento) {
-			recebe_token();
-			if (pto_vir() == 0) {
-				printf("ERRO: Esperava um ponto e virgula na linha %d posicao %d\n", linha, pos);
-				system("pause");
-				erro=1;
-				return 0;
-			} else {
-				return 1;
-			}
-		} else if (tk == TKAtribui || lista_atrib() == 1) {
-			recebe_token();
-			if (atrib2() == 1) {
-				return 1;
-			}
-		} else {
-			printf("ERRO: Esperava =, +=, -=, *=, ou /= na linha %d posicao %d\n", linha, pos);
-			system("pause");
-			erro=1;
-			return 0;
-		}
-	}
-	return 0;
-}
-
-int atrib() {
-	if (tk == TKId) {
-		recebe_token();
-		if (tk == TKIncremento || tk == TKDecremento) {
-			recebe_token();
-			if (pto_vir() == 0) {
-				printf("ERRO: Esperava um ponto e virgula na linha %d posicao %d\n", linha, pos);
-				system("pause");
-				erro=1;
-				return 0;
-			} else {
-				return 1;
-			}
-		} else {
-			if (lista_atrib() == 0) {
-				printf("ERRO: Esperava =, +=, -=, *=, ou /= na linha %d posicao %d\n", linha, pos);
-				system("pause");
-				erro=1;
-				return 0;
-			} else {
-				recebe_token();
-				if (atrib2() == 1) {
-					return 1;
-				}
-			}
-		}
-	}
-
-
-	return 0;
-}
-
-int ini_for() {
-	if (pto_vir() == 0 && ini() == 0) {
-		printf("ERRO: Esperava um ponto e virgula ou uma inicialização de variavel na linha %d posicao %d\n", linha, pos);
-		system("pause");
-		erro=1;
-		return 0;
-	} else if (pto_vir() == 1)
-		return 1;
-	return 0;
-}
-
-int exp_for() {
-	if (pto_vir() == 0 && expp() == 0) {
-		printf("ERRO: Esperava um ponto e virgula ou uma expressão de saida na linha %d posicao %d\n", linha, pos);
-		system("pause");
-		erro=1;
-		return 0;
-	} else if (pto_vir() == 1)
-		return 1;
-	return 0;
-}
-
-int inc_for() {
-	if (inc() == 0 && fecha_par() == 0) {
-		printf("ERRO: Esperava um fecha parenteses ou uma incrementação de variavel na linha %d posicao %d\n", linha, pos);
-		system("pause");
-		erro=1;
-		return 0;
-	} else if (fecha_par() == 1)
-		return 1;
-	return 0;
-}
-
-int _for() {
-	if (tk == TKFor) {
-		recebe_token();
-		if (abre_par() == 0) {
-			printf("ERRO: Esperava abrir um parenteses na linha %d posicao %d\n", linha, pos);
-			system("pause");
-			erro=1;
-			return 0;
-		} else {
-			recebe_token();
-			if (ini_for() == 1) {
-				recebe_token();
-				if (exp_for() == 1) {
-					recebe_token();
-					if (inc_for() == 1) {
-						recebe_token();
-						if (abre_chave() == 0) {
-							return 1;
-						} else {
-							return 1;
-						}
-					}
-				}
-			}
-		}
-
-	}
-	return 0;
-}
-
-
-
-int _do() {
-	if (tk == TKDo) {
-		recebe_token();
-		if (abre_chave() == 1) {
-			return 1;
-		} else {
-			return 1;
-		}
-	}
-	return 0;
-}
-
-int exp_while() {
-	if (expp() == 1 || tk == TKId || tk == TKConstante) {
-		return 1;
-	} else {
-		printf("ERRO: Esperava uma condição de saida na linha %d posicao %d\n", linha, pos);
-		system("pause");
-		erro=1;
-		return 0;
-	}
-	return 0;
-}
-
-int _while() {
-	if (tk == TKWhile) {
-		recebe_token();
-		if (abre_par() == 0) {
-			printf("ERRO: Esperava abrir um parenteses na linha %d posicao %d\n", linha, pos);
-			system("pause");
-			erro=1;
-			return 0;
-		} else {
-			recebe_token();
-			if (exp_while() == 1) {
-				if (fecha_par() == 1) {
-					recebe_token();
-					if (pto_vir() == 1 || abre_chave() == 1 || tk == tk-1) {
-						return 1;
-					} else {
-						printf("ERRO: Esperava ponto e virgula linha %d posicao %d\n", linha, pos);
-						system("pause");
-						erro=1;
-						return 0;
-					}
-				} else {
-					printf("ERRO: Esperava fechar um parenteses na linha %d posicao %d\n", linha, pos);
-					system("pause");
-					erro=1;
-					return 0;
-				}
-			}
-		}
-	}
-	return 0;
-}
-
-int _if () {
-	if (tk == TKIf) {
-		recebe_token();
-
-		if (abre_par() == 0) {
-			printf("ERRO: Esperava abrir um parenteses na linha %d posicao %d\n", linha, pos);
-			system("pause");
-			erro=1;
-			return 0;
-		} else {
-			recebe_token();
-			if (expp() == 1) {
-				if (fecha_par() == 0) {
-					printf("ERRO: Esperava fechar um parenteses na linha %d posicao %d\n", linha, pos);
-					system("pause");
-					erro=1;
-					return 0;
-				} else {
-					return 1;
-				}
-			}
-		}
-	}
-	return 0;
-}
-
-int _break() {
-	if (tk == TKBreak) {
-		recebe_token();
-		if (pto_vir() == 0) {
-			printf("ERRO: Esperava um ponto e virgula na linha %d posicao %d\n", linha, pos);
-			system("pause");
-
-			erro=1;
-			return 0;
-		} else {
-			return 1;
-		}
-	}
-	return 0;
-}
-
-int _else() {
-	if (tk == TKElse) {
-		recebe_token();
-		if (_if() == 1) {
-			return 1;
-		} else if (tk == -1) {
-			return 1;
-		}
-	}
-	return 0;
-}
-
-int _switch() {
-	if (tk == TKSwitch) {
-		recebe_token();
-		if (abre_par() == 0) {
-			printf("ERRO: Esperava abrir um parenteses na linha %d posicao %d\n", linha, pos);
-			system("pause");
-			erro=1;
-			return 0;
-		} else {
-			recebe_token();
-			if (tk == TKId) {
-				recebe_token();
-				if (fecha_par() == 0) {
-					printf("ERRO: Esperava fechar um parenteses na linha %d posicao %d\n", linha, pos);
-					system("pause");
-					erro=1;
-					return 0;
-				} else {
-					return 1;
-				}
-			} else {
-				printf("ERRO: Esperava um identificador na linha %d posicao %d\n", linha, pos);
-				system("pause");
-				erro=1;
-				return 0;
-			}
-		}
-	}
-	return 0;
-}
-
-int _case() {
-	if (tk == TKCase) {
-		recebe_token();
-		if (tk == TKConstante) {
-			recebe_token();
-			if (dois_pontos() == 0) {
-				printf("ERRO: Esperava dois pontos na linha %d posicao %d\n", linha, pos);
-				system("pause");
-				erro=1;
-				return 0;
-			} else {
-				return 1;
-			}
-		} else {
-			printf("ERRO: Esperava uma constante na linha %d posicao %d\n", linha, pos);
-			system("pause");
-			erro=1;
-			return 0;
-		}
-	}
-	return 0;
-}
-
-int _void() {
-	if (tk == TKVoid) {
-		recebe_token();
-		if (tk == TKId) {
-			recebe_token();
-			if (abre_par() == 1) {
-				recebe_token();
-				declara_func();
-			} else {
-				printf("ERRO: Esperava abrir parenteses na linha %d posicao %d\n", linha, pos);
-				system("pause");
-				erro=1;
-				return 0;
-			}
-		} else {
-			printf("ERRO: Esperava MAIN ou identificador de funcao na linha %d posicao %d\n", linha, pos);
-			system("pause");
-			erro=1;
-			return 0;
-		}
-	}
-	return 0;
-}
-
-int _return() {
-	if (tk == TKReturn) {
-		recebe_token();
-		if (tk == TKId || tk == TKConstante) {
-			recebe_token();
-			if (pto_vir() == 1) {
-				return 1;
-			} else {
-				printf("ERRO: Esperava ponto e virgula na linha %d posicao %d\n", linha, pos);
-				system("pause");
-				erro=1;
-				return 0;
-			}
-		} else {
-			printf("ERRO: Esperava uma constante ou um identificador na linha %d posicao %d\n", linha, pos);
-			system("pause");
-			erro=1;
-			return 0;
-		}
-	}
-	return 0;
-}
-
-int _gets() {
-	if (tk == TKGets) {
-		recebe_token();
-		if (abre_par() == 1) {
-			recebe_token();
-			if (tk == TKId) {
-				recebe_token();
-				if (fecha_par() == 1) {
-					recebe_token();
-					if (pto_vir() == 1) {
-						return 1;
-					} else {
-						printf("ERRO: Esperava um ponto e virgula na linha %d posicao %d\n", linha, pos);
-						system("pause");
-						erro=1;
-						return 0;
-					}
-				} else {
-					printf("ERRO: Esperava fechar parenteses na linha %d posicao %d\n", linha, pos);
-					system("pause");
-					erro=1;
-					return 0;
-				}
-			} else {
-				printf("ERRO: Esperava um identificador na linha %d posicao %d\n", linha, pos);
-				system("pause");
-				erro=1;
-				return 0;
-			}
-		} else {
-			printf("ERRO: Esperava abrir um parenteses na linha %d posicao %d\n", linha, pos);
-			system("pause");
-			erro=1;
-			return 0;
-		}
-	}
-	return 0;
-}
-
-int _fflush() {
-	if (tk == TKFflush) {
-		recebe_token();
-		if (abre_par() == 1) {
-			recebe_token();
-			if (tk == TKStdin) {
-				recebe_token();
-				if (fecha_par() == 1) {
-					recebe_token();
-					if (pto_vir() == 1) {
-						return 1;
-					} else {
-						printf("ERRO: Esperava um ponto e virgula na linha %d posicao %d\n", linha, pos);
-						system("pause");
-						erro=1;
-						return 0;
-					}
-				} else {
-					printf("ERRO: Esperava fechar um parenteses na linha %d posicao %d\n", linha, pos);
-					system("pause");
-					erro=1;
-					return 0;
-				}
-			} else {
-				printf("ERRO: Esperava stdin na linha %d posicao %d\n", linha, pos);
-				system("pause");
-				erro=1;
-				return 0;
-			}
-		} else {
-			printf("ERRO: Esperava abrir um parenteses na linha %d posicao %d\n", linha, pos);
-			system("pause");
-			erro=1;
-			return 0;
-		}
-	}
-	return 0;
-}
-
-int _setbuf() {
-	if (tk == TKSetbuf) {
-		recebe_token();
-		if (abre_par() == 1) {
-			recebe_token();
-			if (tk == TKStdout) {
-				recebe_token();
-				if (virgula() == 1) {
-					recebe_token();
-					if (tk == TKNULL) {
-						recebe_token();
-						if (fecha_par() == 1) {
-							recebe_token();
-							if (pto_vir() == 1) {
-								return 1;
-							} else {
-								printf("ERRO: Esperava um ponto e virgula na linha %d posicao %d\n", linha, pos);
-								system("pause");
-								erro=1;
-								return 0;
-							}
-						} else {
-							printf("ERRO: Esperava fechar um parenteses na linha %d posicao %d\n", linha, pos);
-							system("pause");
-							erro=1;
-							return 0;
-						}
-					} else {
-						printf("ERRO: Esperava NULL na linha %d posicao %d\n", linha, pos);
-						system("pause");
-						erro=1;
-						return 0;
-					}
-				} else {
-					printf("ERRO: Esperava uma virgula na linha %d posicao %d\n", linha, pos);
-					system("pause");
-					erro=1;
-					return 0;
-				}
-			} else {
-				printf("ERRO: Esperava stdout na linha %d posicao %d\n", linha, pos);
-				system("pause");
-				erro=1;
-				return 0;
-			}
-		} else {
-			printf("ERRO: Esperava abrir um parenteses na linha %d posicao %d\n", linha, pos);
-			system("pause");
-			erro=1;
-			return 0;
-		}
-	}
-	return 0;
-}
-
-int _scanf() {
-	if (tk == TKScanf) {
-		recebe_token();
-		if (abre_par() == 1) {
-			recebe_token();
-			if (tk == TKAspaDupla) {
-				recebe_token();
-				if (tk == TKRestoDivisao) {
-					recebe_token();
-					if (tk == TKId) {
-						recebe_token();
-						if (tk == TKAspaDupla) {
-							recebe_token();
-							if (virgula() == 1) {
-								recebe_token();
-								if (tk == TKEComers) {
-									recebe_token();
-									if (tk == TKId) {
-										recebe_token();
-										if (fecha_par() == 1) {
-											recebe_token();
-											if (pto_vir() == 1) {
-												return 1;
-											} else {
-												printf("ERRO: Esperava um ponto e virgula na linha %d posicao %d\n", linha, pos);
-												system("pause");
-												erro=1;
-												return 0;
-											}
-										} else {
-											printf("ERRO: Esperava fechar um parenteses na linha %d posicao %d\n", linha, pos);
-											system("pause");
-											erro=1;
-											return 0;
-										}
-									} else {
-										printf("ERRO: Esperava um identificador na linha %d posicao %d\n", linha, pos);
-										system("pause");
-										erro=1;
-										return 0;
-									}
-								} else {
-									printf("ERRO: Esperava & na linha %d posicao %d\n", linha, pos);
-									system("pause");
-									erro=1;
-									return 0;
-								}
-							} else {
-								printf("ERRO: Esperava uma virgula na linha %d posicao %d\n", linha, pos);
-								system("pause");
-								erro=1;
-								return 0;
-							}
-						} else {
-							printf("ERRO: Esperava uma aspa dupla na linha %d posicao %d\n", linha, pos);
-							system("pause");
-							erro=1;
-							return 0;
-						}
-					} else {
-						printf("ERRO: Esperava um identificador na linha %d posicao %d\n", linha, pos);
-						system("pause");
-						erro=1;
-						return 0;
-					}
-				} else {
-					printf("ERRO: Esperava um (por cernto) na linha %d posicao %d\n", linha, pos);
-					system("pause");
-					erro=1;
-					return 0;
-				}
-			} else {
-				printf("ERRO: Esperava uma aspa dupla na linha %d posicao %d\n", linha, pos);
-				system("pause");
-				erro=1;
-				return 0;
-			}
-		} else {
-			printf("ERRO: Esperava abrir um parenteses na linha %d posicao %d\n", linha, pos);
-			system("pause");
-			erro=1;
-			return 0;
-		}
-	}
-	return 0;
-}
-
-int _default() {
-	if (tk == TKDefault) {
-		recebe_token();
-		if (dois_pontos() == 1) {
-			return 1;
-		} else {
-			printf("ERRO: Esperava dois pontos na linha %d posicao %d\n", linha, pos);
-			system("pause");
-			erro=1;
-			return 0;
-		}
-	}
-	return 0;
-}
-
-int main() {
-	setbuf(stdout, NULL);
-	FILE *arquivoLeitura;
-
-	do{
-		//printf("Digite caminho completo do arquivo de leitura\n");
-		//gets(local);
-		//fflush(stdin);
-		strcpy(local,"teste.txt");
-
-		arquivoLeitura = fopen(local, "r+");
-
-		if (arquivoLeitura  ==  NULL) {
-			printf("Arquivo não encontrado\n");
-		}
-	} while(arquivoLeitura  ==  NULL);
-
-	printf("Analise lexica em andamento..\n");
-
-	check = ftell(arquivoLeitura);
-
-	while(1) {
-		fseek(arquivoLeitura, check, SEEK_SET);
-		fgets(exp1, 200, arquivoLeitura);
-
-		check = ftell(arquivoLeitura);
-		tk = -3;
-
-		while (tk  != -1 && tk  != -2) {
-			tk = rec_equ(exp1);
-			if (tk ==  -2) {
-				printf("ERRO: Programa encontrou erro léxico linha %d na posicao %d\n", linha, pos);
-				system("pause");
-				erro=1;
-			}
-		}
-
-		pos = 0;
-		linha++;
-
-		if (feof(arquivoLeitura))
-			break;
-	}
-
-	printf("OK: Analise lexica concluida!\n");
-
-	fclose(arquivoLeitura);
-
-	arquivoLeitura = fopen(local, "r+");
-
-	printf("Analise sintatica em andamento..\n");
-
-	check = ftell(arquivoLeitura);
-	linha = 1;
-
-	while(1) {
-		fseek(arquivoLeitura, check, SEEK_SET);
-		fgets(exp1, 200, arquivoLeitura);
-
-		check = ftell(arquivoLeitura);
-		tk = -3;
-		recebe_token();
-
-		if (tk == TKAbreChave) {
-			abre_chave();
-			recebe_token();
-		}
-		if (tk == TKFechaChave) {
-			fecha_chave();
-			recebe_token();
-		}
-		if (tk == TKComparacao || tk == TKAtribui || tk == TKIncremento || tk == TKMaisIgual || tk == TKSoma || tk == TKDiferente || tk == TKPontoExclamacao || tk == TKAbrePar || tk == TKFechaPar || tk == TKVirgula || tk == TKPontoeVirg || tk == TKDoisPontos || tk == TKPonto || tk == TKAspaDupla || tk == TKAbreColchete || tk == TKE || tk == TKEComers || tk == TKOu || tk == TKTraco || tk == TKFechaColchete || tk == TKDecremento || tk == TKMenosIgual || tk == TKMenos || tk == TKVezesIgual || tk == TKMultiplica || tk == TKDivideIgual || tk == TKDivisao || tk == TKRestoDivisao || tk == TKAspaSimples || tk == TKMaiorIgual || tk == TKMaiorBinario || tk == TKMaior || tk == TKMenorIgual || tk == TKMenorBinario || tk == TKMenor) {
-			printf("ERRO: Token %d nao permite inicar linha, linha %d posicao %d\n",tk, linha, pos);
-			system("pause");
-			erro=1;
-			return 0;
-		}
-		if (tk ==  TKInt || tk ==  TKFloat || tk ==  TKLong || tk ==  TKDouble)
-			declara_var();
-		if (tk ==  TKFree)
-			fre();
-		if (tk == TKFor)
-			_for();
-		if (tk == TKDo)
-			_do();
-		if (tk == TKWhile)
-			_while();
-		if (tk == TKIf)
-			_if();
-		if (tk == TKElse)
-			_else();
-		if (tk == TKBreak)
-			_break();
-		if (tk == TKSwitch)
-			_switch();
-		if (tk == TKCase)
-			_case();
-		if (tk == TKVoid)
-			_void();
-		if (tk == TKReturn)
-			_return();
-		if (tk == TKGets)
-			_gets();
-		if (tk == TKId)
-			_identificador();
-		if (tk == TKFflush)
-			_fflush();
-		if (tk == TKSetbuf)
-			_setbuf();
-		if (tk == TKPrintf)
-			_printf();
-		if (tk == TKScanf)
-			_scanf();
-		if (tk == TKDefault)
-			_default();
-
-		pos = 0;
-		linha++;
-
-		if (feof(arquivoLeitura))
-			break;
-	}
-
-	printf("OK: Analise sintatica concluida!\n");
-
-	if (erro == 0)
-		printf("Nenhum erro foi encontrado no programa!\n");
-
-	fclose(arquivoLeitura);
-
-	system("pause");
-	return 0;
+int main()
+{
+FILE *arqout;
+char Com_C[MAX_COD];
+if ((arqin=fopen("c:\\teste\\prog.cpp","rt"))==NULL){printf("Erro na abertura do arquivo");exit(0);}
+if ((arqout=fopen("c:\\teste\\saida.kvmp","wt"))==NULL){printf("Erro na abertura do arquivo de saida");exit(0);}
+token=le_token();
+while (token!=TK_Fim_Arquivo)
+   {
+   if (Lista_Com(Com_C)==0)
+      printf("Erro no comando!!!\n");
+   else
+      {
+	  fprintf(arqout,"%s",Com_C);
+	  printf("%s",Com_C);
+      }
+   getch();
+   }
+fclose(arqin);
+fclose(arqout);
+system("pause");
 }
