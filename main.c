@@ -1,653 +1,2610 @@
 #include <string.h>
 #include <stdio.h>
-#include <conio.h>
 #include <stdlib.h>
 
-#define TK_int 1
-#define TK_float 2
-#define TK_char 3
-#define TK_struct 4
-#define TK_if 5
-#define TK_else 6
-#define TK_while 7
-
-#define TK_Abre_Colch 8
-#define TK_Fecha_Colch 9
-#define TK_Abre_Chaves 10
-#define TK_Fecha_Chaves 11
-#define TK_Fim_Arquivo 12
-#define TK_Atrib 13
-#define TK_Const_Int 14
-#define TK_Mais 15
-#define TK_Menos 16
-#define TK_Mult 17
-#define TK_Abre_Par 18
-#define TK_Fecha_Par 19
-#define TK_virgula 20
-#define TK_pv 21
-#define TK_Maior 22
-#define TK_Menor 23
-#define TK_Menor_Igual 24
-#define TK_Maior_Igual 25
-#define TK_Igual 26
-#define TK_Diferente 27
-#define TK_id 28
-
-
-/***********************************************************************************/
-/*                                                                                 */
-/*  IN�CIO DO L�XICO - N�o entre a n�o ser que tenha interesse pessoal em l�xicos  */
-/*                                                                                 */
-/***********************************************************************************/
-
-int linlex=0,collex=1;
-
-char tokens[][20]={"","TK_int",
-                      "TK_float",
-					  "TK_char",
-					  "TK_struct",
-					  "TK_if",
-					  "TK_else",
-					  "TK_while",
-					  "TK_Abre_Colch",
-					  "TK_Fecha_Colch",
-					  "TK_Abre_Chaves",
-					  "TK_Fecha_Chaves",
-					  "TK_Fim_Arquivo",
-					  "TK_Atrib",
-					  "TK_Const_Int",
-					  "TK_Mais",
-					  "TK_Menos",
-					  "TK_Mult",
-					  "TK_Abre_Par",
-					  "TK_Fecha_Par",
-					  "TK_virgula",
-					  "TK_pv",
-					  "TK_Maior",
-					  "TK_Menor",
-					  "TK_Menor_Igual",
-					  "TK_Maior_Igual",
-					  "TK_Igual",
-					  "TK_Diferente",
-					  "TK_id"
-					  };
-
-typedef struct pal{char palavra[20]; int token;} tpal;
-tpal reservadas[]={{"",0},
-				   {"int",TK_int},
-				   {"float",TK_float},
-				   {"char",TK_char},
-				   {"struct",TK_struct},
-				   {"if",TK_if},
-				   {"else",TK_else},
-				   {"while",TK_while},
-				   {"fim",-1}};
-
-FILE *arqin;
-int token;
-char lex[20];
-
-char le_char()
-{
-char c;
-
-if (fread(&c,1,1,arqin)==0) return -1;
-if (c=='\n') {linlex++;collex=1;}
-else collex++;
-return c;
-};
-
-int pal_res(char lex[])
-{
-int tk=0;
-while (strcmp(reservadas[tk].palavra,"fim")!=0)
-   {
-   	if (strcmp(lex,reservadas[tk].palavra)==0) return reservadas[tk].token;
-	tk++;
-   }
-return TK_id;
-}
-
-int le_token()
-{
-static int pos=0;
-static int estado=0;
-static char c='\0';
-while(1)
-{
-switch (estado)
-{
-case 0:if (c==',') {c=le_char();return TK_virgula;}
-       if (c=='+') {c=le_char();return TK_Mais;}
-       if (c=='-') {c=le_char();return TK_Menos;}
-       if (c=='*') {c=le_char();return TK_Mult;}
-       if (c=='{') {c=le_char();return TK_Abre_Chaves;}
-       if (c=='}') {c=le_char();return TK_Fecha_Chaves;}
-       if (c==';') {c=le_char();return TK_pv;}
-       if (c=='[') {c=le_char();return TK_Abre_Colch;}
-       if (c==']') {c=le_char();return TK_Fecha_Colch;}
-       if (c=='(') {c=le_char();return TK_Abre_Par;}
-       if (c==')') {c=le_char();return TK_Fecha_Par;}
-       if (c=='=')
-	      {
-		  c=le_char();
-		  if (c=='=')
-		     {
-             c=le_char();
-		     return TK_Igual;
-			 }
-		  return TK_Atrib;
-		  }
-       if (c=='<')
-	      {
-		  c=le_char();
-		  if (c=='=')
-		     {
-             c=le_char();
-		     return TK_Menor_Igual;
-			 }
-		  return TK_Menor;
-		  }
-       if (c=='>')
-	      {
-		  c=le_char();
-		  if (c=='=')
-		     {
-             c=le_char();
-		     return TK_Maior_Igual;
-			 }
-		  return TK_Maior;
-		  }
-       if (c=='!')
-	      {
-		  c=le_char();
-		  if (c=='=')
-		     {
-             c=le_char();
-		     return TK_Diferente;
-			 }
-		  }
-       if (c>='a' && c<='z' || c=='_')
-          {
-          lex[0]=c;
-          c=le_char();
-		  pos=1;
-		  estado=1;
-		  break;
-		  }
-       if (c>='0' && c<='9')
-          {
-          lex[0]=c;
-          c=le_char();
-		  pos=1;
-		  estado=2;
-		  break;
-		  }
-	   if (c==-1) return TK_Fim_Arquivo;
-	   if (c=='\n'||c=='\r'||c=='\t'||c=='\0'||c==' '){c=le_char();break;}
-case 1:if (c>='a' && c<='z' || c=='_' || c>='0' && c<='9')
-          {
-          lex[pos++]=c;
-          c=le_char();
-		  break;
-		  }
-	   else
-	      {
-		  estado=0;
-		  lex[pos]='\0';
-		  return pal_res(lex);
-		  }
-case 2:if (c>='0' && c<='9')
-          {
-          lex[pos++]=c;
-          c=le_char();
-		  break;
-		  }
-	   else
-	      {
-		  estado=0;
-		  lex[pos]='\0';
-		  return TK_Const_Int;
-		  }
-}
-}
-}
-
-/********************/
-/*                  */
-/*  FIM DO L�XICO   */
-/*                  */
-/********************/
-
+#define TK_Id 1
+#define TK_Void 2
+#define TK_Short 3
+#define TK_Int 4
+#define TK_Long 5
+#define TK_Float 6
+#define TK_Double 7
+#define TK_Char 69
+#define TK_Asm 8
+#define TK_Auto 9
+#define TK_Break 10
+#define TK_If 11
+#define TK_Else 12
+#define TK_While 13
+#define TK_Do 14
+#define TK_For 15
+#define TK_Switch 16
+#define TK_Case 17
+#define TK_Continue 18
+#define TK_Default 19
+#define TK_Const 20
+#define TK_Enum 21
+#define TK_Extern 22
+#define TK_Goto 23
+#define TK_Register 24
+#define TK_Return 25
+#define TK_Signed 26
+#define TK_Unsigned 27
+#define TK_Sizeof 28
+#define TK_Static 29
+#define TK_Struct 30
+#define TK_Typedef 31
+#define TK_Union 32
+#define TK_Volatile 33
+#define TK_AbrePar 34
+#define TK_FechaPar 35
+#define TK_AbreChave 36
+#define TK_FechaChave 37
+#define TK_AbreColchete 38
+#define TK_FechaColchete 39
+#define TK_PontoeVirg 40
+#define TK_DoisPontos 41
+#define TK_Virgula 42
+#define TK_Atrib 43
+#define TK_Mais 44
+#define TK_Menos 45
+#define TK_Multiplicacao 46
+#define TK_Divisao 47
+#define TK_RestoDivisao 48
+#define TK_Maior 49
+#define TK_Menor 50
+#define TK_Hashtag 51
+#define TK_MenosIgual 52
+#define TK_MaisIgual 53
+#define TK_MultiplicacaoIgual 54
+#define TK_DivisaoIgual 55
+#define TK_RestoDivisaoIgual 56
+#define TK_ComparadorMaiorIgual 57
+#define TK_ComparadorMenorIgual 58
+#define TK_MenosMenos 59
+#define TK_MaisMais 60
+#define TK_ComparadorIgual 61
+#define TK_ComparadorDiferente 62
+#define TK_Negacao 63
+#define TK_Ternario 64
+#define TK_ShiftLeft 65
+#define TK_ShiftRight 66
+#define TK_OU 67
+#define TK_AND 68
+#define TK_ELogico 70
+#define TK_OULogico 71
+#define TK_XOR 72
+#define TK_ConstInt 80
+#define TK_ConstFloat 81
+#define TK_ConstOctal 82
+#define TK_ConstHexa 83
+#define TK_ErroE 100
+#define TK_ErroConstFloat 101
+#define TK_ErroOU 102
+#define TK_ErroAND 103
+#define TK_ErroConstHexa 104
 #define MAX_COD 1000
 
-void mostra_t()
-{
-printf("%s lex=%s na lin %d, col %d\n",tokens[token],lex,linlex,collex);
+int pos = 0;
+int estado_anterior = 0;
+int posColuna = 0;
+int subColuna = 0;
+int linha = 0;
+int coluna = 0;
+int tab = 0;
+int TK_sParser[1000];
+char TK_sParserLex[1000][20];
+int posParser = 0;
+int posParserLex = 0;
+int token = 0;
+int doWhile = 0;
+char lex[10];
+int laco = 0;
+
+int PROGC(char *PROGC_c);
+
+int LD(char *LD_c);
+
+int RLD(char *RLD_c);
+
+int DEC(char *RLD_c);
+
+int RDEC(char *RDEC_t, char *RDEC_c);
+
+int DV(char *DV_t);
+
+int RDV(char *RDV_t);
+
+int TIPO(char *Tipo_t);
+
+int RTIPOSINAL(char *RTIPOSINAL_s, char *RTIPOSINAL_t);
+
+int RTIPOSINAL2(char *RTIPOSINAL2_s, char *RTIPOSINAL2_t);
+
+int RTIPOSHORT(char *RTIPOSHORT_s, char *RTIPOSHORT_t);
+
+int RTIPOLONG(char *RTIPOLONG_s, char *RTIPOLONG_t);
+
+int RTIPOLONG2(char *RTIPOLONG2_s, char *RTIPOLONG2_t);
+
+int DF(char *DF_c);
+
+int LP();
+
+int RLP();
+
+int CORPO(char *CORPO_c);
+
+int LCD(char *LCD_c);
+
+int COM(char *COM_c);
+
+int COMIF(char *COMIF_c);
+
+int RIF(char *RIF_c);
+
+int COMFOR(char *COMFOR_c);
+
+int RFOR(char *RFOR_c);
+
+int EIF(char *EIF_c, char *EIF_p);
+
+int COMWHILE(char *COMWHILE_c);
+
+int RWHILE(char *RWHILE_c);
+
+int COMDOWHILE(char *COMDOWHILE_c);
+
+int RDOWHILE(char *RDOWHILE_c);
+
+int COMSWITCH();
+
+int RSWITCH();
+
+int NEXTCASE();
+
+int E(char *E_tp, char *E_p, char *E_c);
+
+int ELinha(char *ELinha_h, char *ELinha_s, char *ELinha_p, char *ELinha_hp, char *ELinha_sp, char *ELinha_c, char *ELinha_hc, char *ELinha_sc);
+
+int E1(char *E1_tp, char *E1_h, char *E1_s, char *E1_p, char *E1_c);
+
+int E2(char *E2_tp, char *E2_h, char *E2_s, char *E2_p, char *E2_c);
+
+int E2Linha(char *E2Linha_h, char *E2Linha_s, char *E2Linha_hp, char *E2Linha_sp, char *E2Linha_hc, char *E2Linha_sc);
+
+int E3(char *E3_tp, char *E3_p, char *E3_c);
+
+int E3Linha(char *E3Linha_h, char *E3Linha_s, char *E3Linha_hp, char *E3Linha_sp, char *E3Linha_hc, char *E3Linha_sc);
+
+int E4(char *E4_tp, char *E4_p, char *E4_c);
+
+int E4Linha(char *E4Linha_h, char *E4Linha_s, char *E4Linha_hp, char *E4Linha_sp, char *E4Linha_hc, char *E4Linha_sc);
+
+int E5(char *E5_tp, char *E5_p, char *E5_c);
+
+int E5Linha(char *E5Linha_h, char *E5Linha_s, char *E5Linha_hp, char *E5Linha_sp, char *E5Linha_hc, char *E5Linha_sc);
+
+int E6(char *E6_tp, char *E6_p, char *E6_c);
+
+int E6Linha(char *E6Linha_h, char *E6Linha_s, char *E6Linha_hp, char *E6Linha_sp, char *E6Linha_hc, char *E6Linha_sc);
+
+int E7(char *E7_tp, char *E7_p, char *E7_c);
+
+int E7Linha(char *E7Linha_h, char *E7Linha_s, char *E7Linha_hp, char *E7Linha_sp, char *E7Linha_hc, char *E7Linha_sc);
+
+int E8(char *E8_tp, char *E8_p, char *E8_c);
+
+int E8Linha(char *E8Linha_h, char *E8Linha_s, char *E8Linha_hp, char *E8Linha_sp, char *E8Linha_hc, char *E8Linha_sc);
+
+int E9(char *E9_tp, char *E9_p, char *E9_c);
+
+int E9Linha(char *E9Linha_h, char *E9Linha_s, char *E9Linha_hp, char *E9Linha_sp, char *E9Linha_hc, char *E9Linha_sc);
+
+int E10(char *E10_tp, char *E10_p, char *E10_c);
+
+int E10Linha(char *E10Linha_h, char *E10Linha_s, char *E10Linha_hp, char *E10Linha_sp, char *E10Linha_hc, char *E10Linha_sc);
+
+int E11(char *E11_tp, char *E11_p, char *E11_c);
+
+int E11Linha(char *E11Linha_h, char *E11Linha_s, char *E11Linha_hp, char *E11Linha_sp, char *E11Linha_hc, char *E11Linha_sc);
+
+int E12(char *E12_tp, char *E12_p, char *E12_c);
+
+int E12Linha(char *E12Linha_h, char *E12Linha_s, char *E12Linha_hp, char *E12Linha_sp, char *E12Linha_hc, char *E12Linha_sc);
+
+int E13(char *E13_tp, char *E13_p, char *E13_c);
+
+int E14(char *E14_tp, char *E14_p, char *E14_c);
+
+int RE();
+
+struct pal_res {
+    char palavra[20];
+    int token;
+};
+struct pal_res lista_pal[] = {{"void",      TK_Void},
+                              {"short",     TK_Short},
+                              {"int",       TK_Int},
+                              {"long",      TK_Long},
+                              {"float",     TK_Float},
+                              {"double",    TK_Double},
+                              {"asm",       TK_Asm},
+                              {"auto",      TK_Auto},
+                              {"break",     TK_Break},
+                              {"if",        TK_If},
+                              {"else",      TK_Else},
+                              {"while",     TK_While},
+                              {"do",        TK_Do},
+                              {"for",       TK_For},
+                              {"switch",    TK_Switch},
+                              {"case",      TK_Case},
+                              {"continue",  TK_Continue},
+                              {"default",   TK_Default},
+                              {"const",     TK_Const},
+                              {"enum",      TK_Enum},
+                              {"extern",    TK_Extern},
+                              {"goto",      TK_Goto},
+                              {"register",  TK_Register},
+                              {"return",    TK_Return},
+                              {"signed",    TK_Signed},
+                              {"unsigned",  TK_Unsigned},
+                              {"sizeof",    TK_Sizeof},
+                              {"static",    TK_Static},
+                              {"struct",    TK_Struct},
+                              {"typedef",   TK_Typedef},
+                              {"union",     TK_Union},
+                              {"volatile",  TK_Volatile},
+                              {"fimtabela", TK_Id}
+};
+
+int palavra_reservada(char lex[]) {
+    int postab = 0;
+    while (strcmp("fimtabela", lista_pal[postab].palavra) != 0) {
+        if (strcmp(lex, lista_pal[postab].palavra) == 0)
+            return lista_pal[postab].token;
+        postab++;
+    }
+    return TK_Id;
 }
 
-/****************/
-/*              */
-/*  EXPRESS�ES  */
-/*              */
-/****************/
 
-int T(char T_c[MAX_COD]);
-int E(char E_c[MAX_COD]);
-int R(char R_h[MAX_COD],char R_s[MAX_COD]);
-int F(char F_c[MAX_COD]);
-int S(char S_h[MAX_COD],char S_s[MAX_COD]);
+int le_token(char st[], char lex[]) {
+    int estado = 0, fim = 0, posl = 0;
+    posColuna = pos;
+    while (!fim) {
+        char c = st[pos];
 
-int Rel(char Rel_c[MAX_COD])
-{
-printf("Entrei no Rel\n");
-char E1_c[MAX_COD],E2_c[MAX_COD],R_s[MAX_COD];
-if (E(E1_c))
-   {
-   char op[10];
-   if (token==TK_Maior) strcpy(op,">");
-   else if (token==TK_Menor) strcpy(op,"<");
-   else if (token==TK_Igual) strcpy(op,"=");
-   else if (token==TK_Diferente) strcpy(op,"<>");
-   else if (token==TK_Maior_Igual) strcpy(op,">=");
-   else if (token==TK_Menor_Igual) strcpy(op,"<=");
-   printf("Voltei do E, token � %s op � %s",tokens[token],op);
-   if (token==TK_Maior||token==TK_Menor||token==TK_Igual||token==TK_Diferente||token==TK_Maior_Igual||token==TK_Menor_Igual)
-      {
-      token=le_token();
-      if (E(E2_c))
-         {
-         printf("Voltei do E2, token � %s",tokens[token]);
-         sprintf(Rel_c,"%s%s\t%s\n",E1_c,E2_c,op);
-         return 1;
-		 }
-		 return 0;
-	  }
-   else
-      {
-	  strcpy(Rel_c,E1_c);
-      printf("Vou retornar 1 no E\n");
-      return 1;
-	  }
-   }
-return 0;
+        lex[posl++] = c;
+        switch (estado) {
+            case 0:
+                if (c >= 'a' && c <= 'z' || c >= 'A' && c <= 'Z' || c == '_') {
+                    pos++;
+                    estado = 1;
+                    estado_anterior = 0;
+                    break;
+                }
+                if (c >= '0' && c <= '9') {
+                    if (c == '0') {
+                        pos++;
+                        estado = 8;
+                        estado_anterior = 0;
+                        break;
+                    }
+                    pos++;
+                    estado = 2;
+                    estado_anterior = 0;
+                    break;
+                }
+                if (c == '.') {
+                    pos++;
+                    estado = 3;
+                    estado_anterior = 0;
+                    break;
+                }
+                if (c == '=') {
+                    c = st[++pos];
+                    if (c == '=') {
+                        lex[posl++] = '=';
+                        lex[posl] = '\0';
+                        pos++;
+                        estado_anterior = 0;
+                        return TK_ComparadorIgual;
+                    } else {
+                        lex[posl] = '\0';
+                        return TK_Atrib;
+                    }
+                }
+                if (c == '!') {
+                    c = st[++pos];
+                    if (c == '=') {
+                        lex[posl++] = '=';
+                        lex[posl] = '\0';
+                        pos++;
+                        estado_anterior = 0;
+                        return TK_ComparadorDiferente;
+                    } else {
+                        lex[posl] = '\0';
+                        return TK_Negacao;
+                    }
+                }
+                if (c == '?') {
+                    lex[posl] = '\0';
+                    pos++;
+                    estado_anterior = 0;
+                    return TK_Ternario;
+                }
+                if (c == '+') {
+                    c = st[++pos];
+                    if (c == '+') {
+                        lex[posl++] = '+';
+                        lex[posl] = '\0';
+                        pos++;
+                        estado_anterior = 0;
+                        return TK_MaisMais;
+                    } else if (c == '=') {
+                        lex[posl++] = '=';
+                        lex[posl] = '\0';
+                        pos++;
+                        estado_anterior = 0;
+                        return TK_MaisIgual;
+                    } else {
+                        lex[posl] = '\0';
+                        return TK_Mais;
+                    }
+
+                }
+                if (c == '-') {
+                    c = st[++pos];
+                    if (c == '-') {
+                        lex[posl++] = '-';
+                        lex[posl] = '\0';
+                        pos++;
+                        estado_anterior = 0;
+                        return TK_MenosMenos;
+                    } else if (c == '=') {
+                        lex[posl++] = '=';
+                        lex[posl] = '\0';
+                        pos++;
+                        estado_anterior = 0;
+                        return TK_MenosIgual;
+                    } else {
+                        lex[posl] = '\0';
+                        return TK_Menos;
+                    }
+                }
+                if (c == '*') {
+                    c = st[++pos];
+                    if (c == '=') {
+                        lex[posl++] = '=';
+                        lex[posl] = '\0';
+                        pos++;
+                        estado_anterior = 0;
+                        return TK_MultiplicacaoIgual;
+                    } else {
+                        lex[posl] = '\0';
+                        return TK_Multiplicacao;
+                    }
+                }
+                if (c == '/') {
+                    c = st[++pos];
+                    if (c == '=') {
+                        lex[posl++] = '=';
+                        lex[posl] = '\0';
+                        pos++;
+                        estado_anterior = 0;
+                        return TK_DivisaoIgual;
+                    } else {
+                        lex[posl] = '\0';
+                        return TK_Divisao;
+                    }
+                }
+                if (c == '%') {
+                    c = st[++pos];
+                    if (c == '=') {
+                        lex[posl++] = '=';
+                        lex[posl] = '\0';
+                        pos++;
+                        estado_anterior = 0;
+                        return TK_RestoDivisaoIgual;
+                    } else {
+                        lex[posl] = '\0';
+                        return TK_RestoDivisao;
+                    }
+                }
+                if (c == '|') {
+                    c = st[++pos];
+                    if (c == '|') {
+                        lex[posl++] = '|';
+                        lex[posl] = '\0';
+                        pos++;
+                        estado_anterior = 0;
+                        return TK_OU;
+                    }
+                    return TK_ErroOU;
+                }
+                if (c == '&') {
+                    c = st[++pos];
+                    if (c == '&') {
+                        lex[posl++] = '&';
+                        lex[posl] = '\0';
+                        pos++;
+                        estado_anterior = 0;
+                        return TK_AND;
+                    }
+                    return TK_ErroAND;
+                }
+                if (c == '>') {
+                    c = st[++pos];
+                    if (c == '=') {
+                        lex[posl++] = '=';
+                        lex[posl] = '\0';
+                        pos++;
+                        estado_anterior = 0;
+                        return TK_ComparadorMaiorIgual;
+                    } else if (c == '>') {
+                        lex[posl++] = '>';
+                        lex[posl] = '\0';
+                        pos++;
+                        estado_anterior = 0;
+                        return TK_ShiftRight;
+                    } else {
+                        lex[posl] = '\0';
+                        return TK_Maior;
+                    }
+                }
+                if (c == '<') {
+                    c = st[++pos];
+                    if (c == '=') {
+                        lex[posl++] = '=';
+                        lex[posl] = '\0';
+                        pos++;
+                        estado_anterior = 0;
+                        return TK_ComparadorMenorIgual;
+                    } else if (c == '<') {
+                        lex[posl++] = '<';
+                        lex[posl] = '\0';
+                        pos++;
+                        estado_anterior = 0;
+                        return TK_ShiftLeft;
+                    } else {
+                        lex[posl] = '\0';
+                        return TK_Menor;
+                    }
+                }
+                if (c == '(') {
+                    lex[posl] = '\0';
+                    pos++;
+                    estado_anterior = 0;
+                    return TK_AbrePar;
+                }
+                if (c == ')') {
+                    lex[posl] = '\0';
+                    pos++;
+                    estado_anterior = 0;
+                    return TK_FechaPar;
+                }
+                if (c == '{') {
+                    lex[posl] = '\0';
+                    pos++;
+                    estado_anterior = 0;
+                    return TK_AbreChave;
+                }
+                if (c == '}') {
+                    lex[posl] = '\0';
+                    pos++;
+                    estado_anterior = 0;
+                    return TK_FechaChave;
+                }
+                if (c == '[') {
+                    lex[posl] = '\0';
+                    pos++;
+                    estado_anterior = 0;
+                    return TK_AbreColchete;
+                }
+                if (c == ']') {
+                    lex[posl] = '\0';
+                    pos++;
+                    estado_anterior = 0;
+                    return TK_FechaColchete;
+                }
+                if (c == ',') {
+                    lex[posl] = '\0';
+                    pos++;
+                    estado_anterior = 0;
+                    return TK_Virgula;
+                }
+                if (c == ';') {
+                    lex[posl] = '\0';
+                    pos++;
+                    estado_anterior = 0;
+                    return TK_PontoeVirg;
+                }
+                if (c == ':') {
+                    lex[posl] = '\0';
+                    pos++;
+                    estado_anterior = 0;
+                    return TK_DoisPontos;
+                }
+                if (c == ' ' || c == '\n') {
+                    pos++;
+                    posl--;
+                    posColuna = pos;
+                }
+                if (c == 127) {
+                    pos++;
+                    posl--;
+                    linha++;
+                    subColuna = pos;
+                    posColuna = pos;
+                }
+                if (c == 9) {
+                    tab++;
+                    pos++;
+                    posColuna = pos;
+                    posl--;
+                    subColuna -= 3;
+                }
+                if (c == '\0') return -1;
+
+                break;
+            case 1:
+                if (c >= 'a' && c <= 'z' || c >= 'A' && c <= 'Z' || c == '_' || c >= '0' && c <= '9') {
+                    pos++;
+                    break;
+                }
+                lex[--posl] = '\0';
+                estado_anterior = 1;
+                return palavra_reservada(lex);
+
+            case 2:
+                if (c >= '0' && c <= '9') { //JA FOI LIDO UM NUMERO ANTERIORMENTE OU UM SINAL
+                    pos++;
+                    break;
+                }
+
+                if (c == '.') {
+                    pos++;
+                    estado = 3;
+                    estado_anterior = 2;
+                    break;
+                }
+                if (c == 'E') {
+                    pos++;
+                    estado = 4;
+                    estado_anterior = 2;
+                    break;
+                }
+                lex[--posl] = '\0';
+                estado_anterior = 2;
+                return TK_ConstInt;
+            case 3:
+                if (c >= '0' && c <= '9') {
+                    pos++;
+                    estado = 7;
+                    break;
+                } else {
+                    return TK_ErroConstFloat;
+                }
+
+            case 4:
+                if (c >= '0' && c <= '9') {
+                    pos++;
+                    estado = 6;
+                    break;
+                } else if (c == '-' || c == '+') {
+                    pos++;
+                    estado = 5;
+                    break;
+                }
+                return TK_ErroE;
+
+            case 5:
+                if (c >= '0' && c <= '9') {
+                    pos++;
+                    estado = 6;
+                    break;
+                }
+                return TK_ErroE;
+
+            case 6:
+                if (c >= '0' && c <= '9') {
+                    pos++;
+                    break;
+                }
+                if (estado_anterior = 2) {
+                    lex[--posl] = '\0';
+                    estado_anterior = 6;
+                    return TK_ConstInt;
+                } else {
+                    lex[--posl] = '\0';
+                    estado_anterior = 6;
+                    return TK_ConstFloat;
+                }
+            case 7:
+                if (c >= '0' && c <= '9') {
+                    pos++;
+                    break;
+                }
+                if (c == 'E') {
+                    pos++;
+                    estado = 4;
+                    estado_anterior = 7;
+                    break;
+                }
+                lex[--posl] = '\0';
+                estado_anterior = 7;
+                return TK_ConstFloat;
+            case 8:
+                if (c >= '0' && c <= '9') {
+                    pos++;
+                    break;
+                }
+                if (c == 'x' || c == 'X') {
+                    pos++;
+                    estado = 9;
+                    estado_anterior = 8;
+                    break;
+                }
+                lex[--posl] = '\0';
+                return TK_ConstInt;
+            case 9:
+                if (c >= '0' && c <= '9') {
+                    pos++;
+                    estado_anterior = 9;
+                    break;
+                } else {
+                    if (estado_anterior == 8)
+                        return TK_ErroConstHexa;
+                }
+                lex[--posl] = '\0';
+                return TK_ConstInt;
+        }
+    }
 }
 
-int E(char E_c[MAX_COD])
-{
-printf("Entrei no E\n");
-char T_c[MAX_COD],R_h[MAX_COD],R_s[MAX_COD];
-if (T(T_c))
-   {
-   strcpy(R_h,T_c);
-   if (R(R_h,R_s))
-      {
-      strcpy(E_c,R_s);
-      printf("Vou retornar 1 no E\n");
-      return 1;
-	  }
-   }
-return 0;
+void getToken() {
+    token = TK_sParser[posParser++];
+    linha = TK_sParser[posParser++];
+    coluna = TK_sParser[posParser++];
+    strcpy(lex, TK_sParserLex[posParserLex++]);
 }
 
-int R(char R_h[MAX_COD],char R_s[MAX_COD])
-{
-printf("Entrei no R (+TR | -TR)\n");
-char T_c[MAX_COD],R1_h[MAX_COD],R1_s[MAX_COD];
-if (token==TK_Mais)
-   {
-   token=le_token();
-   if (T(T_c))
-      {
-      strcpy(R1_h,R_h);
-      strcat(R1_h,T_c);
-      strcat(R1_h,"\t+\n");
-      if (R(R1_h,R1_s))
-         {
-         strcpy(R_s,R1_s);
-         return 1;
-	     }
-      }
-   return 0;
-   }
-if (token==TK_Menos)
-   {
-   token=le_token();
-   if (T(T_c))
-      {
-      strcpy(R1_h,R_h);
-      strcat(R1_h,T_c);
-      strcat(R1_h,"\t-\n");
-      if (R(R1_h,R1_s))
-         {
-         strcpy(R_s,R1_s);
-         return 1;
-	     }
-      }
-   return 0;
-   }
-strcpy(R_s,R_h);
-printf("Vou retornar 1 no R\n");
-return 1;
+typedef struct TS {
+    char id[10];
+    char tipo[10];
+    struct TS *prox;
+} tabela;
+
+tabela *ts;
+
+void poetabsimb(char *id, char *tipo) {
+    tabela *aux = (tabela *) malloc(sizeof(tabela));
+    strcpy(aux->id, id);
+    strcpy(aux->tipo, tipo);
+    aux->prox = ts;
+    ts = aux;
 }
 
-int T(char T_c[MAX_COD])
-{
-char F_c[MAX_COD],S_h[MAX_COD],S_s[MAX_COD];
-printf("Entrei no T\n");
-if (F(F_c))
-   {
-   strcpy(S_h,F_c);
-   if (S(S_h,S_s))
-      {
-      strcpy(T_c,S_s);
-      return 1;
-	  }
-   }
-return 0;
+int verificaDuplicacao(char *lex, tabela *tab) {
+    if (tab == NULL)
+        return 1;
+
+    if (!strcmp(tab->id, lex)) {
+        printf("Variavel %s ja foi declarada\n", lex);
+        printf("Erro ocorreu na linha %d, coluna %d",linha,coluna);
+        exit(0);
+    }
+
+    return verificaDuplicacao(lex, tab->prox);
 }
 
-int S(char S_h[MAX_COD],char S_s[MAX_COD])
-{
-printf("Entrei no S (*FS)\n");
-char F_c[MAX_COD],S1_h[MAX_COD],S1_s[MAX_COD];
-if (token==TK_Mult)
-   {
-   token=le_token();
-   if (F(F_c))
-      {
-      strcpy(S1_h,S_h);
-      strcat(S1_h,F_c);
-      strcat(S1_h,"\t*\n");
-      if (S(S1_h,S1_s))
-         {
-         strcpy(S_s,S1_s);
-         return 1;
-	     }
-      }
-   return 0;
-   }
-strcpy(S_s,S_h);
-printf("Vou retornar 1 no S\n");
-return 1;
-}
+void *consultaTipo(char *id, char *Tipo, tabela *tab){
+    if (tab == NULL)
+        return 1;
 
-int F(char F_c[MAX_COD])
-{
-printf("Entrei no F\n");
 
-if (token==TK_Const_Int)
-   {
-   strcpy(F_c,"\tpush ");
-   strcat(F_c,lex);
-   strcat(F_c,"\n");
-   token=le_token();
-   return 1;
-   }
-if (token==TK_id)
-   {
-   strcpy(F_c,"\tvalor-r ");
-   strcat(F_c,lex);
-   strcat(F_c,"\n");
-   token=le_token();
-   return 1;
-   }
-if (token==TK_Abre_Par)
-   {
-   char E_c[MAX_COD];
-   token=le_token();
-   if (E(E_c))
-      if (token==TK_Fecha_Par)
-         {
-         token=le_token();
-         strcpy(F_c,E_c);
-         return 1;
-		 }
-   }
+    if (!strcmp(tab->id, id)) {
+        strcpy(Tipo,tab->tipo);
+    }
 
-return 0;
-}
-
-/**************/
-/*            */
-/*  COMANDOS  */
-/*            */
-/**************/
-
-int Com(char Com_c[MAX_COD]);
-int Lista_Com(char Lista_Com_c[MAX_COD]);
-
-/* Lista_Com ->
-
-*/
-
-int Lista_Com(char Lista_Com_c[MAX_COD])
-{
-printf("Entrei no Lista_Com\n");
-
-char LL_c[MAX_COD];
-	char Com_c[MAX_COD];
-	printf("Vou testar Com - token � %s\n",tokens[token]);
-	if (token==TK_Fim_Arquivo) return 1;
-    if (token!=TK_id && token!=TK_pv && token!=TK_if && token!=TK_while)
-       {
-       	strcpy(Lista_Com_c,"");
-       	return 1;
-	   }
-
-	if (Com(Com_c))
-	   {
-       printf("B - token � %s\n",tokens[token]);
-	      if (Lista_Com(LL_c))
-		     {
-		     strcpy(Lista_Com_c,Com_c);
-		     strcat(Lista_Com_c,LL_c);
-	         printf("Vou retornar 1 no Lista_Com. Token � %s\n",tokens[token]);
-	   	     return 1;
-			 }
-		  printf("Vou retornar 0 no Lista_Com-1 - token � %s\n",tokens[token]);
-	      return 0;
-	   }
-	if (token==TK_Fim_Arquivo) return 1;
-	printf("Vou retornar 0 no Lista_Com-2\n");
-	return 0;
+    return consultaTipo(id, Tipo, tab->prox);
 }
 
 void geralabel(char label[])
 {
-static int numlabel=0;
-sprintf(label,"LB%03d",numlabel++);
+    static int numlabel=0;
+    sprintf(label,"LB%03d",numlabel++);
 }
 
-int Com(char Com_c[MAX_COD])
+void geratemp(char temp[])
 {
-printf("Entrei no Com\n");
-char Rel_c[MAX_COD];
-if (token==TK_if)
-   {
-   char labelelse[10],labelfim[10];
-   geralabel(labelelse);
-   geralabel(labelfim);
-   token=le_token();
-   if (token==TK_Abre_Par)
-      {
-      token=le_token();
-      if (Rel(Rel_c))
-	     if (token==TK_Fecha_Par)
-	        {
-            token=le_token();
-	        char Com3_c[MAX_COD];
-      		if (Com(Com3_c))
-	           {
-	           	if (token==TK_else)
-					{
-					token=le_token();
-					char Com2_c[MAX_COD];
-      				if (Com(Com2_c))
-      				   {
-      				   sprintf(Com_c,"%s\tgofalse %s\n%s\tgoto %s\nrotulo %s\n%srotulo %s",
-						       Rel_c,labelelse,Com3_c,labelfim,labelelse,Com2_c,labelfim);
-      				   return 1;
-					   }
-					else
-					   {
-					   printf("Erro no comando do else\n");
-					   return 0;
-					   }
-					}
-				else
-				    {
-					   printf("Esperava palavra else\n");
-					   return 0;
-				    }
-			   }
-            	else
-				  {
-	              printf("Esperava fecha par�nteses\n");
-				  return 0;
-                  }
-			}
-			else
-			   {
-			   printf("Erro na express�o do if \n");
-               return 0;
-		       }
-		{
-	    printf("Esperava abre par�nteses\n");
-		return 0;
-		}
-	  }
-else
-   {
-   printf("Esperava abre par�nteses\n");
-   return 0;
-   }
+    static int numtemp=0;
+    sprintf(temp,"T%03d",numtemp++);
 }
-if (token==TK_while)
-   {
-   char labelinicio[10],labelfim[10];
-   geralabel(labelinicio);
-   geralabel(labelfim);
-   token=le_token();
-   if (token==TK_Abre_Par)
-      {
-      token=le_token();
-      if (Rel(Rel_c))
-	     if (token==TK_Fecha_Par)
-	        {
-            token=le_token();
-            char Com1_c[MAX_COD];
-	        if (Com(Com1_c))
-      				   {
-      				   sprintf(Com_c,"rotulo %s\n%s\tgofalse %s\n%s\tgoto %s\nrotulo %s\n",
-						 labelinicio,Rel_c,labelfim,Com1_c,labelinicio,labelfim);
-      				   return 1;
-					   }
 
-            	else
-				  {
-	              printf("Esperava fecha par�nteses\n");
-				  return 0;
-                  }
-			}
-			else
-			   {
-			   printf("Erro na condi��o do while\n");
-               return 0;
-		       }
-		{
-	    printf("Esperava abre par�nteses\n");
-		return 0;
-		}
-	  }
-else
-   {
-   printf("Esperava abre par�nteses\n");
-   return 0;
-   }
-}
-else if (token==TK_id)
-   {
-   char id[10];
-   strcpy(id,lex);
-   token=le_token();
-	if (token==TK_Atrib)
-	   {
-        token=le_token();
-        char E_c[MAX_COD];
-	   	if (Rel(E_c))
-	   	   {
-	   	   if (token==TK_pv)
-	           {
-               token=le_token();
-               strcpy(Com_c,"\tvalor-l ");
-		       strcat(Com_c,id);
-		       strcat(Com_c,"\n");
-		       strcat(Com_c,E_c);
-		       strcat(Com_c,"\t:=\n\tpop\n");
-		       printf("Vou retornar 1 no Com\n");
-		       return 1;
-		       }
-		    else
-		       {
-		       	printf("Faltou ponto-e-v�rgula ap�s atribui��o\n");
-		       	return 0;
-			   }
-		   }
-	   }
-   }
-else if (token==TK_Abre_Chaves)
-        {
-        char Lista_Com_c[MAX_COD];
-		token=le_token();
-        printf("Consumi o abre chaves\n");
-	    if (Lista_Com(Lista_Com_c))
-           {
-           printf("Voltei do Lista_Com. Token=%s\n",tokens[token]);
-	       if (token==TK_Fecha_Chaves)
-	          {
-	          token=le_token();
-              printf("Consumi o fecha chaves\n");
-	          strcpy(Com_c,Lista_Com_c);
-			  return 1;
-			  }
-			else
-			{
-		printf("Esperava fecha chaves na linha %d",linlex);
-           return 0;
-       }
-		   }
-		}
-else   	   if (token==TK_pv)
-	           {
-		       printf("Vou retornar 1 no Com com ponto e virgula\n");
-               token=le_token();
-    return 1; }
-   else {
-		       printf("Vou retornar 0 no Com vazio - token � %s\n",tokens[token]);
+int PROGC(char *PROGC_c) { // PROGC -> LD
+    char LD_c[MAX_COD];
 
-   return 1;
-   }
+    if (LD(LD_c)) {
+        strcpy(PROGC_c, LD_c);
+        return 1;
+    }
+    else
+        return 0;
 }
-int main()
-{
-FILE *arqout;
-char Com_C[MAX_COD];
-if ((arqin=fopen("c:\\teste\\prog.cpp","rt"))==NULL){printf("Erro na abertura do arquivo");exit(0);}
-if ((arqout=fopen("c:\\teste\\saida.kvmp","wt"))==NULL){printf("Erro na abertura do arquivo de saida");exit(0);}
-token=le_token();
-while (token!=TK_Fim_Arquivo)
-   {
-   if (Lista_Com(Com_C)==0)
-      printf("Erro no comando!!!\n");
-   else
-      {
-	  fprintf(arqout,"%s",Com_C);
-	  printf("%s",Com_C);
-      }
-   getch();
-   }
-fclose(arqin);
-fclose(arqout);
-system("pause");
+
+int LD(char *LD_c) { // LD -> DEC RLD
+    char DEC_c[MAX_COD], RLD_c[MAX_COD];
+
+    if (DEC(DEC_c)) {
+        if (RLD(RLD_c)) {
+            sprintf(LD_c, "%s%s\n", DEC_c, RLD_c);
+            return 1;
+        }
+        else
+            return 0;
+    } else
+        return 0;
+}
+
+int RLD(char *RLD_c) { // RLD -> LD / e
+    char LD_c[MAX_COD];
+
+    if (LD(LD_c)) {
+        strcpy(RLD_c, LD_c);
+        return 1;
+    }
+    else
+        return 1;
+}
+
+int DEC(char *DEC_c) { // DEC -> TIPO{RDEC.t=TIPO.t} id{poetabsimb(id,TIPO.t)} RDEC
+    char RDEC_t[10], Tipo_t[10], RDEC_c[MAX_COD];
+
+    if (TIPO(Tipo_t)) {
+        strcpy(RDEC_t, Tipo_t);
+        if (token == TK_Id) {
+            if (verificaDuplicacao(lex,ts))
+                poetabsimb(lex, Tipo_t);
+            getToken();
+            if (RDEC(RDEC_t, RDEC_c)) {
+                strcpy(DEC_c, RDEC_c);
+                return 1;
+            }
+            else
+                return 0;
+        } else {
+            printf("Erro: esperava token 'id' na linha %d coluna %d\n", linha, coluna);
+            return 0;
+        }
+    } else
+        return 0;
+}
+
+int RDEC(char *RDEC_t, char *RDEC_c) { // RDEC -> ,{DV.t=RDEC.t}DV / (DF / ; / = cte;
+    char DF_c[MAX_COD];
+
+    char DV_t[10];
+    if (token == TK_Virgula) {
+        strcpy(DV_t, RDEC_t);
+        getToken();
+        if (DV(DV_t))
+            return 1;
+        else
+            return 0;
+    } else if (token == TK_AbrePar) {
+        getToken();
+        if (DF(DF_c)) {
+            strcpy(RDEC_c, DF_c);
+            return 1;
+        }
+        else
+            return 0;
+    } else if (token == TK_PontoeVirg) {
+        getToken();
+        return 1;
+    } else if (token == TK_Atrib) {
+        getToken();
+        if (token == TK_ConstInt) {
+            getToken();
+            if (token == TK_PontoeVirg) {
+                getToken();
+                return 1;
+            } else {
+                printf("Erro: esperava token ';' na linha %d coluna %d\n", linha, coluna);
+                return 0;
+            }
+        } else {
+            printf("Erro: esperava token contante inteira na linha %d coluna %d\n", linha, coluna);
+            return 0;
+        }
+    } else {
+        printf("Erro: esperava token ';', ')' ou ',' na linha %d coluna %d\n", linha, coluna);
+        return 0;
+    }
+}
+
+int DV(char *DV_t) { // DV -> id{RDV.t=DV.t}{poetabsimb(id,DV.t)} RDV
+    char RDV_t[10];
+    if (token == TK_Id) {
+        strcpy(RDV_t, DV_t);
+        if (verificaDuplicacao(lex,ts))
+            poetabsimb(lex, DV_t);
+        getToken();
+        if (RDV(RDV_t))
+            return 1;
+        else
+            return 0;
+    } else {
+        printf("Erro: esperava token 'id' na linha %d coluna %d\n", linha, coluna);
+        return 0;
+    }
+}
+
+int RDV(char *RDV_t) { // RDV -> ,{DV.t=RDV.t}DV / ;
+    char DV_t[10];
+    if (token == TK_Virgula) {
+        strcpy(DV_t, RDV_t);
+        getToken();
+        if (DV(DV_t))
+            return 1;
+        else
+            return 0;
+    } else if (token == TK_PontoeVirg) {
+        getToken();
+        return 1;
+    } else {
+        printf("Erro: esperava token ',' ou ';' na linha %d coluna %d\n", linha, coluna);
+        return 0;
+    }
+}
+
+int
+TIPO(char *Tipo_t) {
+//    char{TIPO.t=“char”}/int{TIPO.t=“int”}/float{TIPO.t=“float”}/double{TIPO.t=“double”}/
+//    signed{RTIPOSINAL.s=”signed”}RTIPOSINAL{TIPO.t=RTIPOSINAL.t} /
+//    unsigned{RTIPOSINAL.s=”unsigned”}RTIPOSINAL{TIPO.t=RTIPOSINAL.t} /
+//    short{RTIPOSHORT.s=”short”}RTIPOSHORT{TIPO.t=RTIPOSHORT.t} /
+//    long{RTIPOLONG.s=”long”}RTIPOLONG{TIPO.t=RTIPOLONG.t}
+    char RTIPOSINAL_s[10], RTIPOSHORT_s[10], RTIPOLONG_s[10], RTIPOSINAL_t[10], RTIPOSHORT_t[10], RTIPOLONG_t[10];
+    if (token == TK_Char || token == TK_Int || token == TK_Float || token == TK_Double) {
+        switch (token) {
+            case TK_Char:
+                strcpy(Tipo_t, "char");
+                break;
+            case TK_Int:
+                strcpy(Tipo_t, "int");
+                break;
+            case TK_Float:
+                strcpy(Tipo_t, "float");
+                break;
+            case TK_Double:
+                strcpy(Tipo_t, "double");
+                break;
+        }
+        getToken();
+        return 1;
+    } else if (token == TK_Signed || token == TK_Unsigned) {
+        switch (token) {
+            case TK_Signed:
+                strcpy(RTIPOSINAL_s, "signed");
+                strcpy(RTIPOSINAL_t, Tipo_t);
+                break;
+            case TK_Unsigned:
+                strcpy(RTIPOSINAL_s, "unsigned");
+                strcpy(RTIPOSINAL_t, Tipo_t);
+                break;
+        }
+        getToken();
+        if (RTIPOSINAL(RTIPOSINAL_s, RTIPOSINAL_t)) {
+            strcpy(Tipo_t, RTIPOSINAL_t);
+            return 1;
+        } else
+            return 0;
+    } else if (token == TK_Short) {
+        strcpy(RTIPOSHORT_s, "short");
+        getToken();
+        if (RTIPOSHORT(RTIPOSHORT_s, RTIPOSHORT_t)) {
+            strcpy(Tipo_t, RTIPOSHORT_t);
+            return 1;
+        }
+        else
+            return 0;
+    } else if (token == TK_Long) {
+        strcpy(RTIPOLONG_s, "long");
+        getToken();
+        if (RTIPOLONG(RTIPOLONG_s, RTIPOLONG_t)) {
+            strcpy(Tipo_t,RTIPOLONG_t);
+            return 1;
+        }
+        else
+            return 0;
+    } else {
+        return 0;
+    }
+}
+
+int RTIPOSINAL(char *RTIPOSINAL_s, char *RTIPOSINAL_t) { //RTIPOSINAL -> char{RTIPOSINAL.t=RTIPOSINAL.s + “ char”}/
+    char RTIPOSINAL2_s[10], RTIPOSINAL2_t[10];
+//    int{RTIPOSINAL.t=RTIPOSINAL.s + “ int”)} /
+//    short{RTIPOSINAL2.s=RTIPOSINAL.s + “ short”} RTIPOSINAL2{RTIPOSINAL.t=RTIPOSINAL2.t} /
+//    long{RTIPOSINAL2.s=RTIPOSINAL.s + “ long”} RTIPOSINAL2{RTIPOSINAL.t=RTIPOSINAL2.t} / e
+    if (token == TK_Char || token == TK_Int) {
+        if(token==TK_Char) {
+            strcat(RTIPOSINAL_s, " char");
+            strcpy(RTIPOSINAL_t, RTIPOSINAL_s);
+        } else if(token == TK_Int){
+            strcat(RTIPOSINAL_s, " int");
+            strcpy(RTIPOSINAL_t, RTIPOSINAL_s);
+        }
+        getToken();
+        return 1;
+    } else if (token == TK_Short || token == TK_Long) {
+        if(token==TK_Short){
+            strcat(RTIPOSINAL_s," short");
+            strcpy(RTIPOSINAL2_s,RTIPOSINAL_s);
+        } else if(token==TK_Long){
+            strcat(RTIPOSINAL_s," long");
+            strcpy(RTIPOSINAL2_s,RTIPOSINAL_s);
+        }
+        getToken();
+        if (RTIPOSINAL2(RTIPOSINAL2_s, RTIPOSINAL2_t)) {
+            strcpy(RTIPOSINAL_t,RTIPOSINAL2_t);
+            return 1;
+        }
+        else
+            return 0;
+    } else
+        return 1;
+}
+
+int RTIPOSINAL2(char *RTIPOSINAL2_s, char *RTIPOSINAL2_t) { //RTIPOSINAL2 -> int{RTIPOSINAL2.t=RTIPOSINAL2.s + “ int”}
+    if (token == TK_Int) {
+        strcat(RTIPOSINAL2_s," int");
+        strcpy(RTIPOSINAL2_t,RTIPOSINAL2_s);
+        getToken();
+        return 1;
+    } else {
+        printf("Erro: esperava token 'int' na linha %d coluna %d\n", linha, coluna);
+        return 0;
+    }
+}
+
+int RTIPOSHORT(char *RTIPOSHORT_s, char *RTIPOSHORT_t) { //RTIPOSHORT -> int{RTIPOSHORT.t=RTIPOSHORT.s + “ int”} / e
+    if (token == TK_Int) {
+        strcat(RTIPOSHORT_s," int");
+        strcpy(RTIPOSHORT_t,RTIPOSHORT_s);
+        getToken();
+        return 1;
+    } else
+        return 1;
+}
+
+int RTIPOLONG(char *RTIPOLONG_s, char *RTIPOLONG_t) { //RTIPOLONG -> int{RTIPOLONG.t=RTIPOLONG.s + “ int”}/
+//    double{RTIPOLONG.t=RTIPOLONG.s + “ double”}/
+//    long{RTIPOLONG2.s=RTIPOLONG.s + “ long”} RTIPOLONG2{RTIPOLONG.t=RTIPOLONG2.t} / e
+    char RTIPOLONG2_t[10], RTIPOLONG2_s[10];
+
+    if (token == TK_Int || token == TK_Double) {
+        if(token==TK_Int){
+            strcat(RTIPOLONG_s," int");
+            strcpy(RTIPOLONG_t,RTIPOLONG_s);
+        } else if (token==TK_Double){
+            strcat(RTIPOLONG_s," char");
+            strcpy(RTIPOLONG_t,RTIPOLONG_s);
+        }
+        getToken();
+        return 1;
+    } else if (token == TK_Long) {
+        strcat(RTIPOLONG_s," double");
+        strcpy(RTIPOLONG2_s,RTIPOLONG_s);
+        getToken();
+        if (RTIPOLONG2(RTIPOLONG2_s, RTIPOLONG2_t)) {
+            strcpy(RTIPOLONG_t,RTIPOLONG2_t);
+            return 1;
+        }
+        else
+            return 0;
+    } else
+        return 1;
+}
+
+int RTIPOLONG2(char *RTIPOLONG2_s, char *RTIPOLONG2_t   ) { //RTIPOLONG2 -> int{RTIPOLONG2.t=RTIPOLONG2.s + “ int”}/ e
+    if (token == TK_Int) {
+        strcat(RTIPOLONG2_s, " int");
+        strcpy(RTIPOLONG2_t,RTIPOLONG2_s);
+        getToken();
+        return 1;
+    } else
+        return 1;
+}
+
+int DF(char *DF_c) { // DF -> LP){CORPO}
+    char CORPO_c[MAX_COD];
+
+    if (LP()) {
+        if (token == TK_FechaPar) {
+            getToken();
+            if (token == TK_AbreChave) {
+                getToken();
+                if (CORPO(CORPO_c)) {
+                    if (token == TK_FechaChave) {
+                        strcpy(DF_c, CORPO_c);
+                        getToken();
+                        return 1;
+                    } else {
+                        printf("Erro: esperava token '}' na linha %d coluna %d\n", linha, coluna);
+                        return 0;
+                    }
+                } else
+                    return 0;
+            } else {
+                printf("Erro: esperava token '{' na linha %d coluna %d\n", linha, coluna);
+                return 0;
+            }
+        } else {
+            printf("Erro: esperava token ')' na linha %d coluna %d\n", linha, coluna);
+            return 0;
+        }
+    } else
+        return 0;
+}
+
+int LP() { //LP -> TIPO id{poetabsimb(id,TIPO.t)} RLP / e
+    char TIPO_t[10];
+
+    if (TIPO(TIPO_t)) {
+        if (token == TK_Id) {
+            if (verificaDuplicacao(lex,ts))
+                poetabsimb(lex, TIPO_t);
+            getToken();
+            if (RLP())
+                return 1;
+            else
+                return 0;
+        } else {
+            printf("Erro: esperava token 'id' na linha %d coluna %d\n", linha, coluna);
+            return 0;
+        }
+    } else
+        return 1;
+}
+
+int RLP() { //RLP -> ,TIPO id{poetabsimb(id,TIPO.t)} RLP / e
+    char TIPO_t[10];
+
+    if (token == TK_Virgula) {
+        getToken();
+        if (TIPO(TIPO_t)) {
+            if (token == TK_Id) {
+                if (verificaDuplicacao(lex,ts))
+                    poetabsimb(lex, TIPO_t);
+                getToken();
+                if (RLP())
+                    return 1;
+                else
+                    return 0;
+            } else {
+                printf("Erro: esperava token 'id' na linha %d coluna %d\n", linha, coluna);
+                return 0;
+            }
+        } else
+            return 0;
+    } else
+        return 1;
+}
+
+int CORPO(char *CORPO_c) { //CORPO -> LCD
+    char LCD_c[MAX_COD];
+
+    if (LCD(LCD_c)) {
+        strcpy(CORPO_c, LCD_c);
+        return 1;
+    }
+    else
+        return 0;
+}
+
+int LCD(char *LCD_c) { //LCD -> COM LCD / TIPO{DV.t=TIPO.t} DV LCD / e
+    char DV_t[10], TIPO_t[10], COM_c[MAX_COD], LCDLinha_c[MAX_COD];
+
+    strcpy(LCDLinha_c,"");
+
+    if (COM(COM_c)) {
+        if (LCD(LCDLinha_c)) {
+            sprintf(LCD_c, "%s%s", COM_c, LCDLinha_c);
+            return 1;
+        }
+        else
+            return 0;
+    } else if (TIPO(TIPO_t)) {
+        strcpy(DV_t,TIPO_t);
+        if (DV(DV_t)) {
+            if (LCD(LCDLinha_c)) {
+                strcpy(LCD_c, LCDLinha_c);
+                return 1;
+            }
+            else
+                return 0;
+        } else
+            return 0;
+    } else
+        return 1;
+}
+
+int COM(char *COM_c) { //COM -> E; / COMWHILE / COMDOWHILE / COMIF / COMFOR / COMSWITCH / return; / break; / {LCD} / TIPO{RDEC.t=TIPO.t} id{poetabsimb(id,TIPO.t)} RDEC
+    char RDEC_t[10], TIPO_t[10], E_tp[10], E_p[10], E_c[MAX_COD], LCD_c[MAX_COD], RDEC_c[MAX_COD];
+    char COMWHILE_c[MAX_COD], COMFOR_c[MAX_COD], COMDOWHILE_c[MAX_COD], COMIF_c[MAX_COD];
+
+    if (E(E_tp, E_p, E_c)) {
+        if (token == TK_PontoeVirg) {
+            strcpy(COM_c, E_c);
+            getToken();
+            return 1;
+        } else {
+            printf("Erro: esperava token ';' na linha %d coluna %d\n", linha, coluna);
+            return 0;
+        }
+    } else if (COMWHILE(COMWHILE_c)) {
+        strcpy(COM_c, COMWHILE_c);
+        return 1;
+    }
+    else if (COMDOWHILE(COMDOWHILE_c)) {
+        strcpy(COM_c, COMDOWHILE_c);
+        return 1;
+    }
+    else if (COMIF(COMIF_c)) {
+        strcpy(COM_c,COMIF_c);
+        return 1;
+    }
+    else if (COMFOR(COMFOR_c)) {
+        strcpy(COM_c, COMFOR_c);
+        return 1;
+    }
+    else if (COMSWITCH())
+        return 1;
+    else if (token == TK_Return) {
+        getToken();
+        if (token == TK_PontoeVirg) {
+            getToken();
+            return 1;
+        } else {
+            printf("Erro: esperava token ';' na linha %d coluna %d\n", linha, coluna);
+            return 0;
+        }
+    } else if (token == TK_Break) {
+        if(laco == 0) {
+            printf("Erro: comando break fora de laco de repeticao");
+            exit(0);
+        }
+        getToken();
+        if (token == TK_PontoeVirg) {
+            getToken();
+            return 1;
+        } else {
+            printf("Erro: esperava token ';' na linha %d coluna %d\n", linha, coluna);
+            return 0;
+        }
+    }else if (token == TK_Continue) {
+        if(laco == 0) {
+            printf("Erro: comando continue fora de laco de repeticao");
+            exit(0);
+        }
+        getToken();
+        if (token == TK_PontoeVirg) {
+            getToken();
+            return 1;
+        } else {
+            printf("Erro: esperava token ';' na linha %d coluna %d\n", linha, coluna);
+            return 0;
+        }
+    } else if (token == TK_AbreChave) {
+        getToken();
+        if (LCD(LCD_c)) {
+            if (token == TK_FechaChave) {
+                strcpy(COM_c, LCD_c);
+                getToken();
+                return 1;
+            } else {
+                printf("Erro: esperava token '}' na linha %d coluna %d\n", linha, coluna);
+                return 0;
+            }
+        } else
+            return 0;
+    } else if (TIPO(TIPO_t)) { // TIPO id RDEC
+        strcpy(RDEC_t,TIPO_t);
+        if (token == TK_Id) {
+            if (verificaDuplicacao(lex,ts))
+                poetabsimb(lex, TIPO_t);
+            getToken();
+            if (RDEC(RDEC_t, RDEC_c)) {
+                strcpy(COM_c, RDEC_c);
+                return 1;
+            }
+            else
+                return 0;
+        } else {
+            printf("Erro: esperava token 'id' na linha %d coluna %d\n", linha, coluna);
+            return 0;
+        }
+    } else {
+        return 0;
+    }
+}
+
+int COMIF(char *COMIF_c) { //COMIF -> if(E)COM RIF
+    char E_tp[10], E_p[MAX_COD],E_c[MAX_COD], COM_c[MAX_COD];
+    char RIF_c[MAX_COD];
+    char labelelse[10],labelfim[10];
+
+    strcpy(RIF_c,"");
+
+    if (token == TK_If) {
+        getToken();
+        if (token == TK_AbrePar) {
+            getToken();
+            if (E(E_tp, E_p, E_c)) {
+                if (token == TK_FechaPar) {
+                    getToken();
+                    if (COM(COM_c)) {
+                        if (RIF(RIF_c)) {
+                            geralabel(labelelse);
+                            geralabel(labelfim);
+                            if(strcmp(RIF_c,""))
+                                sprintf(COMIF_c,"%s\tif %s==0 goto %s\n%s\tgoto %s\n%s:\n%s%s:\n",E_c,E_p,labelelse,COM_c,labelfim,labelelse,RIF_c,labelfim);
+                            else
+                                sprintf(COMIF_c,"%s\tif %s==0 goto %s\n%s%s:\n",E_c,E_p,labelfim,COM_c,labelfim);
+                            return 1;
+                        }
+                        else
+                            return 0;
+                    } else
+                        return 0;
+                } else {
+                    printf("Erro: esperava token ')' na linha %d coluna %d\n", linha, coluna);
+                    return 0;
+                }
+            } else
+                return 0;
+        } else {
+            printf("Erro: esperava token '(' na linha %d coluna %d\n", linha, coluna);
+            return 0;
+        }
+    } else {
+        return 0;
+    }
+}
+
+int RIF(char *RIF_c) { //RIF -> else COM / e
+    char COM_c[MAX_COD];
+
+    if (token == TK_Else) {
+        getToken();
+        if (COM(COM_c)) {
+            strcpy(RIF_c,COM_c);
+            return 1;
+        }
+        else
+            return 0;
+    } else
+        return 1;
+}
+
+int COMFOR(char *COMFOR_c) { //COMFOR -> for(EIF;EIF;EIF)COM RFOR
+    char COM_c[MAX_COD], RFOR_c[MAX_COD];
+    char EIF1_c[MAX_COD], EIF2_c[MAX_COD], EIF3_c[MAX_COD];
+    char EIF1_p[MAX_COD], EIF2_p[MAX_COD], EIF3_p[MAX_COD];
+    char labellaco[MAX_COD],labelfim[MAX_COD];
+
+    if (token == TK_For) {
+        laco = 1;
+        getToken();
+        if (token == TK_AbrePar) {
+            getToken();
+            if (EIF(EIF1_c, EIF1_p)) {
+                if (token == TK_PontoeVirg) {
+                    getToken();
+                    if (EIF(EIF2_c, EIF2_p)) {
+                        if (token == TK_PontoeVirg) {
+                            getToken();
+                            if (EIF(EIF3_c, EIF3_p)) {
+                                if (token == TK_FechaPar) {
+                                    getToken();
+                                    if (COM(COM_c)) {
+                                        laco = 0;
+                                        if (RFOR(RFOR_c)) {
+                                            geralabel(labellaco);
+                                            geralabel(labelfim);
+                                            sprintf(COMFOR_c, "%s%s:\n%s\tif %s == 0 goto %s\n%s%s\tgoto %s\n%s:\n%s", EIF1_c,
+                                                    labellaco,
+                                                    EIF2_c, EIF2_p, labelfim, COM_c, EIF3_c, labellaco, labelfim, RFOR_c);
+                                            return 1;
+                                        }
+                                        else
+                                            return 0;
+                                    } else
+                                        return 0;
+                                } else {
+                                    printf("Erro: esperava token ')' na linha %d coluna %d\n", linha, coluna);
+                                    return 0;
+                                }
+                            } else
+                                return 0;
+                        } else {
+                            printf("Erro: esperava token ';' na linha %d coluna %d\n", linha, coluna);
+                            return 0;
+                        }
+                    } else
+                        return 0;
+                } else {
+                    printf("Erro: esperava token ';' na linha %d coluna %d\n", linha, coluna);
+                    return 0;
+                }
+            } else
+                return 0;
+        } else {
+            printf("Erro: esperava token '(' na linha %d coluna %d\n", linha, coluna);
+            return 0;
+        }
+    } else
+        return 0;
+}
+
+int RFOR(char *RFOR_c) { //RFOR -> COM / e
+    char COM_c[MAX_COD];
+
+    if (COM(COM_c)) {
+        strcpy(RFOR_c, COM_c);
+        return 1;
+    }
+    else
+        return 1;
+}
+
+int EIF(char *EIF_c, char *EIF_p) { //EIF -> E / e
+    char E_tp[10], E_p[MAX_COD],E_c[MAX_COD];   ;
+
+    if (E(E_tp, E_p, E_c)) {
+        strcpy(EIF_c, E_c);
+        strcpy(EIF_p, E_p);
+        return 1;
+    }
+    else
+        return 1;
+}
+
+int COMWHILE(char *COMWHILE_c) { //COMWHILE -> while(E)COM RWHILE
+    char E_tp[10], E_p[MAX_COD],E_c[MAX_COD], COM_c[MAX_COD], RWHILE_c[MAX_COD];
+    char labelinicio[10],labelfim[10];
+
+    if (token == TK_While && doWhile != 1) {
+        laco = 1;
+        getToken();
+        if (token == TK_AbrePar) {
+            getToken();
+            if (E(E_tp, E_p, E_c)) {
+                if (token == TK_FechaPar) {
+                    getToken();
+                    if (COM(COM_c)) {
+                        if (RWHILE(RWHILE_c)) {
+                            geralabel(labelinicio);
+                            geralabel(labelfim);
+                            sprintf(COMWHILE_c,"%s:\n%s\tif %s==0 goto %s\n%s\tgoto %s\n%s:\n%s",labelinicio,E_c,E_p,labelfim,COM_c,labelinicio,labelfim,RWHILE_c);
+                            laco = 0;
+                            return 1;
+                        }
+                        else
+                            return 0;
+                    } else
+                        return 0;
+                } else {
+                    printf("Erro: esperava token ')' na linha %d coluna %d\n", linha, coluna);
+                    return 0;
+                }
+            } else
+                return 0;
+        } else {
+            printf("Erro: esperava token '(' na linha %d coluna %d\n", linha, coluna);
+            return 0;
+        }
+    } else {
+        return 0;
+    }
+}
+
+int RWHILE(char *RWHILE_c) { //RWHILE -> COM / e
+    char COM_c[MAX_COD];
+
+    if (COM(COM_c)) {
+        strcpy(RWHILE_c, COM_c);
+        return 1;
+    }
+    else
+        return 1;
+}
+
+int COMDOWHILE(char *COMDOWHILE_c) { //COMDOWHILE -> do COM RDOWHILE while(E);
+    char E_tp[10], E_p[MAX_COD], E_c[MAX_COD], COM_c[MAX_COD], RDOWHILE_c[MAX_COD];
+    char label[10];
+
+    if (token == TK_Do) {
+        laco = 1;
+        doWhile = 1;
+        getToken();
+        if (COM(COM_c)) {
+            if (RDOWHILE(RDOWHILE_c)) {
+                if (token == TK_While) {
+                    getToken();
+                    if (token == TK_AbrePar) {
+                        getToken();
+                        if (E(E_tp, E_p, E_c)) {
+                            if (token == TK_FechaPar) {
+                                getToken();
+                                if (token == TK_PontoeVirg) {
+                                    getToken();
+                                    doWhile = 0;
+                                    geralabel(label);
+                                    sprintf(COMDOWHILE_c,"%s:\n%s%s\tif %s==1 goto %s\n%s",label,COM_c,E_c,E_p,label,RDOWHILE_c);
+                                    laco = 0;
+                                    return 1;
+                                } else {
+                                    printf("Erro: esperava token ';' na linha %d coluna %d\n", linha, coluna);
+                                }
+                            } else {
+                                printf("Erro: esperava token ')' na linha %d coluna %d\n", linha, coluna);
+                                return 0;
+                            }
+                        } else
+                            return 0;
+                    } else {
+                        printf("Erro: esperava token '(' na linha %d coluna %d\n", linha, coluna);
+                        return 0;
+                    }
+                } else {
+                    printf("Erro: esperava token 'while' na linha %d coluna %d\n", linha, coluna);
+                    return 0;
+                }
+            } else
+                return 0;
+        } else
+            return 0;
+    } else {
+        return 0;
+    }
+}
+
+int RDOWHILE(char *RDOWHILE_c) { //RDOWHILE -> COM / e
+    char COM_c[MAX_COD];
+
+    if (COM(COM_c)) {
+        strcpy(RDOWHILE_c, COM_c);
+        return 1;
+    }
+    else
+        return 1;
+}
+
+int COMSWITCH() { //COMSWITCH -> switch(E) RSWITCH
+    char E_tp[10], E_p[MAX_COD],E_c[MAX_COD];
+
+    if (token == TK_Switch) {
+        getToken();
+        if (token == TK_AbrePar) {
+            getToken();
+            if (E(E_tp, E_p, E_c)) {
+                if (token == TK_FechaPar) {
+                    getToken();
+                    if (RSWITCH())
+                        return 1;
+                    else
+                        return 0;
+                } else {
+                    printf("Erro: esperava token ')' na linha %d coluna %d\n", linha, coluna);
+                    return 0;
+                }
+            } else
+                return 0;
+        } else {
+            printf("Erro: esperava token '(' na linha %d coluna %d\n", linha, coluna);
+            return 0;
+        }
+    } else {
+        return 0;
+    }
+}
+
+int RSWITCH() { //RSWITCH -> {case cte: COM NEXTCASE} / case cte: COM / default: COM
+    char COM_c[MAX_COD];
+
+    if (token == TK_AbreChave) {
+        getToken();
+        if (token == TK_Case) {
+            getToken();
+            if (token == TK_ConstInt) {
+                getToken();
+                if (token == TK_DoisPontos) {
+                    getToken();
+                    if (COM(COM_c)) {
+                        if (NEXTCASE()) {
+                            if (token == TK_FechaChave) {
+                                getToken();
+                                return 1;
+                            } else {
+                                printf("Erro: esperava token '}' na linha %d coluna %d\n", linha, coluna);
+                                return 0;
+                            }
+                        } else
+                            return 0;
+                    } else
+                        return 0;
+                } else {
+                    printf("Erro: esperava token ':' na linha %d coluna %d\n", linha, coluna);
+                    return 0;
+                }
+            } else {
+                printf("Erro: esperava constante inteira na linha %d coluna %d\n", linha, coluna);
+                return 0;
+            }
+        } else {
+            printf("Erro: esperava token 'case' na linha %d coluna %d\n", linha, coluna);
+            return 0;
+        }
+    } else if (token == TK_Case) { // case(cte): COM
+        getToken();
+        if (token == TK_ConstInt) {
+            getToken();
+            if (token == TK_DoisPontos) {
+                getToken();
+                if (COM(COM_c))
+                    return 1;
+                else
+                    return 0;
+            } else {
+                printf("Erro: esperava token ':' na linha %d coluna %d\n", linha, coluna);
+                return 0;
+            }
+        } else {
+            printf("Erro: esperava constante inteira na linha %d coluna %d\n", linha, coluna);
+            return 0;
+        }
+    } else if (token == TK_Default) { // default: COM
+        getToken();
+        if (token == TK_DoisPontos) {
+            getToken();
+            if (COM(COM_c))
+                return 1;
+            else
+                return 0;
+        } else {
+            printf("Erro: esperava token ':' na linha %d coluna %d\n", linha, coluna);
+            return 0;
+        }
+    } else {
+        printf("Erro: esperava token '{', 'case' ou 'default' na linha %d coluna %d\n", linha, coluna);
+        return 0;
+    }
+}
+
+int NEXTCASE() { //NEXTCASE -> case cte: COM NEXTCASE/ default: COM / e
+    char COM_c[MAX_COD];
+
+    if (token == TK_Case) {
+        getToken();
+        if (token == TK_ConstInt) {
+            getToken();
+            if (token == TK_DoisPontos) {
+                getToken();
+                if (COM(COM_c)) {
+                    if (NEXTCASE())
+                        return 1;
+                    else
+                        return 0;
+                } else
+                    return 0;
+            } else {
+                printf("Erro: esperava token ':' na linha %d coluna %d\n", linha, coluna);
+                return 0;
+            }
+        } else {
+            printf("Erro: esperava constante inteira na linha %d coluna %d\n", linha, coluna);
+            return 0;
+        }
+    } else if (token == TK_Default) { // default: COM
+        getToken();
+        if (token == TK_DoisPontos) {
+            getToken();
+            if (COM(COM_c))
+                return 1;
+            else
+                return 0;
+        } else {
+            printf("Erro: esperava token ':' na linha %d coluna %d\n", linha, coluna);
+            return 0;
+        }
+    } else
+        return 1;
+}
+
+int E(char *E_tp, char *E_p, char *E_c) { // E -> E1{E'.h = E1.tp; E'.hp = E1.p;} E' {E.tp = E'.s; E.p = E'.sp; E.c = E'.sc}
+    char ELinha_h[10], ELinha_s[10], ELinha_c[MAX_COD], ELinha_p[10],ELinha_hp[10], ELinha_hc[MAX_COD], ELinha_sp[10], ELinha_sc[MAX_COD];
+    char E1_tp[10], E1_h[10], E1_s[10], E1_p[10], E1_c[MAX_COD];
+
+    if (E1(E1_tp, E1_h, E1_s, E1_p, E1_c)) {
+        strcpy(ELinha_h, E1_tp);
+        strcpy(ELinha_hp, E1_p);
+        strcpy(ELinha_hc, E1_c);
+        if (ELinha(ELinha_h, ELinha_s, ELinha_p, ELinha_hp, ELinha_sp, ELinha_c, ELinha_hc, ELinha_sc)) {
+            strcpy(E_tp, ELinha_s);
+            strcpy(E_p, ELinha_sp);
+            strcpy(E_c, ELinha_sc);
+            return 1;
+        }
+        else
+            return 0;
+    } else
+        return 0;
+}
+
+int ELinha(char *ELinha_h, char *ELinha_s, char *ELinha_p, char *ELinha_hp, char *ELinha_sp, char *ELinha_c, char *ELinha_hc, char *ELinha_sc) { // E' -> ,E1{E'2.h=E1.tp} E'{E'.s=E'2.s; E'.p = E'2.p; E'.c = E1.c + E'2.c} / e{E'.s = E'.h; E'.sp = E'.hp; E'.sc = E'.hc}
+    char ELinha2_sp[10], ELinha2_sc[MAX_COD], ELinha2_hp[10], ELinha2_hc[MAX_COD];
+    char ELinha2_h[10], ELinha2_s[10], ELinha2_p[10], ELinha2_c[MAX_COD];
+    char E1_tp[10], E1_h[10], E1_s[10], E1_p[10], E1_c[MAX_COD];
+
+    if (token == TK_Virgula) {
+        getToken();
+        if (E1(E1_tp, E1_h, E1_s, E1_p, E1_c)) {
+            strcpy(ELinha2_h, E1_tp);
+            if (ELinha(ELinha2_h, ELinha2_s, ELinha2_p, ELinha2_hp, ELinha2_sp, ELinha2_c, ELinha2_hc, ELinha2_sc)) {
+                strcpy(ELinha_s,ELinha2_s);
+                strcpy(ELinha_p, ELinha2_p);
+                sprintf(ELinha_c, "%s %s", E1_c, ELinha2_c);
+                return 1;
+            }
+            else
+                return 0;
+        } else
+            return 0;
+    } else {
+        strcpy(ELinha_s,ELinha_h);
+        strcpy(ELinha_sp, ELinha_hp);
+        strcpy(ELinha_sc, ELinha_hc);
+        return 1;
+    }
+}
+
+int E1(char *E1_tp, char *E1_h, char *E1_s, char *E1_p, char *E1_c) { // E1 -> E2 = {E1'.h = E2.tp}E1{E1.tp = E1'.s} / E2 *= {E1'.h = E2.tp}E1{E1.tp = E1'.s} / E2 ÷= {E1'.h = E2.tp}E1{E1.tp = E1'.s}  / E2 %= {E1'.h = E2.tp}E1{E1.tp = E1'.s} / E2 +={E1'.h = E2.tp} E1{E1.tp = E1'.s}  / E2 -={E1'.h = E2.tp} E1{E1.tp = E1'.s}  / E2{E1.tp = E2.tp}
+    char E1Linha_h[10], E1Linha_s[10], E1Linha_tp[10], E1Linha_p[10], E1Linha_c[MAX_COD];
+    char E2_tp[10], E2_h[10], E2_s[10], E2_p[10], E2_c[MAX_COD];
+
+    if (E2(E2_tp, E2_h, E2_s, E2_p, E2_c)) {
+        if (token == TK_Atrib) {
+            strcpy(E1Linha_h,E2_tp);
+            getToken();
+            if (E1(E1Linha_tp, E1Linha_h, E1Linha_s, E1Linha_p, E1Linha_c)) {
+                strcpy(E1_tp, E1Linha_s);
+                strcpy(E1_p, E2_p);
+                sprintf(E1_c, "%s\t%s = %s\n", E1Linha_c, E2_p, E1Linha_p);
+                return 1;
+            }
+            else
+                return 0;
+        } else if (token == TK_MultiplicacaoIgual) {
+            strcpy(E1Linha_h,E2_tp);
+            getToken();
+            if (E1(E1Linha_tp, E1Linha_h, E1Linha_s, E1Linha_p, E1Linha_c)) {
+                strcpy(E1_tp, E1Linha_s);
+                strcpy(E1_p, E2_p);
+                sprintf(E1_c, "%s\t%s = %s * %s\n", E1Linha_c, E2_p, E2_p, E1Linha_p);
+                return 1;
+            }
+            else
+                return 0;
+        } else if (token == TK_DivisaoIgual) {
+            strcpy(E1Linha_h,E2_tp);
+            getToken();
+            if (E1Linha_tp, E1Linha_h, E1Linha_s, E1Linha_p, E1Linha_c) {
+                strcpy(E1_tp, E1Linha_s);
+                strcpy(E1_p, E2_p);
+                sprintf(E1_c, "%s\t%s = %s / %s\n", E1Linha_c, E2_p, E2_p, E1Linha_p);
+                return 1;
+            }
+            else
+                return 0;
+        } else if (token == TK_RestoDivisaoIgual) {
+            strcpy(E1Linha_h,E2_tp);
+            getToken();
+            if (E1(E1Linha_tp, E1Linha_h, E1Linha_s, E1Linha_p, E1Linha_c)) {
+                strcpy(E1_tp, E1Linha_s);
+                strcpy(E1_p, E2_p);
+                sprintf(E1_c, "%s\t%s = %s %c %s\n", E1Linha_c, E2_p, E2_p, 37, E1Linha_p);
+                return 1;
+            }
+            else
+                return 0;
+        } else if (token == TK_MaisIgual) {
+            strcpy(E1Linha_h,E2_tp);
+            getToken();
+            if (E1(E1Linha_tp, E1Linha_h, E1Linha_s, E1Linha_p, E1Linha_c)) {
+                strcpy(E1_tp, E1Linha_s);
+                strcpy(E1_p, E2_p);
+                sprintf(E1_c, "%s\t%s = %s + %s\n", E1Linha_c, E2_p, E2_p, E1Linha_p);
+                return 1;
+            }
+            else
+                return 0;
+        } else if (token == TK_MenosIgual) {
+            strcpy(E1Linha_h,E2_tp);
+            getToken();
+            if (E1(E1Linha_tp, E1Linha_h, E1Linha_s, E1Linha_p, E1Linha_c)) {
+                strcpy(E1_tp, E1Linha_s);
+                strcpy(E1_p, E2_p);
+                sprintf(E1_c, "%s\t%s = %s - %s\n", E1Linha_c, E2_p, E2_p, E1Linha_p);
+                return 1;
+            }
+            else
+                return 0;
+        } else {
+            strcpy(E1_tp, E2_tp);
+            strcpy(E1_p, E2_p);
+            strcpy(E1_c, E2_c);
+            return 1;
+        }
+    }
+}
+
+int E2(char *E2_tp, char *E2_h, char *E2_s, char *E2_p, char *E2_c) { // E2 -> E3{E2'.h = E3.tp}E2' {E2.tp = E2'.s}
+    char E2Linha_h[10], E2Linha_s[10], E2Linha_p[10], E2Linha_hp[10], E2Linha_sp[10], E2Linha_c[MAX_COD], E2Linha_hc[MAX_COD], E2Linha_sc[MAX_COD];
+    char E3_tp[10], E3_p[10], E3_c[MAX_COD];
+
+    if (E3(E3_tp, E3_p, E3_c)) {
+        strcpy(E2Linha_h, E3_tp);
+        strcpy(E2Linha_hp, E3_p);
+        strcpy(E2Linha_hc, E3_c);
+        if (E2Linha(E2Linha_h, E2Linha_s, E2Linha_hp, E2Linha_sp, E2Linha_hc, E2Linha_sc)) {
+            strcpy(E2_tp, E2Linha_s);
+            strcpy(E2_p, E2Linha_sp);
+            strcpy(E2_c, E2Linha_sc );
+            return 1;
+        }
+        else
+            return 0;
+    } else
+        return 0;
+}
+
+int E2Linha(char *E2Linha_h, char *E2Linha_s, char *E2Linha_hp, char *E2Linha_sp, char *E2Linha_hc, char *E2Linha_sc) { // E2' -> ? E2 : E2 E2' / e{E2'.s = E2'.h}
+    char E2_tp[10], E2_h[10], E2_s[10], E2_p[10], E2_c[MAX_COD];
+    char E2Linha2_h[10], E2Linha2_s[10], E2Linha2_hp[10], E2Linha2_sp[10], E2Linha2_hc[MAX_COD], E2Linha2_sc[MAX_COD];
+
+    if (token == TK_Ternario) {
+        getToken();
+        if (E2(E2_tp, E2_h, E2_s, E2_p, E2_c)) {
+            if (token == TK_DoisPontos) {
+                getToken();
+                if (E2(E2_tp, E2_h, E2_s, E2_p, E2_c)) {
+                    if (E2Linha(E2Linha2_h, E2Linha2_s, E2Linha2_hp, E2Linha2_sp, E2Linha2_hc, E2Linha2_sc))
+                        return 1;
+                    else
+                        return 0;
+                } else
+                    return 0;
+            } else {
+                printf("Erro: esperava token ':' na linha %d coluna %d\n", linha, coluna);
+                return 0;
+            }
+        } else
+            return 0;
+    } else {
+        strcpy(E2Linha_s, E2Linha_h);
+        strcpy(E2Linha_sp, E2Linha_hp);
+        strcpy(E2Linha_sc, E2Linha_hc);
+        return 1;
+    }
+}
+
+int E3(char *E3_tp, char *E3_p, char *E3_c) { // E3 -> E4 {E3'.h = E4.tp}E3' {E3.tp = E3'.s}
+    char E3Linha_h[10], E3Linha_s[10], E3Linha_hp[10], E3Linha_sp[10], E3Linha_hc[MAX_COD], E3Linha_sc[MAX_COD];
+    char E4_tp[10], E4_p[10], E4_c[MAX_COD];
+
+    if (E4(E4_tp, E4_p, E4_c)) {
+        strcpy(E3Linha_h,E4_tp);
+        strcpy(E3Linha_hp, E4_p);
+        strcpy(E3Linha_hc, E4_c);
+        if (E3Linha(E3Linha_h, E3Linha_s, E3Linha_hp, E3Linha_sp, E3Linha_hc, E3Linha_sc)) {
+            strcpy(E3_tp, E3Linha_s);
+            strcpy(E3_p, E3Linha_sp);
+            strcpy(E3_c, E3Linha_sc);
+            return 1;
+        }
+        else
+            return 0;
+    } else
+        return 0;
+}
+
+int E3Linha(char *E3Linha_h, char *E3Linha_s, char *E3Linha_hp, char *E3Linha_sp, char *E3Linha_hc, char *E3Linha_sc) { // E3' -> || E4{E3'2.h=tint;} E3'{E3'.s=E3'2.s} / e{E3'.s = E3'.h}
+    char E3Linha2_h[10], E3Linha2_s[10], E3Linha2_hp[10], E3Linha2_sp[10], E3Linha2_hc[MAX_COD], E3Linha2_sc[MAX_COD];
+    char E4_tp[10], E4_p[10], E4_c[MAX_COD];
+
+    if (token == TK_OU) {
+        getToken();
+        if (E4(E4_tp, E4_p, E4_c)) {
+            strcpy(E3Linha2_h,"int");
+            geratemp(E3Linha2_hp);
+            sprintf(E3Linha2_hc, "%s%s\t%s = %s || %s\n", E3Linha_hc, E4_c, E3Linha2_hp, E3Linha_hp, E4_p);
+            if (E3Linha(E3Linha2_h, E3Linha2_s, E3Linha2_hp, E3Linha2_sp, E3Linha2_hc, E3Linha2_sc)) {
+                strcpy(E3Linha_s,E3Linha2_s);
+                strcpy(E3Linha_sp, E3Linha2_sp);
+                strcpy(E3Linha_sc, E3Linha2_sc);
+                return 1;
+            }
+        } else
+            return 0;
+    } else {
+        strcpy(E3Linha_s, E3Linha_h);
+        strcpy(E3Linha_sp, E3Linha_hp);
+        strcpy(E3Linha_sc, E3Linha_hc);
+        return 1;
+    }
+}
+
+int E4(char *E4_tp, char *E4_p, char *E4_c) { //E4 -> E5 {E4'.h = E5.tp}E4' {E4.tp = E4'.s}
+    char E4Linha_h[10], E4Linha_s[10], E4Linha_hp[10], E4Linha_sp[10], E4Linha_hc[MAX_COD], E4Linha_sc[MAX_COD];
+    char E5_tp[10], E5_p[10], E5_c[MAX_COD];
+
+    if (E5(E5_tp, E5_p, E5_c)) {
+        strcpy(E4Linha_h, E5_tp);
+        strcpy(E4Linha_hp, E5_p);
+        strcpy(E4Linha_hc, E5_c);
+        if (E4Linha(E4Linha_h, E4Linha_s, E4Linha_hp, E4Linha_sp, E4Linha_hc, E4Linha_sc)) {
+            strcpy(E4_tp, E4Linha_s);
+            strcpy(E4_p, E4Linha_sp);
+            strcpy(E4_c, E4Linha_sc);
+            return 1;
+        }
+        else
+            return 0;
+    } else
+        return 0;
+}
+
+int E4Linha(char *E4Linha_h, char *E4Linha_s, char *E4Linha_hp, char *E4Linha_sp, char *E4Linha_hc, char *E4Linha_sc) { // E4' -> && E5{E4'2.h=tint;} E4' {E4'.s=E4'2.s}/ e{E4'.s = E4'.h}
+    char E4Linha2_h[10], E4Linha2_s[10], E4Linha2_hp[10], E4Linha2_sp[10], E4Linha2_hc[MAX_COD], E4Linha2_sc[MAX_COD];
+    char E5_tp[10], E5_p[10], E5_c[MAX_COD];
+
+    if (token == TK_AND) {
+        getToken();
+        if (E5(E5_tp, E5_p, E5_c)) {
+            strcpy(E4Linha2_h, "int");
+            geratemp(E4Linha2_hp);
+            sprintf(E4Linha2_hc, "%s%s\t%s = %s && %s\n", E4Linha_hc, E5_c, E4Linha2_hp, E4Linha_hp, E5_p);
+            if (E4Linha(E4Linha2_h, E4Linha2_s, E4Linha2_hp, E4Linha2_sp, E4Linha2_hc, E4Linha2_sc)) {
+                strcpy(E4Linha_s, E4Linha2_s);
+                strcpy(E4Linha_sp, E4Linha2_sp);
+                strcpy(E4Linha_sc, E4Linha2_sc);
+                return 1;
+            } else
+                return 0;
+        } else
+            return 0;
+    } else{
+        strcpy(E4Linha_s, E4Linha_h);
+        strcpy(E4Linha_sp, E4Linha_hp);
+        strcpy(E4Linha_sc, E4Linha_hc);
+        return 1;
+    }
+}
+
+int E5(char *E5_tp, char *E5_p, char *E5_c) { // E5 -> E6 {E5'.h = E6.tp}E5' {E5.tp = E5'.s}
+    char E6_tp[10], E6_p[10], E6_c[MAX_COD];
+    char E5Linha_h[10], E5Linha_s[10], E5Linha_hp[10], E5Linha_sp[10], E5Linha_hc[MAX_COD], E5Linha_sc[MAX_COD];
+
+    if (E6(E6_tp, E6_p, E6_c)) {
+        strcpy(E5Linha_h, E6_tp);
+        strcpy(E5Linha_hp, E6_p);
+        strcpy(E5Linha_hc, E6_c);
+        if (E5Linha(E5Linha_h, E5Linha_s, E5Linha_hp, E5Linha_sp, E5Linha_hc, E5Linha_sc)) {
+            strcpy(E5_tp, E5Linha_s);
+            strcpy(E5_p, E5Linha_sp);
+            strcpy(E5_c, E5Linha_sc);
+            return 1;
+        }
+        else
+            return 0;
+    } else
+        return 0;
+}
+
+int E5Linha(char *E5Linha_h, char *E5Linha_s, char *E5Linha_hp, char *E5Linha_sp, char *E5Linha_hc, char *E5Linha_sc) { // E5' -> | E6{E5'2.h=tint;} E5'{E5'.s=E5'2.s}  / e{E5'.s = E5'.h}
+    char E6_tp[10], E6_p[10], E6_c[MAX_COD];
+    char E5Linha2_h[10], E5Linha2_s[10], E5Linha2_hp[10], E5Linha2_sp[10], E5Linha2_hc[MAX_COD], E5Linha2_sc[MAX_COD];
+
+    if (token == TK_OULogico) {
+        getToken();
+        if (E6(E6_tp, E6_p, E6_c)) {
+            strcpy(E5Linha2_h, "int");
+            geratemp(E5Linha2_hp);
+            sprintf(E5Linha2_hc, "%s%s\t%s = %s | %s\n", E5Linha_hc, E6_c, E5Linha2_hp, E5Linha_hp, E6_p);
+            if (E5Linha(E5Linha2_h, E5Linha2_s, E5Linha2_hp, E5Linha2_sp, E5Linha2_hc, E5Linha2_sc)) {
+                strcpy(E5Linha_s, E5Linha2_s);
+                strcpy(E5Linha_sp, E5Linha2_sp);
+                strcpy(E5Linha_sc, E5Linha2_sc);
+                return 1;
+            }
+            else
+                return 0;
+        } else
+            return 0;
+    } else {
+        strcpy(E5Linha_s, E5Linha_h);
+        strcpy(E5Linha_sp, E5Linha_hp);
+        strcpy(E5Linha_sc, E5Linha_hc);
+        return 1;
+    }
+}
+
+int E6(char *E6_tp, char *E6_p, char *E6_c) { // E6 -> E7 {E6'.h = E7.tp}E6' {E6.tp = E6'.s}
+    char E7_tp[10], E7_p[10], E7_c[MAX_COD];
+    char E6Linha_h[10], E6Linha_s[10], E6Linha_hp[10], E6Linha_sp[10], E6Linha_hc[MAX_COD], E6Linha_sc[MAX_COD];
+
+    if (E7(E7_tp, E7_p, E7_c)) {
+        strcpy(E6Linha_h, E7_tp);
+        strcpy(E6Linha_hp, E7_p);
+        strcpy(E6Linha_hc, E7_c);
+        if (E6Linha(E6Linha_h, E6Linha_s, E6Linha_hp, E6Linha_sp, E6Linha_hc, E6Linha_sc)) {
+            strcpy(E6_tp, E6Linha_s);
+            strcpy(E6_p, E6Linha_sp);
+            strcpy(E6_c, E6Linha_sc);
+            return 1;
+        }
+        else
+            return 0;
+    } else
+        return 0;
+}
+
+int E6Linha(char *E6Linha_h, char *E6Linha_s, char *E6Linha_hp, char *E6Linha_sp, char *E6Linha_hc, char *E6Linha_sc) { // E6' -> ^ E7{E6'2.h=tint} E6'{E6'.s=E6'2.s}  / e{E6'.s = E6'.h}
+    char E7_tp[10], E7_p[10], E7_c[MAX_COD];
+    char E6Linha2_h[10], E6Linha2_s[10], E6Linha2_hp[10], E6Linha2_sp[10], E6Linha2_hc[MAX_COD], E6Linha2_sc[MAX_COD];
+
+    if (token == TK_XOR) {
+        getToken();
+        if (E7(E7_tp, E7_p, E7_c)) {
+            strcpy(E6Linha2_h, "int");
+            geratemp(E6Linha2_hp);
+            sprintf(E6Linha2_hc, "%s%s\t%s = %s ^ %s\n", E6Linha_hc, E7_c, E6Linha2_hp, E6Linha_hp, E7_p);
+            if (E6Linha(E6Linha2_h, E6Linha2_s, E6Linha2_hp, E6Linha2_sp, E6Linha2_hc, E6Linha2_sc)) {
+                strcpy(E6Linha_s, E6Linha2_s);
+                strcpy(E6Linha_sp, E6Linha2_sp);
+                strcpy(E6Linha_sc, E6Linha2_sc);
+                return 1;
+            }
+            else
+                return 0;
+        } else
+            return 0;
+    } else {
+        strcpy(E6Linha_s, E6Linha_h);
+        strcpy(E6Linha_sp, E6Linha_hp);
+        strcpy(E6Linha_sc, E6Linha_hc);
+        return 1;
+    }
+}
+
+
+int E7(char *E7_tp, char *E7_p, char *E7_c) { // E7 -> E8 {E7'.h = E8.tp}E7' {E7.tp = E7'.s}
+    char E8_tp[10], E8_p[10], E8_c[MAX_COD];
+    char E7Linha_h[10], E7Linha_s[10], E7Linha_hp[10], E7Linha_sp[10], E7Linha_hc[MAX_COD], E7Linha_sc[MAX_COD];
+
+    if (E8(E8_tp, E8_p, E8_c)) {
+        strcpy(E7Linha_h, E8_tp);
+        strcpy(E7Linha_hp, E8_p);
+        strcpy(E7Linha_hc, E8_c);
+        if (E7Linha(E7Linha_h, E7Linha_s, E7Linha_hp, E7Linha_sp, E7Linha_hc, E7Linha_sc)) {
+            strcpy(E7_tp, E7Linha_s);
+            strcpy(E7_p, E7Linha_sp);
+            strcpy(E7_c, E7Linha_sc);
+            return 1;
+        }
+        else
+            return 0;
+    } else
+        return 0;
+}
+
+int E7Linha(char *E7Linha_h, char *E7Linha_s, char *E7Linha_hp, char *E7Linha_sp, char *E7Linha_hc, char *E7Linha_sc) { //E7' -> & E8{E7'2.h=tint;} E7'{E7'.s=E7'2.s} / e{E7'.s = E7'.h}
+    char E8_tp[10], E8_p[10], E8_c[MAX_COD];
+    char E7Linha2_h[10], E7Linha2_s[10], E7Linha2_hp[10], E7Linha2_sp[10], E7Linha2_hc[MAX_COD], E7Linha2_sc[MAX_COD];
+
+    if (token == TK_ELogico) {
+        getToken();
+        if (E8(E8_tp, E8_p, E8_c)) {
+            strcpy(E7Linha2_h, "int");
+            geratemp(E7Linha2_hp);
+            sprintf(E7Linha2_hc, "%s%s\t%s = %s & %s\n", E7Linha_hc, E8_c, E7Linha2_hp, E7Linha_hp, E8_p);
+            if (E7Linha(E7Linha2_h, E7Linha2_s, E7Linha2_hp, E7Linha2_sp, E7Linha2_hc, E7Linha2_sc)) {
+                strcpy(E7Linha_s, E7Linha2_s);
+                strcpy(E7Linha_sp, E7Linha2_sp);
+                strcpy(E7Linha_sc, E7Linha2_sc);
+                return 1;
+            }
+            else
+                return 0;
+        } else
+            return 0;
+    } else {
+        strcpy(E7Linha_s, E7Linha_h);
+        strcpy(E7Linha_sp, E7Linha_hp);
+        strcpy(E7Linha_sc, E7Linha_hc);
+        return 1;
+    }
+}
+
+int E8(char *E8_tp, char *E8_p, char *E8_c) { // E8 -> E9 {E8'.h = E9.tp}E8' {E8.tp = E8'.s}
+    char E9_tp[10], E9_p[10], E9_c[MAX_COD];
+    char E8Linha_h[10], E8Linha_s[10], E8Linha_hp[10], E8Linha_sp[10], E8Linha_hc[MAX_COD], E8Linha_sc[MAX_COD];
+
+    if (E9(E9_tp, E9_p, E9_c)) {
+        strcpy(E8Linha_h, E9_tp);
+        strcpy(E8Linha_hp, E9_p);
+        strcpy(E8Linha_hc, E9_c);
+        if (E8Linha(E8Linha_h, E8Linha_s, E8Linha_hp, E8Linha_sp, E8Linha_hc, E8Linha_sc)) {
+            strcpy(E8_tp, E8Linha_s);
+            strcpy(E8_p, E8Linha_sp);
+            strcpy(E8_c, E8Linha_sc);
+            return 1;
+        }
+        else
+            return 0;
+    } else
+        return 0;
+}
+
+int E8Linha(char *E8Linha_h, char *E8Linha_s, char *E8Linha_hp, char *E8Linha_sp, char *E8Linha_hc, char *E8Linha_sc) { // E8' -> == E9{E8'2.h=tint} E8' {E8'.s=E8'2.s}/ != E9 {E8'2.h=tint;}E8' {E8'.s=E8'2.s}/ e{E8'.s = E8'.h}
+    char E9_tp[10], E9_p[10], E9_c[MAX_COD];
+    char E8Linha2_h[10], E8Linha2_s[10], E8Linha2_hp[10], E8Linha2_sp[10], E8Linha2_hc[MAX_COD], E8Linha2_sc[MAX_COD];
+
+    if (token == TK_ComparadorIgual) {
+        getToken();
+        if (E9(E9_tp, E9_p, E9_c)) {
+            strcpy(E8Linha2_h, "int");
+            geratemp(E8Linha2_hp);
+            sprintf(E8Linha2_hc, "%s%s\t%s = %s == %s\n", E8Linha_hc, E9_c, E8Linha2_hp, E8Linha_hp, E9_p);
+            if (E8Linha(E8Linha2_h, E8Linha2_s, E8Linha2_hp, E8Linha2_sp, E8Linha2_hc, E8Linha2_sc)) {
+                strcpy(E8Linha_s, E8Linha2_s);
+                strcpy(E8Linha_sp, E8Linha2_sp);
+                strcpy(E8Linha_sc, E8Linha2_sc);
+                return 1;
+            }
+            else
+                return 0;
+        } else
+            return 0;
+    } else if (token == TK_ComparadorDiferente) {
+        getToken();
+        if (E9(E9_tp, E9_p, E9_c)) {
+            strcpy(E8Linha2_h, "int");
+            geratemp(E8Linha2_hp);
+            sprintf(E8Linha2_hc, "%s%s\t%s = %s != %s\n", E8Linha_hc, E9_c, E8Linha2_hp, E8Linha_hp, E9_p);
+            if (E8Linha(E8Linha2_h, E8Linha2_s, E8Linha2_hp, E8Linha2_sp, E8Linha2_hc, E8Linha2_sc)) {
+                strcpy(E8Linha_s, E8Linha2_s);
+                strcpy(E8Linha_sp, E8Linha2_sp);
+                strcpy(E8Linha_sc, E8Linha2_sc);
+                return 1;
+            }
+            else
+                return 0;
+        } else
+            return 0;
+    } else {
+        strcpy(E8Linha_s, E8Linha_h);
+        strcpy(E8Linha_sp, E8Linha_hp);
+        strcpy(E8Linha_sc, E8Linha_hc);
+        return 1;
+    }
+}
+
+int E9(char *E9_tp, char *E9_p, char *E9_c) { // E9 -> E10 {E9'.h = E10.tp}E9' {E9.tp = E9'.s}
+    char E10_tp[10], E10_p[10], E10_c[MAX_COD];
+    char E9Linha_h[10], E9Linha_s[10], E9Linha_hp[10], E9Linha_sp[10], E9Linha_hc[MAX_COD], E9Linha_sc[MAX_COD];
+
+    if (E10(E10_tp, E10_p, E10_c)) {
+        strcpy(E9Linha_h, E10_tp);
+        strcpy(E9Linha_hp, E10_p);
+        strcpy(E9Linha_hc, E10_c);
+        if (E9Linha(E9Linha_h, E9Linha_s, E9Linha_hp, E9Linha_sp, E9Linha_hc, E9Linha_sc)) {
+            strcpy(E9_tp, E9Linha_s);
+            strcpy(E9_p, E9Linha_sp);
+            strcpy(E9_c, E9Linha_sc);
+            return 1;
+        }
+        else
+            return 0;
+    } else
+        return 0;
+}
+
+int E9Linha(char *E9Linha_h, char *E9Linha_s, char *E9Linha_hp, char *E9Linha_sp, char *E9Linha_hc, char *E9Linha_sc) { // E9' -> < E10{E9'2.h=tint}  E9'{E9'.s=E9'2.s}  / > E10{E9'2.h=tint} E9'{E9'.s=E9'2.s} / <= E10{E9'2.h=tint} E9'{E9'.s=E9'2.s} / >= E10{E9'2.h=tint} E9' {E9'.s=E9'2.s}/ e{E9'.s = E9'.h}
+    char E10_tp[10], E10_p[10], E10_c[MAX_COD];
+    char E9Linha2_h[10], E9Linha2_s[10], E9Linha2_hp[10], E9Linha2_sp[10], E9Linha2_hc[MAX_COD], E9Linha2_sc[MAX_COD];
+
+    if (token == TK_Menor) {
+        getToken();
+        if (E10(E10_tp, E10_p, E10_c)) {
+            strcpy(E9Linha2_h, "int");
+            geratemp(E9Linha2_hp);
+            sprintf(E9Linha2_hc, "%s%s\t%s = %s < %s\n", E9Linha_hc, E10_c, E9Linha2_hp, E9Linha_hp, E10_p);
+            if (E9Linha(E9Linha2_h, E9Linha2_s, E9Linha2_hp, E9Linha2_sp, E9Linha2_hc, E9Linha2_sc)) {
+                strcpy(E9Linha_s, E9Linha2_s);
+                strcpy(E9Linha_sp, E9Linha2_sp);
+                strcpy(E9Linha_sc, E9Linha2_sc);
+                return 1;
+            }
+            else
+                return 0;
+        } else
+            return 0;
+    } else if (token == TK_Maior) {
+        getToken();
+        if (E10(E10_tp, E10_p, E10_c)) {
+            strcpy(E9Linha2_h, "int");
+            geratemp(E9Linha2_hp);
+            sprintf(E9Linha2_hc, "%s%s\t%s = %s > %s\n", E9Linha_hc, E10_c, E9Linha2_hp, E9Linha_hp, E10_p);
+            if (E9Linha(E9Linha2_h, E9Linha2_s, E9Linha2_hp, E9Linha2_sp, E9Linha2_hc, E9Linha2_sc)) {
+                strcpy(E9Linha_s, E9Linha2_s);
+                strcpy(E9Linha_sp, E9Linha2_sp);
+                strcpy(E9Linha_sc, E9Linha2_sc);
+                return 1;
+            }
+            else
+                return 0;
+        } else
+            return 0;
+    } else if (token == TK_ComparadorMenorIgual) {
+        getToken();
+        if (E10(E10_tp, E10_p, E10_c)) {
+            strcpy(E9Linha2_h, "int");
+            geratemp(E9Linha2_hp);
+            sprintf(E9Linha2_hc, "%s%s\t%s = %s <= %s\n", E9Linha_hc, E10_c, E9Linha2_hp, E9Linha_hp, E10_p);
+            if (E9Linha(E9Linha2_h, E9Linha2_s, E9Linha2_hp, E9Linha2_sp, E9Linha2_hc, E9Linha2_sc)) {
+                strcpy(E9Linha_s, E9Linha2_s);
+                strcpy(E9Linha_sp, E9Linha2_sp);
+                strcpy(E9Linha_sc, E9Linha2_sc);
+                return 1;
+            }
+            else
+                return 0;
+        } else
+            return 0;
+    } else if (token == TK_ComparadorMaiorIgual) {
+        getToken();
+        if (E10(E10_tp, E10_p, E10_c)) {
+            strcpy(E9Linha2_h, "int");
+            geratemp(E9Linha2_hp);
+            sprintf(E9Linha2_hc, "%s%s\t%s = %s >= %s\n", E9Linha_hc, E10_c, E9Linha2_hp, E9Linha_hp, E10_p);
+            if (E9Linha(E9Linha2_h, E9Linha2_s, E9Linha2_hp, E9Linha2_sp, E9Linha2_hc, E9Linha2_sc)) {
+                strcpy(E9Linha_s, E9Linha2_s);
+                strcpy(E9Linha_sp, E9Linha2_sp);
+                strcpy(E9Linha_sc, E9Linha2_sc);
+                return 1;
+            }
+            else
+                return 0;
+        } else
+            return 0;
+    } else {
+        strcpy(E9Linha_s, E9Linha_h);
+        strcpy(E9Linha_sp, E9Linha_hp);
+        strcpy(E9Linha_sc, E9Linha_hc);
+        return 1;
+    }
+}
+
+int E10(char *E10_tp, char *E10_p, char *E10_c) { // E10 -> E11 {E10'.h = E11.tp}E10' {E10.tp = E10'.s}
+    char E11_tp[10], E11_p[10], E11_c[MAX_COD];
+    char E10Linha_h[10], E10Linha_s[10], E10Linha_hp[10], E10Linha_sp[10], E10Linha_hc[MAX_COD], E10Linha_sc[MAX_COD];
+
+    if (E11(E11_tp, E11_p, E11_c)) {
+        strcpy(E10Linha_h, E11_tp);
+        strcpy(E10Linha_hp, E11_p);
+        strcpy(E10Linha_hc, E11_c);
+        if (E10Linha(E10Linha_h, E10Linha_s, E10Linha_hp, E10Linha_sp, E10Linha_hc, E10Linha_sc)) {
+            strcpy(E10_tp, E10Linha_s);
+            strcpy(E10_p, E10Linha_sp);
+            strcpy(E10_c, E10Linha_sc);
+            return 1;
+        }
+        else
+            return 0;
+    } else
+        return 0;
+}
+
+int E10Linha(char *E10Linha_h, char *E10Linha_s, char *E10Linha_hp, char *E10Linha_sp, char *E10Linha_hc, char *E10Linha_sc) { // E10' -> << E11{E10'2.h=tint}  E10'{E10'.s=E10'2.s} | >> E11{E10'2.h=tint}  E10'{E10'.s=E10'2.s} / e {E10'.s = E10'.h}
+    char E11_tp[10], E11_p[10], E11_c[MAX_COD];
+    char E10Linha2_h[10], E10Linha2_s[10], E10Linha2_hp[10], E10Linha2_sp[10], E10Linha2_hc[MAX_COD], E10Linha2_sc[MAX_COD];
+
+    if (token == TK_ShiftLeft) {
+        getToken();
+        if (E11(E11_tp, E11_p, E11_c)) {
+            strcpy(E10Linha2_h, "int");
+            geratemp(E10Linha2_hp);
+            sprintf(E10Linha2_hc, "%s%s\t%s = %s << %s\n", E10Linha_hc, E11_c, E10Linha2_hp, E10Linha_hp, E11_p);
+            if (E10Linha(E10Linha2_h, E10Linha2_s, E10Linha2_hp, E10Linha2_sp, E10Linha2_hc, E10Linha2_sc)) {
+                strcpy(E10Linha_s, E10Linha2_s);
+                strcpy(E10Linha_sp, E10Linha2_sp);
+                strcpy(E10Linha_sc, E10Linha2_sc);
+                return 1;
+            }
+            else
+                return 0;
+        } else
+            return 0;
+    } else if (token == TK_ShiftRight) {
+        getToken();
+        if (E11(E11_tp, E11_p, E11_c)) {
+            strcpy(E10Linha2_h, "int");
+            geratemp(E10Linha2_hp);
+            sprintf(E10Linha2_hc, "%s%s\t%s = %s >> %s\n", E10Linha_hc, E11_c, E10Linha2_hp, E10Linha_hp, E11_p);
+            if (E10Linha(E10Linha2_h, E10Linha2_s, E10Linha2_hp, E10Linha2_sp, E10Linha2_hc, E10Linha2_sc)) {
+                strcpy(E10Linha_s, E10Linha2_s);
+                strcpy(E10Linha_sp, E10Linha2_sp);
+                strcpy(E10Linha_sc, E10Linha2_sc);
+                return 1;
+            }
+            else
+                return 0;
+        } else
+            return 0;
+    } else {
+        strcpy(E10Linha_s, E10Linha_h);
+        strcpy(E10Linha_sp, E10Linha_hp);
+        strcpy(E10Linha_sc, E10Linha_hc);
+        return 1;
+    }
+}
+
+int E11(char *E11_tp, char *E11_p, char *E11_c) { // E11 -> E12{E11'.h = E12.tp} E11' {E11.tp = E11'.s}
+    char E12_tp[10], E12_p[10], E12_c[MAX_COD];
+    char E11Linha_h[10], E11Linha_s[10], E11Linha_hp[10], E11Linha_sp[10], E11Linha_hc[MAX_COD], E11Linha_sc[MAX_COD];
+
+    if (E12(E12_tp, E12_p, E12_c)) {
+        strcpy(E11Linha_h, E12_tp);
+        strcpy(E11Linha_hp, E12_p);
+        strcpy(E11Linha_hc, E12_c);
+        if (E11Linha(E11Linha_h, E11Linha_s, E11Linha_hp, E11Linha_sp, E11Linha_hc, E11Linha_sc)) {
+            strcpy(E11_tp, E11Linha_s);
+            strcpy(E11_p, E11Linha_sp);
+            strcpy(E11_c, E11Linha_sc);
+            return 1;
+        }
+        else
+            return 0;
+    } else
+        return 0;
+}
+
+int E11Linha(char *E11Linha_h, char *E11Linha_s, char *E11Linha_hp, char *E11Linha_sp, char *E11Linha_hc, char *E11Linha_sc) { // E11' -> + E12{if(E11'.h==tint && E12.tp==tint) E11'2.h=tint; else E11'2.h=tfloat;} E11'2{E11'.s=E11'2.s} / - E12{if(E11'.h==tint && E12.tp==tint) E11'2.h=tint; else E11'2.h=tfloat;} E11'2{E11'.s=E11'2.s} / e {E11'.s = E11'.h}
+    char E12_tp[10], E12_p[10], E12_c[MAX_COD];
+    char E11Linha2_h[10], E11Linha2_s[10], E11Linha2_hp[10], E11Linha2_sp[10], E11Linha2_hc[MAX_COD], E11Linha2_sc[MAX_COD];
+
+    if (token == TK_Mais) {
+        getToken();
+        if (E12(E12_tp, E12_p, E12_c)) {
+            if(!strcmp(E11Linha_h, "int") && !strcmp(E12_tp, "int"))
+                strcpy(E11Linha2_h, "int");
+            else
+                strcpy(E11Linha2_h, "float");
+            geratemp(E11Linha2_hp);
+            sprintf(E11Linha2_hc, "%s%s\t%s = %s + %s\n", E11Linha_hc, E12_c, E11Linha2_hp, E11Linha_hp, E12_p);
+            if (E11Linha(E11Linha2_h, E11Linha2_s, E11Linha2_hp, E11Linha2_sp, E11Linha2_hc, E11Linha2_sc)) {
+                strcpy(E11Linha_s, E11Linha2_s);
+                strcpy(E11Linha_sp, E11Linha2_sp);
+                strcpy(E11Linha_sc, E11Linha2_sc);
+                return 1;
+            }
+            else
+                return 0;
+        }
+    } else if (token == TK_Menos) {
+        getToken();
+        if (E12(E12_tp, E12_p, E12_c)) {
+            if(!strcmp(E11Linha_h, "int") && !strcmp(E12_tp, "int"))
+                strcpy(E11Linha2_h, "int");
+            else
+                strcpy(E11Linha2_h, "float");
+            geratemp(E11Linha2_hp);
+            sprintf(E11Linha2_hc, "%s%s\t%s = %s - %s\n", E11Linha_hc, E12_c, E11Linha2_hp, E11Linha_hp, E12_p);
+            if (E11Linha(E11Linha2_h, E11Linha2_s, E11Linha2_hp, E11Linha2_sp, E11Linha2_hc, E11Linha2_sc)) {
+                strcpy(E11Linha_s, E11Linha2_s);
+                strcpy(E11Linha_sp, E11Linha2_sp);
+                strcpy(E11Linha_sc, E11Linha2_sc);
+                return 1;
+            }
+            else
+                return 0;
+        }
+    } else {
+        strcpy(E11Linha_s, E11Linha_h);
+        strcpy(E11Linha_sp, E11Linha_hp);
+        strcpy(E11Linha_sc, E11Linha_hc);
+        return 1;
+    }
+}
+
+int E12(char *E12_tp, char *E12_p, char *E12_c) { // E12 -> E13 {E12'.h = E13.tp}E12' {E12.tp = E12'.s}
+    char E13_tp[10], E13_p[10], E13_c[MAX_COD];
+    char E12Linha_h[10], E12Linha_s[10], E12Linha_hp[10], E12Linha_sp[10], E12Linha_hc[MAX_COD], E12Linha_sc[MAX_COD];
+
+    if (E13(E13_tp, E13_p, E13_c)) {
+        strcpy(E12Linha_h, E13_tp);
+        strcpy(E12Linha_hp, E13_p);
+        strcpy(E12Linha_hc, E13_c);
+
+        if (E12Linha(E12Linha_h, E12Linha_s, E12Linha_hp, E12Linha_sp, E12Linha_hc, E12Linha_sc)) {
+            strcpy(E12_tp, E12Linha_s);
+            strcpy(E12_p, E12Linha_sp);
+            strcpy(E12_c, E12Linha_sc);
+            return 1;
+        }
+        else
+            return 0;
+    } else
+        return 0;
+}
+
+int E12Linha(char *E12Linha_h, char *E12Linha_s, char *E12Linha_hp, char *E12Linha_sp, char *E12Linha_hc, char *E12Linha_sc) {// E12' -> * E13{if(E12'.h==tint && E13.tp==tint) E12'2.h=tint; else E12'2.h=tfloat;} E12'{E12'.s=E12'2.s} / ÷ E13{if(E12'.h==tint && E13.tp==tint) E12'2.h=tint; else E12'2.h=tfloat;} E12'{E12'.s=E12'2.s} / % E13{if(E12'.h==tint && E13.tp==tint) E12'2.h=tint; else printf("Erro: operação de resto inválida"); exit(0);} E12'{E12'.s=E12'2.s} / e {E12'.s = E12'.h}
+    char E13_tp[10], E13_p[10], E13_c[MAX_COD];
+    char E12Linha2_h[10], E12Linha2_s[10], E12Linha2_hp[10], E12Linha2_sp[10], E12Linha2_hc[MAX_COD], E12Linha2_sc[MAX_COD];
+
+    if (token == TK_Multiplicacao) {
+        getToken();
+        if (E13(E13_tp, E13_p, E13_c)) {
+
+            if(!strcmp(E12Linha_h, "int") && strcmp(E13_tp, "int"))
+                strcpy(E12Linha2_h, "int");
+            else
+                strcpy(E12Linha2_h, "float");
+            geratemp(E12Linha2_hp);
+            sprintf(E12Linha2_hc, "%s%s\t%s = %s * %s\n", E12Linha_hc, E13_c, E12Linha2_hp, E12Linha_hp, E13_p);
+            if (E12Linha(E12Linha2_h, E12Linha2_s, E12Linha2_hp, E12Linha2_sp, E12Linha2_hc, E12Linha2_sc)) {
+                strcpy(E12Linha_s, E12Linha2_s);
+                strcpy(E12Linha_sp, E12Linha2_sp);
+                strcpy(E12Linha_sc, E12Linha2_sc);
+                return 1;
+            }
+            else
+                return 0;
+        } else
+            return 0;
+    } else if (token == TK_Divisao) {
+        getToken();
+        if (E13(E13_tp, E13_p, E13_c)) {
+            if(!strcmp(E12Linha_h, "int") && strcmp(E13_tp, "int"))
+                strcpy(E12Linha2_h, "int");
+            else
+                strcpy(E12Linha2_h, "float");
+            geratemp(E12Linha2_hp);
+            sprintf(E12Linha2_hc, "%s%s\t%s = %s / %s\n", E12Linha_hc, E13_c, E12Linha2_hp, E12Linha_hp, E13_p);
+            if (E12Linha(E12Linha2_h, E12Linha2_s, E12Linha2_hp, E12Linha2_sp, E12Linha2_hc, E12Linha2_sc)) {
+                strcpy(E12Linha_s, E12Linha2_s);
+                strcpy(E12Linha_sp, E12Linha2_sp);
+                strcpy(E12Linha_sc, E12Linha2_sc);
+                return 1;
+            }
+            else
+                return 0;
+        } else
+            return 0;
+    } else if (token == TK_RestoDivisao) {
+        getToken();
+        if (E13(E13_tp, E13_p, E13_c)) {
+            if(!strcmp(E12Linha_h, "int") && !strcmp(E13_tp, "int"))
+                strcpy(E12Linha2_h, "int");
+            else{
+                printf("Erro: operação de resto inválida");
+                exit(0);
+            }
+            geratemp(E12Linha2_hp);
+            sprintf(E12Linha2_hc, "%s%s\t%s = %s %c %s\n", E12Linha_hc, E13_c, E12Linha2_hp, E12Linha_hp, 37, E13_p);
+            if (E12Linha(E12Linha2_h, E12Linha2_s, E12Linha2_hp, E12Linha2_sp, E12Linha2_hc, E12Linha2_sc)) {
+                strcpy(E12Linha_s, E12Linha2_s);
+                strcpy(E12Linha_sp, E12Linha2_sp);
+                strcpy(E12Linha_sc, E12Linha2_sc);
+                return 1;
+            }
+            else
+                return 0;
+        } else
+            return 0;
+    } else {
+        strcpy(E12Linha_s, E12Linha_h);
+        strcpy(E12Linha_sp, E12Linha_hp);
+        strcpy(E12Linha_sc, E12Linha_hc);
+        return 1;
+    }
+}
+
+int E13(char *E13_tp, char *E13_p, char *E13_c) { // E13 -> E14 - {E13'.h = E14.tp}E13{E13.tp = E13'.s} / E14 ++{E13'.h = E14.tp} E13{E13.tp = E13'.s} / E14 -- {E13'.h = E14.tp}E13{E13.tp = E13'.s} / E14 !{E13'.h = E14.tp} E13{E13.tp = E13'.s} / E14 {E13.tp = E14.tp}
+    char E14_tp[10], E14_p[10], E14_c[MAX_COD];
+    char E13Linha_tp[10], E13Linha_h[10], E13Linha_s[10];
+
+    if (E14(E14_tp, E14_p, E14_c)) {
+        if (token == TK_Menos) {
+            strcpy(E13Linha_h, E14_tp);
+            getToken();
+            if (E13(E13Linha_tp, E13Linha_h, E13Linha_s)) {
+                strcpy(E13_tp, E13Linha_s);
+
+                return 1;
+            }
+            else
+                return 0;
+        } else if (token == TK_MaisMais) {
+            strcpy(E13Linha_h, E14_tp);
+            getToken();
+            if (E13(E13Linha_tp, E13Linha_h, E13Linha_s)) {
+                strcpy(E13_tp, E13Linha_s);
+                return 1;
+            }
+            else
+                return 0;
+        } else if (token == TK_MenosMenos) {
+            strcpy(E13Linha_h, E14_tp);
+            getToken();
+            if (E13(E13Linha_tp, E13Linha_h, E13Linha_s)) {
+                strcpy(E13_tp, E13Linha_s);
+                return 1;
+            }
+            else
+                return 0;
+        } else if (token == TK_Negacao) {
+            strcpy(E13Linha_h, E14_tp);
+            getToken();
+            if (E13(E13Linha_tp, E13Linha_h, E13Linha_s)) {
+                strcpy(E13_tp, E13Linha_s);
+                return 1;
+            }
+            else
+                return 0;
+        } else {
+            strcpy(E13_tp, E14_tp);
+            strcpy(E13_p, E14_p);
+            strcpy(E13_c, E14_c);
+            return 1;
+        }
+    }
+    return 0;
+}
+
+int E14(char *E14_tp, char *E14_p, char *E14_c) { // E14 -> cte / id{E14.tp = consultaTipo(id, E14.tp, tabelaSimbolos)} RE / (E)
+    char E_tp[10];
+
+    if (token == TK_ConstInt) {
+        strcpy(E14_tp, "int");
+        geratemp(E14_p);
+        sprintf(E14_c,"\t%s = %s\n",E14_p,lex);
+        getToken();
+        return 1;
+    } else if (token == TK_ConstFloat) {
+        strcpy(E14_tp, "float");
+        geratemp(E14_p);
+        sprintf(E14_c,"\t%s = %s\n",E14_p,lex);
+        getToken();
+        return 1;
+    }else if (token == TK_Id) {
+        consultaTipo(lex, E14_tp, ts);
+        if(strcmp(E14_tp, "int") && strcmp(E14_tp, "float")){
+            printf("Variavel %s nao foi declarada\n", lex);
+            exit(0);
+        }
+        strcpy(E14_p,lex);
+        strcpy(E14_c,"");
+
+        getToken();
+        if (RE())
+            return 1;
+        else
+            return 0;
+    } else if (token == TK_AbrePar) {
+        char E_p[MAX_COD],E_c[MAX_COD];
+        getToken();
+        if (E(E_tp, E_p, E_c)) {
+            if (token == TK_FechaPar) {
+                getToken();
+                strcpy(E14_c,E_c);
+                strcpy(E14_p,E_p);
+                return 1;
+            } else
+                return 0;
+        } else
+            return 0;
+    } else
+        return 0;
+}
+
+int RE() { // RE -> (LP) / e
+    if (token == TK_AbrePar) {
+        getToken();
+        if (LP()) {
+            if (token == TK_FechaPar) {
+                getToken();
+                return 1;
+            } else {
+                printf("Erro: esperava token ')' na linha %d coluna %d\n", linha, coluna);
+                return 0;
+            }
+        } else
+            return 0;
+    } else
+        return 1;
+}
+
+int main() {
+    char exp1[20000], lex[20], c;
+    setbuf(stdout, NULL);
+    FILE *entrada;
+    ts = NULL;
+    int i = 0;
+    char PROGC_c[MAX_COD];
+
+    // Informar arquivo de entrada
+    if ((entrada = fopen("teste.txt", "r")) == NULL) {
+        printf("Arquivo não pode ser aberto\n");
+        exit(1);
+    }
+
+    while (1) { // passa todo o conteudo do arquivo pra uma string
+        c = fgetc(entrada);
+        if (feof(entrada))
+            break;
+        if (c != 9 && c != 10 && c != 13) {
+            exp1[i++] = c;
+        } else if (c == 10) {
+            exp1[i++] = 127;
+        } else if (c == 9) {
+            exp1[i++] = 9;
+        }
+    }
+    exp1[i] = '\0';
+
+    for (i = 0; i < 1000; i++) { // preenche matriz com -1 para melhor controle
+        TK_sParser[i] = -1;
+    }
+
+    while ((token = le_token(exp1, lex)) != -1) {
+
+        coluna = posColuna - subColuna;
+        char linhaSt[3];
+        char colunaSt[3];
+        snprintf(linhaSt, sizeof(linhaSt), "%d", linha);
+        snprintf(colunaSt, sizeof(colunaSt), "%d", coluna);
+
+        // Coloca no TK_sParser[] toda a estrutura dos tokens
+        // A estrutura é a seguinte:
+        // 0     1     2       3    4     5     ...
+        // token  linha coluna   token  linha coluna  ...
+
+        TK_sParser[posParser++] = token;
+        TK_sParser[posParser++] = linha;
+        TK_sParser[posParser++] = coluna;
+        strcpy(TK_sParserLex[posParserLex++], lex);
+    }
+
+    fclose(entrada);
+    posParser = 0;
+    posParserLex = 0;
+    getToken(); // Avança na sentença
+
+    if (PROGC(PROGC_c)) {
+        printf("%s", PROGC_c);
+        printf("Código de 3 enderecos gerado com sucesso.\nPressione ENTER para encerrar...");
+        getchar();
+    }
+    else {
+        printf("Falha no reconhecimento sintático\nPressione ENTER para encerrar...");
+        getchar();
+    }
+
 }
