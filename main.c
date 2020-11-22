@@ -55,30 +55,31 @@
 #define TKMaior 49
 #define TKMenor 50
 #define TKHashtag 51
-#define TKMenosIgual 52
-#define TKMaisIgual 53
-#define TKMultiplicacaoIgual 54
-#define TKDivisaoIgual 55
-#define TKRestoDivisaoIgual 56
-#define TKComparadorMaiorIgual 57
-#define TKComparadorMenorIgual 58
-#define TKMenosMenos 59
-#define TKMaisMais 60
-#define TKComparadorIgual 61
-#define TKComparadorDiferente 62
-#define TKNegacao 63
-#define TKTernario 64
-#define TKShiftLeft 65
-#define TKShiftRight 66
-#define TKOU 67
-#define TKAND 68
-#define TKELogico 70
-#define TKOULogico 71
-#define TKXOR 72
+#define TKMenosIgual 52             /* -= */
+#define TKMaisIgual 53              /* += */
+#define TKMultiplicacaoIgual 54     /* *= */
+#define TKDivisaoIgual 55           /* /= */
+#define TKRestoDivisaoIgual 56      /* %= */
+#define TKComparadorMaiorIgual 57   /* >= */
+#define TKComparadorMenorIgual 58   /* <= */
+#define TKMenosMenos 59             /* -- */
+#define TKMaisMais 60               /* ++ */
+#define TKComparadorIgual 61        /* == */
+#define TKComparadorDiferente 62    /* != */
+#define TKNegacao 63                /* ! */
+#define TKTernario 64               /* ? */
+#define TKShiftLeft 65              /* << */
+#define TKShiftRight 66             /* >> */
+#define TKOU 67                     /* || */
+#define TKAND 68                    /* && */
+#define TKELogico 70                /* &  */
+#define TKOULogico 71               /* | */
+#define TKXOR 72                    /* ^ */
 #define TKConstInt 80
 #define TKConstFloat 81
 #define TKConstOctal 82
 #define TKConstHexa 83
+
 #define TKErroE 100
 #define TKErroConstFloat 101
 #define TKErroOU 102
@@ -135,9 +136,9 @@ int LP();
 
 int RLP();
 
-int CORPO(char *CORPO_c);
+int CORPO();
 
-int LCD(char *LCD_c);
+int LCD();
 
 int COM(char *COM_c);
 
@@ -599,7 +600,7 @@ int le_token(char st[], char lex[]) {
                 estado_anterior = 1;
                 return palavra_reservada(lex);
             case 2:
-                if (c >= '0' && c <= '9') {
+                if (c >= '0' && c <= '9') { //JA FOI LIDO UM NUMERO ANTERIORMENTE OU UM SINAL
                     pos++;
                     break;
                 }
@@ -701,12 +702,7 @@ int le_token(char st[], char lex[]) {
                 return TKConstInt;
         }
     }
-
-    return -1;
 }
-
-
-
 
 void getToken() {
     tk = tksParser[posParser++];
@@ -753,18 +749,6 @@ void consultaTipo(char *id, char *Tipo, tabela *tab){
     }
 
     consultaTipo(id, Tipo, tab->prox);
-}
-
-void geralabel(char label[])
-{
-    static int numlabel=0;
-    sprintf(label,"LB%03d",numlabel++);
-}
-
-void geratemp(char temp[])
-{
-    static int numtemp=0;
-    sprintf(temp,"T%03d",numtemp++);
 }
 
 int PROGC() { // PROGC -> LD
@@ -851,7 +835,7 @@ int RDEC() { // RDEC -> ,{DV.t=RDEC.t}DV / (DF / ; / = cte;
                 return 0;
             }
         } else {
-            printf("Erro: esperava token constante inteira na linha %d coluna %d\n", linha, coluna);
+            printf("Erro: esperava token contante inteira na linha %d coluna %d\n", linha, coluna);
             return 0;
         }
     } else {
@@ -1055,14 +1039,13 @@ int RTIPOLONG2(char *RTIPOLONG2_s, char *RTIPOLONG2_t   ) { //RTIPOLONG2 -> int{
 }
 
 int DF() { // DF -> LP){CORPO}
-    char CORPO_c[MAX_COD];
 
     if (LP()) {
         if (tk == TKFechaPar) {
             getToken();
             if (tk == TKAbreChave) {
                 getToken();
-                if (CORPO(CORPO_c)) {
+                if (CORPO()) {
                     if (tk == TKFechaChave) {
                         getToken();
                         return 1;
@@ -1128,40 +1111,37 @@ int RLP() { //RLP -> ,TIPO id{addTabelaSimbolos(id,TIPO.t)} RLP / e
         return 1;
 }
 
-int CORPO(char *CORPO_c) { //CORPO -> LCD
-    char LCD_c[MAX_COD];
-
-    if (LCD(LCD_c)) {
-        strcpy(CORPO_c, LCD_c);
+int CORPO() { //CORPO -> LCD
+    if (LCD()) {
         return 1;
     }
-    else
-        return 0;
+    else {
+    	return 0;
+    }
 }
 
-int LCD(char *LCD_c) { //LCD -> COM LCD / TIPO{DV.t=TIPO.t} DV LCD / e
-    char DV_t[10], TIPO_t[10], COM_c[MAX_COD], LCDLinha_c[MAX_COD];
-
-    strcpy(LCDLinha_c,"");
+int LCD() { //LCD -> COM LCD / TIPO{DV.t=TIPO.t} DV LCD / e
+    char DV_t[10], TIPO_t[10], COM_c[MAX_COD];
 
     if (COM(COM_c)) {
-        if (LCD(LCDLinha_c)) {
-            sprintf(LCD_c, "%s%s", COM_c, LCDLinha_c);
+        if (LCD()) {
             return 1;
         }
-        else
-            return 0;
+        else {
+        	return 0;
+        }
     } else if (TIPO(TIPO_t)) {
         strcpy(DV_t,TIPO_t);
         if (DV(DV_t)) {
-            if (LCD(LCDLinha_c)) {
-                strcpy(LCD_c, LCDLinha_c);
+            if (LCD()) {
                 return 1;
             }
-            else
+            else{
                 return 0;
-        } else
+            }
+        } else {
             return 0;
+        }
     } else
         return 1;
 }
@@ -1268,7 +1248,6 @@ int COM(char *COM_c) { //COM -> E; / COMWHILE / COMDOWHILE / COMIF / COMFOR / CO
 int COMIF(char *COMIF_c) { //COMIF -> if(E)COM RIF
     char E_tp[10], E_p[MAX_COD],E_c[MAX_COD], COM_c[MAX_COD];
     char RIF_c[MAX_COD];
-    char labelelse[10],labelfim[10];
 
     strcpy(RIF_c,"");
 
@@ -1281,12 +1260,6 @@ int COMIF(char *COMIF_c) { //COMIF -> if(E)COM RIF
                     getToken();
                     if (COM(COM_c)) {
                         if (RIF(RIF_c)) {
-                            geralabel(labelelse);
-                            geralabel(labelfim);
-                            if(strcmp(RIF_c,""))
-                                sprintf(COMIF_c,"%s\tif %s==0 goto %s\n%s\tgoto %s\n%s:\n%s%s:\n",E_c,E_p,labelelse,COM_c,labelfim,labelelse,RIF_c,labelfim);
-                            else
-                                sprintf(COMIF_c,"%s\tif %s==0 goto %s\n%s%s:\n",E_c,E_p,labelfim,COM_c,labelfim);
                             return 1;
                         }
                         else
@@ -1327,7 +1300,6 @@ int COMFOR(char *COMFOR_c) { //COMFOR -> for(EIF;EIF;EIF)COM RFOR
     char COM_c[MAX_COD], RFOR_c[MAX_COD];
     char EIF1_c[MAX_COD], EIF2_c[MAX_COD], EIF3_c[MAX_COD];
     char EIF1_p[MAX_COD], EIF2_p[MAX_COD], EIF3_p[MAX_COD];
-    char labellaco[MAX_COD],labelfim[MAX_COD];
 
     if (tk == TKFor) {
         laco = 1;
@@ -1346,11 +1318,6 @@ int COMFOR(char *COMFOR_c) { //COMFOR -> for(EIF;EIF;EIF)COM RFOR
                                     if (COM(COM_c)) {
                                         laco = 0;
                                         if (RFOR(RFOR_c)) {
-                                            geralabel(labellaco);
-                                            geralabel(labelfim);
-                                            sprintf(COMFOR_c, "%s%s:\n%s\tif %s == 0 goto %s\n%s%s\tgoto %s\n%s:\n%s", EIF1_c,
-                                                    labellaco,
-                                                    EIF2_c, EIF2_p, labelfim, COM_c, EIF3_c, labellaco, labelfim, RFOR_c);
                                             return 1;
                                         }
                                         else
@@ -1408,7 +1375,6 @@ int EIF(char *EIF_c, char *EIF_p) { //EIF -> E / e
 
 int COMWHILE(char *COMWHILE_c) { //COMWHILE -> while(E)COM RWHILE
     char E_tp[10], E_p[MAX_COD],E_c[MAX_COD], COM_c[MAX_COD], RWHILE_c[MAX_COD];
-    char labelinicio[10],labelfim[10];
 
     if (tk == TKWhile && doWhile != 1) {
         laco = 1;
@@ -1420,9 +1386,6 @@ int COMWHILE(char *COMWHILE_c) { //COMWHILE -> while(E)COM RWHILE
                     getToken();
                     if (COM(COM_c)) {
                         if (RWHILE(RWHILE_c)) {
-                            geralabel(labelinicio);
-                            geralabel(labelfim);
-                            sprintf(COMWHILE_c,"%s:\n%s\tif %s==0 goto %s\n%s\tgoto %s\n%s:\n%s",labelinicio,E_c,E_p,labelfim,COM_c,labelinicio,labelfim,RWHILE_c);
                             laco = 0;
                             return 1;
                         }
@@ -1458,7 +1421,6 @@ int RWHILE(char *RWHILE_c) { //RWHILE -> COM / e
 
 int COMDOWHILE(char *COMDOWHILE_c) { //COMDOWHILE -> do COM RDOWHILE while(E);
     char E_tp[10], E_p[MAX_COD], E_c[MAX_COD], COM_c[MAX_COD], RDOWHILE_c[MAX_COD];
-    char label[10];
 
     if (tk == TKDo) {
         laco = 1;
@@ -1476,8 +1438,6 @@ int COMDOWHILE(char *COMDOWHILE_c) { //COMDOWHILE -> do COM RDOWHILE while(E);
                                 if (tk == TKPontoeVirg) {
                                     getToken();
                                     doWhile = 0;
-                                    geralabel(label);
-                                    sprintf(COMDOWHILE_c,"%s:\n%s%s\tif %s==1 goto %s\n%s",label,COM_c,E_c,E_p,label,RDOWHILE_c);
                                     laco = 0;
                                     return 1;
                                 } else {
@@ -1504,7 +1464,6 @@ int COMDOWHILE(char *COMDOWHILE_c) { //COMDOWHILE -> do COM RDOWHILE while(E);
     } else {
         return 0;
     }
-    return -1;
 }
 
 int RDOWHILE(char *RDOWHILE_c) { //RDOWHILE -> COM / e
@@ -1864,8 +1823,6 @@ int E3Linha(char *E3Linha_h, char *E3Linha_s, char *E3Linha_hp, char *E3Linha_sp
         getToken();
         if (E4(E4_tp, E4_p, E4_c)) {
             strcpy(E3Linha2_h,"int");
-            geratemp(E3Linha2_hp);
-            sprintf(E3Linha2_hc, "%s%s\t%s = %s || %s\n", E3Linha_hc, E4_c, E3Linha2_hp, E3Linha_hp, E4_p);
             if (E3Linha(E3Linha2_h, E3Linha2_s, E3Linha2_hp, E3Linha2_sp, E3Linha2_hc, E3Linha2_sc)) {
                 strcpy(E3Linha_s,E3Linha2_s);
                 strcpy(E3Linha_sp, E3Linha2_sp);
@@ -1910,8 +1867,6 @@ int E4Linha(char *E4Linha_h, char *E4Linha_s, char *E4Linha_hp, char *E4Linha_sp
         getToken();
         if (E5(E5_tp, E5_p, E5_c)) {
             strcpy(E4Linha2_h, "int");
-            geratemp(E4Linha2_hp);
-            sprintf(E4Linha2_hc, "%s%s\t%s = %s && %s\n", E4Linha_hc, E5_c, E4Linha2_hp, E4Linha_hp, E5_p);
             if (E4Linha(E4Linha2_h, E4Linha2_s, E4Linha2_hp, E4Linha2_sp, E4Linha2_hc, E4Linha2_sc)) {
                 strcpy(E4Linha_s, E4Linha2_s);
                 strcpy(E4Linha_sp, E4Linha2_sp);
@@ -1957,8 +1912,6 @@ int E5Linha(char *E5Linha_h, char *E5Linha_s, char *E5Linha_hp, char *E5Linha_sp
         getToken();
         if (E6(E6_tp, E6_p, E6_c)) {
             strcpy(E5Linha2_h, "int");
-            geratemp(E5Linha2_hp);
-            sprintf(E5Linha2_hc, "%s%s\t%s = %s | %s\n", E5Linha_hc, E6_c, E5Linha2_hp, E5Linha_hp, E6_p);
             if (E5Linha(E5Linha2_h, E5Linha2_s, E5Linha2_hp, E5Linha2_sp, E5Linha2_hc, E5Linha2_sc)) {
                 strcpy(E5Linha_s, E5Linha2_s);
                 strcpy(E5Linha_sp, E5Linha2_sp);
@@ -2005,8 +1958,6 @@ int E6Linha(char *E6Linha_h, char *E6Linha_s, char *E6Linha_hp, char *E6Linha_sp
         getToken();
         if (E7(E7_tp, E7_p, E7_c)) {
             strcpy(E6Linha2_h, "int");
-            geratemp(E6Linha2_hp);
-            sprintf(E6Linha2_hc, "%s%s\t%s = %s ^ %s\n", E6Linha_hc, E7_c, E6Linha2_hp, E6Linha_hp, E7_p);
             if (E6Linha(E6Linha2_h, E6Linha2_s, E6Linha2_hp, E6Linha2_sp, E6Linha2_hc, E6Linha2_sc)) {
                 strcpy(E6Linha_s, E6Linha2_s);
                 strcpy(E6Linha_sp, E6Linha2_sp);
@@ -2054,8 +2005,6 @@ int E7Linha(char *E7Linha_h, char *E7Linha_s, char *E7Linha_hp, char *E7Linha_sp
         getToken();
         if (E8(E8_tp, E8_p, E8_c)) {
             strcpy(E7Linha2_h, "int");
-            geratemp(E7Linha2_hp);
-            sprintf(E7Linha2_hc, "%s%s\t%s = %s & %s\n", E7Linha_hc, E8_c, E7Linha2_hp, E7Linha_hp, E8_p);
             if (E7Linha(E7Linha2_h, E7Linha2_s, E7Linha2_hp, E7Linha2_sp, E7Linha2_hc, E7Linha2_sc)) {
                 strcpy(E7Linha_s, E7Linha2_s);
                 strcpy(E7Linha_sp, E7Linha2_sp);
@@ -2102,8 +2051,6 @@ int E8Linha(char *E8Linha_h, char *E8Linha_s, char *E8Linha_hp, char *E8Linha_sp
         getToken();
         if (E9(E9_tp, E9_p, E9_c)) {
             strcpy(E8Linha2_h, "int");
-            geratemp(E8Linha2_hp);
-            sprintf(E8Linha2_hc, "%s%s\t%s = %s == %s\n", E8Linha_hc, E9_c, E8Linha2_hp, E8Linha_hp, E9_p);
             if (E8Linha(E8Linha2_h, E8Linha2_s, E8Linha2_hp, E8Linha2_sp, E8Linha2_hc, E8Linha2_sc)) {
                 strcpy(E8Linha_s, E8Linha2_s);
                 strcpy(E8Linha_sp, E8Linha2_sp);
@@ -2118,8 +2065,6 @@ int E8Linha(char *E8Linha_h, char *E8Linha_s, char *E8Linha_hp, char *E8Linha_sp
         getToken();
         if (E9(E9_tp, E9_p, E9_c)) {
             strcpy(E8Linha2_h, "int");
-            geratemp(E8Linha2_hp);
-            sprintf(E8Linha2_hc, "%s%s\t%s = %s != %s\n", E8Linha_hc, E9_c, E8Linha2_hp, E8Linha_hp, E9_p);
             if (E8Linha(E8Linha2_h, E8Linha2_s, E8Linha2_hp, E8Linha2_sp, E8Linha2_hc, E8Linha2_sc)) {
                 strcpy(E8Linha_s, E8Linha2_s);
                 strcpy(E8Linha_sp, E8Linha2_sp);
@@ -2166,8 +2111,6 @@ int E9Linha(char *E9Linha_h, char *E9Linha_s, char *E9Linha_hp, char *E9Linha_sp
         getToken();
         if (E10(E10_tp, E10_p, E10_c)) {
             strcpy(E9Linha2_h, "int");
-            geratemp(E9Linha2_hp);
-            sprintf(E9Linha2_hc, "%s%s\t%s = %s < %s\n", E9Linha_hc, E10_c, E9Linha2_hp, E9Linha_hp, E10_p);
             if (E9Linha(E9Linha2_h, E9Linha2_s, E9Linha2_hp, E9Linha2_sp, E9Linha2_hc, E9Linha2_sc)) {
                 strcpy(E9Linha_s, E9Linha2_s);
                 strcpy(E9Linha_sp, E9Linha2_sp);
@@ -2182,8 +2125,6 @@ int E9Linha(char *E9Linha_h, char *E9Linha_s, char *E9Linha_hp, char *E9Linha_sp
         getToken();
         if (E10(E10_tp, E10_p, E10_c)) {
             strcpy(E9Linha2_h, "int");
-            geratemp(E9Linha2_hp);
-            sprintf(E9Linha2_hc, "%s%s\t%s = %s > %s\n", E9Linha_hc, E10_c, E9Linha2_hp, E9Linha_hp, E10_p);
             if (E9Linha(E9Linha2_h, E9Linha2_s, E9Linha2_hp, E9Linha2_sp, E9Linha2_hc, E9Linha2_sc)) {
                 strcpy(E9Linha_s, E9Linha2_s);
                 strcpy(E9Linha_sp, E9Linha2_sp);
@@ -2198,8 +2139,6 @@ int E9Linha(char *E9Linha_h, char *E9Linha_s, char *E9Linha_hp, char *E9Linha_sp
         getToken();
         if (E10(E10_tp, E10_p, E10_c)) {
             strcpy(E9Linha2_h, "int");
-            geratemp(E9Linha2_hp);
-            sprintf(E9Linha2_hc, "%s%s\t%s = %s <= %s\n", E9Linha_hc, E10_c, E9Linha2_hp, E9Linha_hp, E10_p);
             if (E9Linha(E9Linha2_h, E9Linha2_s, E9Linha2_hp, E9Linha2_sp, E9Linha2_hc, E9Linha2_sc)) {
                 strcpy(E9Linha_s, E9Linha2_s);
                 strcpy(E9Linha_sp, E9Linha2_sp);
@@ -2214,8 +2153,6 @@ int E9Linha(char *E9Linha_h, char *E9Linha_s, char *E9Linha_hp, char *E9Linha_sp
         getToken();
         if (E10(E10_tp, E10_p, E10_c)) {
             strcpy(E9Linha2_h, "int");
-            geratemp(E9Linha2_hp);
-            sprintf(E9Linha2_hc, "%s%s\t%s = %s >= %s\n", E9Linha_hc, E10_c, E9Linha2_hp, E9Linha_hp, E10_p);
             if (E9Linha(E9Linha2_h, E9Linha2_s, E9Linha2_hp, E9Linha2_sp, E9Linha2_hc, E9Linha2_sc)) {
                 strcpy(E9Linha_s, E9Linha2_s);
                 strcpy(E9Linha_sp, E9Linha2_sp);
@@ -2262,8 +2199,6 @@ int E10Linha(char *E10Linha_h, char *E10Linha_s, char *E10Linha_hp, char *E10Lin
         getToken();
         if (E11(E11_tp, E11_p, E11_c)) {
             strcpy(E10Linha2_h, "int");
-            geratemp(E10Linha2_hp);
-            sprintf(E10Linha2_hc, "%s%s\t%s = %s << %s\n", E10Linha_hc, E11_c, E10Linha2_hp, E10Linha_hp, E11_p);
             if (E10Linha(E10Linha2_h, E10Linha2_s, E10Linha2_hp, E10Linha2_sp, E10Linha2_hc, E10Linha2_sc)) {
                 strcpy(E10Linha_s, E10Linha2_s);
                 strcpy(E10Linha_sp, E10Linha2_sp);
@@ -2278,8 +2213,6 @@ int E10Linha(char *E10Linha_h, char *E10Linha_s, char *E10Linha_hp, char *E10Lin
         getToken();
         if (E11(E11_tp, E11_p, E11_c)) {
             strcpy(E10Linha2_h, "int");
-            geratemp(E10Linha2_hp);
-            sprintf(E10Linha2_hc, "%s%s\t%s = %s >> %s\n", E10Linha_hc, E11_c, E10Linha2_hp, E10Linha_hp, E11_p);
             if (E10Linha(E10Linha2_h, E10Linha2_s, E10Linha2_hp, E10Linha2_sp, E10Linha2_hc, E10Linha2_sc)) {
                 strcpy(E10Linha_s, E10Linha2_s);
                 strcpy(E10Linha_sp, E10Linha2_sp);
@@ -2329,8 +2262,6 @@ int E11Linha(char *E11Linha_h, char *E11Linha_s, char *E11Linha_hp, char *E11Lin
                 strcpy(E11Linha2_h, "int");
             else
                 strcpy(E11Linha2_h, "float");
-            geratemp(E11Linha2_hp);
-            sprintf(E11Linha2_hc, "%s%s\t%s = %s + %s\n", E11Linha_hc, E12_c, E11Linha2_hp, E11Linha_hp, E12_p);
             if (E11Linha(E11Linha2_h, E11Linha2_s, E11Linha2_hp, E11Linha2_sp, E11Linha2_hc, E11Linha2_sc)) {
                 strcpy(E11Linha_s, E11Linha2_s);
                 strcpy(E11Linha_sp, E11Linha2_sp);
@@ -2347,8 +2278,6 @@ int E11Linha(char *E11Linha_h, char *E11Linha_s, char *E11Linha_hp, char *E11Lin
                 strcpy(E11Linha2_h, "int");
             else
                 strcpy(E11Linha2_h, "float");
-            geratemp(E11Linha2_hp);
-            sprintf(E11Linha2_hc, "%s%s\t%s = %s - %s\n", E11Linha_hc, E12_c, E11Linha2_hp, E11Linha_hp, E12_p);
             if (E11Linha(E11Linha2_h, E11Linha2_s, E11Linha2_hp, E11Linha2_sp, E11Linha2_hc, E11Linha2_sc)) {
                 strcpy(E11Linha_s, E11Linha2_s);
                 strcpy(E11Linha_sp, E11Linha2_sp);
@@ -2399,8 +2328,6 @@ int E12Linha(char *E12Linha_h, char *E12Linha_s, char *E12Linha_hp, char *E12Lin
                 strcpy(E12Linha2_h, "int");
             else
                 strcpy(E12Linha2_h, "float");
-            geratemp(E12Linha2_hp);
-            sprintf(E12Linha2_hc, "%s%s\t%s = %s * %s\n", E12Linha_hc, E13_c, E12Linha2_hp, E12Linha_hp, E13_p);
             if (E12Linha(E12Linha2_h, E12Linha2_s, E12Linha2_hp, E12Linha2_sp, E12Linha2_hc, E12Linha2_sc)) {
                 strcpy(E12Linha_s, E12Linha2_s);
                 strcpy(E12Linha_sp, E12Linha2_sp);
@@ -2418,8 +2345,6 @@ int E12Linha(char *E12Linha_h, char *E12Linha_s, char *E12Linha_hp, char *E12Lin
                 strcpy(E12Linha2_h, "int");
             else
                 strcpy(E12Linha2_h, "float");
-            geratemp(E12Linha2_hp);
-            sprintf(E12Linha2_hc, "%s%s\t%s = %s / %s\n", E12Linha_hc, E13_c, E12Linha2_hp, E12Linha_hp, E13_p);
             if (E12Linha(E12Linha2_h, E12Linha2_s, E12Linha2_hp, E12Linha2_sp, E12Linha2_hc, E12Linha2_sc)) {
                 strcpy(E12Linha_s, E12Linha2_s);
                 strcpy(E12Linha_sp, E12Linha2_sp);
@@ -2439,8 +2364,6 @@ int E12Linha(char *E12Linha_h, char *E12Linha_s, char *E12Linha_hp, char *E12Lin
                 printf("Erro: operação de resto inválida");
                 exit(0);
             }
-            geratemp(E12Linha2_hp);
-            sprintf(E12Linha2_hc, "%s%s\t%s = %s %c %s\n", E12Linha_hc, E13_c, E12Linha2_hp, E12Linha_hp, 37, E13_p);
             if (E12Linha(E12Linha2_h, E12Linha2_s, E12Linha2_hp, E12Linha2_sp, E12Linha2_hc, E12Linha2_sc)) {
                 strcpy(E12Linha_s, E12Linha2_s);
                 strcpy(E12Linha_sp, E12Linha2_sp);
@@ -2469,29 +2392,29 @@ int E13(char *E13_tp, char *E13_p, char *E13_c) { // E13 -> E14 - {E13'.h = E14.
             getToken();
             if (E13(E13Linha_tp, E13Linha_h, E13Linha_s)) {
                 strcpy(E13_tp, E13Linha_s);
-
                 return 1;
             }
             else
                 return 0;
         } else if (tk == TKMaisMais) {
-            strcpy(E13Linha_h, E14_tp);
+        	strcpy(E13Linha_h, E14_tp);
             getToken();
-            if (E13(E13Linha_tp, E13Linha_h, E13Linha_s)) {
+            //if (E13(E13Linha_tp, E13Linha_h, E13Linha_s)) {
                 strcpy(E13_tp, E13Linha_s);
                 return 1;
-            }
-            else
-                return 0;
+            //}
+            //else {
+            //	return 0;
+            //}
         } else if (tk == TKMenosMenos) {
             strcpy(E13Linha_h, E14_tp);
             getToken();
-            if (E13(E13Linha_tp, E13Linha_h, E13Linha_s)) {
+            //if (E13(E13Linha_tp, E13Linha_h, E13Linha_s)) {
                 strcpy(E13_tp, E13Linha_s);
                 return 1;
-            }
-            else
-                return 0;
+            //}
+            //else
+            //    return 0;
         } else if (tk == TKNegacao) {
             strcpy(E13Linha_h, E14_tp);
             getToken();
@@ -2516,14 +2439,10 @@ int E14(char *E14_tp, char *E14_p, char *E14_c) { // E14 -> cte / id{E14.tp = co
 
     if (tk == TKConstInt) {
         strcpy(E14_tp, "int");
-        geratemp(E14_p);
-        sprintf(E14_c,"\t%s = %s\n",E14_p,lex);
         getToken();
         return 1;
     } else if (tk == TKConstFloat) {
         strcpy(E14_tp, "float");
-        geratemp(E14_p);
-        sprintf(E14_c,"\t%s = %s\n",E14_p,lex);
         getToken();
         return 1;
     }else if (tk == TKId) {
@@ -2581,15 +2500,7 @@ int main() {
     ts = NULL;
     int i = 0;
 
-    //erroVarNaoDeclarada.txt
-    //erroVarDupli.txt
-    //testeOK.txt
-    //testeErro.txt
-    //erroBreak.txt
-    //erroContinue.txt
-    //erroIncompTipo.txt
-
-    if ((entrada = fopen("erroIncompTipo.txt", "r")) == NULL) {
+    if ((entrada = fopen("entrada.txt", "r")) == NULL) {
         printf("Arquivo não pode ser aberto\n");
         exit(1);
     }
@@ -2613,17 +2524,7 @@ int main() {
     }
 
     while ((tk = le_token(conteudo, lex)) != -1) {
-
         coluna = posColuna - subColuna;
-        char linhaSt[3];
-        char colunaSt[3];
-        snprintf(linhaSt, sizeof(linhaSt), "%d", linha);
-        snprintf(colunaSt, sizeof(colunaSt), "%d", coluna);
-
-        // Coloca no tksParser[] toda a estrutura dos tokens
-        // A estrutura é a seguinte:
-        // 0     1     2       3    4     5     ...
-        // tk  linha coluna   tk  linha coluna  ...
 
         tksParser[posParser++] = tk;
         tksParser[posParser++] = linha;
@@ -2637,11 +2538,11 @@ int main() {
     getToken(); // Avança na sentença
 
     if (PROGC()) {
-    	printf("Reconhecimento sintático concluído!\n");
+    	printf("Sucesso no reconhecimento sintático\nPressione ENTER para encerrar...");
         getchar();
     }
     else {
-        printf("Reconhecimento sintático com erros!\n");
+        printf("Falha no reconhecimento sintático\nPressione ENTER para encerrar...");
         getchar();
     }
 
