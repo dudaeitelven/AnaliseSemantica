@@ -83,7 +83,7 @@ palavra_reservada (char * lex)
 
 ;; Function le_token (le_token, funcdef_no=18, decl_uid=4978, cgraph_uid=18, symbol_order=34)
 
-beginning to process the following SWITCH statement (D:\WSCodeblocks\Compiladores\AnaliseSemantica\AnaliseSemantica\main.c:285) : ------- 
+beginning to process the following SWITCH statement (D:\WSCodeblocks\Compiladores\AnaliseSemantica\AnaliseSemantica\main.c:284) : ------- 
 switch (estado_294) <default: <L159> [INV], case 0: <L1> [INV], case 1: <L97> [INV], case 2: <L106> [INV], case 3: <L115> [INV], case 4: <L119> [INV], case 5: <L126> [INV], case 6: <L131> [INV], case 7: <L138> [INV], case 8: <L145> [INV], case 9: <L153> [INV]>
 
 le_token (char * st, char * lex)
@@ -1824,9 +1824,9 @@ getToken ()
 
 
 
-;; Function poetabsimb (poetabsimb, funcdef_no=20, decl_uid=5008, cgraph_uid=20, symbol_order=37)
+;; Function addTabelaSimbolos (addTabelaSimbolos, funcdef_no=20, decl_uid=5008, cgraph_uid=20, symbol_order=37)
 
-poetabsimb (char * id, char * tipo)
+addTabelaSimbolos (char * id, char * tipo)
 {
   struct tabela * aux;
   char[10] * _1;
@@ -2154,7 +2154,7 @@ DEC ()
     goto <bb 6>; [INV]
 
   <bb 5> :
-  poetabsimb (&lex, &Tipo_t);
+  addTabelaSimbolos (&lex, &Tipo_t);
 
   <bb 6> :
   getToken ();
@@ -2334,7 +2334,7 @@ RDEC ()
   <bb 17> :
   coluna.122_11 = coluna;
   linha.123_12 = linha;
-  printf ("Erro: esperava token contante inteira na linha %d coluna %d\n", linha.123_12, coluna.122_11);
+  printf ("Erro: esperava token constante inteira na linha %d coluna %d\n", linha.123_12, coluna.122_11);
   _35 = 0;
   // predicted unlikely by early return (on trees) predictor.
   goto <bb 19>; [INV]
@@ -2393,7 +2393,7 @@ DV (char * DV_t)
     goto <bb 5>; [INV]
 
   <bb 4> :
-  poetabsimb (&lex, DV_t_11(D));
+  addTabelaSimbolos (&lex, DV_t_11(D));
 
   <bb 5> :
   getToken ();
@@ -2509,7 +2509,7 @@ RDV (char * RDV_t)
 
 ;; Function TIPO (TIPO, funcdef_no=32, decl_uid=4767, cgraph_uid=32, symbol_order=49)
 
-beginning to process the following SWITCH statement (D:\WSCodeblocks\Compiladores\AnaliseSemantica\AnaliseSemantica\main.c:904) : ------- 
+beginning to process the following SWITCH statement (D:\WSCodeblocks\Compiladores\AnaliseSemantica\AnaliseSemantica\main.c:906) : ------- 
 switch (tk.138_5) <default: <L8> [INV], case 4: <L5> [INV], case 6: <L6> [INV], case 7: <L7> [INV], case 69: <L4> [INV]>
 
 TIPO (char * Tipo_t)
@@ -2725,7 +2725,7 @@ TIPO (char * Tipo_t)
 }
 
 
-beginning to process the following SWITCH statement (D:\WSCodeblocks\Compiladores\AnaliseSemantica\AnaliseSemantica\main.c:921) : ------- 
+beginning to process the following SWITCH statement (D:\WSCodeblocks\Compiladores\AnaliseSemantica\AnaliseSemantica\main.c:923) : ------- 
 switch (tk.141_8) <default: <L15> [INV], case 26: <L13> [INV], case 27: <L14> [INV]>
 
 TIPO (char * Tipo_t)
@@ -3822,7 +3822,7 @@ LP ()
     goto <bb 6>; [INV]
 
   <bb 5> :
-  poetabsimb (&lex, &TIPO_t);
+  addTabelaSimbolos (&lex, &TIPO_t);
 
   <bb 6> :
   getToken ();
@@ -3918,7 +3918,7 @@ RLP ()
     goto <bb 7>; [INV]
 
   <bb 6> :
-  poetabsimb (&lex, &TIPO_t);
+  addTabelaSimbolos (&lex, &TIPO_t);
 
   <bb 7> :
   getToken ();
@@ -4451,7 +4451,7 @@ COM (char * COM_c)
     goto <bb 42>; [INV]
 
   <bb 41> :
-  poetabsimb (&lex, &TIPO_t);
+  addTabelaSimbolos (&lex, &TIPO_t);
 
   <bb 42> :
   getToken ();
@@ -9259,7 +9259,7 @@ main ()
   setbuf (_1, 0B);
   ts = 0B;
   i_43 = 0;
-  entrada_45 = fopen ("teste.txt", "r");
+  entrada_45 = fopen ("erroIncompTipo.txt", "r");
   if (entrada_45 == 0B)
     goto <bb 3>; [INV]
   else
@@ -9409,12 +9409,12 @@ main ()
     goto <bb 23>; [INV]
 
   <bb 22> :
-  printf ("Sucesso no reconhecimento sint\xc3\xa1tico\nPressione ENTER para encerrar...");
+  __builtin_puts (&"Reconhecimento sint\xc3\xa1tico conclu\xc3\xaddo!"[0]);
   getchar ();
   goto <bb 24>; [INV]
 
   <bb 23> :
-  printf ("Falha no reconhecimento sint\xc3\xa1tico\nPressione ENTER para encerrar...");
+  __builtin_puts (&"Reconhecimento sint\xc3\xa1tico com erros!"[0]);
   getchar ();
 
   <bb 24> :

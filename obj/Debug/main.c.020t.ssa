@@ -1821,9 +1821,9 @@ getToken ()
 
 
 
-;; Function poetabsimb (poetabsimb, funcdef_no=20, decl_uid=5008, cgraph_uid=20, symbol_order=37)
+;; Function addTabelaSimbolos (addTabelaSimbolos, funcdef_no=20, decl_uid=5008, cgraph_uid=20, symbol_order=37)
 
-poetabsimb (char * id, char * tipo)
+addTabelaSimbolos (char * id, char * tipo)
 {
   struct tabela * aux;
   char[10] * _1;
@@ -2092,7 +2092,7 @@ DV (char * DV_t)
     goto <bb 5>; [INV]
 
   <bb 4> :
-  poetabsimb (&lex, DV_t_11(D));
+  addTabelaSimbolos (&lex, DV_t_11(D));
 
   <bb 5> :
   getToken ();
@@ -2823,7 +2823,7 @@ RLP ()
     goto <bb 7>; [INV]
 
   <bb 6> :
-  poetabsimb (&lex, &TIPO_t);
+  addTabelaSimbolos (&lex, &TIPO_t);
 
   <bb 7> :
   getToken ();
@@ -2914,7 +2914,7 @@ LP ()
     goto <bb 6>; [INV]
 
   <bb 5> :
-  poetabsimb (&lex, &TIPO_t);
+  addTabelaSimbolos (&lex, &TIPO_t);
 
   <bb 6> :
   getToken ();
@@ -6579,7 +6579,7 @@ COM (char * COM_c)
     goto <bb 42>; [INV]
 
   <bb 41> :
-  poetabsimb (&lex, &TIPO_t);
+  addTabelaSimbolos (&lex, &TIPO_t);
 
   <bb 42> :
   getToken ();
@@ -7026,7 +7026,7 @@ RDEC ()
   <bb 17> :
   coluna.122_11 = coluna;
   linha.123_12 = linha;
-  printf ("Erro: esperava token contante inteira na linha %d coluna %d\n", linha.123_12, coluna.122_11);
+  printf ("Erro: esperava token constante inteira na linha %d coluna %d\n", linha.123_12, coluna.122_11);
   _35 = 0;
   // predicted unlikely by early return (on trees) predictor.
   goto <bb 19>; [INV]
@@ -7095,7 +7095,7 @@ DEC ()
     goto <bb 6>; [INV]
 
   <bb 5> :
-  poetabsimb (&lex, &Tipo_t);
+  addTabelaSimbolos (&lex, &Tipo_t);
 
   <bb 6> :
   getToken ();
@@ -8736,7 +8736,7 @@ main ()
   setbuf (_1, 0B);
   ts = 0B;
   i_43 = 0;
-  entrada_45 = fopen ("teste.txt", "r");
+  entrada_45 = fopen ("erroIncompTipo.txt", "r");
   if (entrada_45 == 0B)
     goto <bb 3>; [INV]
   else
@@ -8886,12 +8886,12 @@ main ()
     goto <bb 23>; [INV]
 
   <bb 22> :
-  printf ("Sucesso no reconhecimento sint\xc3\xa1tico\nPressione ENTER para encerrar...");
+  __builtin_puts (&"Reconhecimento sint\xc3\xa1tico conclu\xc3\xaddo!"[0]);
   getchar ();
   goto <bb 24>; [INV]
 
   <bb 23> :
-  printf ("Falha no reconhecimento sint\xc3\xa1tico\nPressione ENTER para encerrar...");
+  __builtin_puts (&"Reconhecimento sint\xc3\xa1tico com erros!"[0]);
   getchar ();
 
   <bb 24> :

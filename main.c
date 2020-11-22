@@ -55,31 +55,30 @@
 #define TKMaior 49
 #define TKMenor 50
 #define TKHashtag 51
-#define TKMenosIgual 52             /* -= */
-#define TKMaisIgual 53              /* += */
-#define TKMultiplicacaoIgual 54     /* *= */
-#define TKDivisaoIgual 55           /* /= */
-#define TKRestoDivisaoIgual 56      /* %= */
-#define TKComparadorMaiorIgual 57   /* >= */
-#define TKComparadorMenorIgual 58   /* <= */
-#define TKMenosMenos 59             /* -- */
-#define TKMaisMais 60               /* ++ */
-#define TKComparadorIgual 61        /* == */
-#define TKComparadorDiferente 62    /* != */
-#define TKNegacao 63                /* ! */
-#define TKTernario 64               /* ? */
-#define TKShiftLeft 65              /* << */
-#define TKShiftRight 66             /* >> */
-#define TKOU 67                     /* || */
-#define TKAND 68                    /* && */
-#define TKELogico 70                /* &  */
-#define TKOULogico 71               /* | */
-#define TKXOR 72                    /* ^ */
+#define TKMenosIgual 52
+#define TKMaisIgual 53
+#define TKMultiplicacaoIgual 54
+#define TKDivisaoIgual 55
+#define TKRestoDivisaoIgual 56
+#define TKComparadorMaiorIgual 57
+#define TKComparadorMenorIgual 58
+#define TKMenosMenos 59
+#define TKMaisMais 60
+#define TKComparadorIgual 61
+#define TKComparadorDiferente 62
+#define TKNegacao 63
+#define TKTernario 64
+#define TKShiftLeft 65
+#define TKShiftRight 66
+#define TKOU 67
+#define TKAND 68
+#define TKELogico 70
+#define TKOULogico 71
+#define TKXOR 72
 #define TKConstInt 80
 #define TKConstFloat 81
 #define TKConstOctal 82
 #define TKConstHexa 83
-
 #define TKErroE 100
 #define TKErroConstFloat 101
 #define TKErroOU 102
@@ -600,7 +599,7 @@ int le_token(char st[], char lex[]) {
                 estado_anterior = 1;
                 return palavra_reservada(lex);
             case 2:
-                if (c >= '0' && c <= '9') { //JA FOI LIDO UM NUMERO ANTERIORMENTE OU UM SINAL
+                if (c >= '0' && c <= '9') {
                     pos++;
                     break;
                 }
@@ -706,6 +705,9 @@ int le_token(char st[], char lex[]) {
     return -1;
 }
 
+
+
+
 void getToken() {
     tk = tksParser[posParser++];
     linha = tksParser[posParser++];
@@ -721,7 +723,7 @@ typedef struct TS {
 
 tabela *ts;
 
-void poetabsimb(char *id, char *tipo) {
+void addTabelaSimbolos(char *id, char *tipo) {
     tabela *aux = (tabela *) malloc(sizeof(tabela));
     strcpy(aux->id, id);
     strcpy(aux->tipo, tipo);
@@ -795,14 +797,14 @@ int RLD(char *RLD_c) { // RLD -> LD / e
         return 1;
 }
 
-int DEC() { // DEC -> TIPO{RDEC.t=TIPO.t} id{poetabsimb(id,TIPO.t)} RDEC
+int DEC() { // DEC -> TIPO{RDEC.t=TIPO.t} id{addTabelaSimbolos(id,TIPO.t)} RDEC
     char RDEC_t[10], Tipo_t[10];
 
     if (TIPO(Tipo_t)) {
         strcpy(RDEC_t, Tipo_t);
         if (tk == TKId) {
             if (verificaDuplicacao(lex,ts))
-                poetabsimb(lex, Tipo_t);
+                addTabelaSimbolos(lex, Tipo_t);
             getToken();
             if (RDEC(RDEC_t)) {
                 return 1;
@@ -849,7 +851,7 @@ int RDEC() { // RDEC -> ,{DV.t=RDEC.t}DV / (DF / ; / = cte;
                 return 0;
             }
         } else {
-            printf("Erro: esperava token contante inteira na linha %d coluna %d\n", linha, coluna);
+            printf("Erro: esperava token constante inteira na linha %d coluna %d\n", linha, coluna);
             return 0;
         }
     } else {
@@ -858,12 +860,12 @@ int RDEC() { // RDEC -> ,{DV.t=RDEC.t}DV / (DF / ; / = cte;
     }
 }
 
-int DV(char *DV_t) { // DV -> id{RDV.t=DV.t}{poetabsimb(id,DV.t)} RDV
+int DV(char *DV_t) { // DV -> id{RDV.t=DV.t}{addTabelaSimbolos(id,DV.t)} RDV
     char RDV_t[10];
     if (tk == TKId) {
         strcpy(RDV_t, DV_t);
         if (verificaDuplicacao(lex,ts))
-            poetabsimb(lex, DV_t);
+            addTabelaSimbolos(lex, DV_t);
         getToken();
         if (RDV(RDV_t))
             return 1;
@@ -1082,13 +1084,13 @@ int DF() { // DF -> LP){CORPO}
         return 0;
 }
 
-int LP() { //LP -> TIPO id{poetabsimb(id,TIPO.t)} RLP / e
+int LP() { //LP -> TIPO id{addTabelaSimbolos(id,TIPO.t)} RLP / e
     char TIPO_t[10];
 
     if (TIPO(TIPO_t)) {
         if (tk == TKId) {
             if (verificaDuplicacao(lex,ts))
-                poetabsimb(lex, TIPO_t);
+                addTabelaSimbolos(lex, TIPO_t);
             getToken();
             if (RLP())
                 return 1;
@@ -1102,7 +1104,7 @@ int LP() { //LP -> TIPO id{poetabsimb(id,TIPO.t)} RLP / e
         return 1;
 }
 
-int RLP() { //RLP -> ,TIPO id{poetabsimb(id,TIPO.t)} RLP / e
+int RLP() { //RLP -> ,TIPO id{addTabelaSimbolos(id,TIPO.t)} RLP / e
     char TIPO_t[10];
 
     if (tk == TKVirgula) {
@@ -1110,7 +1112,7 @@ int RLP() { //RLP -> ,TIPO id{poetabsimb(id,TIPO.t)} RLP / e
         if (TIPO(TIPO_t)) {
             if (tk == TKId) {
                 if (verificaDuplicacao(lex,ts))
-                    poetabsimb(lex, TIPO_t);
+                    addTabelaSimbolos(lex, TIPO_t);
                 getToken();
                 if (RLP())
                     return 1;
@@ -1164,7 +1166,7 @@ int LCD(char *LCD_c) { //LCD -> COM LCD / TIPO{DV.t=TIPO.t} DV LCD / e
         return 1;
 }
 
-int COM(char *COM_c) { //COM -> E; / COMWHILE / COMDOWHILE / COMIF / COMFOR / COMSWITCH / return; / break; / {LCD} / TIPO{RDEC.t=TIPO.t} id{poetabsimb(id,TIPO.t)} RDEC
+int COM(char *COM_c) { //COM -> E; / COMWHILE / COMDOWHILE / COMIF / COMFOR / COMSWITCH / return; / break; / {LCD} / TIPO{RDEC.t=TIPO.t} id{addTabelaSimbolos(id,TIPO.t)} RDEC
     char TIPO_t[10], E_tp[10], E_p[10], E_c[MAX_COD], LCD_c[MAX_COD], RDEC_c[MAX_COD];
     char COMWHILE_c[MAX_COD], COMFOR_c[MAX_COD], COMDOWHILE_c[MAX_COD], COMIF_c[MAX_COD];
 
@@ -1246,7 +1248,7 @@ int COM(char *COM_c) { //COM -> E; / COMWHILE / COMDOWHILE / COMIF / COMFOR / CO
     } else if (TIPO(TIPO_t)) { // TIPO id RDEC
         if (tk == TKId) {
             if (verificaDuplicacao(lex,ts))
-                poetabsimb(lex, TIPO_t);
+                addTabelaSimbolos(lex, TIPO_t);
             getToken();
             if (RDEC()) {
                 strcpy(COM_c, RDEC_c);
@@ -2579,7 +2581,15 @@ int main() {
     ts = NULL;
     int i = 0;
 
-    if ((entrada = fopen("teste.txt", "r")) == NULL) {
+    //erroVarNaoDeclarada.txt
+    //erroVarDupli.txt
+    //testeOK.txt
+    //testeErro.txt
+    //erroBreak.txt
+    //erroContinue.txt
+    //erroIncompTipo.txt
+
+    if ((entrada = fopen("erroIncompTipo.txt", "r")) == NULL) {
         printf("Arquivo não pode ser aberto\n");
         exit(1);
     }
@@ -2627,11 +2637,11 @@ int main() {
     getToken(); // Avança na sentença
 
     if (PROGC()) {
-    	printf("Sucesso no reconhecimento sintático\nPressione ENTER para encerrar...");
+    	printf("Reconhecimento sintático concluído!\n");
         getchar();
     }
     else {
-        printf("Falha no reconhecimento sintático\nPressione ENTER para encerrar...");
+        printf("Reconhecimento sintático com erros!\n");
         getchar();
     }
 

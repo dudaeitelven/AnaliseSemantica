@@ -991,9 +991,9 @@ getToken ()
 
 
 
-;; Function poetabsimb (poetabsimb, funcdef_no=20, decl_uid=5008, cgraph_uid=20, symbol_order=37)
+;; Function addTabelaSimbolos (addTabelaSimbolos, funcdef_no=20, decl_uid=5008, cgraph_uid=20, symbol_order=37)
 
-poetabsimb (char * id, char * tipo)
+addTabelaSimbolos (char * id, char * tipo)
 {
   struct tabela * aux;
 
@@ -1187,7 +1187,7 @@ DEC ()
       _4 = verificaDuplicacao (&lex, ts.111_3);
       if (_4 != 0) goto <D.5829>; else goto <D.5830>;
       <D.5829>:
-      poetabsimb (&lex, &Tipo_t);
+      addTabelaSimbolos (&lex, &Tipo_t);
       <D.5830>:
       getToken ();
       _5 = RDEC (&RDEC_t);
@@ -1294,7 +1294,7 @@ RDEC ()
       <D.5850>:
       coluna.122_11 = coluna;
       linha.123_12 = linha;
-      printf ("Erro: esperava token contante inteira na linha %d coluna %d\n", linha.123_12, coluna.122_11);
+      printf ("Erro: esperava token constante inteira na linha %d coluna %d\n", linha.123_12, coluna.122_11);
       D.5840 = 0;
       // predicted unlikely by early return (on trees) predictor.
       return D.5840;
@@ -1332,7 +1332,7 @@ DV (char * DV_t)
       _3 = verificaDuplicacao (&lex, ts.127_2);
       if (_3 != 0) goto <D.5857>; else goto <D.5858>;
       <D.5857>:
-      poetabsimb (&lex, DV_t);
+      addTabelaSimbolos (&lex, DV_t);
       <D.5858>:
       getToken ();
       _4 = RDV (&RDV_t);
@@ -1874,7 +1874,7 @@ LP ()
       _4 = verificaDuplicacao (&lex, ts.172_3);
       if (_4 != 0) goto <D.5981>; else goto <D.5982>;
       <D.5981>:
-      poetabsimb (&lex, &TIPO_t);
+      addTabelaSimbolos (&lex, &TIPO_t);
       <D.5982>:
       getToken ();
       _5 = RLP ();
@@ -1930,7 +1930,7 @@ RLP ()
       _5 = verificaDuplicacao (&lex, ts.177_4);
       if (_5 != 0) goto <D.5994>; else goto <D.5995>;
       <D.5994>:
-      poetabsimb (&lex, &TIPO_t);
+      addTabelaSimbolos (&lex, &TIPO_t);
       <D.5995>:
       getToken ();
       _6 = RLP ();
@@ -2244,7 +2244,7 @@ COM (char * COM_c)
       _32 = verificaDuplicacao (&lex, ts.202_31);
       if (_32 != 0) goto <D.6060>; else goto <D.6061>;
       <D.6060>:
-      poetabsimb (&lex, &TIPO_t);
+      addTabelaSimbolos (&lex, &TIPO_t);
       <D.6061>:
       getToken ();
       _33 = RDEC ();
@@ -5441,7 +5441,7 @@ main ()
         setbuf (_1, 0B);
         ts = 0B;
         i = 0;
-        entrada = fopen ("teste.txt", "r");
+        entrada = fopen ("erroIncompTipo.txt", "r");
         if (entrada == 0B) goto <D.6591>; else goto <D.6592>;
         <D.6591>:
         __builtin_puts (&"Arquivo n\xc3\xa3o pode ser aberto"[0]);
@@ -5552,11 +5552,11 @@ main ()
         _30 = PROGC ();
         if (_30 != 0) goto <D.6605>; else goto <D.6606>;
         <D.6605>:
-        printf ("Sucesso no reconhecimento sint\xc3\xa1tico\nPressione ENTER para encerrar...");
+        __builtin_puts (&"Reconhecimento sint\xc3\xa1tico conclu\xc3\xaddo!"[0]);
         getchar ();
         goto <D.6607>;
         <D.6606>:
-        printf ("Falha no reconhecimento sint\xc3\xa1tico\nPressione ENTER para encerrar...");
+        __builtin_puts (&"Reconhecimento sint\xc3\xa1tico com erros!"[0]);
         getchar ();
         <D.6607>:
         D.6608 = 0;

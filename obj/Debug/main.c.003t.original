@@ -740,7 +740,7 @@
 }
 
 
-;; Function poetabsimb (null)
+;; Function addTabelaSimbolos (null)
 ;; enabled by -tree-original
 
 
@@ -891,7 +891,7 @@
         {
           if (verificaDuplicacao ((char *) &lex, ts) != 0)
             {
-              poetabsimb ((char *) &lex, (char *) &Tipo_t);
+              addTabelaSimbolos ((char *) &lex, (char *) &Tipo_t);
             }
           getToken ();
           if (RDEC ((char *) &RDEC_t) != 0)
@@ -980,7 +980,7 @@
                     }
                   else
                     {
-                      printf ((const char * restrict) "Erro: esperava token contante inteira na linha %d coluna %d\n", linha, coluna);
+                      printf ((const char * restrict) "Erro: esperava token constante inteira na linha %d coluna %d\n", linha, coluna);
                       return 0;
                     }
                 }
@@ -1008,7 +1008,7 @@
       strcpy ((char *) &RDV_t, (const char * restrict) DV_t);
       if (verificaDuplicacao ((char *) &lex, ts) != 0)
         {
-          poetabsimb ((char *) &lex, DV_t);
+          addTabelaSimbolos ((char *) &lex, DV_t);
         }
       getToken ();
       if (RDV ((char *) &RDV_t) != 0)
@@ -1415,7 +1415,7 @@
         {
           if (verificaDuplicacao ((char *) &lex, ts) != 0)
             {
-              poetabsimb ((char *) &lex, (char *) &TIPO_t);
+              addTabelaSimbolos ((char *) &lex, (char *) &TIPO_t);
             }
           getToken ();
           if (RLP () != 0)
@@ -1457,7 +1457,7 @@
             {
               if (verificaDuplicacao ((char *) &lex, ts) != 0)
                 {
-                  poetabsimb ((char *) &lex, (char *) &TIPO_t);
+                  addTabelaSimbolos ((char *) &lex, (char *) &TIPO_t);
                 }
               getToken ();
               if (RLP () != 0)
@@ -1728,7 +1728,7 @@
                                                 {
                                                   if (verificaDuplicacao ((char *) &lex, ts) != 0)
                                                     {
-                                                      poetabsimb ((char *) &lex, (char *) &TIPO_t);
+                                                      addTabelaSimbolos ((char *) &lex, (char *) &TIPO_t);
                                                     }
                                                   getToken ();
                                                   if (RDEC () != 0)
@@ -4449,7 +4449,7 @@
     struct FILE * entrada;
   ts = 0B;
     int i = 0;
-  if ((entrada = fopen ((const char * restrict) "teste.txt", (const char * restrict) "r")) == 0B)
+  if ((entrada = fopen ((const char * restrict) "erroIncompTipo.txt", (const char * restrict) "r")) == 0B)
     {
       printf ((const char * restrict) "Arquivo n\xc3\xa3o pode ser aberto\n");
       exit (1);
@@ -4514,12 +4514,12 @@
   getToken ();
   if (PROGC () != 0)
     {
-      printf ((const char * restrict) "Sucesso no reconhecimento sint\xc3\xa1tico\nPressione ENTER para encerrar...");
+      printf ((const char * restrict) "Reconhecimento sint\xc3\xa1tico conclu\xc3\xaddo!\n");
       getchar ();
     }
   else
     {
-      printf ((const char * restrict) "Falha no reconhecimento sint\xc3\xa1tico\nPressione ENTER para encerrar...");
+      printf ((const char * restrict) "Reconhecimento sint\xc3\xa1tico com erros!\n");
       getchar ();
     }
   return 0;

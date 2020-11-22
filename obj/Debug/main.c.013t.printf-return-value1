@@ -1419,9 +1419,9 @@ getToken ()
 
 
 
-;; Function poetabsimb (poetabsimb, funcdef_no=20, decl_uid=5008, cgraph_uid=20, symbol_order=37)
+;; Function addTabelaSimbolos (addTabelaSimbolos, funcdef_no=20, decl_uid=5008, cgraph_uid=20, symbol_order=37)
 
-poetabsimb (char * id, char * tipo)
+addTabelaSimbolos (char * id, char * tipo)
 {
   struct tabela * aux;
 
@@ -1524,7 +1524,7 @@ consultaTipo (char * id, char * Tipo, struct tabela * tab)
 
 ;; Function geralabel (geralabel, funcdef_no=23, decl_uid=5021, cgraph_uid=23, symbol_order=40)
 
-D:\WSCodeblocks\Compiladores\AnaliseSemantica\AnaliseSemantica\main.c:759: sprintf: objsize = 18446744073709551615, fmtstr = "LB%03d"
+D:\WSCodeblocks\Compiladores\AnaliseSemantica\AnaliseSemantica\main.c:761: sprintf: objsize = 18446744073709551615, fmtstr = "LB%03d"
   Directive 1 at offset 0: "LB", length = 2
     Result: 2, 2, 2, 2 (2, 2, 2, 2)
   Directive 2 at offset 2: "%03d"
@@ -1548,7 +1548,7 @@ geralabel (char * label)
 
 ;; Function geratemp (geratemp, funcdef_no=24, decl_uid=5025, cgraph_uid=24, symbol_order=41)
 
-D:\WSCodeblocks\Compiladores\AnaliseSemantica\AnaliseSemantica\main.c:765: sprintf: objsize = 18446744073709551615, fmtstr = "T%03d"
+D:\WSCodeblocks\Compiladores\AnaliseSemantica\AnaliseSemantica\main.c:767: sprintf: objsize = 18446744073709551615, fmtstr = "T%03d"
   Directive 1 at offset 0: "T", length = 1
     Result: 1, 1, 1, 1 (1, 1, 1, 1)
   Directive 2 at offset 1: "%03d"
@@ -1709,7 +1709,7 @@ DEC ()
     goto <bb 6>; [INV]
 
   <bb 5> :
-  poetabsimb (&lex, &Tipo_t);
+  addTabelaSimbolos (&lex, &Tipo_t);
 
   <bb 6> :
   getToken ();
@@ -1864,7 +1864,7 @@ RDEC ()
   <bb 17> :
   coluna.122_11 = coluna;
   linha.123_12 = linha;
-  printf ("Erro: esperava token contante inteira na linha %d coluna %d\n", linha.123_12, coluna.122_11);
+  printf ("Erro: esperava token constante inteira na linha %d coluna %d\n", linha.123_12, coluna.122_11);
   D.5840 = 0;
   // predicted unlikely by early return (on trees) predictor.
   goto <bb 19>; [INV]
@@ -1912,7 +1912,7 @@ DV (char * DV_t)
     goto <bb 5>; [INV]
 
   <bb 4> :
-  poetabsimb (&lex, DV_t);
+  addTabelaSimbolos (&lex, DV_t);
 
   <bb 5> :
   getToken ();
@@ -2691,7 +2691,7 @@ LP ()
     goto <bb 6>; [INV]
 
   <bb 5> :
-  poetabsimb (&lex, &TIPO_t);
+  addTabelaSimbolos (&lex, &TIPO_t);
 
   <bb 6> :
   getToken ();
@@ -2772,7 +2772,7 @@ RLP ()
     goto <bb 7>; [INV]
 
   <bb 6> :
-  poetabsimb (&lex, &TIPO_t);
+  addTabelaSimbolos (&lex, &TIPO_t);
 
   <bb 7> :
   getToken ();
@@ -2857,7 +2857,7 @@ CORPO (char * CORPO_c)
 
 ;; Function LCD (LCD, funcdef_no=42, decl_uid=4789, cgraph_uid=42, symbol_order=59)
 
-D:\WSCodeblocks\Compiladores\AnaliseSemantica\AnaliseSemantica\main.c:1147: sprintf: objsize = 18446744073709551615, fmtstr = "%s%s"
+D:\WSCodeblocks\Compiladores\AnaliseSemantica\AnaliseSemantica\main.c:1149: sprintf: objsize = 18446744073709551615, fmtstr = "%s%s"
   Directive 1 at offset 0: "%s"
     Result: 0, 999, 999, 999 (0, 999, 999, 999)
   Directive 2 at offset 2: "%s"
@@ -3236,7 +3236,7 @@ COM (char * COM_c)
     goto <bb 42>; [INV]
 
   <bb 41> :
-  poetabsimb (&lex, &TIPO_t);
+  addTabelaSimbolos (&lex, &TIPO_t);
 
   <bb 42> :
   getToken ();
@@ -3291,7 +3291,7 @@ COM (char * COM_c)
 
 ;; Function COMIF (COMIF, funcdef_no=44, decl_uid=4793, cgraph_uid=44, symbol_order=61)
 
-D:\WSCodeblocks\Compiladores\AnaliseSemantica\AnaliseSemantica\main.c:1287: sprintf: objsize = 18446744073709551615, fmtstr = "%s	if %s==0 goto %s
+D:\WSCodeblocks\Compiladores\AnaliseSemantica\AnaliseSemantica\main.c:1289: sprintf: objsize = 18446744073709551615, fmtstr = "%s	if %s==0 goto %s
 %s%s:
 "
   Directive 1 at offset 0: "%s"
@@ -3315,7 +3315,7 @@ D:\WSCodeblocks\Compiladores\AnaliseSemantica\AnaliseSemantica\main.c:1287: spri
 ", length = 2
     Result: 2, 2, 2, 2 (16, 3031, 3031, 3031)
   Directive 10 at offset 26: "", length = 1
-D:\WSCodeblocks\Compiladores\AnaliseSemantica\AnaliseSemantica\main.c:1285: sprintf: objsize = 18446744073709551615, fmtstr = "%s	if %s==0 goto %s
+D:\WSCodeblocks\Compiladores\AnaliseSemantica\AnaliseSemantica\main.c:1287: sprintf: objsize = 18446744073709551615, fmtstr = "%s	if %s==0 goto %s
 %s	goto %s
 %s:
 %s%s:
@@ -3537,7 +3537,7 @@ RIF (char * RIF_c)
 
 ;; Function COMFOR (COMFOR, funcdef_no=46, decl_uid=4797, cgraph_uid=46, symbol_order=63)
 
-D:\WSCodeblocks\Compiladores\AnaliseSemantica\AnaliseSemantica\main.c:1349: sprintf: objsize = 18446744073709551615, fmtstr = "%s%s:
+D:\WSCodeblocks\Compiladores\AnaliseSemantica\AnaliseSemantica\main.c:1351: sprintf: objsize = 18446744073709551615, fmtstr = "%s%s:
 %s	if %s == 0 goto %s
 %s%s	goto %s
 %s:
@@ -3838,7 +3838,7 @@ EIF (char * EIF_c, char * EIF_p)
 
 ;; Function COMWHILE (COMWHILE, funcdef_no=49, decl_uid=4804, cgraph_uid=49, symbol_order=66)
 
-D:\WSCodeblocks\Compiladores\AnaliseSemantica\AnaliseSemantica\main.c:1423: sprintf: objsize = 18446744073709551615, fmtstr = "%s:
+D:\WSCodeblocks\Compiladores\AnaliseSemantica\AnaliseSemantica\main.c:1425: sprintf: objsize = 18446744073709551615, fmtstr = "%s:
 %s	if %s==0 goto %s
 %s	goto %s
 %s:
@@ -4040,7 +4040,7 @@ RWHILE (char * RWHILE_c)
 
 ;; Function COMDOWHILE (COMDOWHILE, funcdef_no=51, decl_uid=4808, cgraph_uid=51, symbol_order=68)
 
-D:\WSCodeblocks\Compiladores\AnaliseSemantica\AnaliseSemantica\main.c:1478: sprintf: objsize = 18446744073709551615, fmtstr = "%s:
+D:\WSCodeblocks\Compiladores\AnaliseSemantica\AnaliseSemantica\main.c:1480: sprintf: objsize = 18446744073709551615, fmtstr = "%s:
 %s%s	if %s==1 goto %s
 %s"
   Directive 1 at offset 0: "%s"
@@ -4781,7 +4781,7 @@ E (char * E_tp, char * E_p, char * E_c)
 
 ;; Function ELinha (ELinha, funcdef_no=57, decl_uid=4826, cgraph_uid=57, symbol_order=74)
 
-D:\WSCodeblocks\Compiladores\AnaliseSemantica\AnaliseSemantica\main.c:1692: sprintf: objsize = 18446744073709551615, fmtstr = "%s %s"
+D:\WSCodeblocks\Compiladores\AnaliseSemantica\AnaliseSemantica\main.c:1694: sprintf: objsize = 18446744073709551615, fmtstr = "%s %s"
   Directive 1 at offset 0: "%s"
     Result: 0, 999, 999, 999 (0, 999, 999, 999)
   Directive 2 at offset 2: " ", length = 1
@@ -4879,7 +4879,7 @@ ELinha (char * ELinha_h, char * ELinha_s, char * ELinha_p, char * ELinha_hp, cha
 
 ;; Function E1 (E1, funcdef_no=58, decl_uid=4832, cgraph_uid=58, symbol_order=75)
 
-D:\WSCodeblocks\Compiladores\AnaliseSemantica\AnaliseSemantica\main.c:1773: sprintf: objsize = 18446744073709551615, fmtstr = "%s	%s = %s - %s
+D:\WSCodeblocks\Compiladores\AnaliseSemantica\AnaliseSemantica\main.c:1775: sprintf: objsize = 18446744073709551615, fmtstr = "%s	%s = %s - %s
 "
   Directive 1 at offset 0: "%s"
     Result: 0, 999, 999, 999 (0, 999, 999, 999)
@@ -4899,7 +4899,7 @@ D:\WSCodeblocks\Compiladores\AnaliseSemantica\AnaliseSemantica\main.c:1773: spri
 ", length = 1
     Result: 1, 1, 1, 1 (8, 1034, 1034, 1034)
   Directive 9 at offset 16: "", length = 1
-D:\WSCodeblocks\Compiladores\AnaliseSemantica\AnaliseSemantica\main.c:1762: sprintf: objsize = 18446744073709551615, fmtstr = "%s	%s = %s + %s
+D:\WSCodeblocks\Compiladores\AnaliseSemantica\AnaliseSemantica\main.c:1764: sprintf: objsize = 18446744073709551615, fmtstr = "%s	%s = %s + %s
 "
   Directive 1 at offset 0: "%s"
     Result: 0, 999, 999, 999 (0, 999, 999, 999)
@@ -4919,7 +4919,7 @@ D:\WSCodeblocks\Compiladores\AnaliseSemantica\AnaliseSemantica\main.c:1762: spri
 ", length = 1
     Result: 1, 1, 1, 1 (8, 1034, 1034, 1034)
   Directive 9 at offset 16: "", length = 1
-D:\WSCodeblocks\Compiladores\AnaliseSemantica\AnaliseSemantica\main.c:1751: sprintf: objsize = 18446744073709551615, fmtstr = "%s	%s = %s %c %s
+D:\WSCodeblocks\Compiladores\AnaliseSemantica\AnaliseSemantica\main.c:1753: sprintf: objsize = 18446744073709551615, fmtstr = "%s	%s = %s %c %s
 "
   Directive 1 at offset 0: "%s"
     Result: 0, 999, 999, 999 (0, 999, 999, 999)
@@ -4943,7 +4943,7 @@ D:\WSCodeblocks\Compiladores\AnaliseSemantica\AnaliseSemantica\main.c:1751: spri
 ", length = 1
     Result: 1, 1, 1, 1 (8, 1034, 1034, 1034)
   Directive 11 at offset 17: "", length = 1
-D:\WSCodeblocks\Compiladores\AnaliseSemantica\AnaliseSemantica\main.c:1740: sprintf: objsize = 18446744073709551615, fmtstr = "%s	%s = %s / %s
+D:\WSCodeblocks\Compiladores\AnaliseSemantica\AnaliseSemantica\main.c:1742: sprintf: objsize = 18446744073709551615, fmtstr = "%s	%s = %s / %s
 "
   Directive 1 at offset 0: "%s"
     Result: 0, 999, 999, 999 (0, 999, 999, 999)
@@ -4963,7 +4963,7 @@ D:\WSCodeblocks\Compiladores\AnaliseSemantica\AnaliseSemantica\main.c:1740: spri
 ", length = 1
     Result: 1, 1, 1, 1 (8, 1034, 1034, 1034)
   Directive 9 at offset 16: "", length = 1
-D:\WSCodeblocks\Compiladores\AnaliseSemantica\AnaliseSemantica\main.c:1729: sprintf: objsize = 18446744073709551615, fmtstr = "%s	%s = %s * %s
+D:\WSCodeblocks\Compiladores\AnaliseSemantica\AnaliseSemantica\main.c:1731: sprintf: objsize = 18446744073709551615, fmtstr = "%s	%s = %s * %s
 "
   Directive 1 at offset 0: "%s"
     Result: 0, 999, 999, 999 (0, 999, 999, 999)
@@ -4983,7 +4983,7 @@ D:\WSCodeblocks\Compiladores\AnaliseSemantica\AnaliseSemantica\main.c:1729: spri
 ", length = 1
     Result: 1, 1, 1, 1 (8, 1034, 1034, 1034)
   Directive 9 at offset 16: "", length = 1
-D:\WSCodeblocks\Compiladores\AnaliseSemantica\AnaliseSemantica\main.c:1718: sprintf: objsize = 18446744073709551615, fmtstr = "%s	%s = %s
+D:\WSCodeblocks\Compiladores\AnaliseSemantica\AnaliseSemantica\main.c:1720: sprintf: objsize = 18446744073709551615, fmtstr = "%s	%s = %s
 "
   Directive 1 at offset 0: "%s"
     Result: 0, 999, 999, 999 (0, 999, 999, 999)
@@ -5483,7 +5483,7 @@ E3 (char * E3_tp, char * E3_p, char * E3_c)
 
 ;; Function E3Linha (E3Linha, funcdef_no=62, decl_uid=4856, cgraph_uid=62, symbol_order=79)
 
-D:\WSCodeblocks\Compiladores\AnaliseSemantica\AnaliseSemantica\main.c:1866: sprintf: objsize = 1000, fmtstr = "%s%s	%s = %s || %s
+D:\WSCodeblocks\Compiladores\AnaliseSemantica\AnaliseSemantica\main.c:1868: sprintf: objsize = 1000, fmtstr = "%s%s	%s = %s || %s
 "
   Directive 1 at offset 0: "%s"
     Result: 0, 0, -1, 9223372036854775807 (0, 0, -1, -1)
@@ -5665,7 +5665,7 @@ E4 (char * E4_tp, char * E4_p, char * E4_c)
 
 ;; Function E4Linha (E4Linha, funcdef_no=64, decl_uid=4867, cgraph_uid=64, symbol_order=81)
 
-D:\WSCodeblocks\Compiladores\AnaliseSemantica\AnaliseSemantica\main.c:1912: sprintf: objsize = 1000, fmtstr = "%s%s	%s = %s && %s
+D:\WSCodeblocks\Compiladores\AnaliseSemantica\AnaliseSemantica\main.c:1914: sprintf: objsize = 1000, fmtstr = "%s%s	%s = %s && %s
 "
   Directive 1 at offset 0: "%s"
     Result: 0, 0, -1, 9223372036854775807 (0, 0, -1, -1)
@@ -5839,7 +5839,7 @@ E5 (char * E5_tp, char * E5_p, char * E5_c)
 
 ;; Function E5Linha (E5Linha, funcdef_no=66, decl_uid=4878, cgraph_uid=66, symbol_order=83)
 
-D:\WSCodeblocks\Compiladores\AnaliseSemantica\AnaliseSemantica\main.c:1959: sprintf: objsize = 1000, fmtstr = "%s%s	%s = %s | %s
+D:\WSCodeblocks\Compiladores\AnaliseSemantica\AnaliseSemantica\main.c:1961: sprintf: objsize = 1000, fmtstr = "%s%s	%s = %s | %s
 "
   Directive 1 at offset 0: "%s"
     Result: 0, 0, -1, 9223372036854775807 (0, 0, -1, -1)
@@ -6013,7 +6013,7 @@ E6 (char * E6_tp, char * E6_p, char * E6_c)
 
 ;; Function E6Linha (E6Linha, funcdef_no=68, decl_uid=4889, cgraph_uid=68, symbol_order=85)
 
-D:\WSCodeblocks\Compiladores\AnaliseSemantica\AnaliseSemantica\main.c:2007: sprintf: objsize = 1000, fmtstr = "%s%s	%s = %s ^ %s
+D:\WSCodeblocks\Compiladores\AnaliseSemantica\AnaliseSemantica\main.c:2009: sprintf: objsize = 1000, fmtstr = "%s%s	%s = %s ^ %s
 "
   Directive 1 at offset 0: "%s"
     Result: 0, 0, -1, 9223372036854775807 (0, 0, -1, -1)
@@ -6187,7 +6187,7 @@ E7 (char * E7_tp, char * E7_p, char * E7_c)
 
 ;; Function E7Linha (E7Linha, funcdef_no=70, decl_uid=4900, cgraph_uid=70, symbol_order=87)
 
-D:\WSCodeblocks\Compiladores\AnaliseSemantica\AnaliseSemantica\main.c:2056: sprintf: objsize = 1000, fmtstr = "%s%s	%s = %s & %s
+D:\WSCodeblocks\Compiladores\AnaliseSemantica\AnaliseSemantica\main.c:2058: sprintf: objsize = 1000, fmtstr = "%s%s	%s = %s & %s
 "
   Directive 1 at offset 0: "%s"
     Result: 0, 0, -1, 9223372036854775807 (0, 0, -1, -1)
@@ -6361,7 +6361,7 @@ E8 (char * E8_tp, char * E8_p, char * E8_c)
 
 ;; Function E8Linha (E8Linha, funcdef_no=72, decl_uid=4911, cgraph_uid=72, symbol_order=89)
 
-D:\WSCodeblocks\Compiladores\AnaliseSemantica\AnaliseSemantica\main.c:2120: sprintf: objsize = 1000, fmtstr = "%s%s	%s = %s != %s
+D:\WSCodeblocks\Compiladores\AnaliseSemantica\AnaliseSemantica\main.c:2122: sprintf: objsize = 1000, fmtstr = "%s%s	%s = %s != %s
 "
   Directive 1 at offset 0: "%s"
     Result: 0, 0, -1, 9223372036854775807 (0, 0, -1, -1)
@@ -6383,7 +6383,7 @@ D:\WSCodeblocks\Compiladores\AnaliseSemantica\AnaliseSemantica\main.c:2120: spri
 ", length = 1
     Result: 1, 1, 1, 1 (9, 1026, -1, -1)
   Directive 10 at offset 19: "", length = 1
-D:\WSCodeblocks\Compiladores\AnaliseSemantica\AnaliseSemantica\main.c:2104: sprintf: objsize = 1000, fmtstr = "%s%s	%s = %s == %s
+D:\WSCodeblocks\Compiladores\AnaliseSemantica\AnaliseSemantica\main.c:2106: sprintf: objsize = 1000, fmtstr = "%s%s	%s = %s == %s
 "
   Directive 1 at offset 0: "%s"
     Result: 0, 0, -1, 9223372036854775807 (0, 0, -1, -1)
@@ -6600,7 +6600,7 @@ E9 (char * E9_tp, char * E9_p, char * E9_c)
 
 ;; Function E9Linha (E9Linha, funcdef_no=74, decl_uid=4922, cgraph_uid=74, symbol_order=91)
 
-D:\WSCodeblocks\Compiladores\AnaliseSemantica\AnaliseSemantica\main.c:2216: sprintf: objsize = 1000, fmtstr = "%s%s	%s = %s >= %s
+D:\WSCodeblocks\Compiladores\AnaliseSemantica\AnaliseSemantica\main.c:2218: sprintf: objsize = 1000, fmtstr = "%s%s	%s = %s >= %s
 "
   Directive 1 at offset 0: "%s"
     Result: 0, 0, -1, 9223372036854775807 (0, 0, -1, -1)
@@ -6622,7 +6622,7 @@ D:\WSCodeblocks\Compiladores\AnaliseSemantica\AnaliseSemantica\main.c:2216: spri
 ", length = 1
     Result: 1, 1, 1, 1 (9, 1026, -1, -1)
   Directive 10 at offset 19: "", length = 1
-D:\WSCodeblocks\Compiladores\AnaliseSemantica\AnaliseSemantica\main.c:2200: sprintf: objsize = 1000, fmtstr = "%s%s	%s = %s <= %s
+D:\WSCodeblocks\Compiladores\AnaliseSemantica\AnaliseSemantica\main.c:2202: sprintf: objsize = 1000, fmtstr = "%s%s	%s = %s <= %s
 "
   Directive 1 at offset 0: "%s"
     Result: 0, 0, -1, 9223372036854775807 (0, 0, -1, -1)
@@ -6644,7 +6644,7 @@ D:\WSCodeblocks\Compiladores\AnaliseSemantica\AnaliseSemantica\main.c:2200: spri
 ", length = 1
     Result: 1, 1, 1, 1 (9, 1026, -1, -1)
   Directive 10 at offset 19: "", length = 1
-D:\WSCodeblocks\Compiladores\AnaliseSemantica\AnaliseSemantica\main.c:2184: sprintf: objsize = 1000, fmtstr = "%s%s	%s = %s > %s
+D:\WSCodeblocks\Compiladores\AnaliseSemantica\AnaliseSemantica\main.c:2186: sprintf: objsize = 1000, fmtstr = "%s%s	%s = %s > %s
 "
   Directive 1 at offset 0: "%s"
     Result: 0, 0, -1, 9223372036854775807 (0, 0, -1, -1)
@@ -6666,7 +6666,7 @@ D:\WSCodeblocks\Compiladores\AnaliseSemantica\AnaliseSemantica\main.c:2184: spri
 ", length = 1
     Result: 1, 1, 1, 1 (8, 1025, -1, -1)
   Directive 10 at offset 18: "", length = 1
-D:\WSCodeblocks\Compiladores\AnaliseSemantica\AnaliseSemantica\main.c:2168: sprintf: objsize = 1000, fmtstr = "%s%s	%s = %s < %s
+D:\WSCodeblocks\Compiladores\AnaliseSemantica\AnaliseSemantica\main.c:2170: sprintf: objsize = 1000, fmtstr = "%s%s	%s = %s < %s
 "
   Directive 1 at offset 0: "%s"
     Result: 0, 0, -1, 9223372036854775807 (0, 0, -1, -1)
@@ -6969,7 +6969,7 @@ E10 (char * E10_tp, char * E10_p, char * E10_c)
 
 ;; Function E10Linha (E10Linha, funcdef_no=76, decl_uid=4933, cgraph_uid=76, symbol_order=93)
 
-D:\WSCodeblocks\Compiladores\AnaliseSemantica\AnaliseSemantica\main.c:2280: sprintf: objsize = 1000, fmtstr = "%s%s	%s = %s >> %s
+D:\WSCodeblocks\Compiladores\AnaliseSemantica\AnaliseSemantica\main.c:2282: sprintf: objsize = 1000, fmtstr = "%s%s	%s = %s >> %s
 "
   Directive 1 at offset 0: "%s"
     Result: 0, 0, -1, 9223372036854775807 (0, 0, -1, -1)
@@ -6991,7 +6991,7 @@ D:\WSCodeblocks\Compiladores\AnaliseSemantica\AnaliseSemantica\main.c:2280: spri
 ", length = 1
     Result: 1, 1, 1, 1 (9, 1026, -1, -1)
   Directive 10 at offset 19: "", length = 1
-D:\WSCodeblocks\Compiladores\AnaliseSemantica\AnaliseSemantica\main.c:2264: sprintf: objsize = 1000, fmtstr = "%s%s	%s = %s << %s
+D:\WSCodeblocks\Compiladores\AnaliseSemantica\AnaliseSemantica\main.c:2266: sprintf: objsize = 1000, fmtstr = "%s%s	%s = %s << %s
 "
   Directive 1 at offset 0: "%s"
     Result: 0, 0, -1, 9223372036854775807 (0, 0, -1, -1)
@@ -7208,7 +7208,7 @@ E11 (char * E11_tp, char * E11_p, char * E11_c)
 
 ;; Function E11Linha (E11Linha, funcdef_no=78, decl_uid=4944, cgraph_uid=78, symbol_order=95)
 
-D:\WSCodeblocks\Compiladores\AnaliseSemantica\AnaliseSemantica\main.c:2349: sprintf: objsize = 1000, fmtstr = "%s%s	%s = %s - %s
+D:\WSCodeblocks\Compiladores\AnaliseSemantica\AnaliseSemantica\main.c:2351: sprintf: objsize = 1000, fmtstr = "%s%s	%s = %s - %s
 "
   Directive 1 at offset 0: "%s"
     Result: 0, 0, -1, 9223372036854775807 (0, 0, -1, -1)
@@ -7230,7 +7230,7 @@ D:\WSCodeblocks\Compiladores\AnaliseSemantica\AnaliseSemantica\main.c:2349: spri
 ", length = 1
     Result: 1, 1, 1, 1 (8, 1025, -1, -1)
   Directive 10 at offset 18: "", length = 1
-D:\WSCodeblocks\Compiladores\AnaliseSemantica\AnaliseSemantica\main.c:2331: sprintf: objsize = 1000, fmtstr = "%s%s	%s = %s + %s
+D:\WSCodeblocks\Compiladores\AnaliseSemantica\AnaliseSemantica\main.c:2333: sprintf: objsize = 1000, fmtstr = "%s%s	%s = %s + %s
 "
   Directive 1 at offset 0: "%s"
     Result: 0, 0, -1, 9223372036854775807 (0, 0, -1, -1)
@@ -7490,7 +7490,7 @@ E12 (char * E12_tp, char * E12_p, char * E12_c)
 
 ;; Function E12Linha (E12Linha, funcdef_no=80, decl_uid=4955, cgraph_uid=80, symbol_order=97)
 
-D:\WSCodeblocks\Compiladores\AnaliseSemantica\AnaliseSemantica\main.c:2441: sprintf: objsize = 1000, fmtstr = "%s%s	%s = %s %c %s
+D:\WSCodeblocks\Compiladores\AnaliseSemantica\AnaliseSemantica\main.c:2443: sprintf: objsize = 1000, fmtstr = "%s%s	%s = %s %c %s
 "
   Directive 1 at offset 0: "%s"
     Result: 0, 0, -1, 9223372036854775807 (0, 0, -1, -1)
@@ -7516,7 +7516,7 @@ D:\WSCodeblocks\Compiladores\AnaliseSemantica\AnaliseSemantica\main.c:2441: spri
 ", length = 1
     Result: 1, 1, 1, 1 (8, 1025, -1, -1)
   Directive 12 at offset 19: "", length = 1
-D:\WSCodeblocks\Compiladores\AnaliseSemantica\AnaliseSemantica\main.c:2420: sprintf: objsize = 1000, fmtstr = "%s%s	%s = %s / %s
+D:\WSCodeblocks\Compiladores\AnaliseSemantica\AnaliseSemantica\main.c:2422: sprintf: objsize = 1000, fmtstr = "%s%s	%s = %s / %s
 "
   Directive 1 at offset 0: "%s"
     Result: 0, 0, -1, 9223372036854775807 (0, 0, -1, -1)
@@ -7538,7 +7538,7 @@ D:\WSCodeblocks\Compiladores\AnaliseSemantica\AnaliseSemantica\main.c:2420: spri
 ", length = 1
     Result: 1, 1, 1, 1 (8, 1025, -1, -1)
   Directive 10 at offset 18: "", length = 1
-D:\WSCodeblocks\Compiladores\AnaliseSemantica\AnaliseSemantica\main.c:2401: sprintf: objsize = 1000, fmtstr = "%s%s	%s = %s * %s
+D:\WSCodeblocks\Compiladores\AnaliseSemantica\AnaliseSemantica\main.c:2403: sprintf: objsize = 1000, fmtstr = "%s%s	%s = %s * %s
 "
   Directive 1 at offset 0: "%s"
     Result: 0, 0, -1, 9223372036854775807 (0, 0, -1, -1)
@@ -7942,7 +7942,7 @@ E13 (char * E13_tp, char * E13_p, char * E13_c)
 
 ;; Function E14 (E14, funcdef_no=82, decl_uid=4963, cgraph_uid=82, symbol_order=99)
 
-D:\WSCodeblocks\Compiladores\AnaliseSemantica\AnaliseSemantica\main.c:2524: sprintf: objsize = 18446744073709551615, fmtstr = "	%s = %s
+D:\WSCodeblocks\Compiladores\AnaliseSemantica\AnaliseSemantica\main.c:2526: sprintf: objsize = 18446744073709551615, fmtstr = "	%s = %s
 "
   Directive 1 at offset 0: "	", length = 1
     Result: 1, 1, 1, 1 (1, 1, 1, 1)
@@ -7956,7 +7956,7 @@ D:\WSCodeblocks\Compiladores\AnaliseSemantica\AnaliseSemantica\main.c:2524: spri
 ", length = 1
     Result: 1, 1, 1, 1 (5, 14, -1, -1)
   Directive 6 at offset 9: "", length = 1
-D:\WSCodeblocks\Compiladores\AnaliseSemantica\AnaliseSemantica\main.c:2518: sprintf: objsize = 18446744073709551615, fmtstr = "	%s = %s
+D:\WSCodeblocks\Compiladores\AnaliseSemantica\AnaliseSemantica\main.c:2520: sprintf: objsize = 18446744073709551615, fmtstr = "	%s = %s
 "
   Directive 1 at offset 0: "	", length = 1
     Result: 1, 1, 1, 1 (1, 1, 1, 1)
@@ -8192,7 +8192,7 @@ main ()
   setbuf (_1, 0B);
   ts = 0B;
   i = 0;
-  entrada = fopen ("teste.txt", "r");
+  entrada = fopen ("erroIncompTipo.txt", "r");
   if (entrada == 0B)
     goto <bb 3>; [INV]
   else
@@ -8339,12 +8339,12 @@ main ()
     goto <bb 23>; [INV]
 
   <bb 22> :
-  printf ("Sucesso no reconhecimento sint\xc3\xa1tico\nPressione ENTER para encerrar...");
+  __builtin_puts (&"Reconhecimento sint\xc3\xa1tico conclu\xc3\xaddo!"[0]);
   getchar ();
   goto <bb 24>; [INV]
 
   <bb 23> :
-  printf ("Falha no reconhecimento sint\xc3\xa1tico\nPressione ENTER para encerrar...");
+  __builtin_puts (&"Reconhecimento sint\xc3\xa1tico com erros!"[0]);
   getchar ();
 
   <bb 24> :

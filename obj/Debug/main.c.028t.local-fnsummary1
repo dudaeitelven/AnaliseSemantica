@@ -1891,12 +1891,12 @@ getToken ()
 
 
 
-;; Function poetabsimb (poetabsimb, funcdef_no=20, decl_uid=5008, cgraph_uid=20, symbol_order=37)
+;; Function addTabelaSimbolos (addTabelaSimbolos, funcdef_no=20, decl_uid=5008, cgraph_uid=20, symbol_order=37)
 
 
-Analyzing function body size: poetabsimb
+Analyzing function body size: addTabelaSimbolos
 
-IPA function summary for poetabsimb/37
+IPA function summary for addTabelaSimbolos/37
   global time:     41.000000
   self size:       15
   global size:     0
@@ -1913,7 +1913,7 @@ IPA function summary for poetabsimb/37
     malloc/104 function body not available
       loop depth: 0 freq:1.00 size: 3 time: 12 callee size: 0 stack: 0
 
-poetabsimb (char * id, char * tipo)
+addTabelaSimbolos (char * id, char * tipo)
 {
   struct tabela * aux;
   char[10] * _1;
@@ -2269,7 +2269,7 @@ IPA function summary for DV/47
       loop depth: 0 freq:1.00 size: 3 time: 12 callee size:12 stack: 0
     getToken/35 function not considered for inlining
       loop depth: 0 freq:1.00 size: 1 time: 10 callee size:12 stack: 0
-    poetabsimb/37 function not considered for inlining
+    addTabelaSimbolos/37 function not considered for inlining
       loop depth: 0 freq:1.00 size: 3 time: 12 callee size: 7 stack: 0
     verificaDuplicacao/38 function not considered for inlining
       loop depth: 0 freq:1.00 size: 4 time: 13 callee size:13 stack: 0
@@ -2308,7 +2308,7 @@ DV (char * DV_t)
     goto <bb 5>; [INV]
 
   <bb 4> :
-  poetabsimb (&lex, DV_t_11(D));
+  addTabelaSimbolos (&lex, DV_t_11(D));
 
   <bb 5> :
   getToken ();
@@ -3216,7 +3216,7 @@ IPA function summary for RLP/57
       loop depth: 0 freq:1.00 size: 2 time: 11 callee size: 0 stack: 0
     getToken/35 function not considered for inlining
       loop depth: 0 freq:1.00 size: 1 time: 10 callee size:12 stack: 0
-    poetabsimb/37 function not considered for inlining
+    addTabelaSimbolos/37 function not considered for inlining
       loop depth: 0 freq:1.00 size: 3 time: 12 callee size: 7 stack: 0
     verificaDuplicacao/38 function not considered for inlining
       loop depth: 0 freq:1.00 size: 4 time: 13 callee size:13 stack: 0
@@ -3275,7 +3275,7 @@ RLP ()
     goto <bb 7>; [INV]
 
   <bb 6> :
-  poetabsimb (&lex, &TIPO_t);
+  addTabelaSimbolos (&lex, &TIPO_t);
 
   <bb 7> :
   getToken ();
@@ -3345,7 +3345,7 @@ IPA function summary for LP/56
       loop depth: 0 freq:1.00 size: 2 time: 11 callee size:18 stack: 0
     getToken/35 function not considered for inlining
       loop depth: 0 freq:1.00 size: 1 time: 10 callee size:12 stack: 0
-    poetabsimb/37 function not considered for inlining
+    addTabelaSimbolos/37 function not considered for inlining
       loop depth: 0 freq:1.00 size: 3 time: 12 callee size: 7 stack: 0
     verificaDuplicacao/38 function not considered for inlining
       loop depth: 0 freq:1.00 size: 4 time: 13 callee size:13 stack: 0
@@ -3392,7 +3392,7 @@ LP ()
     goto <bb 6>; [INV]
 
   <bb 5> :
-  poetabsimb (&lex, &TIPO_t);
+  addTabelaSimbolos (&lex, &TIPO_t);
 
   <bb 6> :
   getToken ();
@@ -8049,7 +8049,7 @@ IPA function summary for COM/60
       loop depth: 0 freq:1.00 size: 2 time: 11 callee size: 0 stack: 0
     getToken/35 function not considered for inlining
       loop depth: 0 freq:1.00 size: 1 time: 10 callee size:12 stack: 0
-    poetabsimb/37 function not considered for inlining
+    addTabelaSimbolos/37 function not considered for inlining
       loop depth: 0 freq:1.00 size: 3 time: 12 callee size: 7 stack: 0
     verificaDuplicacao/38 function not considered for inlining
       loop depth: 0 freq:1.00 size: 4 time: 13 callee size:13 stack: 0
@@ -8455,7 +8455,7 @@ COM (char * COM_c)
     goto <bb 42>; [INV]
 
   <bb 41> :
-  poetabsimb (&lex, &TIPO_t);
+  addTabelaSimbolos (&lex, &TIPO_t);
 
   <bb 42> :
   getToken ();
@@ -9016,7 +9016,7 @@ RDEC ()
   <bb 17> :
   coluna.122_11 = coluna;
   linha.123_12 = linha;
-  printf ("Erro: esperava token contante inteira na linha %d coluna %d\n", linha.123_12, coluna.122_11);
+  printf ("Erro: esperava token constante inteira na linha %d coluna %d\n", linha.123_12, coluna.122_11);
   _35 = 0;
   // predicted unlikely by early return (on trees) predictor.
   goto <bb 19>; [INV]
@@ -9062,7 +9062,7 @@ IPA function summary for DEC/45
       loop depth: 0 freq:1.00 size: 3 time: 12 callee size:27 stack: 0
     getToken/35 function not considered for inlining
       loop depth: 0 freq:1.00 size: 1 time: 10 callee size:12 stack: 0
-    poetabsimb/37 function not considered for inlining
+    addTabelaSimbolos/37 function not considered for inlining
       loop depth: 0 freq:1.00 size: 3 time: 12 callee size: 7 stack: 0
     verificaDuplicacao/38 function not considered for inlining
       loop depth: 0 freq:1.00 size: 4 time: 13 callee size:13 stack: 0
@@ -9113,7 +9113,7 @@ DEC ()
     goto <bb 6>; [INV]
 
   <bb 5> :
-  poetabsimb (&lex, &Tipo_t);
+  addTabelaSimbolos (&lex, &Tipo_t);
 
   <bb 6> :
   getToken ();
@@ -11056,11 +11056,11 @@ IPA function summary for main/101
   calls:
     getchar/119 function body not available
       loop depth: 0 freq:1.00 size: 1 time: 10 callee size: 0 stack: 0
-    printf/105 function body not available
+    __builtin_puts/115 function body not available
       loop depth: 0 freq:1.00 size: 2 time: 11 callee size: 0 stack: 0
     getchar/119 function body not available
       loop depth: 0 freq:1.00 size: 1 time: 10 callee size: 0 stack: 0
-    printf/105 function body not available
+    __builtin_puts/115 function body not available
       loop depth: 0 freq:1.00 size: 2 time: 11 callee size: 0 stack: 0
     PROGC/42 function not considered for inlining
       loop depth: 0 freq:1.00 size: 2 time: 11 callee size: 3 stack: 0
@@ -11138,7 +11138,7 @@ main ()
   setbuf (_1, 0B);
   ts = 0B;
   i_43 = 0;
-  entrada_45 = fopen ("teste.txt", "r");
+  entrada_45 = fopen ("erroIncompTipo.txt", "r");
   if (entrada_45 == 0B)
     goto <bb 3>; [INV]
   else
@@ -11288,12 +11288,12 @@ main ()
     goto <bb 23>; [INV]
 
   <bb 22> :
-  printf ("Sucesso no reconhecimento sint\xc3\xa1tico\nPressione ENTER para encerrar...");
+  __builtin_puts (&"Reconhecimento sint\xc3\xa1tico conclu\xc3\xaddo!"[0]);
   getchar ();
   goto <bb 24>; [INV]
 
   <bb 23> :
-  printf ("Falha no reconhecimento sint\xc3\xa1tico\nPressione ENTER para encerrar...");
+  __builtin_puts (&"Reconhecimento sint\xc3\xa1tico com erros!"[0]);
   getchar ();
 
   <bb 24> :
