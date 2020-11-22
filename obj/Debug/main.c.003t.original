@@ -192,50 +192,25 @@
 }
 
 
-;; Function le_char (null)
+;; Function palavra_reservada (null)
 ;; enabled by -tree-original
 
 
 {
-  char c;
+  int postab = 0;
 
-    char c;
-  if (fread ((void * restrict) &c, 1, 1, arqin) == 0)
+    int postab = 0;
+  goto <D.4974>;
+  <D.4973>:;
+  if (strcmp ((const char *) lex, (const char *) &lista_pal[postab].palavra) == 0)
     {
-      return -1;
+      return lista_pal[postab].tk;
     }
-  if (c == 10)
-    {
-      linlex++ ;
-      collex = 1;
-    }
-  else
-    {
-      collex++ ;
-    }
-  return c;
-}
-
-
-;; Function pal_res (null)
-;; enabled by -tree-original
-
-
-{
-  int tk = 0;
-
-    int tk = 0;
-  goto <D.4921>;
-  <D.4920>:;
-  if (strcmp ((const char *) lex, (const char *) &reservadas[tk].palavra) == 0)
-    {
-      return reservadas[tk].token;
-    }
-  tk++ ;
-  <D.4921>:;
-  if (strcmp ((const char *) &reservadas[tk].palavra, (const char *) "fim") != 0) goto <D.4920>; else goto <D.4922>;
-  <D.4922>:;
-  return 28;
+  postab++ ;
+  <D.4974>:;
+  if (strcmp ((const char *) "fimtabela", (const char *) &lista_pal[postab].palavra) != 0) goto <D.4973>; else goto <D.4975>;
+  <D.4975>:;
+  return 1;
 }
 
 
@@ -244,482 +219,575 @@
 
 
 {
-  static int pos = 0;
-  static int estado = 0;
-  static char c = 0;
+  int estado = 0;
+  int fim = 0;
+  int posl = 0;
 
-    static int pos = 0;
-    static int estado = 0;
-    static char c = 0;
-  <D.4932>:;
-  switch (estado)
-    {
-      case 0:;
-      if (c == 44)
-        {
-          c = le_char ();
-          return 20;
-        }
-      if (c == 43)
-        {
-          c = le_char ();
-          return 15;
-        }
-      if (c == 45)
-        {
-          c = le_char ();
-          return 16;
-        }
-      if (c == 42)
-        {
-          c = le_char ();
-          return 17;
-        }
-      if (c == 123)
-        {
-          c = le_char ();
-          return 10;
-        }
-      if (c == 125)
-        {
-          c = le_char ();
-          return 11;
-        }
-      if (c == 59)
-        {
-          c = le_char ();
-          return 21;
-        }
-      if (c == 91)
-        {
-          c = le_char ();
-          return 8;
-        }
-      if (c == 93)
-        {
-          c = le_char ();
-          return 9;
-        }
-      if (c == 40)
-        {
-          c = le_char ();
-          return 18;
-        }
-      if (c == 41)
-        {
-          c = le_char ();
-          return 19;
-        }
-      if (c == 61)
-        {
-          c = le_char ();
-          if (c == 61)
-            {
-              c = le_char ();
-              return 26;
-            }
-          return 13;
-        }
-      if (c == 60)
-        {
-          c = le_char ();
-          if (c == 61)
-            {
-              c = le_char ();
-              return 24;
-            }
-          return 23;
-        }
-      if (c == 62)
-        {
-          c = le_char ();
-          if (c == 61)
-            {
-              c = le_char ();
-              return 25;
-            }
-          return 22;
-        }
-      if (c == 33)
-        {
-          c = le_char ();
-          if (c == 61)
-            {
-              c = le_char ();
-              return 27;
-            }
-        }
-      if (c > 96 && c <= 122 || c == 95)
-        {
-          lex[0] = c;
-          c = le_char ();
-          pos = 1;
-          estado = 1;
-          goto <D.4929>;
-        }
-      if (c > 47 && c <= 57)
-        {
-          lex[0] = c;
-          c = le_char ();
-          pos = 1;
-          estado = 2;
-          goto <D.4929>;
-        }
-      if (c == -1)
-        {
-          return 12;
-        }
-      if ((((c == 10 || c == 13) || c == 9) || c == 0) || c == 32)
-        {
-          c = le_char ();
-          goto <D.4929>;
-        }
-      case 1:;
-      if ((c > 96 && c <= 122 || c == 95) || c > 47 && c <= 57)
-        {
-          lex[pos++ ] = c;
-          c = le_char ();
-          goto <D.4929>;
-        }
-      else
-        {
-          estado = 0;
-          lex[pos] = 0;
-          return pal_res ((char *) &lex);
-        }
-      case 2:;
-      if (c > 47 && c <= 57)
-        {
-          lex[pos++ ] = c;
-          c = le_char ();
-          goto <D.4929>;
-        }
-      else
-        {
-          estado = 0;
-          lex[pos] = 0;
-          return 14;
-        }
-      <D.4929>:;
-    }
-  goto <D.4932>;
-}
+    int estado = 0;
+    int fim = 0;
+    int posl = 0;
+  posColuna = pos;
+  goto <D.4996>;
+  <D.4995>:;
+  {
+    char c = *(st + (sizetype) pos);
 
-
-;; Function mostra_t (null)
-;; enabled by -tree-original
-
-
-{
-  printf ((const char * restrict) "%s lex=%s na lin %d, col %d\n", (char *) &tokens[token], (char *) &lex, linlex, collex);
-}
-
-
-;; Function Rel (null)
-;; enabled by -tree-original
-
-
-{
-  char E1_c[1000];
-  char E2_c[1000];
-  char R_s[1000];
-
-  printf ((const char * restrict) "Entrei no Rel\n");
-    char E1_c[1000];
-    char E2_c[1000];
-    char R_s[1000];
-  if (E ((char *) &E1_c) != 0)
-    {
+        char c = *(st + (sizetype) pos);
+    *(lex + (sizetype) posl++ ) = c;
+    switch (estado)
       {
-        char op[10];
-
-                char op[10];
-        if (token == 22)
+        case 0:;
+        if ((c > 96 && c <= 122 || c > 64 && c <= 90) || c == 95)
           {
-            strcpy ((char *) &op, (const char * restrict) ">");
+            pos++ ;
+            estado = 1;
+            estado_anterior = 0;
+            goto <D.4985>;
           }
-        else
+        if (c > 47 && c <= 57)
           {
-            if (token == 23)
+            if (c == 48)
               {
-                strcpy ((char *) &op, (const char * restrict) "<");
+                pos++ ;
+                estado = 8;
+                estado_anterior = 0;
+                goto <D.4985>;
+              }
+            pos++ ;
+            estado = 2;
+            estado_anterior = 0;
+            goto <D.4985>;
+          }
+        if (c == 46)
+          {
+            pos++ ;
+            estado = 3;
+            estado_anterior = 0;
+            goto <D.4985>;
+          }
+        if (c == 61)
+          {
+            c = *(st + (sizetype)  ++pos);
+            if (c == 61)
+              {
+                *(lex + (sizetype) posl++ ) = 61;
+                *(lex + (sizetype) posl) = 0;
+                pos++ ;
+                estado_anterior = 0;
+                return 61;
               }
             else
               {
-                if (token == 26)
+                *(lex + (sizetype) posl) = 0;
+                return 43;
+              }
+          }
+        if (c == 33)
+          {
+            c = *(st + (sizetype)  ++pos);
+            if (c == 61)
+              {
+                *(lex + (sizetype) posl++ ) = 61;
+                *(lex + (sizetype) posl) = 0;
+                pos++ ;
+                estado_anterior = 0;
+                return 62;
+              }
+            else
+              {
+                *(lex + (sizetype) posl) = 0;
+                return 63;
+              }
+          }
+        if (c == 63)
+          {
+            *(lex + (sizetype) posl) = 0;
+            pos++ ;
+            estado_anterior = 0;
+            return 64;
+          }
+        if (c == 43)
+          {
+            c = *(st + (sizetype)  ++pos);
+            if (c == 43)
+              {
+                *(lex + (sizetype) posl++ ) = 43;
+                *(lex + (sizetype) posl) = 0;
+                pos++ ;
+                estado_anterior = 0;
+                return 60;
+              }
+            else
+              {
+                if (c == 61)
                   {
-                    strcpy ((char *) &op, (const char * restrict) "=");
+                    *(lex + (sizetype) posl++ ) = 61;
+                    *(lex + (sizetype) posl) = 0;
+                    pos++ ;
+                    estado_anterior = 0;
+                    return 53;
                   }
                 else
                   {
-                    if (token == 27)
-                      {
-                        strcpy ((char *) &op, (const char * restrict) "<>");
-                      }
-                    else
-                      {
-                        if (token == 25)
-                          {
-                            strcpy ((char *) &op, (const char * restrict) ">=");
-                          }
-                        else
-                          {
-                            if (token == 24)
-                              {
-                                strcpy ((char *) &op, (const char * restrict) "<=");
-                              }
-                          }
-                      }
+                    *(lex + (sizetype) posl) = 0;
+                    return 44;
                   }
               }
           }
-        printf ((const char * restrict) "Voltei do E, token \xef\xbf\xbd %s op \xef\xbf\xbd %s", (char *) &tokens[token], (char *) &op);
-        if (((((token == 22 || token == 23) || token == 26) || token == 27) || token == 25) || token == 24)
+        if (c == 45)
           {
-            token = le_token ();
-            if (E ((char *) &E2_c) != 0)
+            c = *(st + (sizetype)  ++pos);
+            if (c == 45)
               {
-                printf ((const char * restrict) "Voltei do E2, token \xef\xbf\xbd %s", (char *) &tokens[token]);
-                sprintf (Rel_c, (const char * restrict) "%s%s\t%s\n", (char *) &E1_c, (char *) &E2_c, (char *) &op);
-                return 1;
+                *(lex + (sizetype) posl++ ) = 45;
+                *(lex + (sizetype) posl) = 0;
+                pos++ ;
+                estado_anterior = 0;
+                return 59;
               }
-            return 0;
+            else
+              {
+                if (c == 61)
+                  {
+                    *(lex + (sizetype) posl++ ) = 61;
+                    *(lex + (sizetype) posl) = 0;
+                    pos++ ;
+                    estado_anterior = 0;
+                    return 52;
+                  }
+                else
+                  {
+                    *(lex + (sizetype) posl) = 0;
+                    return 45;
+                  }
+              }
+          }
+        if (c == 42)
+          {
+            c = *(st + (sizetype)  ++pos);
+            if (c == 61)
+              {
+                *(lex + (sizetype) posl++ ) = 61;
+                *(lex + (sizetype) posl) = 0;
+                pos++ ;
+                estado_anterior = 0;
+                return 54;
+              }
+            else
+              {
+                *(lex + (sizetype) posl) = 0;
+                return 46;
+              }
+          }
+        if (c == 47)
+          {
+            c = *(st + (sizetype)  ++pos);
+            if (c == 61)
+              {
+                *(lex + (sizetype) posl++ ) = 61;
+                *(lex + (sizetype) posl) = 0;
+                pos++ ;
+                estado_anterior = 0;
+                return 55;
+              }
+            else
+              {
+                *(lex + (sizetype) posl) = 0;
+                return 47;
+              }
+          }
+        if (c == 37)
+          {
+            c = *(st + (sizetype)  ++pos);
+            if (c == 61)
+              {
+                *(lex + (sizetype) posl++ ) = 61;
+                *(lex + (sizetype) posl) = 0;
+                pos++ ;
+                estado_anterior = 0;
+                return 56;
+              }
+            else
+              {
+                *(lex + (sizetype) posl) = 0;
+                return 48;
+              }
+          }
+        if (c == 124)
+          {
+            c = *(st + (sizetype)  ++pos);
+            if (c == 124)
+              {
+                *(lex + (sizetype) posl++ ) = 124;
+                *(lex + (sizetype) posl) = 0;
+                pos++ ;
+                estado_anterior = 0;
+                return 67;
+              }
+            return 102;
+          }
+        if (c == 38)
+          {
+            c = *(st + (sizetype)  ++pos);
+            if (c == 38)
+              {
+                *(lex + (sizetype) posl++ ) = 38;
+                *(lex + (sizetype) posl) = 0;
+                pos++ ;
+                estado_anterior = 0;
+                return 68;
+              }
+            return 103;
+          }
+        if (c == 62)
+          {
+            c = *(st + (sizetype)  ++pos);
+            if (c == 61)
+              {
+                *(lex + (sizetype) posl++ ) = 61;
+                *(lex + (sizetype) posl) = 0;
+                pos++ ;
+                estado_anterior = 0;
+                return 57;
+              }
+            else
+              {
+                if (c == 62)
+                  {
+                    *(lex + (sizetype) posl++ ) = 62;
+                    *(lex + (sizetype) posl) = 0;
+                    pos++ ;
+                    estado_anterior = 0;
+                    return 66;
+                  }
+                else
+                  {
+                    *(lex + (sizetype) posl) = 0;
+                    return 49;
+                  }
+              }
+          }
+        if (c == 60)
+          {
+            c = *(st + (sizetype)  ++pos);
+            if (c == 61)
+              {
+                *(lex + (sizetype) posl++ ) = 61;
+                *(lex + (sizetype) posl) = 0;
+                pos++ ;
+                estado_anterior = 0;
+                return 58;
+              }
+            else
+              {
+                if (c == 60)
+                  {
+                    *(lex + (sizetype) posl++ ) = 60;
+                    *(lex + (sizetype) posl) = 0;
+                    pos++ ;
+                    estado_anterior = 0;
+                    return 65;
+                  }
+                else
+                  {
+                    *(lex + (sizetype) posl) = 0;
+                    return 50;
+                  }
+              }
+          }
+        if (c == 40)
+          {
+            *(lex + (sizetype) posl) = 0;
+            pos++ ;
+            estado_anterior = 0;
+            return 34;
+          }
+        if (c == 41)
+          {
+            *(lex + (sizetype) posl) = 0;
+            pos++ ;
+            estado_anterior = 0;
+            return 35;
+          }
+        if (c == 123)
+          {
+            *(lex + (sizetype) posl) = 0;
+            pos++ ;
+            estado_anterior = 0;
+            return 36;
+          }
+        if (c == 125)
+          {
+            *(lex + (sizetype) posl) = 0;
+            pos++ ;
+            estado_anterior = 0;
+            return 37;
+          }
+        if (c == 91)
+          {
+            *(lex + (sizetype) posl) = 0;
+            pos++ ;
+            estado_anterior = 0;
+            return 38;
+          }
+        if (c == 93)
+          {
+            *(lex + (sizetype) posl) = 0;
+            pos++ ;
+            estado_anterior = 0;
+            return 39;
+          }
+        if (c == 44)
+          {
+            *(lex + (sizetype) posl) = 0;
+            pos++ ;
+            estado_anterior = 0;
+            return 42;
+          }
+        if (c == 59)
+          {
+            *(lex + (sizetype) posl) = 0;
+            pos++ ;
+            estado_anterior = 0;
+            return 40;
+          }
+        if (c == 58)
+          {
+            *(lex + (sizetype) posl) = 0;
+            pos++ ;
+            estado_anterior = 0;
+            return 41;
+          }
+        if (c == 32 || c == 10)
+          {
+            pos++ ;
+            posl-- ;
+            posColuna = pos;
+          }
+        if (c == 127)
+          {
+            pos++ ;
+            posl-- ;
+            linha++ ;
+            subColuna = pos;
+            posColuna = pos;
+          }
+        if (c == 9)
+          {
+            tab++ ;
+            pos++ ;
+            posColuna = pos;
+            posl-- ;
+            subColuna = subColuna + -3;
+          }
+        if (c == 0)
+          {
+            return -1;
+          }
+        goto <D.4985>;
+        case 1:;
+        if (((c > 96 && c <= 122 || c > 64 && c <= 90) || c == 95) || c > 47 && c <= 57)
+          {
+            pos++ ;
+            goto <D.4985>;
+          }
+        *(lex + (sizetype)  --posl) = 0;
+        estado_anterior = 1;
+        return palavra_reservada (lex);
+        case 2:;
+        if (c > 47 && c <= 57)
+          {
+            pos++ ;
+            goto <D.4985>;
+          }
+        if (c == 46)
+          {
+            pos++ ;
+            estado = 3;
+            estado_anterior = 2;
+            goto <D.4985>;
+          }
+        if (c == 69)
+          {
+            pos++ ;
+            estado = 4;
+            estado_anterior = 2;
+            goto <D.4985>;
+          }
+        *(lex + (sizetype)  --posl) = 0;
+        estado_anterior = 2;
+        return 80;
+        case 3:;
+        if (c > 47 && c <= 57)
+          {
+            pos++ ;
+            estado = 7;
+            goto <D.4985>;
           }
         else
           {
-            strcpy (Rel_c, (const char * restrict) &E1_c);
-            printf ((const char * restrict) "Vou retornar 1 no E\n");
-            return 1;
+            return 101;
           }
-      }
-    }
-  return 0;
-}
-
-
-;; Function E (null)
-;; enabled by -tree-original
-
-
-{
-  char T_c[1000];
-  char R_h[1000];
-  char R_s[1000];
-
-  printf ((const char * restrict) "Entrei no E\n");
-    char T_c[1000];
-    char R_h[1000];
-    char R_s[1000];
-  if (T ((char *) &T_c) != 0)
-    {
-      strcpy ((char *) &R_h, (const char * restrict) &T_c);
-      if (R ((char *) &R_h, (char *) &R_s) != 0)
-        {
-          strcpy (E_c, (const char * restrict) &R_s);
-          printf ((const char * restrict) "Vou retornar 1 no E\n");
-          return 1;
-        }
-    }
-  return 0;
-}
-
-
-;; Function R (null)
-;; enabled by -tree-original
-
-
-{
-  char T_c[1000];
-  char R1_h[1000];
-  char R1_s[1000];
-
-  printf ((const char * restrict) "Entrei no R (+TR | -TR)\n");
-    char T_c[1000];
-    char R1_h[1000];
-    char R1_s[1000];
-  if (token == 15)
-    {
-      token = le_token ();
-      if (T ((char *) &T_c) != 0)
-        {
-          strcpy ((char *) &R1_h, (const char * restrict) R_h);
-          strcat ((char *) &R1_h, (const char * restrict) &T_c);
-          strcat ((char *) &R1_h, (const char * restrict) "\t+\n");
-          if (R ((char *) &R1_h, (char *) &R1_s) != 0)
-            {
-              strcpy (R_s, (const char * restrict) &R1_s);
-              return 1;
-            }
-        }
-      return 0;
-    }
-  if (token == 16)
-    {
-      token = le_token ();
-      if (T ((char *) &T_c) != 0)
-        {
-          strcpy ((char *) &R1_h, (const char * restrict) R_h);
-          strcat ((char *) &R1_h, (const char * restrict) &T_c);
-          strcat ((char *) &R1_h, (const char * restrict) "\t-\n");
-          if (R ((char *) &R1_h, (char *) &R1_s) != 0)
-            {
-              strcpy (R_s, (const char * restrict) &R1_s);
-              return 1;
-            }
-        }
-      return 0;
-    }
-  strcpy (R_s, (const char * restrict) R_h);
-  printf ((const char * restrict) "Vou retornar 1 no R\n");
-  return 1;
-}
-
-
-;; Function T (null)
-;; enabled by -tree-original
-
-
-{
-  char F_c[1000];
-  char S_h[1000];
-  char S_s[1000];
-
-    char F_c[1000];
-    char S_h[1000];
-    char S_s[1000];
-  printf ((const char * restrict) "Entrei no T\n");
-  if (F ((char *) &F_c) != 0)
-    {
-      strcpy ((char *) &S_h, (const char * restrict) &F_c);
-      if (S ((char *) &S_h, (char *) &S_s) != 0)
-        {
-          strcpy (T_c, (const char * restrict) &S_s);
-          return 1;
-        }
-    }
-  return 0;
-}
-
-
-;; Function S (null)
-;; enabled by -tree-original
-
-
-{
-  char F_c[1000];
-  char S1_h[1000];
-  char S1_s[1000];
-
-  printf ((const char * restrict) "Entrei no S (*FS)\n");
-    char F_c[1000];
-    char S1_h[1000];
-    char S1_s[1000];
-  if (token == 17)
-    {
-      token = le_token ();
-      if (F ((char *) &F_c) != 0)
-        {
-          strcpy ((char *) &S1_h, (const char * restrict) S_h);
-          strcat ((char *) &S1_h, (const char * restrict) &F_c);
-          strcat ((char *) &S1_h, (const char * restrict) "\t*\n");
-          if (S ((char *) &S1_h, (char *) &S1_s) != 0)
-            {
-              strcpy (S_s, (const char * restrict) &S1_s);
-              return 1;
-            }
-        }
-      return 0;
-    }
-  strcpy (S_s, (const char * restrict) S_h);
-  printf ((const char * restrict) "Vou retornar 1 no S\n");
-  return 1;
-}
-
-
-;; Function F (null)
-;; enabled by -tree-original
-
-
-{
-  printf ((const char * restrict) "Entrei no F\n");
-  if (token == 14)
-    {
-      strcpy (F_c, (const char * restrict) "\tpush ");
-      strcat (F_c, (const char * restrict) &lex);
-      strcat (F_c, (const char * restrict) "\n");
-      token = le_token ();
-      return 1;
-    }
-  if (token == 28)
-    {
-      strcpy (F_c, (const char * restrict) "\tvalor-r ");
-      strcat (F_c, (const char * restrict) &lex);
-      strcat (F_c, (const char * restrict) "\n");
-      token = le_token ();
-      return 1;
-    }
-  if (token == 18)
-    {
-      {
-        char E_c[1000];
-
-                char E_c[1000];
-        token = le_token ();
-        if (E ((char *) &E_c) != 0)
+        case 4:;
+        if (c > 47 && c <= 57)
           {
-            if (token == 19)
+            pos++ ;
+            estado = 6;
+            goto <D.4985>;
+          }
+        else
+          {
+            if (c == 45 || c == 43)
               {
-                token = le_token ();
-                strcpy (F_c, (const char * restrict) &E_c);
-                return 1;
+                pos++ ;
+                estado = 5;
+                goto <D.4985>;
               }
           }
+        return 100;
+        case 5:;
+        if (c > 47 && c <= 57)
+          {
+            pos++ ;
+            estado = 6;
+            goto <D.4985>;
+          }
+        return 100;
+        case 6:;
+        if (c > 47 && c <= 57)
+          {
+            pos++ ;
+            goto <D.4985>;
+          }
+        if (estado_anterior == 2)
+          {
+            *(lex + (sizetype)  --posl) = 0;
+            estado_anterior = 6;
+            return 80;
+          }
+        else
+          {
+            *(lex + (sizetype)  --posl) = 0;
+            estado_anterior = 6;
+            return 81;
+          }
+        case 7:;
+        if (c > 47 && c <= 57)
+          {
+            pos++ ;
+            goto <D.4985>;
+          }
+        if (c == 69)
+          {
+            pos++ ;
+            estado = 4;
+            estado_anterior = 7;
+            goto <D.4985>;
+          }
+        *(lex + (sizetype)  --posl) = 0;
+        estado_anterior = 7;
+        return 81;
+        case 8:;
+        if (c > 47 && c <= 57)
+          {
+            pos++ ;
+            goto <D.4985>;
+          }
+        if (c == 120 || c == 88)
+          {
+            pos++ ;
+            estado = 9;
+            estado_anterior = 8;
+            goto <D.4985>;
+          }
+        *(lex + (sizetype)  --posl) = 0;
+        return 80;
+        case 9:;
+        if (c > 47 && c <= 57)
+          {
+            pos++ ;
+            estado_anterior = 9;
+            goto <D.4985>;
+          }
+        else
+          {
+            if (estado_anterior == 8)
+              {
+                return 104;
+              }
+          }
+        *(lex + (sizetype)  --posl) = 0;
+        return 80;
+        <D.4985>:;
       }
-    }
-  return 0;
+  }
+  <D.4996>:;
+  if (fim == 0) goto <D.4995>; else goto <D.4997>;
+  <D.4997>:;
+  return -1;
 }
 
 
-;; Function Lista_Com (null)
+;; Function getToken (null)
 ;; enabled by -tree-original
 
 
 {
-  char LL_c[1000];
-  char Com_c[1000];
+  tk = tksParser[posParser++ ];
+  linha = tksParser[posParser++ ];
+  coluna = tksParser[posParser++ ];
+  strcpy ((char *) &lex, (const char * restrict) &tksParserLex[posParserLex++ ]);
+}
 
-  printf ((const char * restrict) "Entrei no Lista_Com\n");
-    char LL_c[1000];
-    char Com_c[1000];
-  printf ((const char * restrict) "Vou testar Com - token \xef\xbf\xbd %s\n", (char *) &tokens[token]);
-  if (token == 12)
+
+;; Function poetabsimb (null)
+;; enabled by -tree-original
+
+
+{
+  struct tabela * aux = (struct tabela *) malloc (32);
+
+    struct tabela * aux = (struct tabela *) malloc (32);
+  strcpy ((char *) &aux->id, (const char * restrict) id);
+  strcpy ((char *) &aux->tipo, (const char * restrict) tipo);
+  aux->prox = (struct TS *) ts;
+  ts = aux;
+}
+
+
+;; Function verificaDuplicacao (null)
+;; enabled by -tree-original
+
+
+{
+  if (tab == 0B)
     {
       return 1;
     }
-  if (((token != 28 && token != 21) && token != 5) && token != 7)
+  if (strcmp ((const char *) &tab->id, (const char *) lex) == 0)
     {
-      strcpy (Lista_Com_c, (const char * restrict) "");
-      return 1;
+      printf ((const char * restrict) "Variavel %s ja foi declarada\n", lex);
+      printf ((const char * restrict) "Erro ocorreu na linha %d, coluna %d", linha, coluna);
+      exit (0);
     }
-  if (Com ((char *) &Com_c) != 0)
+  return verificaDuplicacao (lex, (struct tabela *) tab->prox);
+}
+
+
+;; Function consultaTipo (null)
+;; enabled by -tree-original
+
+
+{
+  if (tab == 0B)
     {
-      printf ((const char * restrict) "B - token \xef\xbf\xbd %s\n", (char *) &tokens[token]);
-      if (Lista_Com ((char *) &LL_c) != 0)
-        {
-          strcpy (Lista_Com_c, (const char * restrict) &Com_c);
-          strcat (Lista_Com_c, (const char * restrict) &LL_c);
-          printf ((const char * restrict) "Vou retornar 1 no Lista_Com. Token \xef\xbf\xbd %s\n", (char *) &tokens[token]);
-          return 1;
-        }
-      printf ((const char * restrict) "Vou retornar 0 no Lista_Com-1 - token \xef\xbf\xbd %s\n", (char *) &tokens[token]);
-      return 0;
+      return;
     }
-  if (token == 12)
+  if (strcmp ((const char *) &tab->id, (const char *) id) == 0)
     {
-      return 1;
+      strcpy (Tipo, (const char * restrict) &tab->tipo);
     }
-  printf ((const char * restrict) "Vou retornar 0 no Lista_Com-2\n");
-  return 0;
+  consultaTipo (id, Tipo, (struct tabela *) tab->prox);
 }
 
 
@@ -735,222 +803,3630 @@
 }
 
 
-;; Function Com (null)
+;; Function geratemp (null)
 ;; enabled by -tree-original
 
 
 {
-  char Rel_c[1000];
+  static int numtemp = 0;
 
-  printf ((const char * restrict) "Entrei no Com\n");
-    char Rel_c[1000];
-  if (token == 5)
+    static int numtemp = 0;
+  sprintf (temp, (const char * restrict) "T%03d", numtemp++ );
+}
+
+
+;; Function PROGC (null)
+;; enabled by -tree-original
+
+
+{
+  if (LD () != 0)
     {
-      {
-        char labelelse[10];
-        char labelfim[10];
+      return 1;
+    }
+  else
+    {
+      return 0;
+    }
+}
 
-                char labelelse[10];
-                char labelfim[10];
-        geralabel ((char *) &labelelse);
-        geralabel ((char *) &labelfim);
-        token = le_token ();
-        if (token == 18)
-          {
-            token = le_token ();
-            if (Rel ((char *) &Rel_c) != 0)
-              {
-                if (token == 19)
-                  {
+
+;; Function LD (null)
+;; enabled by -tree-original
+
+
+{
+  if (DEC () != 0)
+    {
+      if (RLD () != 0)
+        {
+          return 1;
+        }
+      else
+        {
+          return 0;
+        }
+    }
+  else
+    {
+      return 0;
+    }
+}
+
+
+;; Function RLD (null)
+;; enabled by -tree-original
+
+
+{
+  char LD_c[1000];
+
+    char LD_c[1000];
+  if (LD ((char *) &LD_c) != 0)
+    {
+      strcpy (RLD_c, (const char * restrict) &LD_c);
+      return 1;
+    }
+  else
+    {
+      return 1;
+    }
+}
+
+
+;; Function DEC (null)
+;; enabled by -tree-original
+
+
+{
+  char RDEC_t[10];
+  char Tipo_t[10];
+
+    char RDEC_t[10];
+    char Tipo_t[10];
+  if (TIPO ((char *) &Tipo_t) != 0)
+    {
+      strcpy ((char *) &RDEC_t, (const char * restrict) &Tipo_t);
+      if (tk == 1)
+        {
+          if (verificaDuplicacao ((char *) &lex, ts) != 0)
+            {
+              poetabsimb ((char *) &lex, (char *) &Tipo_t);
+            }
+          getToken ();
+          if (RDEC ((char *) &RDEC_t) != 0)
+            {
+              return 1;
+            }
+          else
+            {
+              return 0;
+            }
+        }
+      else
+        {
+          printf ((const char * restrict) "Erro: esperava token \'id\' na linha %d coluna %d\n", linha, coluna);
+          return 0;
+        }
+    }
+  else
+    {
+      return 0;
+    }
+}
+
+
+;; Function RDEC (null)
+;; enabled by -tree-original
+
+
+{
+  char DF_c[1000];
+  char DV_t[10];
+
+    char DF_c[1000];
+    char DV_t[10];
+  if (tk == 42)
+    {
+      getToken ();
+      if (DV ((char *) &DV_t) != 0)
+        {
+          return 1;
+        }
+      else
+        {
+          return 0;
+        }
+    }
+  else
+    {
+      if (tk == 34)
+        {
+          getToken ();
+          if (DF ((char *) &DF_c) != 0)
+            {
+              return 1;
+            }
+          else
+            {
+              return 0;
+            }
+        }
+      else
+        {
+          if (tk == 40)
+            {
+              getToken ();
+              return 1;
+            }
+          else
+            {
+              if (tk == 43)
+                {
+                  getToken ();
+                  if (tk == 80)
                     {
-                      char Com3_c[1000];
-
-                      token = le_token ();
-                                            char Com3_c[1000];
-                      if (Com ((char *) &Com3_c) != 0)
+                      getToken ();
+                      if (tk == 40)
                         {
-                          if (token == 6)
-                            {
-                              {
-                                char Com2_c[1000];
+                          getToken ();
+                          return 1;
+                        }
+                      else
+                        {
+                          printf ((const char * restrict) "Erro: esperava token \';\' na linha %d coluna %d\n", linha, coluna);
+                          return 0;
+                        }
+                    }
+                  else
+                    {
+                      printf ((const char * restrict) "Erro: esperava token contante inteira na linha %d coluna %d\n", linha, coluna);
+                      return 0;
+                    }
+                }
+              else
+                {
+                  printf ((const char * restrict) "Erro: esperava token \';\', \')\' ou \',\' na linha %d coluna %d\n", linha, coluna);
+                  return 0;
+                }
+            }
+        }
+    }
+}
 
-                                token = le_token ();
-                                                                char Com2_c[1000];
-                                if (Com ((char *) &Com2_c) != 0)
-                                  {
-                                    sprintf (Com_c, (const char * restrict) "%s\tgofalse %s\n%s\tgoto %s\nrotulo %s\n%srotulo %s", (char *) &Rel_c, (char *) &labelelse, (char *) &Com3_c, (char *) &labelfim, (char *) &labelelse, (char *) &Com2_c, (char *) &labelfim);
-                                    return 1;
-                                  }
-                                else
-                                  {
-                                    printf ((const char * restrict) "Erro no comando do else\n");
-                                    return 0;
-                                  }
-                              }
+
+;; Function DV (null)
+;; enabled by -tree-original
+
+
+{
+  char RDV_t[10];
+
+    char RDV_t[10];
+  if (tk == 1)
+    {
+      strcpy ((char *) &RDV_t, (const char * restrict) DV_t);
+      if (verificaDuplicacao ((char *) &lex, ts) != 0)
+        {
+          poetabsimb ((char *) &lex, DV_t);
+        }
+      getToken ();
+      if (RDV ((char *) &RDV_t) != 0)
+        {
+          return 1;
+        }
+      else
+        {
+          return 0;
+        }
+    }
+  else
+    {
+      printf ((const char * restrict) "Erro: esperava token \'id\' na linha %d coluna %d\n", linha, coluna);
+      return 0;
+    }
+}
+
+
+;; Function RDV (null)
+;; enabled by -tree-original
+
+
+{
+  char DV_t[10];
+
+    char DV_t[10];
+  if (tk == 42)
+    {
+      strcpy ((char *) &DV_t, (const char * restrict) RDV_t);
+      getToken ();
+      if (DV ((char *) &DV_t) != 0)
+        {
+          return 1;
+        }
+      else
+        {
+          return 0;
+        }
+    }
+  else
+    {
+      if (tk == 40)
+        {
+          getToken ();
+          return 1;
+        }
+      else
+        {
+          printf ((const char * restrict) "Erro: esperava token \',\' ou \';\' na linha %d coluna %d\n", linha, coluna);
+          return 0;
+        }
+    }
+}
+
+
+;; Function TIPO (null)
+;; enabled by -tree-original
+
+
+{
+  char RTIPOSINAL_s[10];
+  char RTIPOSHORT_s[10];
+  char RTIPOLONG_s[10];
+  char RTIPOSINAL_t[10];
+  char RTIPOSHORT_t[10];
+  char RTIPOLONG_t[10];
+
+    char RTIPOSINAL_s[10];
+    char RTIPOSHORT_s[10];
+    char RTIPOLONG_s[10];
+    char RTIPOSINAL_t[10];
+    char RTIPOSHORT_t[10];
+    char RTIPOLONG_t[10];
+  if (((tk == 69 || tk == 4) || tk == 6) || tk == 7)
+    {
+      switch (tk)
+        {
+          case 69:;
+          strcpy (Tipo_t, (const char * restrict) "char");
+          goto <D.5062>;
+          case 4:;
+          strcpy (Tipo_t, (const char * restrict) "int");
+          goto <D.5062>;
+          case 6:;
+          strcpy (Tipo_t, (const char * restrict) "float");
+          goto <D.5062>;
+          case 7:;
+          strcpy (Tipo_t, (const char * restrict) "double");
+          goto <D.5062>;
+          <D.5062>:;
+        }
+      getToken ();
+      return 1;
+    }
+  else
+    {
+      if (tk == 26 || tk == 27)
+        {
+          switch (tk)
+            {
+              case 26:;
+              strcpy ((char *) &RTIPOSINAL_s, (const char * restrict) "signed");
+              strcpy ((char *) &RTIPOSINAL_t, (const char * restrict) Tipo_t);
+              goto <D.5067>;
+              case 27:;
+              strcpy ((char *) &RTIPOSINAL_s, (const char * restrict) "unsigned");
+              strcpy ((char *) &RTIPOSINAL_t, (const char * restrict) Tipo_t);
+              goto <D.5067>;
+              <D.5067>:;
+            }
+          getToken ();
+          if (RTIPOSINAL ((char *) &RTIPOSINAL_s, (char *) &RTIPOSINAL_t) != 0)
+            {
+              strcpy (Tipo_t, (const char * restrict) &RTIPOSINAL_t);
+              return 1;
+            }
+          else
+            {
+              return 0;
+            }
+        }
+      else
+        {
+          if (tk == 3)
+            {
+              strcpy ((char *) &RTIPOSHORT_s, (const char * restrict) "short");
+              getToken ();
+              if (RTIPOSHORT ((char *) &RTIPOSHORT_s, (char *) &RTIPOSHORT_t) != 0)
+                {
+                  strcpy (Tipo_t, (const char * restrict) &RTIPOSHORT_t);
+                  return 1;
+                }
+              else
+                {
+                  return 0;
+                }
+            }
+          else
+            {
+              if (tk == 5)
+                {
+                  strcpy ((char *) &RTIPOLONG_s, (const char * restrict) "long");
+                  getToken ();
+                  if (RTIPOLONG ((char *) &RTIPOLONG_s, (char *) &RTIPOLONG_t) != 0)
+                    {
+                      strcpy (Tipo_t, (const char * restrict) &RTIPOLONG_t);
+                      return 1;
+                    }
+                  else
+                    {
+                      return 0;
+                    }
+                }
+              else
+                {
+                  return 0;
+                }
+            }
+        }
+    }
+}
+
+
+;; Function RTIPOSINAL (null)
+;; enabled by -tree-original
+
+
+{
+  char RTIPOSINAL2_s[10];
+  char RTIPOSINAL2_t[10];
+
+    char RTIPOSINAL2_s[10];
+    char RTIPOSINAL2_t[10];
+  if (tk == 69 || tk == 4)
+    {
+      if (tk == 69)
+        {
+          strcat (RTIPOSINAL_s, (const char * restrict) " char");
+          strcpy (RTIPOSINAL_t, (const char * restrict) RTIPOSINAL_s);
+        }
+      else
+        {
+          if (tk == 4)
+            {
+              strcat (RTIPOSINAL_s, (const char * restrict) " int");
+              strcpy (RTIPOSINAL_t, (const char * restrict) RTIPOSINAL_s);
+            }
+        }
+      getToken ();
+      return 1;
+    }
+  else
+    {
+      if (tk == 3 || tk == 5)
+        {
+          if (tk == 3)
+            {
+              strcat (RTIPOSINAL_s, (const char * restrict) " short");
+              strcpy ((char *) &RTIPOSINAL2_s, (const char * restrict) RTIPOSINAL_s);
+            }
+          else
+            {
+              if (tk == 5)
+                {
+                  strcat (RTIPOSINAL_s, (const char * restrict) " long");
+                  strcpy ((char *) &RTIPOSINAL2_s, (const char * restrict) RTIPOSINAL_s);
+                }
+            }
+          getToken ();
+          if (RTIPOSINAL2 ((char *) &RTIPOSINAL2_s, (char *) &RTIPOSINAL2_t) != 0)
+            {
+              strcpy (RTIPOSINAL_t, (const char * restrict) &RTIPOSINAL2_t);
+              return 1;
+            }
+          else
+            {
+              return 0;
+            }
+        }
+      else
+        {
+          return 1;
+        }
+    }
+}
+
+
+;; Function RTIPOSINAL2 (null)
+;; enabled by -tree-original
+
+
+{
+  if (tk == 4)
+    {
+      strcat (RTIPOSINAL2_s, (const char * restrict) " int");
+      strcpy (RTIPOSINAL2_t, (const char * restrict) RTIPOSINAL2_s);
+      getToken ();
+      return 1;
+    }
+  else
+    {
+      printf ((const char * restrict) "Erro: esperava token \'int\' na linha %d coluna %d\n", linha, coluna);
+      return 0;
+    }
+}
+
+
+;; Function RTIPOSHORT (null)
+;; enabled by -tree-original
+
+
+{
+  if (tk == 4)
+    {
+      strcat (RTIPOSHORT_s, (const char * restrict) " int");
+      strcpy (RTIPOSHORT_t, (const char * restrict) RTIPOSHORT_s);
+      getToken ();
+      return 1;
+    }
+  else
+    {
+      return 1;
+    }
+}
+
+
+;; Function RTIPOLONG (null)
+;; enabled by -tree-original
+
+
+{
+  char RTIPOLONG2_t[10];
+  char RTIPOLONG2_s[10];
+
+    char RTIPOLONG2_t[10];
+    char RTIPOLONG2_s[10];
+  if (tk == 4 || tk == 7)
+    {
+      if (tk == 4)
+        {
+          strcat (RTIPOLONG_s, (const char * restrict) " int");
+          strcpy (RTIPOLONG_t, (const char * restrict) RTIPOLONG_s);
+        }
+      else
+        {
+          if (tk == 7)
+            {
+              strcat (RTIPOLONG_s, (const char * restrict) " char");
+              strcpy (RTIPOLONG_t, (const char * restrict) RTIPOLONG_s);
+            }
+        }
+      getToken ();
+      return 1;
+    }
+  else
+    {
+      if (tk == 5)
+        {
+          strcat (RTIPOLONG_s, (const char * restrict) " double");
+          strcpy ((char *) &RTIPOLONG2_s, (const char * restrict) RTIPOLONG_s);
+          getToken ();
+          if (RTIPOLONG2 ((char *) &RTIPOLONG2_s, (char *) &RTIPOLONG2_t) != 0)
+            {
+              strcpy (RTIPOLONG_t, (const char * restrict) &RTIPOLONG2_t);
+              return 1;
+            }
+          else
+            {
+              return 0;
+            }
+        }
+      else
+        {
+          return 1;
+        }
+    }
+}
+
+
+;; Function RTIPOLONG2 (null)
+;; enabled by -tree-original
+
+
+{
+  if (tk == 4)
+    {
+      strcat (RTIPOLONG2_s, (const char * restrict) " int");
+      strcpy (RTIPOLONG2_t, (const char * restrict) RTIPOLONG2_s);
+      getToken ();
+      return 1;
+    }
+  else
+    {
+      return 1;
+    }
+}
+
+
+;; Function DF (null)
+;; enabled by -tree-original
+
+
+{
+  char CORPO_c[1000];
+
+    char CORPO_c[1000];
+  if (LP () != 0)
+    {
+      if (tk == 35)
+        {
+          getToken ();
+          if (tk == 36)
+            {
+              getToken ();
+              if (CORPO ((char *) &CORPO_c) != 0)
+                {
+                  if (tk == 37)
+                    {
+                      getToken ();
+                      return 1;
+                    }
+                  else
+                    {
+                      printf ((const char * restrict) "Erro: esperava token \'}\' na linha %d coluna %d\n", linha, coluna);
+                      return 0;
+                    }
+                }
+              else
+                {
+                  return 0;
+                }
+            }
+          else
+            {
+              printf ((const char * restrict) "Erro: esperava token \'{\' na linha %d coluna %d\n", linha, coluna);
+              return 0;
+            }
+        }
+      else
+        {
+          printf ((const char * restrict) "Erro: esperava token \')\' na linha %d coluna %d\n", linha, coluna);
+          return 0;
+        }
+    }
+  else
+    {
+      return 0;
+    }
+}
+
+
+;; Function LP (null)
+;; enabled by -tree-original
+
+
+{
+  char TIPO_t[10];
+
+    char TIPO_t[10];
+  if (TIPO ((char *) &TIPO_t) != 0)
+    {
+      if (tk == 1)
+        {
+          if (verificaDuplicacao ((char *) &lex, ts) != 0)
+            {
+              poetabsimb ((char *) &lex, (char *) &TIPO_t);
+            }
+          getToken ();
+          if (RLP () != 0)
+            {
+              return 1;
+            }
+          else
+            {
+              return 0;
+            }
+        }
+      else
+        {
+          printf ((const char * restrict) "Erro: esperava token \'id\' na linha %d coluna %d\n", linha, coluna);
+          return 0;
+        }
+    }
+  else
+    {
+      return 1;
+    }
+}
+
+
+;; Function RLP (null)
+;; enabled by -tree-original
+
+
+{
+  char TIPO_t[10];
+
+    char TIPO_t[10];
+  if (tk == 42)
+    {
+      getToken ();
+      if (TIPO ((char *) &TIPO_t) != 0)
+        {
+          if (tk == 1)
+            {
+              if (verificaDuplicacao ((char *) &lex, ts) != 0)
+                {
+                  poetabsimb ((char *) &lex, (char *) &TIPO_t);
+                }
+              getToken ();
+              if (RLP () != 0)
+                {
+                  return 1;
+                }
+              else
+                {
+                  return 0;
+                }
+            }
+          else
+            {
+              printf ((const char * restrict) "Erro: esperava token \'id\' na linha %d coluna %d\n", linha, coluna);
+              return 0;
+            }
+        }
+      else
+        {
+          return 0;
+        }
+    }
+  else
+    {
+      return 1;
+    }
+}
+
+
+;; Function CORPO (null)
+;; enabled by -tree-original
+
+
+{
+  char LCD_c[1000];
+
+    char LCD_c[1000];
+  if (LCD ((char *) &LCD_c) != 0)
+    {
+      strcpy (CORPO_c, (const char * restrict) &LCD_c);
+      return 1;
+    }
+  else
+    {
+      return 0;
+    }
+}
+
+
+;; Function LCD (null)
+;; enabled by -tree-original
+
+
+{
+  char DV_t[10];
+  char TIPO_t[10];
+  char COM_c[1000];
+  char LCDLinha_c[1000];
+
+    char DV_t[10];
+    char TIPO_t[10];
+    char COM_c[1000];
+    char LCDLinha_c[1000];
+  strcpy ((char *) &LCDLinha_c, (const char * restrict) "");
+  if (COM ((char *) &COM_c) != 0)
+    {
+      if (LCD ((char *) &LCDLinha_c) != 0)
+        {
+          sprintf (LCD_c, (const char * restrict) "%s%s", (char *) &COM_c, (char *) &LCDLinha_c);
+          return 1;
+        }
+      else
+        {
+          return 0;
+        }
+    }
+  else
+    {
+      if (TIPO ((char *) &TIPO_t) != 0)
+        {
+          strcpy ((char *) &DV_t, (const char * restrict) &TIPO_t);
+          if (DV ((char *) &DV_t) != 0)
+            {
+              if (LCD ((char *) &LCDLinha_c) != 0)
+                {
+                  strcpy (LCD_c, (const char * restrict) &LCDLinha_c);
+                  return 1;
+                }
+              else
+                {
+                  return 0;
+                }
+            }
+          else
+            {
+              return 0;
+            }
+        }
+      else
+        {
+          return 1;
+        }
+    }
+}
+
+
+;; Function COM (null)
+;; enabled by -tree-original
+
+
+{
+  char TIPO_t[10];
+  char E_tp[10];
+  char E_p[10];
+  char E_c[1000];
+  char LCD_c[1000];
+  char RDEC_c[1000];
+  char COMWHILE_c[1000];
+  char COMFOR_c[1000];
+  char COMDOWHILE_c[1000];
+  char COMIF_c[1000];
+
+    char TIPO_t[10];
+    char E_tp[10];
+    char E_p[10];
+    char E_c[1000];
+    char LCD_c[1000];
+    char RDEC_c[1000];
+    char COMWHILE_c[1000];
+    char COMFOR_c[1000];
+    char COMDOWHILE_c[1000];
+    char COMIF_c[1000];
+  if (E ((char *) &E_tp, (char *) &E_p, (char *) &E_c) != 0)
+    {
+      if (tk == 40)
+        {
+          strcpy (COM_c, (const char * restrict) &E_c);
+          getToken ();
+          return 1;
+        }
+      else
+        {
+          printf ((const char * restrict) "Erro: esperava token \';\' na linha %d coluna %d\n", linha, coluna);
+          return 0;
+        }
+    }
+  else
+    {
+      if (COMWHILE ((char *) &COMWHILE_c) != 0)
+        {
+          strcpy (COM_c, (const char * restrict) &COMWHILE_c);
+          return 1;
+        }
+      else
+        {
+          if (COMDOWHILE ((char *) &COMDOWHILE_c) != 0)
+            {
+              strcpy (COM_c, (const char * restrict) &COMDOWHILE_c);
+              return 1;
+            }
+          else
+            {
+              if (COMIF ((char *) &COMIF_c) != 0)
+                {
+                  strcpy (COM_c, (const char * restrict) &COMIF_c);
+                  return 1;
+                }
+              else
+                {
+                  if (COMFOR ((char *) &COMFOR_c) != 0)
+                    {
+                      strcpy (COM_c, (const char * restrict) &COMFOR_c);
+                      return 1;
+                    }
+                  else
+                    {
+                      if (COMSWITCH () != 0)
+                        {
+                          return 1;
+                        }
+                      else
+                        {
+                          if (tk == 25)
+                            {
+                              getToken ();
+                              if (tk == 40)
+                                {
+                                  getToken ();
+                                  return 1;
+                                }
+                              else
+                                {
+                                  printf ((const char * restrict) "Erro: esperava token \';\' na linha %d coluna %d\n", linha, coluna);
+                                  return 0;
+                                }
                             }
                           else
                             {
-                              printf ((const char * restrict) "Esperava palavra else\n");
+                              if (tk == 10)
+                                {
+                                  if (laco == 0)
+                                    {
+                                      printf ((const char * restrict) "Erro: comando break fora de laco de repeticao");
+                                      exit (0);
+                                    }
+                                  getToken ();
+                                  if (tk == 40)
+                                    {
+                                      getToken ();
+                                      return 1;
+                                    }
+                                  else
+                                    {
+                                      printf ((const char * restrict) "Erro: esperava token \';\' na linha %d coluna %d\n", linha, coluna);
+                                      return 0;
+                                    }
+                                }
+                              else
+                                {
+                                  if (tk == 18)
+                                    {
+                                      if (laco == 0)
+                                        {
+                                          printf ((const char * restrict) "Erro: comando continue fora de laco de repeticao");
+                                          exit (0);
+                                        }
+                                      getToken ();
+                                      if (tk == 40)
+                                        {
+                                          getToken ();
+                                          return 1;
+                                        }
+                                      else
+                                        {
+                                          printf ((const char * restrict) "Erro: esperava token \';\' na linha %d coluna %d\n", linha, coluna);
+                                          return 0;
+                                        }
+                                    }
+                                  else
+                                    {
+                                      if (tk == 36)
+                                        {
+                                          getToken ();
+                                          if (LCD ((char *) &LCD_c) != 0)
+                                            {
+                                              if (tk == 37)
+                                                {
+                                                  strcpy (COM_c, (const char * restrict) &LCD_c);
+                                                  getToken ();
+                                                  return 1;
+                                                }
+                                              else
+                                                {
+                                                  printf ((const char * restrict) "Erro: esperava token \'}\' na linha %d coluna %d\n", linha, coluna);
+                                                  return 0;
+                                                }
+                                            }
+                                          else
+                                            {
+                                              return 0;
+                                            }
+                                        }
+                                      else
+                                        {
+                                          if (TIPO ((char *) &TIPO_t) != 0)
+                                            {
+                                              if (tk == 1)
+                                                {
+                                                  if (verificaDuplicacao ((char *) &lex, ts) != 0)
+                                                    {
+                                                      poetabsimb ((char *) &lex, (char *) &TIPO_t);
+                                                    }
+                                                  getToken ();
+                                                  if (RDEC () != 0)
+                                                    {
+                                                      strcpy (COM_c, (const char * restrict) &RDEC_c);
+                                                      return 1;
+                                                    }
+                                                  else
+                                                    {
+                                                      return 0;
+                                                    }
+                                                }
+                                              else
+                                                {
+                                                  printf ((const char * restrict) "Erro: esperava token \'id\' na linha %d coluna %d\n", linha, coluna);
+                                                  return 0;
+                                                }
+                                            }
+                                          else
+                                            {
+                                              return 0;
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
+
+;; Function COMIF (null)
+;; enabled by -tree-original
+
+
+{
+  char E_tp[10];
+  char E_p[1000];
+  char E_c[1000];
+  char COM_c[1000];
+  char RIF_c[1000];
+  char labelelse[10];
+  char labelfim[10];
+
+    char E_tp[10];
+    char E_p[1000];
+    char E_c[1000];
+    char COM_c[1000];
+    char RIF_c[1000];
+    char labelelse[10];
+    char labelfim[10];
+  strcpy ((char *) &RIF_c, (const char * restrict) "");
+  if (tk == 11)
+    {
+      getToken ();
+      if (tk == 34)
+        {
+          getToken ();
+          if (E ((char *) &E_tp, (char *) &E_p, (char *) &E_c) != 0)
+            {
+              if (tk == 35)
+                {
+                  getToken ();
+                  if (COM ((char *) &COM_c) != 0)
+                    {
+                      if (RIF ((char *) &RIF_c) != 0)
+                        {
+                          geralabel ((char *) &labelelse);
+                          geralabel ((char *) &labelfim);
+                          if (strcmp ((const char *) &RIF_c, (const char *) "") != 0)
+                            {
+                              sprintf (COMIF_c, (const char * restrict) "%s\tif %s==0 goto %s\n%s\tgoto %s\n%s:\n%s%s:\n", (char *) &E_c, (char *) &E_p, (char *) &labelelse, (char *) &COM_c, (char *) &labelfim, (char *) &labelelse, (char *) &RIF_c, (char *) &labelfim);
+                            }
+                          else
+                            {
+                              sprintf (COMIF_c, (const char * restrict) "%s\tif %s==0 goto %s\n%s%s:\n", (char *) &E_c, (char *) &E_p, (char *) &labelfim, (char *) &COM_c, (char *) &labelfim);
+                            }
+                          return 1;
+                        }
+                      else
+                        {
+                          return 0;
+                        }
+                    }
+                  else
+                    {
+                      return 0;
+                    }
+                }
+              else
+                {
+                  printf ((const char * restrict) "Erro: esperava token \')\' na linha %d coluna %d\n", linha, coluna);
+                  return 0;
+                }
+            }
+          else
+            {
+              return 0;
+            }
+        }
+      else
+        {
+          printf ((const char * restrict) "Erro: esperava token \'(\' na linha %d coluna %d\n", linha, coluna);
+          return 0;
+        }
+    }
+  else
+    {
+      return 0;
+    }
+}
+
+
+;; Function RIF (null)
+;; enabled by -tree-original
+
+
+{
+  char COM_c[1000];
+
+    char COM_c[1000];
+  if (tk == 12)
+    {
+      getToken ();
+      if (COM ((char *) &COM_c) != 0)
+        {
+          strcpy (RIF_c, (const char * restrict) &COM_c);
+          return 1;
+        }
+      else
+        {
+          return 0;
+        }
+    }
+  else
+    {
+      return 1;
+    }
+}
+
+
+;; Function COMFOR (null)
+;; enabled by -tree-original
+
+
+{
+  char COM_c[1000];
+  char RFOR_c[1000];
+  char EIF1_c[1000];
+  char EIF2_c[1000];
+  char EIF3_c[1000];
+  char EIF1_p[1000];
+  char EIF2_p[1000];
+  char EIF3_p[1000];
+  char labellaco[1000];
+  char labelfim[1000];
+
+    char COM_c[1000];
+    char RFOR_c[1000];
+    char EIF1_c[1000];
+    char EIF2_c[1000];
+    char EIF3_c[1000];
+    char EIF1_p[1000];
+    char EIF2_p[1000];
+    char EIF3_p[1000];
+    char labellaco[1000];
+    char labelfim[1000];
+  if (tk == 15)
+    {
+      laco = 1;
+      getToken ();
+      if (tk == 34)
+        {
+          getToken ();
+          if (EIF ((char *) &EIF1_c, (char *) &EIF1_p) != 0)
+            {
+              if (tk == 40)
+                {
+                  getToken ();
+                  if (EIF ((char *) &EIF2_c, (char *) &EIF2_p) != 0)
+                    {
+                      if (tk == 40)
+                        {
+                          getToken ();
+                          if (EIF ((char *) &EIF3_c, (char *) &EIF3_p) != 0)
+                            {
+                              if (tk == 35)
+                                {
+                                  getToken ();
+                                  if (COM ((char *) &COM_c) != 0)
+                                    {
+                                      laco = 0;
+                                      if (RFOR ((char *) &RFOR_c) != 0)
+                                        {
+                                          geralabel ((char *) &labellaco);
+                                          geralabel ((char *) &labelfim);
+                                          sprintf (COMFOR_c, (const char * restrict) "%s%s:\n%s\tif %s == 0 goto %s\n%s%s\tgoto %s\n%s:\n%s", (char *) &EIF1_c, (char *) &labellaco, (char *) &EIF2_c, (char *) &EIF2_p, (char *) &labelfim, (char *) &COM_c, (char *) &EIF3_c, (char *) &labellaco, (char *) &labelfim, (char *) &RFOR_c);
+                                          return 1;
+                                        }
+                                      else
+                                        {
+                                          return 0;
+                                        }
+                                    }
+                                  else
+                                    {
+                                      return 0;
+                                    }
+                                }
+                              else
+                                {
+                                  printf ((const char * restrict) "Erro: esperava token \')\' na linha %d coluna %d\n", linha, coluna);
+                                  return 0;
+                                }
+                            }
+                          else
+                            {
                               return 0;
                             }
                         }
                       else
                         {
-                          printf ((const char * restrict) "Esperava fecha par\xef\xbf\xbdnteses\n");
+                          printf ((const char * restrict) "Erro: esperava token \';\' na linha %d coluna %d\n", linha, coluna);
                           return 0;
                         }
                     }
-                  }
-                else
-                  {
-                    printf ((const char * restrict) "Erro na express\xef\xbf\xbdo do if \n");
-                    return 0;
-                  }
-              }
-            printf ((const char * restrict) "Esperava abre par\xef\xbf\xbdnteses\n");
-            return 0;
-          }
-        else
-          {
-            printf ((const char * restrict) "Esperava abre par\xef\xbf\xbdnteses\n");
-            return 0;
-          }
-      }
-    }
-  if (token == 7)
-    {
-      {
-        char labelinicio[10];
-        char labelfim[10];
-
-                char labelinicio[10];
-                char labelfim[10];
-        geralabel ((char *) &labelinicio);
-        geralabel ((char *) &labelfim);
-        token = le_token ();
-        if (token == 18)
-          {
-            token = le_token ();
-            if (Rel ((char *) &Rel_c) != 0)
-              {
-                if (token == 19)
-                  {
+                  else
                     {
-                      char Com1_c[1000];
-
-                      token = le_token ();
-                                            char Com1_c[1000];
-                      if (Com ((char *) &Com1_c) != 0)
-                        {
-                          sprintf (Com_c, (const char * restrict) "rotulo %s\n%s\tgofalse %s\n%s\tgoto %s\nrotulo %s\n", (char *) &labelinicio, (char *) &Rel_c, (char *) &labelfim, (char *) &Com1_c, (char *) &labelinicio, (char *) &labelfim);
-                          return 1;
-                        }
-                      else
-                        {
-                          printf ((const char * restrict) "Esperava fecha par\xef\xbf\xbdnteses\n");
-                          return 0;
-                        }
-                    }
-                  }
-                else
-                  {
-                    printf ((const char * restrict) "Erro na condi\xef\xbf\xbd\xef\xbf\xbdo do while\n");
-                    return 0;
-                  }
-              }
-            printf ((const char * restrict) "Esperava abre par\xef\xbf\xbdnteses\n");
-            return 0;
-          }
-        else
-          {
-            printf ((const char * restrict) "Esperava abre par\xef\xbf\xbdnteses\n");
-            return 0;
-          }
-      }
-    }
-  else
-    {
-      if (token == 28)
-        {
-          {
-            char id[10];
-
-                        char id[10];
-            strcpy ((char *) &id, (const char * restrict) &lex);
-            token = le_token ();
-            if (token == 13)
-              {
-                {
-                  char E_c[1000];
-
-                  token = le_token ();
-                                    char E_c[1000];
-                  if (Rel ((char *) &E_c) != 0)
-                    {
-                      if (token == 21)
-                        {
-                          token = le_token ();
-                          strcpy (Com_c, (const char * restrict) "\tvalor-l ");
-                          strcat (Com_c, (const char * restrict) &id);
-                          strcat (Com_c, (const char * restrict) "\n");
-                          strcat (Com_c, (const char * restrict) &E_c);
-                          strcat (Com_c, (const char * restrict) "\t:=\n\tpop\n");
-                          printf ((const char * restrict) "Vou retornar 1 no Com\n");
-                          return 1;
-                        }
-                      else
-                        {
-                          printf ((const char * restrict) "Faltou ponto-e-v\xef\xbf\xbdrgula ap\xef\xbf\xbds atribui\xef\xbf\xbd\xef\xbf\xbdo\n");
-                          return 0;
-                        }
+                      return 0;
                     }
                 }
-              }
-          }
-        }
-      else
-        {
-          if (token == 10)
-            {
-              {
-                char Lista_Com_c[1000];
-
-                                char Lista_Com_c[1000];
-                token = le_token ();
-                printf ((const char * restrict) "Consumi o abre chaves\n");
-                if (Lista_Com ((char *) &Lista_Com_c) != 0)
-                  {
-                    printf ((const char * restrict) "Voltei do Lista_Com. Token=%s\n", (char *) &tokens[token]);
-                    if (token == 11)
-                      {
-                        token = le_token ();
-                        printf ((const char * restrict) "Consumi o fecha chaves\n");
-                        strcpy (Com_c, (const char * restrict) &Lista_Com_c);
-                        return 1;
-                      }
-                    else
-                      {
-                        printf ((const char * restrict) "Esperava fecha chaves na linha %d", linlex);
-                        return 0;
-                      }
-                  }
-              }
+              else
+                {
+                  printf ((const char * restrict) "Erro: esperava token \';\' na linha %d coluna %d\n", linha, coluna);
+                  return 0;
+                }
             }
           else
             {
-              if (token == 21)
+              return 0;
+            }
+        }
+      else
+        {
+          printf ((const char * restrict) "Erro: esperava token \'(\' na linha %d coluna %d\n", linha, coluna);
+          return 0;
+        }
+    }
+  else
+    {
+      return 0;
+    }
+}
+
+
+;; Function RFOR (null)
+;; enabled by -tree-original
+
+
+{
+  char COM_c[1000];
+
+    char COM_c[1000];
+  if (COM ((char *) &COM_c) != 0)
+    {
+      strcpy (RFOR_c, (const char * restrict) &COM_c);
+      return 1;
+    }
+  else
+    {
+      return 1;
+    }
+}
+
+
+;; Function EIF (null)
+;; enabled by -tree-original
+
+
+{
+  char E_tp[10];
+  char E_p[1000];
+  char E_c[1000];
+
+    char E_tp[10];
+    char E_p[1000];
+    char E_c[1000];
+  if (E ((char *) &E_tp, (char *) &E_p, (char *) &E_c) != 0)
+    {
+      strcpy (EIF_c, (const char * restrict) &E_c);
+      strcpy (EIF_p, (const char * restrict) &E_p);
+      return 1;
+    }
+  else
+    {
+      return 1;
+    }
+}
+
+
+;; Function COMWHILE (null)
+;; enabled by -tree-original
+
+
+{
+  char E_tp[10];
+  char E_p[1000];
+  char E_c[1000];
+  char COM_c[1000];
+  char RWHILE_c[1000];
+  char labelinicio[10];
+  char labelfim[10];
+
+    char E_tp[10];
+    char E_p[1000];
+    char E_c[1000];
+    char COM_c[1000];
+    char RWHILE_c[1000];
+    char labelinicio[10];
+    char labelfim[10];
+  if (tk == 13 && doWhile != 1)
+    {
+      laco = 1;
+      getToken ();
+      if (tk == 34)
+        {
+          getToken ();
+          if (E ((char *) &E_tp, (char *) &E_p, (char *) &E_c) != 0)
+            {
+              if (tk == 35)
                 {
-                  printf ((const char * restrict) "Vou retornar 1 no Com com ponto e virgula\n");
-                  token = le_token ();
+                  getToken ();
+                  if (COM ((char *) &COM_c) != 0)
+                    {
+                      if (RWHILE ((char *) &RWHILE_c) != 0)
+                        {
+                          geralabel ((char *) &labelinicio);
+                          geralabel ((char *) &labelfim);
+                          sprintf (COMWHILE_c, (const char * restrict) "%s:\n%s\tif %s==0 goto %s\n%s\tgoto %s\n%s:\n%s", (char *) &labelinicio, (char *) &E_c, (char *) &E_p, (char *) &labelfim, (char *) &COM_c, (char *) &labelinicio, (char *) &labelfim, (char *) &RWHILE_c);
+                          laco = 0;
+                          return 1;
+                        }
+                      else
+                        {
+                          return 0;
+                        }
+                    }
+                  else
+                    {
+                      return 0;
+                    }
+                }
+              else
+                {
+                  printf ((const char * restrict) "Erro: esperava token \')\' na linha %d coluna %d\n", linha, coluna);
+                  return 0;
+                }
+            }
+          else
+            {
+              return 0;
+            }
+        }
+      else
+        {
+          printf ((const char * restrict) "Erro: esperava token \'(\' na linha %d coluna %d\n", linha, coluna);
+          return 0;
+        }
+    }
+  else
+    {
+      return 0;
+    }
+}
+
+
+;; Function RWHILE (null)
+;; enabled by -tree-original
+
+
+{
+  char COM_c[1000];
+
+    char COM_c[1000];
+  if (COM ((char *) &COM_c) != 0)
+    {
+      strcpy (RWHILE_c, (const char * restrict) &COM_c);
+      return 1;
+    }
+  else
+    {
+      return 1;
+    }
+}
+
+
+;; Function COMDOWHILE (null)
+;; enabled by -tree-original
+
+
+{
+  char E_tp[10];
+  char E_p[1000];
+  char E_c[1000];
+  char COM_c[1000];
+  char RDOWHILE_c[1000];
+  char label[10];
+
+    char E_tp[10];
+    char E_p[1000];
+    char E_c[1000];
+    char COM_c[1000];
+    char RDOWHILE_c[1000];
+    char label[10];
+  if (tk == 14)
+    {
+      laco = 1;
+      doWhile = 1;
+      getToken ();
+      if (COM ((char *) &COM_c) != 0)
+        {
+          if (RDOWHILE ((char *) &RDOWHILE_c) != 0)
+            {
+              if (tk == 13)
+                {
+                  getToken ();
+                  if (tk == 34)
+                    {
+                      getToken ();
+                      if (E ((char *) &E_tp, (char *) &E_p, (char *) &E_c) != 0)
+                        {
+                          if (tk == 35)
+                            {
+                              getToken ();
+                              if (tk == 40)
+                                {
+                                  getToken ();
+                                  doWhile = 0;
+                                  geralabel ((char *) &label);
+                                  sprintf (COMDOWHILE_c, (const char * restrict) "%s:\n%s%s\tif %s==1 goto %s\n%s", (char *) &label, (char *) &COM_c, (char *) &E_c, (char *) &E_p, (char *) &label, (char *) &RDOWHILE_c);
+                                  laco = 0;
+                                  return 1;
+                                }
+                              else
+                                {
+                                  printf ((const char * restrict) "Erro: esperava token \';\' na linha %d coluna %d\n", linha, coluna);
+                                }
+                            }
+                          else
+                            {
+                              printf ((const char * restrict) "Erro: esperava token \')\' na linha %d coluna %d\n", linha, coluna);
+                              return 0;
+                            }
+                        }
+                      else
+                        {
+                          return 0;
+                        }
+                    }
+                  else
+                    {
+                      printf ((const char * restrict) "Erro: esperava token \'(\' na linha %d coluna %d\n", linha, coluna);
+                      return 0;
+                    }
+                }
+              else
+                {
+                  printf ((const char * restrict) "Erro: esperava token \'while\' na linha %d coluna %d\n", linha, coluna);
+                  return 0;
+                }
+            }
+          else
+            {
+              return 0;
+            }
+        }
+      else
+        {
+          return 0;
+        }
+    }
+  else
+    {
+      return 0;
+    }
+  return -1;
+}
+
+
+;; Function RDOWHILE (null)
+;; enabled by -tree-original
+
+
+{
+  char COM_c[1000];
+
+    char COM_c[1000];
+  if (COM ((char *) &COM_c) != 0)
+    {
+      strcpy (RDOWHILE_c, (const char * restrict) &COM_c);
+      return 1;
+    }
+  else
+    {
+      return 1;
+    }
+}
+
+
+;; Function COMSWITCH (null)
+;; enabled by -tree-original
+
+
+{
+  char E_tp[10];
+  char E_p[1000];
+  char E_c[1000];
+
+    char E_tp[10];
+    char E_p[1000];
+    char E_c[1000];
+  if (tk == 16)
+    {
+      getToken ();
+      if (tk == 34)
+        {
+          getToken ();
+          if (E ((char *) &E_tp, (char *) &E_p, (char *) &E_c) != 0)
+            {
+              if (tk == 35)
+                {
+                  getToken ();
+                  if (RSWITCH () != 0)
+                    {
+                      return 1;
+                    }
+                  else
+                    {
+                      return 0;
+                    }
+                }
+              else
+                {
+                  printf ((const char * restrict) "Erro: esperava token \')\' na linha %d coluna %d\n", linha, coluna);
+                  return 0;
+                }
+            }
+          else
+            {
+              return 0;
+            }
+        }
+      else
+        {
+          printf ((const char * restrict) "Erro: esperava token \'(\' na linha %d coluna %d\n", linha, coluna);
+          return 0;
+        }
+    }
+  else
+    {
+      return 0;
+    }
+}
+
+
+;; Function RSWITCH (null)
+;; enabled by -tree-original
+
+
+{
+  char COM_c[1000];
+
+    char COM_c[1000];
+  if (tk == 36)
+    {
+      getToken ();
+      if (tk == 17)
+        {
+          getToken ();
+          if (tk == 80)
+            {
+              getToken ();
+              if (tk == 41)
+                {
+                  getToken ();
+                  if (COM ((char *) &COM_c) != 0)
+                    {
+                      if (NEXTCASE () != 0)
+                        {
+                          if (tk == 37)
+                            {
+                              getToken ();
+                              return 1;
+                            }
+                          else
+                            {
+                              printf ((const char * restrict) "Erro: esperava token \'}\' na linha %d coluna %d\n", linha, coluna);
+                              return 0;
+                            }
+                        }
+                      else
+                        {
+                          return 0;
+                        }
+                    }
+                  else
+                    {
+                      return 0;
+                    }
+                }
+              else
+                {
+                  printf ((const char * restrict) "Erro: esperava token \':\' na linha %d coluna %d\n", linha, coluna);
+                  return 0;
+                }
+            }
+          else
+            {
+              printf ((const char * restrict) "Erro: esperava constante inteira na linha %d coluna %d\n", linha, coluna);
+              return 0;
+            }
+        }
+      else
+        {
+          printf ((const char * restrict) "Erro: esperava token \'case\' na linha %d coluna %d\n", linha, coluna);
+          return 0;
+        }
+    }
+  else
+    {
+      if (tk == 17)
+        {
+          getToken ();
+          if (tk == 80)
+            {
+              getToken ();
+              if (tk == 41)
+                {
+                  getToken ();
+                  if (COM ((char *) &COM_c) != 0)
+                    {
+                      return 1;
+                    }
+                  else
+                    {
+                      return 0;
+                    }
+                }
+              else
+                {
+                  printf ((const char * restrict) "Erro: esperava token \':\' na linha %d coluna %d\n", linha, coluna);
+                  return 0;
+                }
+            }
+          else
+            {
+              printf ((const char * restrict) "Erro: esperava constante inteira na linha %d coluna %d\n", linha, coluna);
+              return 0;
+            }
+        }
+      else
+        {
+          if (tk == 19)
+            {
+              getToken ();
+              if (tk == 41)
+                {
+                  getToken ();
+                  if (COM ((char *) &COM_c) != 0)
+                    {
+                      return 1;
+                    }
+                  else
+                    {
+                      return 0;
+                    }
+                }
+              else
+                {
+                  printf ((const char * restrict) "Erro: esperava token \':\' na linha %d coluna %d\n", linha, coluna);
+                  return 0;
+                }
+            }
+          else
+            {
+              printf ((const char * restrict) "Erro: esperava token \'{\', \'case\' ou \'default\' na linha %d coluna %d\n", linha, coluna);
+              return 0;
+            }
+        }
+    }
+}
+
+
+;; Function NEXTCASE (null)
+;; enabled by -tree-original
+
+
+{
+  char COM_c[1000];
+
+    char COM_c[1000];
+  if (tk == 17)
+    {
+      getToken ();
+      if (tk == 80)
+        {
+          getToken ();
+          if (tk == 41)
+            {
+              getToken ();
+              if (COM ((char *) &COM_c) != 0)
+                {
+                  if (NEXTCASE () != 0)
+                    {
+                      return 1;
+                    }
+                  else
+                    {
+                      return 0;
+                    }
+                }
+              else
+                {
+                  return 0;
+                }
+            }
+          else
+            {
+              printf ((const char * restrict) "Erro: esperava token \':\' na linha %d coluna %d\n", linha, coluna);
+              return 0;
+            }
+        }
+      else
+        {
+          printf ((const char * restrict) "Erro: esperava constante inteira na linha %d coluna %d\n", linha, coluna);
+          return 0;
+        }
+    }
+  else
+    {
+      if (tk == 19)
+        {
+          getToken ();
+          if (tk == 41)
+            {
+              getToken ();
+              if (COM ((char *) &COM_c) != 0)
+                {
                   return 1;
                 }
               else
                 {
-                  printf ((const char * restrict) "Vou retornar 0 no Com vazio - token \xef\xbf\xbd %s\n", (char *) &tokens[token]);
+                  return 0;
+                }
+            }
+          else
+            {
+              printf ((const char * restrict) "Erro: esperava token \':\' na linha %d coluna %d\n", linha, coluna);
+              return 0;
+            }
+        }
+      else
+        {
+          return 1;
+        }
+    }
+}
+
+
+;; Function E (null)
+;; enabled by -tree-original
+
+
+{
+  char ELinha_h[10];
+  char ELinha_s[10];
+  char ELinha_c[1000];
+  char ELinha_p[10];
+  char ELinha_hp[10];
+  char ELinha_hc[1000];
+  char ELinha_sp[10];
+  char ELinha_sc[1000];
+  char E1_tp[10];
+  char E1_h[10];
+  char E1_s[10];
+  char E1_p[10];
+  char E1_c[1000];
+
+    char ELinha_h[10];
+    char ELinha_s[10];
+    char ELinha_c[1000];
+    char ELinha_p[10];
+    char ELinha_hp[10];
+    char ELinha_hc[1000];
+    char ELinha_sp[10];
+    char ELinha_sc[1000];
+    char E1_tp[10];
+    char E1_h[10];
+    char E1_s[10];
+    char E1_p[10];
+    char E1_c[1000];
+  if (E1 ((char *) &E1_tp, (char *) &E1_h, (char *) &E1_s, (char *) &E1_p, (char *) &E1_c) != 0)
+    {
+      strcpy ((char *) &ELinha_h, (const char * restrict) &E1_tp);
+      strcpy ((char *) &ELinha_hp, (const char * restrict) &E1_p);
+      strcpy ((char *) &ELinha_hc, (const char * restrict) &E1_c);
+      if (ELinha ((char *) &ELinha_h, (char *) &ELinha_s, (char *) &ELinha_p, (char *) &ELinha_hp, (char *) &ELinha_sp, (char *) &ELinha_c, (char *) &ELinha_hc, (char *) &ELinha_sc) != 0)
+        {
+          strcpy (E_tp, (const char * restrict) &ELinha_s);
+          strcpy (E_p, (const char * restrict) &ELinha_sp);
+          strcpy (E_c, (const char * restrict) &ELinha_sc);
+          return 1;
+        }
+      else
+        {
+          return 0;
+        }
+    }
+  else
+    {
+      return 0;
+    }
+}
+
+
+;; Function ELinha (null)
+;; enabled by -tree-original
+
+
+{
+  char ELinha2_sp[10];
+  char ELinha2_sc[1000];
+  char ELinha2_hp[10];
+  char ELinha2_hc[1000];
+  char ELinha2_h[10];
+  char ELinha2_s[10];
+  char ELinha2_p[10];
+  char ELinha2_c[1000];
+  char E1_tp[10];
+  char E1_h[10];
+  char E1_s[10];
+  char E1_p[10];
+  char E1_c[1000];
+
+    char ELinha2_sp[10];
+    char ELinha2_sc[1000];
+    char ELinha2_hp[10];
+    char ELinha2_hc[1000];
+    char ELinha2_h[10];
+    char ELinha2_s[10];
+    char ELinha2_p[10];
+    char ELinha2_c[1000];
+    char E1_tp[10];
+    char E1_h[10];
+    char E1_s[10];
+    char E1_p[10];
+    char E1_c[1000];
+  if (tk == 42)
+    {
+      getToken ();
+      if (E1 ((char *) &E1_tp, (char *) &E1_h, (char *) &E1_s, (char *) &E1_p, (char *) &E1_c) != 0)
+        {
+          strcpy ((char *) &ELinha2_h, (const char * restrict) &E1_tp);
+          if (ELinha ((char *) &ELinha2_h, (char *) &ELinha2_s, (char *) &ELinha2_p, (char *) &ELinha2_hp, (char *) &ELinha2_sp, (char *) &ELinha2_c, (char *) &ELinha2_hc, (char *) &ELinha2_sc) != 0)
+            {
+              strcpy (ELinha_s, (const char * restrict) &ELinha2_s);
+              strcpy (ELinha_p, (const char * restrict) &ELinha2_p);
+              sprintf (ELinha_c, (const char * restrict) "%s %s", (char *) &E1_c, (char *) &ELinha2_c);
+              return 1;
+            }
+          else
+            {
+              return 0;
+            }
+        }
+      else
+        {
+          return 0;
+        }
+    }
+  else
+    {
+      strcpy (ELinha_s, (const char * restrict) ELinha_h);
+      strcpy (ELinha_sp, (const char * restrict) ELinha_hp);
+      strcpy (ELinha_sc, (const char * restrict) ELinha_hc);
+      return 1;
+    }
+}
+
+
+;; Function E1 (null)
+;; enabled by -tree-original
+
+
+{
+  char E1Linha_h[10];
+  char E1Linha_s[10];
+  char E1Linha_tp[10];
+  char E1Linha_p[10];
+  char E1Linha_c[1000];
+  char E2_tp[10];
+  char E2_h[10];
+  char E2_s[10];
+  char E2_p[10];
+  char E2_c[1000];
+
+    char E1Linha_h[10];
+    char E1Linha_s[10];
+    char E1Linha_tp[10];
+    char E1Linha_p[10];
+    char E1Linha_c[1000];
+    char E2_tp[10];
+    char E2_h[10];
+    char E2_s[10];
+    char E2_p[10];
+    char E2_c[1000];
+  if (E2 ((char *) &E2_tp, (char *) &E2_h, (char *) &E2_s, (char *) &E2_p, (char *) &E2_c) != 0)
+    {
+      if (tk == 43)
+        {
+          strcpy ((char *) &E1Linha_h, (const char * restrict) &E2_tp);
+          getToken ();
+          if (E1 ((char *) &E1Linha_tp, (char *) &E1Linha_h, (char *) &E1Linha_s, (char *) &E1Linha_p, (char *) &E1Linha_c) != 0)
+            {
+              strcpy (E1_tp, (const char * restrict) &E1Linha_s);
+              strcpy (E1_p, (const char * restrict) &E2_p);
+              sprintf (E1_c, (const char * restrict) "%s\t%s = %s\n", (char *) &E1Linha_c, (char *) &E2_p, (char *) &E1Linha_p);
+              return 1;
+            }
+          else
+            {
+              return 0;
+            }
+        }
+      else
+        {
+          if (tk == 54)
+            {
+              strcpy ((char *) &E1Linha_h, (const char * restrict) &E2_tp);
+              getToken ();
+              if (E1 ((char *) &E1Linha_tp, (char *) &E1Linha_h, (char *) &E1Linha_s, (char *) &E1Linha_p, (char *) &E1Linha_c) != 0)
+                {
+                  strcpy (E1_tp, (const char * restrict) &E1Linha_s);
+                  strcpy (E1_p, (const char * restrict) &E2_p);
+                  sprintf (E1_c, (const char * restrict) "%s\t%s = %s * %s\n", (char *) &E1Linha_c, (char *) &E2_p, (char *) &E2_p, (char *) &E1Linha_p);
+                  return 1;
+                }
+              else
+                {
+                  return 0;
+                }
+            }
+          else
+            {
+              if (tk == 55)
+                {
+                  strcpy ((char *) &E1Linha_h, (const char * restrict) &E2_tp);
+                  getToken ();
+                  if (E1 ((char *) &E1Linha_tp, (char *) &E1Linha_h, (char *) &E1Linha_s, (char *) &E1Linha_p, (char *) &E1Linha_c) != 0)
+                    {
+                      strcpy (E1_tp, (const char * restrict) &E1Linha_s);
+                      strcpy (E1_p, (const char * restrict) &E2_p);
+                      sprintf (E1_c, (const char * restrict) "%s\t%s = %s / %s\n", (char *) &E1Linha_c, (char *) &E2_p, (char *) &E2_p, (char *) &E1Linha_p);
+                      return 1;
+                    }
+                  else
+                    {
+                      return 0;
+                    }
+                }
+              else
+                {
+                  if (tk == 56)
+                    {
+                      strcpy ((char *) &E1Linha_h, (const char * restrict) &E2_tp);
+                      getToken ();
+                      if (E1 ((char *) &E1Linha_tp, (char *) &E1Linha_h, (char *) &E1Linha_s, (char *) &E1Linha_p, (char *) &E1Linha_c) != 0)
+                        {
+                          strcpy (E1_tp, (const char * restrict) &E1Linha_s);
+                          strcpy (E1_p, (const char * restrict) &E2_p);
+                          sprintf (E1_c, (const char * restrict) "%s\t%s = %s %c %s\n", (char *) &E1Linha_c, (char *) &E2_p, (char *) &E2_p, 37, (char *) &E1Linha_p);
+                          return 1;
+                        }
+                      else
+                        {
+                          return 0;
+                        }
+                    }
+                  else
+                    {
+                      if (tk == 53)
+                        {
+                          strcpy ((char *) &E1Linha_h, (const char * restrict) &E2_tp);
+                          getToken ();
+                          if (E1 ((char *) &E1Linha_tp, (char *) &E1Linha_h, (char *) &E1Linha_s, (char *) &E1Linha_p, (char *) &E1Linha_c) != 0)
+                            {
+                              strcpy (E1_tp, (const char * restrict) &E1Linha_s);
+                              strcpy (E1_p, (const char * restrict) &E2_p);
+                              sprintf (E1_c, (const char * restrict) "%s\t%s = %s + %s\n", (char *) &E1Linha_c, (char *) &E2_p, (char *) &E2_p, (char *) &E1Linha_p);
+                              return 1;
+                            }
+                          else
+                            {
+                              return 0;
+                            }
+                        }
+                      else
+                        {
+                          if (tk == 52)
+                            {
+                              strcpy ((char *) &E1Linha_h, (const char * restrict) &E2_tp);
+                              getToken ();
+                              if (E1 ((char *) &E1Linha_tp, (char *) &E1Linha_h, (char *) &E1Linha_s, (char *) &E1Linha_p, (char *) &E1Linha_c) != 0)
+                                {
+                                  strcpy (E1_tp, (const char * restrict) &E1Linha_s);
+                                  strcpy (E1_p, (const char * restrict) &E2_p);
+                                  sprintf (E1_c, (const char * restrict) "%s\t%s = %s - %s\n", (char *) &E1Linha_c, (char *) &E2_p, (char *) &E2_p, (char *) &E1Linha_p);
+                                  return 1;
+                                }
+                              else
+                                {
+                                  return 0;
+                                }
+                            }
+                          else
+                            {
+                              strcpy (E1_tp, (const char * restrict) &E2_tp);
+                              strcpy (E1_p, (const char * restrict) &E2_p);
+                              strcpy (E1_c, (const char * restrict) &E2_c);
+                              return 1;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
+
+;; Function E2 (null)
+;; enabled by -tree-original
+
+
+{
+  char E2Linha_h[10];
+  char E2Linha_s[10];
+  char E2Linha_hp[10];
+  char E2Linha_sp[10];
+  char E2Linha_hc[1000];
+  char E2Linha_sc[1000];
+  char E3_tp[10];
+  char E3_p[10];
+  char E3_c[1000];
+
+    char E2Linha_h[10];
+    char E2Linha_s[10];
+    char E2Linha_hp[10];
+    char E2Linha_sp[10];
+    char E2Linha_hc[1000];
+    char E2Linha_sc[1000];
+    char E3_tp[10];
+    char E3_p[10];
+    char E3_c[1000];
+  if (E3 ((char *) &E3_tp, (char *) &E3_p, (char *) &E3_c) != 0)
+    {
+      strcpy ((char *) &E2Linha_h, (const char * restrict) &E3_tp);
+      strcpy ((char *) &E2Linha_hp, (const char * restrict) &E3_p);
+      strcpy ((char *) &E2Linha_hc, (const char * restrict) &E3_c);
+      if (E2Linha ((char *) &E2Linha_h, (char *) &E2Linha_s, (char *) &E2Linha_hp, (char *) &E2Linha_sp, (char *) &E2Linha_hc, (char *) &E2Linha_sc) != 0)
+        {
+          strcpy (E2_tp, (const char * restrict) &E2Linha_s);
+          strcpy (E2_p, (const char * restrict) &E2Linha_sp);
+          strcpy (E2_c, (const char * restrict) &E2Linha_sc);
+          return 1;
+        }
+      else
+        {
+          return 0;
+        }
+    }
+  else
+    {
+      return 0;
+    }
+}
+
+
+;; Function E2Linha (null)
+;; enabled by -tree-original
+
+
+{
+  char E2_tp[10];
+  char E2_h[10];
+  char E2_s[10];
+  char E2_p[10];
+  char E2_c[1000];
+  char E2Linha2_h[10];
+  char E2Linha2_s[10];
+  char E2Linha2_hp[10];
+  char E2Linha2_sp[10];
+  char E2Linha2_hc[1000];
+  char E2Linha2_sc[1000];
+
+    char E2_tp[10];
+    char E2_h[10];
+    char E2_s[10];
+    char E2_p[10];
+    char E2_c[1000];
+    char E2Linha2_h[10];
+    char E2Linha2_s[10];
+    char E2Linha2_hp[10];
+    char E2Linha2_sp[10];
+    char E2Linha2_hc[1000];
+    char E2Linha2_sc[1000];
+  if (tk == 64)
+    {
+      getToken ();
+      if (E2 ((char *) &E2_tp, (char *) &E2_h, (char *) &E2_s, (char *) &E2_p, (char *) &E2_c) != 0)
+        {
+          if (tk == 41)
+            {
+              getToken ();
+              if (E2 ((char *) &E2_tp, (char *) &E2_h, (char *) &E2_s, (char *) &E2_p, (char *) &E2_c) != 0)
+                {
+                  if (E2Linha ((char *) &E2Linha2_h, (char *) &E2Linha2_s, (char *) &E2Linha2_hp, (char *) &E2Linha2_sp, (char *) &E2Linha2_hc, (char *) &E2Linha2_sc) != 0)
+                    {
+                      return 1;
+                    }
+                  else
+                    {
+                      return 0;
+                    }
+                }
+              else
+                {
+                  return 0;
+                }
+            }
+          else
+            {
+              printf ((const char * restrict) "Erro: esperava token \':\' na linha %d coluna %d\n", linha, coluna);
+              return 0;
+            }
+        }
+      else
+        {
+          return 0;
+        }
+    }
+  else
+    {
+      strcpy (E2Linha_s, (const char * restrict) E2Linha_h);
+      strcpy (E2Linha_sp, (const char * restrict) E2Linha_hp);
+      strcpy (E2Linha_sc, (const char * restrict) E2Linha_hc);
+      return 1;
+    }
+}
+
+
+;; Function E3 (null)
+;; enabled by -tree-original
+
+
+{
+  char E3Linha_h[10];
+  char E3Linha_s[10];
+  char E3Linha_hp[10];
+  char E3Linha_sp[10];
+  char E3Linha_hc[1000];
+  char E3Linha_sc[1000];
+  char E4_tp[10];
+  char E4_p[10];
+  char E4_c[1000];
+
+    char E3Linha_h[10];
+    char E3Linha_s[10];
+    char E3Linha_hp[10];
+    char E3Linha_sp[10];
+    char E3Linha_hc[1000];
+    char E3Linha_sc[1000];
+    char E4_tp[10];
+    char E4_p[10];
+    char E4_c[1000];
+  if (E4 ((char *) &E4_tp, (char *) &E4_p, (char *) &E4_c) != 0)
+    {
+      strcpy ((char *) &E3Linha_h, (const char * restrict) &E4_tp);
+      strcpy ((char *) &E3Linha_hp, (const char * restrict) &E4_p);
+      strcpy ((char *) &E3Linha_hc, (const char * restrict) &E4_c);
+      if (E3Linha ((char *) &E3Linha_h, (char *) &E3Linha_s, (char *) &E3Linha_hp, (char *) &E3Linha_sp, (char *) &E3Linha_hc, (char *) &E3Linha_sc) != 0)
+        {
+          strcpy (E3_tp, (const char * restrict) &E3Linha_s);
+          strcpy (E3_p, (const char * restrict) &E3Linha_sp);
+          strcpy (E3_c, (const char * restrict) &E3Linha_sc);
+          return 1;
+        }
+      else
+        {
+          return 0;
+        }
+    }
+  else
+    {
+      return 0;
+    }
+}
+
+
+;; Function E3Linha (null)
+;; enabled by -tree-original
+
+
+{
+  char E3Linha2_h[10];
+  char E3Linha2_s[10];
+  char E3Linha2_hp[10];
+  char E3Linha2_sp[10];
+  char E3Linha2_hc[1000];
+  char E3Linha2_sc[1000];
+  char E4_tp[10];
+  char E4_p[10];
+  char E4_c[1000];
+
+    char E3Linha2_h[10];
+    char E3Linha2_s[10];
+    char E3Linha2_hp[10];
+    char E3Linha2_sp[10];
+    char E3Linha2_hc[1000];
+    char E3Linha2_sc[1000];
+    char E4_tp[10];
+    char E4_p[10];
+    char E4_c[1000];
+  if (tk == 67)
+    {
+      getToken ();
+      if (E4 ((char *) &E4_tp, (char *) &E4_p, (char *) &E4_c) != 0)
+        {
+          strcpy ((char *) &E3Linha2_h, (const char * restrict) "int");
+          geratemp ((char *) &E3Linha2_hp);
+          sprintf ((char *) &E3Linha2_hc, (const char * restrict) "%s%s\t%s = %s || %s\n", E3Linha_hc, (char *) &E4_c, (char *) &E3Linha2_hp, E3Linha_hp, (char *) &E4_p);
+          if (E3Linha ((char *) &E3Linha2_h, (char *) &E3Linha2_s, (char *) &E3Linha2_hp, (char *) &E3Linha2_sp, (char *) &E3Linha2_hc, (char *) &E3Linha2_sc) != 0)
+            {
+              strcpy (E3Linha_s, (const char * restrict) &E3Linha2_s);
+              strcpy (E3Linha_sp, (const char * restrict) &E3Linha2_sp);
+              strcpy (E3Linha_sc, (const char * restrict) &E3Linha2_sc);
+              return 1;
+            }
+        }
+      else
+        {
+          return 0;
+        }
+    }
+  else
+    {
+      strcpy (E3Linha_s, (const char * restrict) E3Linha_h);
+      strcpy (E3Linha_sp, (const char * restrict) E3Linha_hp);
+      strcpy (E3Linha_sc, (const char * restrict) E3Linha_hc);
+      return 1;
+    }
+}
+
+
+;; Function E4 (null)
+;; enabled by -tree-original
+
+
+{
+  char E4Linha_h[10];
+  char E4Linha_s[10];
+  char E4Linha_hp[10];
+  char E4Linha_sp[10];
+  char E4Linha_hc[1000];
+  char E4Linha_sc[1000];
+  char E5_tp[10];
+  char E5_p[10];
+  char E5_c[1000];
+
+    char E4Linha_h[10];
+    char E4Linha_s[10];
+    char E4Linha_hp[10];
+    char E4Linha_sp[10];
+    char E4Linha_hc[1000];
+    char E4Linha_sc[1000];
+    char E5_tp[10];
+    char E5_p[10];
+    char E5_c[1000];
+  if (E5 ((char *) &E5_tp, (char *) &E5_p, (char *) &E5_c) != 0)
+    {
+      strcpy ((char *) &E4Linha_h, (const char * restrict) &E5_tp);
+      strcpy ((char *) &E4Linha_hp, (const char * restrict) &E5_p);
+      strcpy ((char *) &E4Linha_hc, (const char * restrict) &E5_c);
+      if (E4Linha ((char *) &E4Linha_h, (char *) &E4Linha_s, (char *) &E4Linha_hp, (char *) &E4Linha_sp, (char *) &E4Linha_hc, (char *) &E4Linha_sc) != 0)
+        {
+          strcpy (E4_tp, (const char * restrict) &E4Linha_s);
+          strcpy (E4_p, (const char * restrict) &E4Linha_sp);
+          strcpy (E4_c, (const char * restrict) &E4Linha_sc);
+          return 1;
+        }
+      else
+        {
+          return 0;
+        }
+    }
+  else
+    {
+      return 0;
+    }
+}
+
+
+;; Function E4Linha (null)
+;; enabled by -tree-original
+
+
+{
+  char E4Linha2_h[10];
+  char E4Linha2_s[10];
+  char E4Linha2_hp[10];
+  char E4Linha2_sp[10];
+  char E4Linha2_hc[1000];
+  char E4Linha2_sc[1000];
+  char E5_tp[10];
+  char E5_p[10];
+  char E5_c[1000];
+
+    char E4Linha2_h[10];
+    char E4Linha2_s[10];
+    char E4Linha2_hp[10];
+    char E4Linha2_sp[10];
+    char E4Linha2_hc[1000];
+    char E4Linha2_sc[1000];
+    char E5_tp[10];
+    char E5_p[10];
+    char E5_c[1000];
+  if (tk == 68)
+    {
+      getToken ();
+      if (E5 ((char *) &E5_tp, (char *) &E5_p, (char *) &E5_c) != 0)
+        {
+          strcpy ((char *) &E4Linha2_h, (const char * restrict) "int");
+          geratemp ((char *) &E4Linha2_hp);
+          sprintf ((char *) &E4Linha2_hc, (const char * restrict) "%s%s\t%s = %s && %s\n", E4Linha_hc, (char *) &E5_c, (char *) &E4Linha2_hp, E4Linha_hp, (char *) &E5_p);
+          if (E4Linha ((char *) &E4Linha2_h, (char *) &E4Linha2_s, (char *) &E4Linha2_hp, (char *) &E4Linha2_sp, (char *) &E4Linha2_hc, (char *) &E4Linha2_sc) != 0)
+            {
+              strcpy (E4Linha_s, (const char * restrict) &E4Linha2_s);
+              strcpy (E4Linha_sp, (const char * restrict) &E4Linha2_sp);
+              strcpy (E4Linha_sc, (const char * restrict) &E4Linha2_sc);
+              return 1;
+            }
+          else
+            {
+              return 0;
+            }
+        }
+      else
+        {
+          return 0;
+        }
+    }
+  else
+    {
+      strcpy (E4Linha_s, (const char * restrict) E4Linha_h);
+      strcpy (E4Linha_sp, (const char * restrict) E4Linha_hp);
+      strcpy (E4Linha_sc, (const char * restrict) E4Linha_hc);
+      return 1;
+    }
+}
+
+
+;; Function E5 (null)
+;; enabled by -tree-original
+
+
+{
+  char E6_tp[10];
+  char E6_p[10];
+  char E6_c[1000];
+  char E5Linha_h[10];
+  char E5Linha_s[10];
+  char E5Linha_hp[10];
+  char E5Linha_sp[10];
+  char E5Linha_hc[1000];
+  char E5Linha_sc[1000];
+
+    char E6_tp[10];
+    char E6_p[10];
+    char E6_c[1000];
+    char E5Linha_h[10];
+    char E5Linha_s[10];
+    char E5Linha_hp[10];
+    char E5Linha_sp[10];
+    char E5Linha_hc[1000];
+    char E5Linha_sc[1000];
+  if (E6 ((char *) &E6_tp, (char *) &E6_p, (char *) &E6_c) != 0)
+    {
+      strcpy ((char *) &E5Linha_h, (const char * restrict) &E6_tp);
+      strcpy ((char *) &E5Linha_hp, (const char * restrict) &E6_p);
+      strcpy ((char *) &E5Linha_hc, (const char * restrict) &E6_c);
+      if (E5Linha ((char *) &E5Linha_h, (char *) &E5Linha_s, (char *) &E5Linha_hp, (char *) &E5Linha_sp, (char *) &E5Linha_hc, (char *) &E5Linha_sc) != 0)
+        {
+          strcpy (E5_tp, (const char * restrict) &E5Linha_s);
+          strcpy (E5_p, (const char * restrict) &E5Linha_sp);
+          strcpy (E5_c, (const char * restrict) &E5Linha_sc);
+          return 1;
+        }
+      else
+        {
+          return 0;
+        }
+    }
+  else
+    {
+      return 0;
+    }
+}
+
+
+;; Function E5Linha (null)
+;; enabled by -tree-original
+
+
+{
+  char E6_tp[10];
+  char E6_p[10];
+  char E6_c[1000];
+  char E5Linha2_h[10];
+  char E5Linha2_s[10];
+  char E5Linha2_hp[10];
+  char E5Linha2_sp[10];
+  char E5Linha2_hc[1000];
+  char E5Linha2_sc[1000];
+
+    char E6_tp[10];
+    char E6_p[10];
+    char E6_c[1000];
+    char E5Linha2_h[10];
+    char E5Linha2_s[10];
+    char E5Linha2_hp[10];
+    char E5Linha2_sp[10];
+    char E5Linha2_hc[1000];
+    char E5Linha2_sc[1000];
+  if (tk == 71)
+    {
+      getToken ();
+      if (E6 ((char *) &E6_tp, (char *) &E6_p, (char *) &E6_c) != 0)
+        {
+          strcpy ((char *) &E5Linha2_h, (const char * restrict) "int");
+          geratemp ((char *) &E5Linha2_hp);
+          sprintf ((char *) &E5Linha2_hc, (const char * restrict) "%s%s\t%s = %s | %s\n", E5Linha_hc, (char *) &E6_c, (char *) &E5Linha2_hp, E5Linha_hp, (char *) &E6_p);
+          if (E5Linha ((char *) &E5Linha2_h, (char *) &E5Linha2_s, (char *) &E5Linha2_hp, (char *) &E5Linha2_sp, (char *) &E5Linha2_hc, (char *) &E5Linha2_sc) != 0)
+            {
+              strcpy (E5Linha_s, (const char * restrict) &E5Linha2_s);
+              strcpy (E5Linha_sp, (const char * restrict) &E5Linha2_sp);
+              strcpy (E5Linha_sc, (const char * restrict) &E5Linha2_sc);
+              return 1;
+            }
+          else
+            {
+              return 0;
+            }
+        }
+      else
+        {
+          return 0;
+        }
+    }
+  else
+    {
+      strcpy (E5Linha_s, (const char * restrict) E5Linha_h);
+      strcpy (E5Linha_sp, (const char * restrict) E5Linha_hp);
+      strcpy (E5Linha_sc, (const char * restrict) E5Linha_hc);
+      return 1;
+    }
+}
+
+
+;; Function E6 (null)
+;; enabled by -tree-original
+
+
+{
+  char E7_tp[10];
+  char E7_p[10];
+  char E7_c[1000];
+  char E6Linha_h[10];
+  char E6Linha_s[10];
+  char E6Linha_hp[10];
+  char E6Linha_sp[10];
+  char E6Linha_hc[1000];
+  char E6Linha_sc[1000];
+
+    char E7_tp[10];
+    char E7_p[10];
+    char E7_c[1000];
+    char E6Linha_h[10];
+    char E6Linha_s[10];
+    char E6Linha_hp[10];
+    char E6Linha_sp[10];
+    char E6Linha_hc[1000];
+    char E6Linha_sc[1000];
+  if (E7 ((char *) &E7_tp, (char *) &E7_p, (char *) &E7_c) != 0)
+    {
+      strcpy ((char *) &E6Linha_h, (const char * restrict) &E7_tp);
+      strcpy ((char *) &E6Linha_hp, (const char * restrict) &E7_p);
+      strcpy ((char *) &E6Linha_hc, (const char * restrict) &E7_c);
+      if (E6Linha ((char *) &E6Linha_h, (char *) &E6Linha_s, (char *) &E6Linha_hp, (char *) &E6Linha_sp, (char *) &E6Linha_hc, (char *) &E6Linha_sc) != 0)
+        {
+          strcpy (E6_tp, (const char * restrict) &E6Linha_s);
+          strcpy (E6_p, (const char * restrict) &E6Linha_sp);
+          strcpy (E6_c, (const char * restrict) &E6Linha_sc);
+          return 1;
+        }
+      else
+        {
+          return 0;
+        }
+    }
+  else
+    {
+      return 0;
+    }
+}
+
+
+;; Function E6Linha (null)
+;; enabled by -tree-original
+
+
+{
+  char E7_tp[10];
+  char E7_p[10];
+  char E7_c[1000];
+  char E6Linha2_h[10];
+  char E6Linha2_s[10];
+  char E6Linha2_hp[10];
+  char E6Linha2_sp[10];
+  char E6Linha2_hc[1000];
+  char E6Linha2_sc[1000];
+
+    char E7_tp[10];
+    char E7_p[10];
+    char E7_c[1000];
+    char E6Linha2_h[10];
+    char E6Linha2_s[10];
+    char E6Linha2_hp[10];
+    char E6Linha2_sp[10];
+    char E6Linha2_hc[1000];
+    char E6Linha2_sc[1000];
+  if (tk == 72)
+    {
+      getToken ();
+      if (E7 ((char *) &E7_tp, (char *) &E7_p, (char *) &E7_c) != 0)
+        {
+          strcpy ((char *) &E6Linha2_h, (const char * restrict) "int");
+          geratemp ((char *) &E6Linha2_hp);
+          sprintf ((char *) &E6Linha2_hc, (const char * restrict) "%s%s\t%s = %s ^ %s\n", E6Linha_hc, (char *) &E7_c, (char *) &E6Linha2_hp, E6Linha_hp, (char *) &E7_p);
+          if (E6Linha ((char *) &E6Linha2_h, (char *) &E6Linha2_s, (char *) &E6Linha2_hp, (char *) &E6Linha2_sp, (char *) &E6Linha2_hc, (char *) &E6Linha2_sc) != 0)
+            {
+              strcpy (E6Linha_s, (const char * restrict) &E6Linha2_s);
+              strcpy (E6Linha_sp, (const char * restrict) &E6Linha2_sp);
+              strcpy (E6Linha_sc, (const char * restrict) &E6Linha2_sc);
+              return 1;
+            }
+          else
+            {
+              return 0;
+            }
+        }
+      else
+        {
+          return 0;
+        }
+    }
+  else
+    {
+      strcpy (E6Linha_s, (const char * restrict) E6Linha_h);
+      strcpy (E6Linha_sp, (const char * restrict) E6Linha_hp);
+      strcpy (E6Linha_sc, (const char * restrict) E6Linha_hc);
+      return 1;
+    }
+}
+
+
+;; Function E7 (null)
+;; enabled by -tree-original
+
+
+{
+  char E8_tp[10];
+  char E8_p[10];
+  char E8_c[1000];
+  char E7Linha_h[10];
+  char E7Linha_s[10];
+  char E7Linha_hp[10];
+  char E7Linha_sp[10];
+  char E7Linha_hc[1000];
+  char E7Linha_sc[1000];
+
+    char E8_tp[10];
+    char E8_p[10];
+    char E8_c[1000];
+    char E7Linha_h[10];
+    char E7Linha_s[10];
+    char E7Linha_hp[10];
+    char E7Linha_sp[10];
+    char E7Linha_hc[1000];
+    char E7Linha_sc[1000];
+  if (E8 ((char *) &E8_tp, (char *) &E8_p, (char *) &E8_c) != 0)
+    {
+      strcpy ((char *) &E7Linha_h, (const char * restrict) &E8_tp);
+      strcpy ((char *) &E7Linha_hp, (const char * restrict) &E8_p);
+      strcpy ((char *) &E7Linha_hc, (const char * restrict) &E8_c);
+      if (E7Linha ((char *) &E7Linha_h, (char *) &E7Linha_s, (char *) &E7Linha_hp, (char *) &E7Linha_sp, (char *) &E7Linha_hc, (char *) &E7Linha_sc) != 0)
+        {
+          strcpy (E7_tp, (const char * restrict) &E7Linha_s);
+          strcpy (E7_p, (const char * restrict) &E7Linha_sp);
+          strcpy (E7_c, (const char * restrict) &E7Linha_sc);
+          return 1;
+        }
+      else
+        {
+          return 0;
+        }
+    }
+  else
+    {
+      return 0;
+    }
+}
+
+
+;; Function E7Linha (null)
+;; enabled by -tree-original
+
+
+{
+  char E8_tp[10];
+  char E8_p[10];
+  char E8_c[1000];
+  char E7Linha2_h[10];
+  char E7Linha2_s[10];
+  char E7Linha2_hp[10];
+  char E7Linha2_sp[10];
+  char E7Linha2_hc[1000];
+  char E7Linha2_sc[1000];
+
+    char E8_tp[10];
+    char E8_p[10];
+    char E8_c[1000];
+    char E7Linha2_h[10];
+    char E7Linha2_s[10];
+    char E7Linha2_hp[10];
+    char E7Linha2_sp[10];
+    char E7Linha2_hc[1000];
+    char E7Linha2_sc[1000];
+  if (tk == 70)
+    {
+      getToken ();
+      if (E8 ((char *) &E8_tp, (char *) &E8_p, (char *) &E8_c) != 0)
+        {
+          strcpy ((char *) &E7Linha2_h, (const char * restrict) "int");
+          geratemp ((char *) &E7Linha2_hp);
+          sprintf ((char *) &E7Linha2_hc, (const char * restrict) "%s%s\t%s = %s & %s\n", E7Linha_hc, (char *) &E8_c, (char *) &E7Linha2_hp, E7Linha_hp, (char *) &E8_p);
+          if (E7Linha ((char *) &E7Linha2_h, (char *) &E7Linha2_s, (char *) &E7Linha2_hp, (char *) &E7Linha2_sp, (char *) &E7Linha2_hc, (char *) &E7Linha2_sc) != 0)
+            {
+              strcpy (E7Linha_s, (const char * restrict) &E7Linha2_s);
+              strcpy (E7Linha_sp, (const char * restrict) &E7Linha2_sp);
+              strcpy (E7Linha_sc, (const char * restrict) &E7Linha2_sc);
+              return 1;
+            }
+          else
+            {
+              return 0;
+            }
+        }
+      else
+        {
+          return 0;
+        }
+    }
+  else
+    {
+      strcpy (E7Linha_s, (const char * restrict) E7Linha_h);
+      strcpy (E7Linha_sp, (const char * restrict) E7Linha_hp);
+      strcpy (E7Linha_sc, (const char * restrict) E7Linha_hc);
+      return 1;
+    }
+}
+
+
+;; Function E8 (null)
+;; enabled by -tree-original
+
+
+{
+  char E9_tp[10];
+  char E9_p[10];
+  char E9_c[1000];
+  char E8Linha_h[10];
+  char E8Linha_s[10];
+  char E8Linha_hp[10];
+  char E8Linha_sp[10];
+  char E8Linha_hc[1000];
+  char E8Linha_sc[1000];
+
+    char E9_tp[10];
+    char E9_p[10];
+    char E9_c[1000];
+    char E8Linha_h[10];
+    char E8Linha_s[10];
+    char E8Linha_hp[10];
+    char E8Linha_sp[10];
+    char E8Linha_hc[1000];
+    char E8Linha_sc[1000];
+  if (E9 ((char *) &E9_tp, (char *) &E9_p, (char *) &E9_c) != 0)
+    {
+      strcpy ((char *) &E8Linha_h, (const char * restrict) &E9_tp);
+      strcpy ((char *) &E8Linha_hp, (const char * restrict) &E9_p);
+      strcpy ((char *) &E8Linha_hc, (const char * restrict) &E9_c);
+      if (E8Linha ((char *) &E8Linha_h, (char *) &E8Linha_s, (char *) &E8Linha_hp, (char *) &E8Linha_sp, (char *) &E8Linha_hc, (char *) &E8Linha_sc) != 0)
+        {
+          strcpy (E8_tp, (const char * restrict) &E8Linha_s);
+          strcpy (E8_p, (const char * restrict) &E8Linha_sp);
+          strcpy (E8_c, (const char * restrict) &E8Linha_sc);
+          return 1;
+        }
+      else
+        {
+          return 0;
+        }
+    }
+  else
+    {
+      return 0;
+    }
+}
+
+
+;; Function E8Linha (null)
+;; enabled by -tree-original
+
+
+{
+  char E9_tp[10];
+  char E9_p[10];
+  char E9_c[1000];
+  char E8Linha2_h[10];
+  char E8Linha2_s[10];
+  char E8Linha2_hp[10];
+  char E8Linha2_sp[10];
+  char E8Linha2_hc[1000];
+  char E8Linha2_sc[1000];
+
+    char E9_tp[10];
+    char E9_p[10];
+    char E9_c[1000];
+    char E8Linha2_h[10];
+    char E8Linha2_s[10];
+    char E8Linha2_hp[10];
+    char E8Linha2_sp[10];
+    char E8Linha2_hc[1000];
+    char E8Linha2_sc[1000];
+  if (tk == 61)
+    {
+      getToken ();
+      if (E9 ((char *) &E9_tp, (char *) &E9_p, (char *) &E9_c) != 0)
+        {
+          strcpy ((char *) &E8Linha2_h, (const char * restrict) "int");
+          geratemp ((char *) &E8Linha2_hp);
+          sprintf ((char *) &E8Linha2_hc, (const char * restrict) "%s%s\t%s = %s == %s\n", E8Linha_hc, (char *) &E9_c, (char *) &E8Linha2_hp, E8Linha_hp, (char *) &E9_p);
+          if (E8Linha ((char *) &E8Linha2_h, (char *) &E8Linha2_s, (char *) &E8Linha2_hp, (char *) &E8Linha2_sp, (char *) &E8Linha2_hc, (char *) &E8Linha2_sc) != 0)
+            {
+              strcpy (E8Linha_s, (const char * restrict) &E8Linha2_s);
+              strcpy (E8Linha_sp, (const char * restrict) &E8Linha2_sp);
+              strcpy (E8Linha_sc, (const char * restrict) &E8Linha2_sc);
+              return 1;
+            }
+          else
+            {
+              return 0;
+            }
+        }
+      else
+        {
+          return 0;
+        }
+    }
+  else
+    {
+      if (tk == 62)
+        {
+          getToken ();
+          if (E9 ((char *) &E9_tp, (char *) &E9_p, (char *) &E9_c) != 0)
+            {
+              strcpy ((char *) &E8Linha2_h, (const char * restrict) "int");
+              geratemp ((char *) &E8Linha2_hp);
+              sprintf ((char *) &E8Linha2_hc, (const char * restrict) "%s%s\t%s = %s != %s\n", E8Linha_hc, (char *) &E9_c, (char *) &E8Linha2_hp, E8Linha_hp, (char *) &E9_p);
+              if (E8Linha ((char *) &E8Linha2_h, (char *) &E8Linha2_s, (char *) &E8Linha2_hp, (char *) &E8Linha2_sp, (char *) &E8Linha2_hc, (char *) &E8Linha2_sc) != 0)
+                {
+                  strcpy (E8Linha_s, (const char * restrict) &E8Linha2_s);
+                  strcpy (E8Linha_sp, (const char * restrict) &E8Linha2_sp);
+                  strcpy (E8Linha_sc, (const char * restrict) &E8Linha2_sc);
+                  return 1;
+                }
+              else
+                {
+                  return 0;
+                }
+            }
+          else
+            {
+              return 0;
+            }
+        }
+      else
+        {
+          strcpy (E8Linha_s, (const char * restrict) E8Linha_h);
+          strcpy (E8Linha_sp, (const char * restrict) E8Linha_hp);
+          strcpy (E8Linha_sc, (const char * restrict) E8Linha_hc);
+          return 1;
+        }
+    }
+}
+
+
+;; Function E9 (null)
+;; enabled by -tree-original
+
+
+{
+  char E10_tp[10];
+  char E10_p[10];
+  char E10_c[1000];
+  char E9Linha_h[10];
+  char E9Linha_s[10];
+  char E9Linha_hp[10];
+  char E9Linha_sp[10];
+  char E9Linha_hc[1000];
+  char E9Linha_sc[1000];
+
+    char E10_tp[10];
+    char E10_p[10];
+    char E10_c[1000];
+    char E9Linha_h[10];
+    char E9Linha_s[10];
+    char E9Linha_hp[10];
+    char E9Linha_sp[10];
+    char E9Linha_hc[1000];
+    char E9Linha_sc[1000];
+  if (E10 ((char *) &E10_tp, (char *) &E10_p, (char *) &E10_c) != 0)
+    {
+      strcpy ((char *) &E9Linha_h, (const char * restrict) &E10_tp);
+      strcpy ((char *) &E9Linha_hp, (const char * restrict) &E10_p);
+      strcpy ((char *) &E9Linha_hc, (const char * restrict) &E10_c);
+      if (E9Linha ((char *) &E9Linha_h, (char *) &E9Linha_s, (char *) &E9Linha_hp, (char *) &E9Linha_sp, (char *) &E9Linha_hc, (char *) &E9Linha_sc) != 0)
+        {
+          strcpy (E9_tp, (const char * restrict) &E9Linha_s);
+          strcpy (E9_p, (const char * restrict) &E9Linha_sp);
+          strcpy (E9_c, (const char * restrict) &E9Linha_sc);
+          return 1;
+        }
+      else
+        {
+          return 0;
+        }
+    }
+  else
+    {
+      return 0;
+    }
+}
+
+
+;; Function E9Linha (null)
+;; enabled by -tree-original
+
+
+{
+  char E10_tp[10];
+  char E10_p[10];
+  char E10_c[1000];
+  char E9Linha2_h[10];
+  char E9Linha2_s[10];
+  char E9Linha2_hp[10];
+  char E9Linha2_sp[10];
+  char E9Linha2_hc[1000];
+  char E9Linha2_sc[1000];
+
+    char E10_tp[10];
+    char E10_p[10];
+    char E10_c[1000];
+    char E9Linha2_h[10];
+    char E9Linha2_s[10];
+    char E9Linha2_hp[10];
+    char E9Linha2_sp[10];
+    char E9Linha2_hc[1000];
+    char E9Linha2_sc[1000];
+  if (tk == 50)
+    {
+      getToken ();
+      if (E10 ((char *) &E10_tp, (char *) &E10_p, (char *) &E10_c) != 0)
+        {
+          strcpy ((char *) &E9Linha2_h, (const char * restrict) "int");
+          geratemp ((char *) &E9Linha2_hp);
+          sprintf ((char *) &E9Linha2_hc, (const char * restrict) "%s%s\t%s = %s < %s\n", E9Linha_hc, (char *) &E10_c, (char *) &E9Linha2_hp, E9Linha_hp, (char *) &E10_p);
+          if (E9Linha ((char *) &E9Linha2_h, (char *) &E9Linha2_s, (char *) &E9Linha2_hp, (char *) &E9Linha2_sp, (char *) &E9Linha2_hc, (char *) &E9Linha2_sc) != 0)
+            {
+              strcpy (E9Linha_s, (const char * restrict) &E9Linha2_s);
+              strcpy (E9Linha_sp, (const char * restrict) &E9Linha2_sp);
+              strcpy (E9Linha_sc, (const char * restrict) &E9Linha2_sc);
+              return 1;
+            }
+          else
+            {
+              return 0;
+            }
+        }
+      else
+        {
+          return 0;
+        }
+    }
+  else
+    {
+      if (tk == 49)
+        {
+          getToken ();
+          if (E10 ((char *) &E10_tp, (char *) &E10_p, (char *) &E10_c) != 0)
+            {
+              strcpy ((char *) &E9Linha2_h, (const char * restrict) "int");
+              geratemp ((char *) &E9Linha2_hp);
+              sprintf ((char *) &E9Linha2_hc, (const char * restrict) "%s%s\t%s = %s > %s\n", E9Linha_hc, (char *) &E10_c, (char *) &E9Linha2_hp, E9Linha_hp, (char *) &E10_p);
+              if (E9Linha ((char *) &E9Linha2_h, (char *) &E9Linha2_s, (char *) &E9Linha2_hp, (char *) &E9Linha2_sp, (char *) &E9Linha2_hc, (char *) &E9Linha2_sc) != 0)
+                {
+                  strcpy (E9Linha_s, (const char * restrict) &E9Linha2_s);
+                  strcpy (E9Linha_sp, (const char * restrict) &E9Linha2_sp);
+                  strcpy (E9Linha_sc, (const char * restrict) &E9Linha2_sc);
+                  return 1;
+                }
+              else
+                {
+                  return 0;
+                }
+            }
+          else
+            {
+              return 0;
+            }
+        }
+      else
+        {
+          if (tk == 58)
+            {
+              getToken ();
+              if (E10 ((char *) &E10_tp, (char *) &E10_p, (char *) &E10_c) != 0)
+                {
+                  strcpy ((char *) &E9Linha2_h, (const char * restrict) "int");
+                  geratemp ((char *) &E9Linha2_hp);
+                  sprintf ((char *) &E9Linha2_hc, (const char * restrict) "%s%s\t%s = %s <= %s\n", E9Linha_hc, (char *) &E10_c, (char *) &E9Linha2_hp, E9Linha_hp, (char *) &E10_p);
+                  if (E9Linha ((char *) &E9Linha2_h, (char *) &E9Linha2_s, (char *) &E9Linha2_hp, (char *) &E9Linha2_sp, (char *) &E9Linha2_hc, (char *) &E9Linha2_sc) != 0)
+                    {
+                      strcpy (E9Linha_s, (const char * restrict) &E9Linha2_s);
+                      strcpy (E9Linha_sp, (const char * restrict) &E9Linha2_sp);
+                      strcpy (E9Linha_sc, (const char * restrict) &E9Linha2_sc);
+                      return 1;
+                    }
+                  else
+                    {
+                      return 0;
+                    }
+                }
+              else
+                {
+                  return 0;
+                }
+            }
+          else
+            {
+              if (tk == 57)
+                {
+                  getToken ();
+                  if (E10 ((char *) &E10_tp, (char *) &E10_p, (char *) &E10_c) != 0)
+                    {
+                      strcpy ((char *) &E9Linha2_h, (const char * restrict) "int");
+                      geratemp ((char *) &E9Linha2_hp);
+                      sprintf ((char *) &E9Linha2_hc, (const char * restrict) "%s%s\t%s = %s >= %s\n", E9Linha_hc, (char *) &E10_c, (char *) &E9Linha2_hp, E9Linha_hp, (char *) &E10_p);
+                      if (E9Linha ((char *) &E9Linha2_h, (char *) &E9Linha2_s, (char *) &E9Linha2_hp, (char *) &E9Linha2_sp, (char *) &E9Linha2_hc, (char *) &E9Linha2_sc) != 0)
+                        {
+                          strcpy (E9Linha_s, (const char * restrict) &E9Linha2_s);
+                          strcpy (E9Linha_sp, (const char * restrict) &E9Linha2_sp);
+                          strcpy (E9Linha_sc, (const char * restrict) &E9Linha2_sc);
+                          return 1;
+                        }
+                      else
+                        {
+                          return 0;
+                        }
+                    }
+                  else
+                    {
+                      return 0;
+                    }
+                }
+              else
+                {
+                  strcpy (E9Linha_s, (const char * restrict) E9Linha_h);
+                  strcpy (E9Linha_sp, (const char * restrict) E9Linha_hp);
+                  strcpy (E9Linha_sc, (const char * restrict) E9Linha_hc);
                   return 1;
                 }
             }
         }
+    }
+}
+
+
+;; Function E10 (null)
+;; enabled by -tree-original
+
+
+{
+  char E11_tp[10];
+  char E11_p[10];
+  char E11_c[1000];
+  char E10Linha_h[10];
+  char E10Linha_s[10];
+  char E10Linha_hp[10];
+  char E10Linha_sp[10];
+  char E10Linha_hc[1000];
+  char E10Linha_sc[1000];
+
+    char E11_tp[10];
+    char E11_p[10];
+    char E11_c[1000];
+    char E10Linha_h[10];
+    char E10Linha_s[10];
+    char E10Linha_hp[10];
+    char E10Linha_sp[10];
+    char E10Linha_hc[1000];
+    char E10Linha_sc[1000];
+  if (E11 ((char *) &E11_tp, (char *) &E11_p, (char *) &E11_c) != 0)
+    {
+      strcpy ((char *) &E10Linha_h, (const char * restrict) &E11_tp);
+      strcpy ((char *) &E10Linha_hp, (const char * restrict) &E11_p);
+      strcpy ((char *) &E10Linha_hc, (const char * restrict) &E11_c);
+      if (E10Linha ((char *) &E10Linha_h, (char *) &E10Linha_s, (char *) &E10Linha_hp, (char *) &E10Linha_sp, (char *) &E10Linha_hc, (char *) &E10Linha_sc) != 0)
+        {
+          strcpy (E10_tp, (const char * restrict) &E10Linha_s);
+          strcpy (E10_p, (const char * restrict) &E10Linha_sp);
+          strcpy (E10_c, (const char * restrict) &E10Linha_sc);
+          return 1;
+        }
+      else
+        {
+          return 0;
+        }
+    }
+  else
+    {
+      return 0;
+    }
+}
+
+
+;; Function E10Linha (null)
+;; enabled by -tree-original
+
+
+{
+  char E11_tp[10];
+  char E11_p[10];
+  char E11_c[1000];
+  char E10Linha2_h[10];
+  char E10Linha2_s[10];
+  char E10Linha2_hp[10];
+  char E10Linha2_sp[10];
+  char E10Linha2_hc[1000];
+  char E10Linha2_sc[1000];
+
+    char E11_tp[10];
+    char E11_p[10];
+    char E11_c[1000];
+    char E10Linha2_h[10];
+    char E10Linha2_s[10];
+    char E10Linha2_hp[10];
+    char E10Linha2_sp[10];
+    char E10Linha2_hc[1000];
+    char E10Linha2_sc[1000];
+  if (tk == 65)
+    {
+      getToken ();
+      if (E11 ((char *) &E11_tp, (char *) &E11_p, (char *) &E11_c) != 0)
+        {
+          strcpy ((char *) &E10Linha2_h, (const char * restrict) "int");
+          geratemp ((char *) &E10Linha2_hp);
+          sprintf ((char *) &E10Linha2_hc, (const char * restrict) "%s%s\t%s = %s << %s\n", E10Linha_hc, (char *) &E11_c, (char *) &E10Linha2_hp, E10Linha_hp, (char *) &E11_p);
+          if (E10Linha ((char *) &E10Linha2_h, (char *) &E10Linha2_s, (char *) &E10Linha2_hp, (char *) &E10Linha2_sp, (char *) &E10Linha2_hc, (char *) &E10Linha2_sc) != 0)
+            {
+              strcpy (E10Linha_s, (const char * restrict) &E10Linha2_s);
+              strcpy (E10Linha_sp, (const char * restrict) &E10Linha2_sp);
+              strcpy (E10Linha_sc, (const char * restrict) &E10Linha2_sc);
+              return 1;
+            }
+          else
+            {
+              return 0;
+            }
+        }
+      else
+        {
+          return 0;
+        }
+    }
+  else
+    {
+      if (tk == 66)
+        {
+          getToken ();
+          if (E11 ((char *) &E11_tp, (char *) &E11_p, (char *) &E11_c) != 0)
+            {
+              strcpy ((char *) &E10Linha2_h, (const char * restrict) "int");
+              geratemp ((char *) &E10Linha2_hp);
+              sprintf ((char *) &E10Linha2_hc, (const char * restrict) "%s%s\t%s = %s >> %s\n", E10Linha_hc, (char *) &E11_c, (char *) &E10Linha2_hp, E10Linha_hp, (char *) &E11_p);
+              if (E10Linha ((char *) &E10Linha2_h, (char *) &E10Linha2_s, (char *) &E10Linha2_hp, (char *) &E10Linha2_sp, (char *) &E10Linha2_hc, (char *) &E10Linha2_sc) != 0)
+                {
+                  strcpy (E10Linha_s, (const char * restrict) &E10Linha2_s);
+                  strcpy (E10Linha_sp, (const char * restrict) &E10Linha2_sp);
+                  strcpy (E10Linha_sc, (const char * restrict) &E10Linha2_sc);
+                  return 1;
+                }
+              else
+                {
+                  return 0;
+                }
+            }
+          else
+            {
+              return 0;
+            }
+        }
+      else
+        {
+          strcpy (E10Linha_s, (const char * restrict) E10Linha_h);
+          strcpy (E10Linha_sp, (const char * restrict) E10Linha_hp);
+          strcpy (E10Linha_sc, (const char * restrict) E10Linha_hc);
+          return 1;
+        }
+    }
+}
+
+
+;; Function E11 (null)
+;; enabled by -tree-original
+
+
+{
+  char E12_tp[10];
+  char E12_p[10];
+  char E12_c[1000];
+  char E11Linha_h[10];
+  char E11Linha_s[10];
+  char E11Linha_hp[10];
+  char E11Linha_sp[10];
+  char E11Linha_hc[1000];
+  char E11Linha_sc[1000];
+
+    char E12_tp[10];
+    char E12_p[10];
+    char E12_c[1000];
+    char E11Linha_h[10];
+    char E11Linha_s[10];
+    char E11Linha_hp[10];
+    char E11Linha_sp[10];
+    char E11Linha_hc[1000];
+    char E11Linha_sc[1000];
+  if (E12 ((char *) &E12_tp, (char *) &E12_p, (char *) &E12_c) != 0)
+    {
+      strcpy ((char *) &E11Linha_h, (const char * restrict) &E12_tp);
+      strcpy ((char *) &E11Linha_hp, (const char * restrict) &E12_p);
+      strcpy ((char *) &E11Linha_hc, (const char * restrict) &E12_c);
+      if (E11Linha ((char *) &E11Linha_h, (char *) &E11Linha_s, (char *) &E11Linha_hp, (char *) &E11Linha_sp, (char *) &E11Linha_hc, (char *) &E11Linha_sc) != 0)
+        {
+          strcpy (E11_tp, (const char * restrict) &E11Linha_s);
+          strcpy (E11_p, (const char * restrict) &E11Linha_sp);
+          strcpy (E11_c, (const char * restrict) &E11Linha_sc);
+          return 1;
+        }
+      else
+        {
+          return 0;
+        }
+    }
+  else
+    {
+      return 0;
+    }
+}
+
+
+;; Function E11Linha (null)
+;; enabled by -tree-original
+
+
+{
+  char E12_tp[10];
+  char E12_p[10];
+  char E12_c[1000];
+  char E11Linha2_h[10];
+  char E11Linha2_s[10];
+  char E11Linha2_hp[10];
+  char E11Linha2_sp[10];
+  char E11Linha2_hc[1000];
+  char E11Linha2_sc[1000];
+
+    char E12_tp[10];
+    char E12_p[10];
+    char E12_c[1000];
+    char E11Linha2_h[10];
+    char E11Linha2_s[10];
+    char E11Linha2_hp[10];
+    char E11Linha2_sp[10];
+    char E11Linha2_hc[1000];
+    char E11Linha2_sc[1000];
+  if (tk == 44)
+    {
+      getToken ();
+      if (E12 ((char *) &E12_tp, (char *) &E12_p, (char *) &E12_c) != 0)
+        {
+          if (strcmp ((const char *) E11Linha_h, (const char *) "int") == 0 && strcmp ((const char *) &E12_tp, (const char *) "int") == 0)
+            {
+              strcpy ((char *) &E11Linha2_h, (const char * restrict) "int");
+            }
+          else
+            {
+              strcpy ((char *) &E11Linha2_h, (const char * restrict) "float");
+            }
+          geratemp ((char *) &E11Linha2_hp);
+          sprintf ((char *) &E11Linha2_hc, (const char * restrict) "%s%s\t%s = %s + %s\n", E11Linha_hc, (char *) &E12_c, (char *) &E11Linha2_hp, E11Linha_hp, (char *) &E12_p);
+          if (E11Linha ((char *) &E11Linha2_h, (char *) &E11Linha2_s, (char *) &E11Linha2_hp, (char *) &E11Linha2_sp, (char *) &E11Linha2_hc, (char *) &E11Linha2_sc) != 0)
+            {
+              strcpy (E11Linha_s, (const char * restrict) &E11Linha2_s);
+              strcpy (E11Linha_sp, (const char * restrict) &E11Linha2_sp);
+              strcpy (E11Linha_sc, (const char * restrict) &E11Linha2_sc);
+              return 1;
+            }
+          else
+            {
+              return 0;
+            }
+        }
+    }
+  else
+    {
+      if (tk == 45)
+        {
+          getToken ();
+          if (E12 ((char *) &E12_tp, (char *) &E12_p, (char *) &E12_c) != 0)
+            {
+              if (strcmp ((const char *) E11Linha_h, (const char *) "int") == 0 && strcmp ((const char *) &E12_tp, (const char *) "int") == 0)
+                {
+                  strcpy ((char *) &E11Linha2_h, (const char * restrict) "int");
+                }
+              else
+                {
+                  strcpy ((char *) &E11Linha2_h, (const char * restrict) "float");
+                }
+              geratemp ((char *) &E11Linha2_hp);
+              sprintf ((char *) &E11Linha2_hc, (const char * restrict) "%s%s\t%s = %s - %s\n", E11Linha_hc, (char *) &E12_c, (char *) &E11Linha2_hp, E11Linha_hp, (char *) &E12_p);
+              if (E11Linha ((char *) &E11Linha2_h, (char *) &E11Linha2_s, (char *) &E11Linha2_hp, (char *) &E11Linha2_sp, (char *) &E11Linha2_hc, (char *) &E11Linha2_sc) != 0)
+                {
+                  strcpy (E11Linha_s, (const char * restrict) &E11Linha2_s);
+                  strcpy (E11Linha_sp, (const char * restrict) &E11Linha2_sp);
+                  strcpy (E11Linha_sc, (const char * restrict) &E11Linha2_sc);
+                  return 1;
+                }
+              else
+                {
+                  return 0;
+                }
+            }
+        }
+      else
+        {
+          strcpy (E11Linha_s, (const char * restrict) E11Linha_h);
+          strcpy (E11Linha_sp, (const char * restrict) E11Linha_hp);
+          strcpy (E11Linha_sc, (const char * restrict) E11Linha_hc);
+          return 1;
+        }
+    }
+}
+
+
+;; Function E12 (null)
+;; enabled by -tree-original
+
+
+{
+  char E13_tp[10];
+  char E13_p[10];
+  char E13_c[1000];
+  char E12Linha_h[10];
+  char E12Linha_s[10];
+  char E12Linha_hp[10];
+  char E12Linha_sp[10];
+  char E12Linha_hc[1000];
+  char E12Linha_sc[1000];
+
+    char E13_tp[10];
+    char E13_p[10];
+    char E13_c[1000];
+    char E12Linha_h[10];
+    char E12Linha_s[10];
+    char E12Linha_hp[10];
+    char E12Linha_sp[10];
+    char E12Linha_hc[1000];
+    char E12Linha_sc[1000];
+  if (E13 ((char *) &E13_tp, (char *) &E13_p, (char *) &E13_c) != 0)
+    {
+      strcpy ((char *) &E12Linha_h, (const char * restrict) &E13_tp);
+      strcpy ((char *) &E12Linha_hp, (const char * restrict) &E13_p);
+      strcpy ((char *) &E12Linha_hc, (const char * restrict) &E13_c);
+      if (E12Linha ((char *) &E12Linha_h, (char *) &E12Linha_s, (char *) &E12Linha_hp, (char *) &E12Linha_sp, (char *) &E12Linha_hc, (char *) &E12Linha_sc) != 0)
+        {
+          strcpy (E12_tp, (const char * restrict) &E12Linha_s);
+          strcpy (E12_p, (const char * restrict) &E12Linha_sp);
+          strcpy (E12_c, (const char * restrict) &E12Linha_sc);
+          return 1;
+        }
+      else
+        {
+          return 0;
+        }
+    }
+  else
+    {
+      return 0;
+    }
+}
+
+
+;; Function E12Linha (null)
+;; enabled by -tree-original
+
+
+{
+  char E13_tp[10];
+  char E13_p[10];
+  char E13_c[1000];
+  char E12Linha2_h[10];
+  char E12Linha2_s[10];
+  char E12Linha2_hp[10];
+  char E12Linha2_sp[10];
+  char E12Linha2_hc[1000];
+  char E12Linha2_sc[1000];
+
+    char E13_tp[10];
+    char E13_p[10];
+    char E13_c[1000];
+    char E12Linha2_h[10];
+    char E12Linha2_s[10];
+    char E12Linha2_hp[10];
+    char E12Linha2_sp[10];
+    char E12Linha2_hc[1000];
+    char E12Linha2_sc[1000];
+  if (tk == 46)
+    {
+      getToken ();
+      if (E13 ((char *) &E13_tp, (char *) &E13_p, (char *) &E13_c) != 0)
+        {
+          if (strcmp ((const char *) E12Linha_h, (const char *) "int") == 0 && strcmp ((const char *) &E13_tp, (const char *) "int") != 0)
+            {
+              strcpy ((char *) &E12Linha2_h, (const char * restrict) "int");
+            }
+          else
+            {
+              strcpy ((char *) &E12Linha2_h, (const char * restrict) "float");
+            }
+          geratemp ((char *) &E12Linha2_hp);
+          sprintf ((char *) &E12Linha2_hc, (const char * restrict) "%s%s\t%s = %s * %s\n", E12Linha_hc, (char *) &E13_c, (char *) &E12Linha2_hp, E12Linha_hp, (char *) &E13_p);
+          if (E12Linha ((char *) &E12Linha2_h, (char *) &E12Linha2_s, (char *) &E12Linha2_hp, (char *) &E12Linha2_sp, (char *) &E12Linha2_hc, (char *) &E12Linha2_sc) != 0)
+            {
+              strcpy (E12Linha_s, (const char * restrict) &E12Linha2_s);
+              strcpy (E12Linha_sp, (const char * restrict) &E12Linha2_sp);
+              strcpy (E12Linha_sc, (const char * restrict) &E12Linha2_sc);
+              return 1;
+            }
+          else
+            {
+              return 0;
+            }
+        }
+      else
+        {
+          return 0;
+        }
+    }
+  else
+    {
+      if (tk == 47)
+        {
+          getToken ();
+          if (E13 ((char *) &E13_tp, (char *) &E13_p, (char *) &E13_c) != 0)
+            {
+              if (strcmp ((const char *) E12Linha_h, (const char *) "int") == 0 && strcmp ((const char *) &E13_tp, (const char *) "int") != 0)
+                {
+                  strcpy ((char *) &E12Linha2_h, (const char * restrict) "int");
+                }
+              else
+                {
+                  strcpy ((char *) &E12Linha2_h, (const char * restrict) "float");
+                }
+              geratemp ((char *) &E12Linha2_hp);
+              sprintf ((char *) &E12Linha2_hc, (const char * restrict) "%s%s\t%s = %s / %s\n", E12Linha_hc, (char *) &E13_c, (char *) &E12Linha2_hp, E12Linha_hp, (char *) &E13_p);
+              if (E12Linha ((char *) &E12Linha2_h, (char *) &E12Linha2_s, (char *) &E12Linha2_hp, (char *) &E12Linha2_sp, (char *) &E12Linha2_hc, (char *) &E12Linha2_sc) != 0)
+                {
+                  strcpy (E12Linha_s, (const char * restrict) &E12Linha2_s);
+                  strcpy (E12Linha_sp, (const char * restrict) &E12Linha2_sp);
+                  strcpy (E12Linha_sc, (const char * restrict) &E12Linha2_sc);
+                  return 1;
+                }
+              else
+                {
+                  return 0;
+                }
+            }
+          else
+            {
+              return 0;
+            }
+        }
+      else
+        {
+          if (tk == 48)
+            {
+              getToken ();
+              if (E13 ((char *) &E13_tp, (char *) &E13_p, (char *) &E13_c) != 0)
+                {
+                  if (strcmp ((const char *) E12Linha_h, (const char *) "int") == 0 && strcmp ((const char *) &E13_tp, (const char *) "int") == 0)
+                    {
+                      strcpy ((char *) &E12Linha2_h, (const char * restrict) "int");
+                    }
+                  else
+                    {
+                      printf ((const char * restrict) "Erro: opera\xc3\xa7\xc3\xa3o de resto inv\xc3\xa1lida");
+                      exit (0);
+                    }
+                  geratemp ((char *) &E12Linha2_hp);
+                  sprintf ((char *) &E12Linha2_hc, (const char * restrict) "%s%s\t%s = %s %c %s\n", E12Linha_hc, (char *) &E13_c, (char *) &E12Linha2_hp, E12Linha_hp, 37, (char *) &E13_p);
+                  if (E12Linha ((char *) &E12Linha2_h, (char *) &E12Linha2_s, (char *) &E12Linha2_hp, (char *) &E12Linha2_sp, (char *) &E12Linha2_hc, (char *) &E12Linha2_sc) != 0)
+                    {
+                      strcpy (E12Linha_s, (const char * restrict) &E12Linha2_s);
+                      strcpy (E12Linha_sp, (const char * restrict) &E12Linha2_sp);
+                      strcpy (E12Linha_sc, (const char * restrict) &E12Linha2_sc);
+                      return 1;
+                    }
+                  else
+                    {
+                      return 0;
+                    }
+                }
+              else
+                {
+                  return 0;
+                }
+            }
+          else
+            {
+              strcpy (E12Linha_s, (const char * restrict) E12Linha_h);
+              strcpy (E12Linha_sp, (const char * restrict) E12Linha_hp);
+              strcpy (E12Linha_sc, (const char * restrict) E12Linha_hc);
+              return 1;
+            }
+        }
+    }
+}
+
+
+;; Function E13 (null)
+;; enabled by -tree-original
+
+
+{
+  char E14_tp[10];
+  char E14_p[10];
+  char E14_c[1000];
+  char E13Linha_tp[10];
+  char E13Linha_h[10];
+  char E13Linha_s[10];
+
+    char E14_tp[10];
+    char E14_p[10];
+    char E14_c[1000];
+    char E13Linha_tp[10];
+    char E13Linha_h[10];
+    char E13Linha_s[10];
+  if (E14 ((char *) &E14_tp, (char *) &E14_p, (char *) &E14_c) != 0)
+    {
+      if (tk == 45)
+        {
+          strcpy ((char *) &E13Linha_h, (const char * restrict) &E14_tp);
+          getToken ();
+          if (E13 ((char *) &E13Linha_tp, (char *) &E13Linha_h, (char *) &E13Linha_s) != 0)
+            {
+              strcpy (E13_tp, (const char * restrict) &E13Linha_s);
+              return 1;
+            }
+          else
+            {
+              return 0;
+            }
+        }
+      else
+        {
+          if (tk == 60)
+            {
+              strcpy ((char *) &E13Linha_h, (const char * restrict) &E14_tp);
+              getToken ();
+              if (E13 ((char *) &E13Linha_tp, (char *) &E13Linha_h, (char *) &E13Linha_s) != 0)
+                {
+                  strcpy (E13_tp, (const char * restrict) &E13Linha_s);
+                  return 1;
+                }
+              else
+                {
+                  return 0;
+                }
+            }
+          else
+            {
+              if (tk == 59)
+                {
+                  strcpy ((char *) &E13Linha_h, (const char * restrict) &E14_tp);
+                  getToken ();
+                  if (E13 ((char *) &E13Linha_tp, (char *) &E13Linha_h, (char *) &E13Linha_s) != 0)
+                    {
+                      strcpy (E13_tp, (const char * restrict) &E13Linha_s);
+                      return 1;
+                    }
+                  else
+                    {
+                      return 0;
+                    }
+                }
+              else
+                {
+                  if (tk == 63)
+                    {
+                      strcpy ((char *) &E13Linha_h, (const char * restrict) &E14_tp);
+                      getToken ();
+                      if (E13 ((char *) &E13Linha_tp, (char *) &E13Linha_h, (char *) &E13Linha_s) != 0)
+                        {
+                          strcpy (E13_tp, (const char * restrict) &E13Linha_s);
+                          return 1;
+                        }
+                      else
+                        {
+                          return 0;
+                        }
+                    }
+                  else
+                    {
+                      strcpy (E13_tp, (const char * restrict) &E14_tp);
+                      strcpy (E13_p, (const char * restrict) &E14_p);
+                      strcpy (E13_c, (const char * restrict) &E14_c);
+                      return 1;
+                    }
+                }
+            }
+        }
+    }
+  return 0;
+}
+
+
+;; Function E14 (null)
+;; enabled by -tree-original
+
+
+{
+  char E_tp[10];
+
+    char E_tp[10];
+  if (tk == 80)
+    {
+      strcpy (E14_tp, (const char * restrict) "int");
+      geratemp (E14_p);
+      sprintf (E14_c, (const char * restrict) "\t%s = %s\n", E14_p, (char *) &lex);
+      getToken ();
+      return 1;
+    }
+  else
+    {
+      if (tk == 81)
+        {
+          strcpy (E14_tp, (const char * restrict) "float");
+          geratemp (E14_p);
+          sprintf (E14_c, (const char * restrict) "\t%s = %s\n", E14_p, (char *) &lex);
+          getToken ();
+          return 1;
+        }
+      else
+        {
+          if (tk == 1)
+            {
+              consultaTipo ((char *) &lex, E14_tp, ts);
+              if (strcmp ((const char *) E14_tp, (const char *) "int") != 0 && strcmp ((const char *) E14_tp, (const char *) "float") != 0)
+                {
+                  printf ((const char * restrict) "Variavel %s nao foi declarada\n", (char *) &lex);
+                  exit (0);
+                }
+              strcpy (E14_p, (const char * restrict) &lex);
+              strcpy (E14_c, (const char * restrict) "");
+              getToken ();
+              if (RE () != 0)
+                {
+                  return 1;
+                }
+              else
+                {
+                  return 0;
+                }
+            }
+          else
+            {
+              if (tk == 34)
+                {
+                  {
+                    char E_p[1000];
+                    char E_c[1000];
+
+                                        char E_p[1000];
+                                        char E_c[1000];
+                    getToken ();
+                    if (E ((char *) &E_tp, (char *) &E_p, (char *) &E_c) != 0)
+                      {
+                        if (tk == 35)
+                          {
+                            getToken ();
+                            strcpy (E14_c, (const char * restrict) &E_c);
+                            strcpy (E14_p, (const char * restrict) &E_p);
+                            return 1;
+                          }
+                        else
+                          {
+                            return 0;
+                          }
+                      }
+                    else
+                      {
+                        return 0;
+                      }
+                  }
+                }
+              else
+                {
+                  return 0;
+                }
+            }
+        }
+    }
+}
+
+
+;; Function RE (null)
+;; enabled by -tree-original
+
+
+{
+  if (tk == 34)
+    {
+      getToken ();
+      if (LP () != 0)
+        {
+          if (tk == 35)
+            {
+              getToken ();
+              return 1;
+            }
+          else
+            {
+              printf ((const char * restrict) "Erro: esperava token \')\' na linha %d coluna %d\n", linha, coluna);
+              return 0;
+            }
+        }
+      else
+        {
+          return 0;
+        }
+    }
+  else
+    {
+      return 1;
     }
 }
 
@@ -960,40 +4436,93 @@
 
 
 {
-  struct FILE * arqout;
-  char Com_C[1000];
+  char conteudo[20000];
+  char lex[20];
+  char c;
+  struct FILE * entrada;
+  int i = 0;
 
-    struct FILE * arqout;
-    char Com_C[1000];
-  if ((arqin = fopen ((const char * restrict) "c:\\teste\\prog.cpp", (const char * restrict) "rt")) == 0B)
+    char conteudo[20000];
+    char lex[20];
+    char c;
+  setbuf (__acrt_iob_func (1), 0B);
+    struct FILE * entrada;
+  ts = 0B;
+    int i = 0;
+  if ((entrada = fopen ((const char * restrict) "teste.txt", (const char * restrict) "r")) == 0B)
     {
-      printf ((const char * restrict) "Erro na abertura do arquivo");
-      exit (0);
+      printf ((const char * restrict) "Arquivo n\xc3\xa3o pode ser aberto\n");
+      exit (1);
     }
-  if ((arqout = fopen ((const char * restrict) "c:\\teste\\saida.kvmp", (const char * restrict) "wt")) == 0B)
+  <D.5634>:;
+  c = (char) fgetc (entrada);
+  if (feof (entrada) != 0)
     {
-      printf ((const char * restrict) "Erro na abertura do arquivo de saida");
-      exit (0);
+      goto <D.5633>;
     }
-  token = le_token ();
-  goto <D.5016>;
-  <D.5015>:;
-  if (Lista_Com ((char *) &Com_C) == 0)
+  if ((c != 9 && c != 10) && c != 13)
     {
-      printf ((const char * restrict) "Erro no comando!!!\n");
+      conteudo[i++ ] = c;
     }
   else
     {
-      fprintf (arqout, (const char * restrict) "%s", (char *) &Com_C);
-      printf ((const char * restrict) "%s", (char *) &Com_C);
+      if (c == 10)
+        {
+          conteudo[i++ ] = 127;
+        }
+      else
+        {
+          if (c == 9)
+            {
+              conteudo[i++ ] = 9;
+            }
+        }
     }
-  getch ();
-  <D.5016>:;
-  if (token != 12) goto <D.5015>; else goto <D.5017>;
-  <D.5017>:;
-  fclose (arqin);
-  fclose (arqout);
-  system ((const char *) "pause");
+  goto <D.5634>;
+  <D.5633>:;
+  conteudo[i] = 0;
+  i = 0;
+  goto <D.5636>;
+  <D.5635>:;
+  tksParser[i] = -1;
+  i++ ;
+  <D.5636>:;
+  if (i <= 999) goto <D.5635>; else goto <D.5637>;
+  <D.5637>:;
+  goto <D.5641>;
+  <D.5640>:;
+  {
+    char linhaSt[3];
+    char colunaSt[3];
+
+    coluna = posColuna - subColuna;
+        char linhaSt[3];
+        char colunaSt[3];
+    snprintf ((char *) &linhaSt, 3, (const char * restrict) "%d", linha);
+    snprintf ((char *) &colunaSt, 3, (const char * restrict) "%d", coluna);
+    tksParser[posParser++ ] = tk;
+    tksParser[posParser++ ] = linha;
+    tksParser[posParser++ ] = coluna;
+    strcpy ((char *) &tksParserLex[posParserLex++ ], (const char * restrict) &lex);
+  }
+  <D.5641>:;
+  if ((tk = le_token ((char *) &conteudo, (char *) &lex)) != -1) goto <D.5640>; else goto <D.5642>;
+  <D.5642>:;
+  fclose (entrada);
+  posParser = 0;
+  posParserLex = 0;
+  getToken ();
+  if (PROGC () != 0)
+    {
+      printf ((const char * restrict) "Sucesso no reconhecimento sint\xc3\xa1tico\nPressione ENTER para encerrar...");
+      getchar ();
+    }
+  else
+    {
+      printf ((const char * restrict) "Falha no reconhecimento sint\xc3\xa1tico\nPressione ENTER para encerrar...");
+      getchar ();
+    }
+  return 0;
 }
 return 0;
 
