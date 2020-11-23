@@ -4,7 +4,7 @@
 palavra_reservada (char * lex)
 {
   int postab;
-  int D.5576;
+  int D.5574;
 
   <bb 2> :
   postab = 0;
@@ -19,7 +19,7 @@ palavra_reservada (char * lex)
     goto <bb 5>; [INV]
 
   <bb 4> :
-  D.5576 = lista_pal[postab].token;
+  D.5574 = lista_pal[postab].token;
   // predicted unlikely by early return (on trees) predictor.
   goto <bb 8>; [INV]
 
@@ -35,11 +35,11 @@ palavra_reservada (char * lex)
     goto <bb 7>; [INV]
 
   <bb 7> :
-  D.5576 = 1;
+  D.5574 = 1;
 
   <bb 8> :
 <L5>:
-  return D.5576;
+  return D.5574;
 
 }
 
@@ -53,7 +53,7 @@ le_token (char * st, char * lex)
   int posl;
   int fim;
   int estado;
-  int D.5596;
+  int D.5594;
 
   <bb 2> :
   estado = 0;
@@ -194,7 +194,7 @@ le_token (char * st, char * lex)
   _27 = pos.10_26 + 1;
   pos = _27;
   estado_anterior = 0;
-  D.5596 = 61;
+  D.5594 = 61;
   // predicted unlikely by early return (on trees) predictor.
   goto <bb 156>; [INV]
 
@@ -202,7 +202,7 @@ le_token (char * st, char * lex)
   _28 = (sizetype) posl;
   _29 = lex + _28;
   *_29 = 0;
-  D.5596 = 43;
+  D.5594 = 43;
   // predicted unlikely by early return (on trees) predictor.
   goto <bb 156>; [INV]
 
@@ -238,7 +238,7 @@ le_token (char * st, char * lex)
   _41 = pos.14_40 + 1;
   pos = _41;
   estado_anterior = 0;
-  D.5596 = 62;
+  D.5594 = 62;
   // predicted unlikely by early return (on trees) predictor.
   goto <bb 156>; [INV]
 
@@ -246,7 +246,7 @@ le_token (char * st, char * lex)
   _42 = (sizetype) posl;
   _43 = lex + _42;
   *_43 = 0;
-  D.5596 = 63;
+  D.5594 = 63;
   // predicted unlikely by early return (on trees) predictor.
   goto <bb 156>; [INV]
 
@@ -264,7 +264,7 @@ le_token (char * st, char * lex)
   _47 = pos.15_46 + 1;
   pos = _47;
   estado_anterior = 0;
-  D.5596 = 64;
+  D.5594 = 64;
   // predicted unlikely by early return (on trees) predictor.
   goto <bb 156>; [INV]
 
@@ -300,7 +300,7 @@ le_token (char * st, char * lex)
   _59 = pos.19_58 + 1;
   pos = _59;
   estado_anterior = 0;
-  D.5596 = 60;
+  D.5594 = 60;
   // predicted unlikely by early return (on trees) predictor.
   goto <bb 156>; [INV]
 
@@ -323,7 +323,7 @@ le_token (char * st, char * lex)
   _66 = pos.21_65 + 1;
   pos = _66;
   estado_anterior = 0;
-  D.5596 = 53;
+  D.5594 = 53;
   // predicted unlikely by early return (on trees) predictor.
   goto <bb 156>; [INV]
 
@@ -331,7 +331,7 @@ le_token (char * st, char * lex)
   _67 = (sizetype) posl;
   _68 = lex + _67;
   *_68 = 0;
-  D.5596 = 44;
+  D.5594 = 44;
   // predicted unlikely by early return (on trees) predictor.
   goto <bb 156>; [INV]
 
@@ -367,7 +367,7 @@ le_token (char * st, char * lex)
   _80 = pos.25_79 + 1;
   pos = _80;
   estado_anterior = 0;
-  D.5596 = 59;
+  D.5594 = 59;
   // predicted unlikely by early return (on trees) predictor.
   goto <bb 156>; [INV]
 
@@ -390,7 +390,7 @@ le_token (char * st, char * lex)
   _87 = pos.27_86 + 1;
   pos = _87;
   estado_anterior = 0;
-  D.5596 = 52;
+  D.5594 = 52;
   // predicted unlikely by early return (on trees) predictor.
   goto <bb 156>; [INV]
 
@@ -398,7 +398,7 @@ le_token (char * st, char * lex)
   _88 = (sizetype) posl;
   _89 = lex + _88;
   *_89 = 0;
-  D.5596 = 45;
+  D.5594 = 45;
   // predicted unlikely by early return (on trees) predictor.
   goto <bb 156>; [INV]
 
@@ -434,7 +434,7 @@ le_token (char * st, char * lex)
   _101 = pos.31_100 + 1;
   pos = _101;
   estado_anterior = 0;
-  D.5596 = 54;
+  D.5594 = 54;
   // predicted unlikely by early return (on trees) predictor.
   goto <bb 156>; [INV]
 
@@ -442,7 +442,7 @@ le_token (char * st, char * lex)
   _102 = (sizetype) posl;
   _103 = lex + _102;
   *_103 = 0;
-  D.5596 = 46;
+  D.5594 = 46;
   // predicted unlikely by early return (on trees) predictor.
   goto <bb 156>; [INV]
 
@@ -478,7 +478,7 @@ le_token (char * st, char * lex)
   _115 = pos.35_114 + 1;
   pos = _115;
   estado_anterior = 0;
-  D.5596 = 55;
+  D.5594 = 55;
   // predicted unlikely by early return (on trees) predictor.
   goto <bb 156>; [INV]
 
@@ -486,7 +486,7 @@ le_token (char * st, char * lex)
   _116 = (sizetype) posl;
   _117 = lex + _116;
   *_117 = 0;
-  D.5596 = 47;
+  D.5594 = 47;
   // predicted unlikely by early return (on trees) predictor.
   goto <bb 156>; [INV]
 
@@ -507,7 +507,7 @@ le_token (char * st, char * lex)
   _123 = (sizetype) posl;
   _124 = lex + _123;
   *_124 = 0;
-  D.5596 = 48;
+  D.5594 = 48;
   // predicted unlikely by early return (on trees) predictor.
   goto <bb 156>; [INV]
 
@@ -543,12 +543,12 @@ le_token (char * st, char * lex)
   _136 = pos.41_135 + 1;
   pos = _136;
   estado_anterior = 0;
-  D.5596 = 67;
+  D.5594 = 67;
   // predicted unlikely by early return (on trees) predictor.
   goto <bb 156>; [INV]
 
   <bb 52> :
-  D.5596 = 102;
+  D.5594 = 102;
   // predicted unlikely by early return (on trees) predictor.
   goto <bb 156>; [INV]
 
@@ -584,12 +584,12 @@ le_token (char * st, char * lex)
   _148 = pos.45_147 + 1;
   pos = _148;
   estado_anterior = 0;
-  D.5596 = 68;
+  D.5594 = 68;
   // predicted unlikely by early return (on trees) predictor.
   goto <bb 156>; [INV]
 
   <bb 56> :
-  D.5596 = 103;
+  D.5594 = 103;
   // predicted unlikely by early return (on trees) predictor.
   goto <bb 156>; [INV]
 
@@ -625,7 +625,7 @@ le_token (char * st, char * lex)
   _160 = pos.49_159 + 1;
   pos = _160;
   estado_anterior = 0;
-  D.5596 = 57;
+  D.5594 = 57;
   // predicted unlikely by early return (on trees) predictor.
   goto <bb 156>; [INV]
 
@@ -648,7 +648,7 @@ le_token (char * st, char * lex)
   _167 = pos.51_166 + 1;
   pos = _167;
   estado_anterior = 0;
-  D.5596 = 66;
+  D.5594 = 66;
   // predicted unlikely by early return (on trees) predictor.
   goto <bb 156>; [INV]
 
@@ -656,7 +656,7 @@ le_token (char * st, char * lex)
   _168 = (sizetype) posl;
   _169 = lex + _168;
   *_169 = 0;
-  D.5596 = 49;
+  D.5594 = 49;
   // predicted unlikely by early return (on trees) predictor.
   goto <bb 156>; [INV]
 
@@ -692,7 +692,7 @@ le_token (char * st, char * lex)
   _181 = pos.55_180 + 1;
   pos = _181;
   estado_anterior = 0;
-  D.5596 = 58;
+  D.5594 = 58;
   // predicted unlikely by early return (on trees) predictor.
   goto <bb 156>; [INV]
 
@@ -715,7 +715,7 @@ le_token (char * st, char * lex)
   _188 = pos.57_187 + 1;
   pos = _188;
   estado_anterior = 0;
-  D.5596 = 65;
+  D.5594 = 65;
   // predicted unlikely by early return (on trees) predictor.
   goto <bb 156>; [INV]
 
@@ -723,7 +723,7 @@ le_token (char * st, char * lex)
   _189 = (sizetype) posl;
   _190 = lex + _189;
   *_190 = 0;
-  D.5596 = 50;
+  D.5594 = 50;
   // predicted unlikely by early return (on trees) predictor.
   goto <bb 156>; [INV]
 
@@ -741,7 +741,7 @@ le_token (char * st, char * lex)
   _194 = pos.58_193 + 1;
   pos = _194;
   estado_anterior = 0;
-  D.5596 = 34;
+  D.5594 = 34;
   // predicted unlikely by early return (on trees) predictor.
   goto <bb 156>; [INV]
 
@@ -759,7 +759,7 @@ le_token (char * st, char * lex)
   _198 = pos.59_197 + 1;
   pos = _198;
   estado_anterior = 0;
-  D.5596 = 35;
+  D.5594 = 35;
   // predicted unlikely by early return (on trees) predictor.
   goto <bb 156>; [INV]
 
@@ -777,7 +777,7 @@ le_token (char * st, char * lex)
   _202 = pos.60_201 + 1;
   pos = _202;
   estado_anterior = 0;
-  D.5596 = 36;
+  D.5594 = 36;
   // predicted unlikely by early return (on trees) predictor.
   goto <bb 156>; [INV]
 
@@ -795,7 +795,7 @@ le_token (char * st, char * lex)
   _206 = pos.61_205 + 1;
   pos = _206;
   estado_anterior = 0;
-  D.5596 = 37;
+  D.5594 = 37;
   // predicted unlikely by early return (on trees) predictor.
   goto <bb 156>; [INV]
 
@@ -813,7 +813,7 @@ le_token (char * st, char * lex)
   _210 = pos.62_209 + 1;
   pos = _210;
   estado_anterior = 0;
-  D.5596 = 38;
+  D.5594 = 38;
   // predicted unlikely by early return (on trees) predictor.
   goto <bb 156>; [INV]
 
@@ -831,7 +831,7 @@ le_token (char * st, char * lex)
   _214 = pos.63_213 + 1;
   pos = _214;
   estado_anterior = 0;
-  D.5596 = 39;
+  D.5594 = 39;
   // predicted unlikely by early return (on trees) predictor.
   goto <bb 156>; [INV]
 
@@ -849,7 +849,7 @@ le_token (char * st, char * lex)
   _218 = pos.64_217 + 1;
   pos = _218;
   estado_anterior = 0;
-  D.5596 = 42;
+  D.5594 = 42;
   // predicted unlikely by early return (on trees) predictor.
   goto <bb 156>; [INV]
 
@@ -867,7 +867,7 @@ le_token (char * st, char * lex)
   _222 = pos.65_221 + 1;
   pos = _222;
   estado_anterior = 0;
-  D.5596 = 40;
+  D.5594 = 40;
   // predicted unlikely by early return (on trees) predictor.
   goto <bb 156>; [INV]
 
@@ -885,7 +885,7 @@ le_token (char * st, char * lex)
   _226 = pos.66_225 + 1;
   pos = _226;
   estado_anterior = 0;
-  D.5596 = 41;
+  D.5594 = 41;
   // predicted unlikely by early return (on trees) predictor.
   goto <bb 156>; [INV]
 
@@ -955,7 +955,7 @@ le_token (char * st, char * lex)
     goto <bb 96>; [INV]
 
   <bb 95> :
-  D.5596 = -1;
+  D.5594 = -1;
   // predicted unlikely by early return (on trees) predictor.
   goto <bb 156>; [INV]
 
@@ -1017,7 +1017,7 @@ le_token (char * st, char * lex)
   _246 = lex + _245;
   *_246 = 0;
   estado_anterior = 1;
-  D.5596 = palavra_reservada (lex);
+  D.5594 = palavra_reservada (lex);
   goto <bb 156>; [INV]
 
   <bb 106> :
@@ -1073,7 +1073,7 @@ le_token (char * st, char * lex)
   _254 = lex + _253;
   *_254 = 0;
   estado_anterior = 2;
-  D.5596 = 80;
+  D.5594 = 80;
   goto <bb 156>; [INV]
 
   <bb 114> :
@@ -1097,7 +1097,7 @@ le_token (char * st, char * lex)
   goto <bb 154>; [INV]
 
   <bb 117> :
-  D.5596 = 101;
+  D.5594 = 101;
   // predicted unlikely by early return (on trees) predictor.
   goto <bb 156>; [INV]
 
@@ -1141,7 +1141,7 @@ le_token (char * st, char * lex)
   goto <bb 154>; [INV]
 
   <bb 124> :
-  D.5596 = 100;
+  D.5594 = 100;
   goto <bb 156>; [INV]
 
   <bb 125> :
@@ -1165,7 +1165,7 @@ le_token (char * st, char * lex)
   goto <bb 154>; [INV]
 
   <bb 128> :
-  D.5596 = 100;
+  D.5594 = 100;
   goto <bb 156>; [INV]
 
   <bb 129> :
@@ -1200,7 +1200,7 @@ le_token (char * st, char * lex)
   _267 = lex + _266;
   *_267 = 0;
   estado_anterior = 6;
-  D.5596 = 80;
+  D.5594 = 80;
   // predicted unlikely by early return (on trees) predictor.
   goto <bb 156>; [INV]
 
@@ -1210,7 +1210,7 @@ le_token (char * st, char * lex)
   _269 = lex + _268;
   *_269 = 0;
   estado_anterior = 6;
-  D.5596 = 81;
+  D.5594 = 81;
   // predicted unlikely by early return (on trees) predictor.
   goto <bb 156>; [INV]
 
@@ -1253,7 +1253,7 @@ le_token (char * st, char * lex)
   _275 = lex + _274;
   *_275 = 0;
   estado_anterior = 7;
-  D.5596 = 81;
+  D.5594 = 81;
   goto <bb 156>; [INV]
 
   <bb 141> :
@@ -1300,7 +1300,7 @@ le_token (char * st, char * lex)
   _280 = (sizetype) posl;
   _281 = lex + _280;
   *_281 = 0;
-  D.5596 = 80;
+  D.5594 = 80;
   goto <bb 156>; [INV]
 
   <bb 148> :
@@ -1331,7 +1331,7 @@ le_token (char * st, char * lex)
     goto <bb 153>; [INV]
 
   <bb 152> :
-  D.5596 = 104;
+  D.5594 = 104;
   // predicted unlikely by early return (on trees) predictor.
   goto <bb 156>; [INV]
 
@@ -1340,7 +1340,7 @@ le_token (char * st, char * lex)
   _285 = (sizetype) posl;
   _286 = lex + _285;
   *_286 = 0;
-  D.5596 = 80;
+  D.5594 = 80;
   goto <bb 156>; [INV]
 
   <bb 154> :
@@ -1355,7 +1355,7 @@ le_token (char * st, char * lex)
 
   <bb 156> :
 <L161>:
-  return D.5596;
+  return D.5594;
 
 }
 
@@ -1421,7 +1421,7 @@ addTabelaSimbolos (char * id, char * tipo)
 
 verificaDuplicacao (char * lex, struct tabela * tab)
 {
-  int D.5729;
+  int D.5727;
 
   <bb 2> :
   if (tab == 0B)
@@ -1430,7 +1430,7 @@ verificaDuplicacao (char * lex, struct tabela * tab)
     goto <bb 4>; [INV]
 
   <bb 3> :
-  D.5729 = 1;
+  D.5727 = 1;
   // predicted unlikely by early return (on trees) predictor.
   goto <bb 7>; [INV]
 
@@ -1451,11 +1451,11 @@ verificaDuplicacao (char * lex, struct tabela * tab)
 
   <bb 6> :
   _5 = tab->prox;
-  D.5729 = verificaDuplicacao (lex, _5);
+  D.5727 = verificaDuplicacao (lex, _5);
 
   <bb 7> :
 <L4>:
-  return D.5729;
+  return D.5727;
 
 }
 
@@ -1504,7 +1504,7 @@ consultaTipo (char * id, char * Tipo, struct tabela * tab)
 RDV (char * RDV_t)
 {
   char DV_t[10];
-  int D.5796;
+  int D.5794;
 
   <bb 2> :
   token.124_1 = token;
@@ -1523,12 +1523,12 @@ RDV (char * RDV_t)
     goto <bb 5>; [INV]
 
   <bb 4> :
-  D.5796 = 1;
+  D.5794 = 1;
   // predicted unlikely by early return (on trees) predictor.
   goto <bb 9>; [INV]
 
   <bb 5> :
-  D.5796 = 0;
+  D.5794 = 0;
   // predicted unlikely by early return (on trees) predictor.
   goto <bb 9>; [INV]
 
@@ -1541,7 +1541,7 @@ RDV (char * RDV_t)
 
   <bb 7> :
   leToken ();
-  D.5796 = 1;
+  D.5794 = 1;
   // predicted unlikely by early return (on trees) predictor.
   goto <bb 9>; [INV]
 
@@ -1549,7 +1549,7 @@ RDV (char * RDV_t)
   coluna.126_4 = coluna;
   linha.127_5 = linha;
   printf ("Erro: esperava token \',\' ou \';\' na linha %d coluna %d\n", linha.127_5, coluna.126_4);
-  D.5796 = 0;
+  D.5794 = 0;
   // predicted unlikely by early return (on trees) predictor.
 
   <bb 9> :
@@ -1557,7 +1557,7 @@ RDV (char * RDV_t)
 
   <bb 10> :
 <L7>:
-  return D.5796;
+  return D.5794;
 
 }
 
@@ -1568,7 +1568,7 @@ RDV (char * RDV_t)
 DV (char * DV_t)
 {
   char RDV_t[10];
-  int D.5789;
+  int D.5787;
 
   <bb 2> :
   token.120_1 = token;
@@ -1598,12 +1598,12 @@ DV (char * DV_t)
     goto <bb 7>; [INV]
 
   <bb 6> :
-  D.5789 = 1;
+  D.5787 = 1;
   // predicted unlikely by early return (on trees) predictor.
   goto <bb 9>; [INV]
 
   <bb 7> :
-  D.5789 = 0;
+  D.5787 = 0;
   // predicted unlikely by early return (on trees) predictor.
   goto <bb 9>; [INV]
 
@@ -1611,7 +1611,7 @@ DV (char * DV_t)
   coluna.122_5 = coluna;
   linha.123_6 = linha;
   printf ("Erro: esperava token \'id\' na linha %d coluna %d\n", linha.123_6, coluna.122_5);
-  D.5789 = 0;
+  D.5787 = 0;
   // predicted unlikely by early return (on trees) predictor.
 
   <bb 9> :
@@ -1619,7 +1619,7 @@ DV (char * DV_t)
 
   <bb 10> :
 <L7>:
-  return D.5789;
+  return D.5787;
 
 }
 
@@ -1629,7 +1629,7 @@ DV (char * DV_t)
 
 TIPO (char * Tipo_t)
 {
-  int D.5806;
+  int D.5804;
 
   <bb 2> :
   token.128_1 = token;
@@ -1678,17 +1678,17 @@ TIPO (char * Tipo_t)
   <bb 10> :
 <L7>:
   leToken ();
-  D.5806 = 1;
+  D.5804 = 1;
   // predicted unlikely by early return (on trees) predictor.
   goto <bb 12>; [INV]
 
   <bb 11> :
-  D.5806 = 0;
+  D.5804 = 0;
   // predicted unlikely by early return (on trees) predictor.
 
   <bb 12> :
 <L10>:
-  return D.5806;
+  return D.5804;
 
 }
 
@@ -1699,7 +1699,7 @@ TIPO (char * Tipo_t)
 RLP ()
 {
   char TIPO_t[10];
-  int D.5841;
+  int D.5839;
 
   <bb 2> :
   token.145_1 = token;
@@ -1743,12 +1743,12 @@ RLP ()
     goto <bb 9>; [INV]
 
   <bb 8> :
-  D.5841 = 1;
+  D.5839 = 1;
   // predicted unlikely by early return (on trees) predictor.
   goto <bb 13>; [INV]
 
   <bb 9> :
-  D.5841 = 0;
+  D.5839 = 0;
   // predicted unlikely by early return (on trees) predictor.
   goto <bb 13>; [INV]
 
@@ -1756,17 +1756,17 @@ RLP ()
   coluna.148_7 = coluna;
   linha.149_8 = linha;
   printf ("Erro: esperava token \'id\' na linha %d coluna %d\n", linha.149_8, coluna.148_7);
-  D.5841 = 0;
+  D.5839 = 0;
   // predicted unlikely by early return (on trees) predictor.
   goto <bb 13>; [INV]
 
   <bb 11> :
-  D.5841 = 0;
+  D.5839 = 0;
   // predicted unlikely by early return (on trees) predictor.
   goto <bb 13>; [INV]
 
   <bb 12> :
-  D.5841 = 1;
+  D.5839 = 1;
   // predicted unlikely by early return (on trees) predictor.
 
   <bb 13> :
@@ -1774,7 +1774,7 @@ RLP ()
 
   <bb 14> :
 <L11>:
-  return D.5841;
+  return D.5839;
 
 }
 
@@ -1785,7 +1785,7 @@ RLP ()
 LP ()
 {
   char TIPO_t[10];
-  int D.5828;
+  int D.5826;
 
   <bb 2> :
   _1 = TIPO (&TIPO_t);
@@ -1821,12 +1821,12 @@ LP ()
     goto <bb 8>; [INV]
 
   <bb 7> :
-  D.5828 = 1;
+  D.5826 = 1;
   // predicted unlikely by early return (on trees) predictor.
   goto <bb 11>; [INV]
 
   <bb 8> :
-  D.5828 = 0;
+  D.5826 = 0;
   // predicted unlikely by early return (on trees) predictor.
   goto <bb 11>; [INV]
 
@@ -1834,12 +1834,12 @@ LP ()
   coluna.143_6 = coluna;
   linha.144_7 = linha;
   printf ("Erro: esperava token \'id\' na linha %d coluna %d\n", linha.144_7, coluna.143_6);
-  D.5828 = 0;
+  D.5826 = 0;
   // predicted unlikely by early return (on trees) predictor.
   goto <bb 11>; [INV]
 
   <bb 10> :
-  D.5828 = 1;
+  D.5826 = 1;
   // predicted unlikely by early return (on trees) predictor.
 
   <bb 11> :
@@ -1847,7 +1847,7 @@ LP ()
 
   <bb 12> :
 <L9>:
-  return D.5828;
+  return D.5826;
 
 }
 
@@ -1857,7 +1857,7 @@ LP ()
 
 RE ()
 {
-  int D.6355;
+  int D.6353;
 
   <bb 2> :
   token.255_1 = token;
@@ -1883,7 +1883,7 @@ RE ()
 
   <bb 5> :
   leToken ();
-  D.6355 = 1;
+  D.6353 = 1;
   // predicted unlikely by early return (on trees) predictor.
   goto <bb 9>; [INV]
 
@@ -1891,22 +1891,22 @@ RE ()
   coluna.257_4 = coluna;
   linha.258_5 = linha;
   printf ("Erro: esperava token \')\' na linha %d coluna %d\n", linha.258_5, coluna.257_4);
-  D.6355 = 0;
+  D.6353 = 0;
   // predicted unlikely by early return (on trees) predictor.
   goto <bb 9>; [INV]
 
   <bb 7> :
-  D.6355 = 0;
+  D.6353 = 0;
   // predicted unlikely by early return (on trees) predictor.
   goto <bb 9>; [INV]
 
   <bb 8> :
-  D.6355 = 1;
+  D.6353 = 1;
   // predicted unlikely by early return (on trees) predictor.
 
   <bb 9> :
 <L6>:
-  return D.6355;
+  return D.6353;
 
 }
 
@@ -1919,7 +1919,7 @@ E14 (char * E14_tp, char * E14_p, char * E14_c)
   char E_c[1000];
   char E_p[1000];
   char E_tp[10];
-  int D.6329;
+  int D.6327;
 
   <bb 2> :
   token.249_1 = token;
@@ -1931,7 +1931,7 @@ E14 (char * E14_tp, char * E14_p, char * E14_c)
   <bb 3> :
   __builtin_memcpy (E14_tp, "int", 4);
   leToken ();
-  D.6329 = 1;
+  D.6327 = 1;
   // predicted unlikely by early return (on trees) predictor.
   goto <bb 21>; [INV]
 
@@ -1945,7 +1945,7 @@ E14 (char * E14_tp, char * E14_p, char * E14_c)
   <bb 5> :
   __builtin_memcpy (E14_tp, "float", 6);
   leToken ();
-  D.6329 = 1;
+  D.6327 = 1;
   // predicted unlikely by early return (on trees) predictor.
   goto <bb 21>; [INV]
 
@@ -1987,12 +1987,12 @@ E14 (char * E14_tp, char * E14_p, char * E14_c)
     goto <bb 12>; [INV]
 
   <bb 11> :
-  D.6329 = 1;
+  D.6327 = 1;
   // predicted unlikely by early return (on trees) predictor.
   goto <bb 21>; [INV]
 
   <bb 12> :
-  D.6329 = 0;
+  D.6327 = 0;
   // predicted unlikely by early return (on trees) predictor.
   goto <bb 21>; [INV]
 
@@ -2022,17 +2022,17 @@ E14 (char * E14_tp, char * E14_p, char * E14_c)
   leToken ();
   strcpy (E14_c, &E_c);
   strcpy (E14_p, &E_p);
-  D.6329 = 1;
+  D.6327 = 1;
   // predicted unlikely by early return (on trees) predictor.
   goto <bb 19>; [INV]
 
   <bb 17> :
-  D.6329 = 0;
+  D.6327 = 0;
   // predicted unlikely by early return (on trees) predictor.
   goto <bb 19>; [INV]
 
   <bb 18> :
-  D.6329 = 0;
+  D.6327 = 0;
   // predicted unlikely by early return (on trees) predictor.
 
   <bb 19> :
@@ -2041,7 +2041,7 @@ E14 (char * E14_tp, char * E14_p, char * E14_c)
   goto <bb 21>; [INV]
 
   <bb 20> :
-  D.6329 = 0;
+  D.6327 = 0;
   // predicted unlikely by early return (on trees) predictor.
 
   <bb 21> :
@@ -2049,7 +2049,7 @@ E14 (char * E14_tp, char * E14_p, char * E14_c)
 
   <bb 22> :
 <L20>:
-  return D.6329;
+  return D.6327;
 
 }
 
@@ -2065,7 +2065,7 @@ E13 (char * E13_tp, char * E13_p, char * E13_c)
   char E14_c[1000];
   char E14_p[10];
   char E14_tp[10];
-  int D.6316;
+  int D.6314;
 
   <bb 2> :
   _1 = E14 (&E14_tp, &E14_p, &E14_c);
@@ -2092,12 +2092,12 @@ E13 (char * E13_tp, char * E13_p, char * E13_c)
 
   <bb 5> :
   strcpy (E13_tp, &E13Linha_s);
-  D.6316 = 1;
+  D.6314 = 1;
   // predicted unlikely by early return (on trees) predictor.
   goto <bb 17>; [INV]
 
   <bb 6> :
-  D.6316 = 0;
+  D.6314 = 0;
   // predicted unlikely by early return (on trees) predictor.
   goto <bb 17>; [INV]
 
@@ -2112,7 +2112,7 @@ E13 (char * E13_tp, char * E13_p, char * E13_c)
   strcpy (&E13Linha_h, &E14_tp);
   leToken ();
   strcpy (E13_tp, &E13Linha_s);
-  D.6316 = 1;
+  D.6314 = 1;
   // predicted unlikely by early return (on trees) predictor.
   goto <bb 17>; [INV]
 
@@ -2127,7 +2127,7 @@ E13 (char * E13_tp, char * E13_p, char * E13_c)
   strcpy (&E13Linha_h, &E14_tp);
   leToken ();
   strcpy (E13_tp, &E13Linha_s);
-  D.6316 = 1;
+  D.6314 = 1;
   // predicted unlikely by early return (on trees) predictor.
   goto <bb 17>; [INV]
 
@@ -2149,12 +2149,12 @@ E13 (char * E13_tp, char * E13_p, char * E13_c)
 
   <bb 13> :
   strcpy (E13_tp, &E13Linha_s);
-  D.6316 = 1;
+  D.6314 = 1;
   // predicted unlikely by early return (on trees) predictor.
   goto <bb 17>; [INV]
 
   <bb 14> :
-  D.6316 = 0;
+  D.6314 = 0;
   // predicted unlikely by early return (on trees) predictor.
   goto <bb 17>; [INV]
 
@@ -2162,12 +2162,12 @@ E13 (char * E13_tp, char * E13_p, char * E13_c)
   strcpy (E13_tp, &E14_tp);
   strcpy (E13_p, &E14_p);
   strcpy (E13_c, &E14_c);
-  D.6316 = 1;
+  D.6314 = 1;
   // predicted unlikely by early return (on trees) predictor.
   goto <bb 17>; [INV]
 
   <bb 16> :
-  D.6316 = 0;
+  D.6314 = 0;
 
   <bb 17> :
   E14_tp = {CLOBBER};
@@ -2179,7 +2179,7 @@ E13 (char * E13_tp, char * E13_p, char * E13_c)
 
   <bb 18> :
 <L15>:
-  return D.6316;
+  return D.6314;
 
 }
 
@@ -2198,7 +2198,7 @@ E12Linha (char * E12Linha_h, char * E12Linha_s, char * E12Linha_hp, char * E12Li
   char E13_c[1000];
   char E13_p[10];
   char E13_tp[10];
-  int D.6287;
+  int D.6285;
 
   <bb 2> :
   token.242_1 = token;
@@ -2247,17 +2247,17 @@ E12Linha (char * E12Linha_h, char * E12Linha_s, char * E12Linha_hp, char * E12Li
   strcpy (E12Linha_s, &E12Linha2_s);
   strcpy (E12Linha_sp, &E12Linha2_sp);
   strcpy (E12Linha_sc, &E12Linha2_sc);
-  D.6287 = 1;
+  D.6285 = 1;
   // predicted unlikely by early return (on trees) predictor.
   goto <bb 32>; [INV]
 
   <bb 10> :
-  D.6287 = 0;
+  D.6285 = 0;
   // predicted unlikely by early return (on trees) predictor.
   goto <bb 32>; [INV]
 
   <bb 11> :
-  D.6287 = 0;
+  D.6285 = 0;
   // predicted unlikely by early return (on trees) predictor.
   goto <bb 32>; [INV]
 
@@ -2308,17 +2308,17 @@ E12Linha (char * E12Linha_h, char * E12Linha_s, char * E12Linha_hp, char * E12Li
   strcpy (E12Linha_s, &E12Linha2_s);
   strcpy (E12Linha_sp, &E12Linha2_sp);
   strcpy (E12Linha_sc, &E12Linha2_sc);
-  D.6287 = 1;
+  D.6285 = 1;
   // predicted unlikely by early return (on trees) predictor.
   goto <bb 32>; [INV]
 
   <bb 20> :
-  D.6287 = 0;
+  D.6285 = 0;
   // predicted unlikely by early return (on trees) predictor.
   goto <bb 32>; [INV]
 
   <bb 21> :
-  D.6287 = 0;
+  D.6285 = 0;
   // predicted unlikely by early return (on trees) predictor.
   goto <bb 32>; [INV]
 
@@ -2367,17 +2367,17 @@ E12Linha (char * E12Linha_h, char * E12Linha_s, char * E12Linha_hp, char * E12Li
   strcpy (E12Linha_s, &E12Linha2_s);
   strcpy (E12Linha_sp, &E12Linha2_sp);
   strcpy (E12Linha_sc, &E12Linha2_sc);
-  D.6287 = 1;
+  D.6285 = 1;
   // predicted unlikely by early return (on trees) predictor.
   goto <bb 32>; [INV]
 
   <bb 29> :
-  D.6287 = 0;
+  D.6285 = 0;
   // predicted unlikely by early return (on trees) predictor.
   goto <bb 32>; [INV]
 
   <bb 30> :
-  D.6287 = 0;
+  D.6285 = 0;
   // predicted unlikely by early return (on trees) predictor.
   goto <bb 32>; [INV]
 
@@ -2385,7 +2385,7 @@ E12Linha (char * E12Linha_h, char * E12Linha_s, char * E12Linha_hp, char * E12Li
   strcpy (E12Linha_s, E12Linha_h);
   strcpy (E12Linha_sp, E12Linha_hp);
   strcpy (E12Linha_sc, E12Linha_hc);
-  D.6287 = 1;
+  D.6285 = 1;
   // predicted unlikely by early return (on trees) predictor.
 
   <bb 32> :
@@ -2401,7 +2401,7 @@ E12Linha (char * E12Linha_h, char * E12Linha_s, char * E12Linha_hp, char * E12Li
 
   <bb 33> :
 <L31>:
-  return D.6287;
+  return D.6285;
 
 }
 
@@ -2420,7 +2420,7 @@ E12 (char * E12_tp, char * E12_p, char * E12_c)
   char E13_c[1000];
   char E13_p[10];
   char E13_tp[10];
-  int D.6274;
+  int D.6272;
 
   <bb 2> :
   _1 = E13 (&E13_tp, &E13_p, &E13_c);
@@ -2443,17 +2443,17 @@ E12 (char * E12_tp, char * E12_p, char * E12_c)
   strcpy (E12_tp, &E12Linha_s);
   strcpy (E12_p, &E12Linha_sp);
   strcpy (E12_c, &E12Linha_sc);
-  D.6274 = 1;
+  D.6272 = 1;
   // predicted unlikely by early return (on trees) predictor.
   goto <bb 7>; [INV]
 
   <bb 5> :
-  D.6274 = 0;
+  D.6272 = 0;
   // predicted unlikely by early return (on trees) predictor.
   goto <bb 7>; [INV]
 
   <bb 6> :
-  D.6274 = 0;
+  D.6272 = 0;
   // predicted unlikely by early return (on trees) predictor.
 
   <bb 7> :
@@ -2469,7 +2469,7 @@ E12 (char * E12_tp, char * E12_p, char * E12_c)
 
   <bb 8> :
 <L5>:
-  return D.6274;
+  return D.6272;
 
 }
 
@@ -2488,7 +2488,7 @@ E11Linha (char * E11Linha_h, char * E11Linha_s, char * E11Linha_hp, char * E11Li
   char E12_c[1000];
   char E12_p[10];
   char E12_tp[10];
-  int D.6254;
+  int D.6252;
 
   <bb 2> :
   token.240_1 = token;
@@ -2537,12 +2537,12 @@ E11Linha (char * E11Linha_h, char * E11Linha_s, char * E11Linha_hp, char * E11Li
   strcpy (E11Linha_s, &E11Linha2_s);
   strcpy (E11Linha_sp, &E11Linha2_sp);
   strcpy (E11Linha_sc, &E11Linha2_sc);
-  D.6254 = 1;
+  D.6252 = 1;
   // predicted unlikely by early return (on trees) predictor.
   goto <bb 22>; [INV]
 
   <bb 10> :
-  D.6254 = 0;
+  D.6252 = 0;
   // predicted unlikely by early return (on trees) predictor.
   goto <bb 22>; [INV]
 
@@ -2593,12 +2593,12 @@ E11Linha (char * E11Linha_h, char * E11Linha_s, char * E11Linha_hp, char * E11Li
   strcpy (E11Linha_s, &E11Linha2_s);
   strcpy (E11Linha_sp, &E11Linha2_sp);
   strcpy (E11Linha_sc, &E11Linha2_sc);
-  D.6254 = 1;
+  D.6252 = 1;
   // predicted unlikely by early return (on trees) predictor.
   goto <bb 22>; [INV]
 
   <bb 19> :
-  D.6254 = 0;
+  D.6252 = 0;
   // predicted unlikely by early return (on trees) predictor.
   goto <bb 22>; [INV]
 
@@ -2606,7 +2606,7 @@ E11Linha (char * E11Linha_h, char * E11Linha_s, char * E11Linha_hp, char * E11Li
   strcpy (E11Linha_s, E11Linha_h);
   strcpy (E11Linha_sp, E11Linha_hp);
   strcpy (E11Linha_sc, E11Linha_hc);
-  D.6254 = 1;
+  D.6252 = 1;
   // predicted unlikely by early return (on trees) predictor.
   goto <bb 22>; [INV]
 
@@ -2635,7 +2635,7 @@ E11Linha (char * E11Linha_h, char * E11Linha_s, char * E11Linha_hp, char * E11Li
 
   <bb 23> :
 <L24>:
-  return D.6254;
+  return D.6252;
 
 }
 
@@ -2654,7 +2654,7 @@ E11 (char * E11_tp, char * E11_p, char * E11_c)
   char E12_c[1000];
   char E12_p[10];
   char E12_tp[10];
-  int D.6241;
+  int D.6239;
 
   <bb 2> :
   _1 = E12 (&E12_tp, &E12_p, &E12_c);
@@ -2677,17 +2677,17 @@ E11 (char * E11_tp, char * E11_p, char * E11_c)
   strcpy (E11_tp, &E11Linha_s);
   strcpy (E11_p, &E11Linha_sp);
   strcpy (E11_c, &E11Linha_sc);
-  D.6241 = 1;
+  D.6239 = 1;
   // predicted unlikely by early return (on trees) predictor.
   goto <bb 7>; [INV]
 
   <bb 5> :
-  D.6241 = 0;
+  D.6239 = 0;
   // predicted unlikely by early return (on trees) predictor.
   goto <bb 7>; [INV]
 
   <bb 6> :
-  D.6241 = 0;
+  D.6239 = 0;
   // predicted unlikely by early return (on trees) predictor.
 
   <bb 7> :
@@ -2703,7 +2703,7 @@ E11 (char * E11_tp, char * E11_p, char * E11_c)
 
   <bb 8> :
 <L5>:
-  return D.6241;
+  return D.6239;
 
 }
 
@@ -2722,7 +2722,7 @@ E10Linha (char * E10Linha_h, char * E10Linha_s, char * E10Linha_hp, char * E10Li
   char E11_c[1000];
   char E11_p[10];
   char E11_tp[10];
-  int D.6228;
+  int D.6226;
 
   <bb 2> :
   token.238_1 = token;
@@ -2751,17 +2751,17 @@ E10Linha (char * E10Linha_h, char * E10Linha_s, char * E10Linha_hp, char * E10Li
   strcpy (E10Linha_s, &E10Linha2_s);
   strcpy (E10Linha_sp, &E10Linha2_sp);
   strcpy (E10Linha_sc, &E10Linha2_sc);
-  D.6228 = 1;
+  D.6226 = 1;
   // predicted unlikely by early return (on trees) predictor.
   goto <bb 15>; [INV]
 
   <bb 6> :
-  D.6228 = 0;
+  D.6226 = 0;
   // predicted unlikely by early return (on trees) predictor.
   goto <bb 15>; [INV]
 
   <bb 7> :
-  D.6228 = 0;
+  D.6226 = 0;
   // predicted unlikely by early return (on trees) predictor.
   goto <bb 15>; [INV]
 
@@ -2792,17 +2792,17 @@ E10Linha (char * E10Linha_h, char * E10Linha_s, char * E10Linha_hp, char * E10Li
   strcpy (E10Linha_s, &E10Linha2_s);
   strcpy (E10Linha_sp, &E10Linha2_sp);
   strcpy (E10Linha_sc, &E10Linha2_sc);
-  D.6228 = 1;
+  D.6226 = 1;
   // predicted unlikely by early return (on trees) predictor.
   goto <bb 15>; [INV]
 
   <bb 12> :
-  D.6228 = 0;
+  D.6226 = 0;
   // predicted unlikely by early return (on trees) predictor.
   goto <bb 15>; [INV]
 
   <bb 13> :
-  D.6228 = 0;
+  D.6226 = 0;
   // predicted unlikely by early return (on trees) predictor.
   goto <bb 15>; [INV]
 
@@ -2810,7 +2810,7 @@ E10Linha (char * E10Linha_h, char * E10Linha_s, char * E10Linha_hp, char * E10Li
   strcpy (E10Linha_s, E10Linha_h);
   strcpy (E10Linha_sp, E10Linha_hp);
   strcpy (E10Linha_sc, E10Linha_hc);
-  D.6228 = 1;
+  D.6226 = 1;
   // predicted unlikely by early return (on trees) predictor.
 
   <bb 15> :
@@ -2826,7 +2826,7 @@ E10Linha (char * E10Linha_h, char * E10Linha_s, char * E10Linha_hp, char * E10Li
 
   <bb 16> :
 <L13>:
-  return D.6228;
+  return D.6226;
 
 }
 
@@ -2845,7 +2845,7 @@ E10 (char * E10_tp, char * E10_p, char * E10_c)
   char E11_c[1000];
   char E11_p[10];
   char E11_tp[10];
-  int D.6219;
+  int D.6217;
 
   <bb 2> :
   _1 = E11 (&E11_tp, &E11_p, &E11_c);
@@ -2868,17 +2868,17 @@ E10 (char * E10_tp, char * E10_p, char * E10_c)
   strcpy (E10_tp, &E10Linha_s);
   strcpy (E10_p, &E10Linha_sp);
   strcpy (E10_c, &E10Linha_sc);
-  D.6219 = 1;
+  D.6217 = 1;
   // predicted unlikely by early return (on trees) predictor.
   goto <bb 7>; [INV]
 
   <bb 5> :
-  D.6219 = 0;
+  D.6217 = 0;
   // predicted unlikely by early return (on trees) predictor.
   goto <bb 7>; [INV]
 
   <bb 6> :
-  D.6219 = 0;
+  D.6217 = 0;
   // predicted unlikely by early return (on trees) predictor.
 
   <bb 7> :
@@ -2894,7 +2894,7 @@ E10 (char * E10_tp, char * E10_p, char * E10_c)
 
   <bb 8> :
 <L5>:
-  return D.6219;
+  return D.6217;
 
 }
 
@@ -2913,7 +2913,7 @@ E9Linha (char * E9Linha_h, char * E9Linha_s, char * E9Linha_hp, char * E9Linha_s
   char E10_c[1000];
   char E10_p[10];
   char E10_tp[10];
-  int D.6194;
+  int D.6192;
 
   <bb 2> :
   token.234_1 = token;
@@ -2942,17 +2942,17 @@ E9Linha (char * E9Linha_h, char * E9Linha_s, char * E9Linha_hp, char * E9Linha_s
   strcpy (E9Linha_s, &E9Linha2_s);
   strcpy (E9Linha_sp, &E9Linha2_sp);
   strcpy (E9Linha_sc, &E9Linha2_sc);
-  D.6194 = 1;
+  D.6192 = 1;
   // predicted unlikely by early return (on trees) predictor.
   goto <bb 27>; [INV]
 
   <bb 6> :
-  D.6194 = 0;
+  D.6192 = 0;
   // predicted unlikely by early return (on trees) predictor.
   goto <bb 27>; [INV]
 
   <bb 7> :
-  D.6194 = 0;
+  D.6192 = 0;
   // predicted unlikely by early return (on trees) predictor.
   goto <bb 27>; [INV]
 
@@ -2983,17 +2983,17 @@ E9Linha (char * E9Linha_h, char * E9Linha_s, char * E9Linha_hp, char * E9Linha_s
   strcpy (E9Linha_s, &E9Linha2_s);
   strcpy (E9Linha_sp, &E9Linha2_sp);
   strcpy (E9Linha_sc, &E9Linha2_sc);
-  D.6194 = 1;
+  D.6192 = 1;
   // predicted unlikely by early return (on trees) predictor.
   goto <bb 27>; [INV]
 
   <bb 12> :
-  D.6194 = 0;
+  D.6192 = 0;
   // predicted unlikely by early return (on trees) predictor.
   goto <bb 27>; [INV]
 
   <bb 13> :
-  D.6194 = 0;
+  D.6192 = 0;
   // predicted unlikely by early return (on trees) predictor.
   goto <bb 27>; [INV]
 
@@ -3024,17 +3024,17 @@ E9Linha (char * E9Linha_h, char * E9Linha_s, char * E9Linha_hp, char * E9Linha_s
   strcpy (E9Linha_s, &E9Linha2_s);
   strcpy (E9Linha_sp, &E9Linha2_sp);
   strcpy (E9Linha_sc, &E9Linha2_sc);
-  D.6194 = 1;
+  D.6192 = 1;
   // predicted unlikely by early return (on trees) predictor.
   goto <bb 27>; [INV]
 
   <bb 18> :
-  D.6194 = 0;
+  D.6192 = 0;
   // predicted unlikely by early return (on trees) predictor.
   goto <bb 27>; [INV]
 
   <bb 19> :
-  D.6194 = 0;
+  D.6192 = 0;
   // predicted unlikely by early return (on trees) predictor.
   goto <bb 27>; [INV]
 
@@ -3065,17 +3065,17 @@ E9Linha (char * E9Linha_h, char * E9Linha_s, char * E9Linha_hp, char * E9Linha_s
   strcpy (E9Linha_s, &E9Linha2_s);
   strcpy (E9Linha_sp, &E9Linha2_sp);
   strcpy (E9Linha_sc, &E9Linha2_sc);
-  D.6194 = 1;
+  D.6192 = 1;
   // predicted unlikely by early return (on trees) predictor.
   goto <bb 27>; [INV]
 
   <bb 24> :
-  D.6194 = 0;
+  D.6192 = 0;
   // predicted unlikely by early return (on trees) predictor.
   goto <bb 27>; [INV]
 
   <bb 25> :
-  D.6194 = 0;
+  D.6192 = 0;
   // predicted unlikely by early return (on trees) predictor.
   goto <bb 27>; [INV]
 
@@ -3083,7 +3083,7 @@ E9Linha (char * E9Linha_h, char * E9Linha_s, char * E9Linha_hp, char * E9Linha_s
   strcpy (E9Linha_s, E9Linha_h);
   strcpy (E9Linha_sp, E9Linha_hp);
   strcpy (E9Linha_sc, E9Linha_hc);
-  D.6194 = 1;
+  D.6192 = 1;
   // predicted unlikely by early return (on trees) predictor.
 
   <bb 27> :
@@ -3099,7 +3099,7 @@ E9Linha (char * E9Linha_h, char * E9Linha_s, char * E9Linha_hp, char * E9Linha_s
 
   <bb 28> :
 <L25>:
-  return D.6194;
+  return D.6192;
 
 }
 
@@ -3118,7 +3118,7 @@ E9 (char * E9_tp, char * E9_p, char * E9_c)
   char E10_c[1000];
   char E10_p[10];
   char E10_tp[10];
-  int D.6185;
+  int D.6183;
 
   <bb 2> :
   _1 = E10 (&E10_tp, &E10_p, &E10_c);
@@ -3141,17 +3141,17 @@ E9 (char * E9_tp, char * E9_p, char * E9_c)
   strcpy (E9_tp, &E9Linha_s);
   strcpy (E9_p, &E9Linha_sp);
   strcpy (E9_c, &E9Linha_sc);
-  D.6185 = 1;
+  D.6183 = 1;
   // predicted unlikely by early return (on trees) predictor.
   goto <bb 7>; [INV]
 
   <bb 5> :
-  D.6185 = 0;
+  D.6183 = 0;
   // predicted unlikely by early return (on trees) predictor.
   goto <bb 7>; [INV]
 
   <bb 6> :
-  D.6185 = 0;
+  D.6183 = 0;
   // predicted unlikely by early return (on trees) predictor.
 
   <bb 7> :
@@ -3167,7 +3167,7 @@ E9 (char * E9_tp, char * E9_p, char * E9_c)
 
   <bb 8> :
 <L5>:
-  return D.6185;
+  return D.6183;
 
 }
 
@@ -3186,7 +3186,7 @@ E8Linha (char * E8Linha_h, char * E8Linha_s, char * E8Linha_hp, char * E8Linha_s
   char E9_c[1000];
   char E9_p[10];
   char E9_tp[10];
-  int D.6172;
+  int D.6170;
 
   <bb 2> :
   token.232_1 = token;
@@ -3215,17 +3215,17 @@ E8Linha (char * E8Linha_h, char * E8Linha_s, char * E8Linha_hp, char * E8Linha_s
   strcpy (E8Linha_s, &E8Linha2_s);
   strcpy (E8Linha_sp, &E8Linha2_sp);
   strcpy (E8Linha_sc, &E8Linha2_sc);
-  D.6172 = 1;
+  D.6170 = 1;
   // predicted unlikely by early return (on trees) predictor.
   goto <bb 15>; [INV]
 
   <bb 6> :
-  D.6172 = 0;
+  D.6170 = 0;
   // predicted unlikely by early return (on trees) predictor.
   goto <bb 15>; [INV]
 
   <bb 7> :
-  D.6172 = 0;
+  D.6170 = 0;
   // predicted unlikely by early return (on trees) predictor.
   goto <bb 15>; [INV]
 
@@ -3256,17 +3256,17 @@ E8Linha (char * E8Linha_h, char * E8Linha_s, char * E8Linha_hp, char * E8Linha_s
   strcpy (E8Linha_s, &E8Linha2_s);
   strcpy (E8Linha_sp, &E8Linha2_sp);
   strcpy (E8Linha_sc, &E8Linha2_sc);
-  D.6172 = 1;
+  D.6170 = 1;
   // predicted unlikely by early return (on trees) predictor.
   goto <bb 15>; [INV]
 
   <bb 12> :
-  D.6172 = 0;
+  D.6170 = 0;
   // predicted unlikely by early return (on trees) predictor.
   goto <bb 15>; [INV]
 
   <bb 13> :
-  D.6172 = 0;
+  D.6170 = 0;
   // predicted unlikely by early return (on trees) predictor.
   goto <bb 15>; [INV]
 
@@ -3274,7 +3274,7 @@ E8Linha (char * E8Linha_h, char * E8Linha_s, char * E8Linha_hp, char * E8Linha_s
   strcpy (E8Linha_s, E8Linha_h);
   strcpy (E8Linha_sp, E8Linha_hp);
   strcpy (E8Linha_sc, E8Linha_hc);
-  D.6172 = 1;
+  D.6170 = 1;
   // predicted unlikely by early return (on trees) predictor.
 
   <bb 15> :
@@ -3290,7 +3290,7 @@ E8Linha (char * E8Linha_h, char * E8Linha_s, char * E8Linha_hp, char * E8Linha_s
 
   <bb 16> :
 <L13>:
-  return D.6172;
+  return D.6170;
 
 }
 
@@ -3309,7 +3309,7 @@ E8 (char * E8_tp, char * E8_p, char * E8_c)
   char E9_c[1000];
   char E9_p[10];
   char E9_tp[10];
-  int D.6163;
+  int D.6161;
 
   <bb 2> :
   _1 = E9 (&E9_tp, &E9_p, &E9_c);
@@ -3332,17 +3332,17 @@ E8 (char * E8_tp, char * E8_p, char * E8_c)
   strcpy (E8_tp, &E8Linha_s);
   strcpy (E8_p, &E8Linha_sp);
   strcpy (E8_c, &E8Linha_sc);
-  D.6163 = 1;
+  D.6161 = 1;
   // predicted unlikely by early return (on trees) predictor.
   goto <bb 7>; [INV]
 
   <bb 5> :
-  D.6163 = 0;
+  D.6161 = 0;
   // predicted unlikely by early return (on trees) predictor.
   goto <bb 7>; [INV]
 
   <bb 6> :
-  D.6163 = 0;
+  D.6161 = 0;
   // predicted unlikely by early return (on trees) predictor.
 
   <bb 7> :
@@ -3358,7 +3358,7 @@ E8 (char * E8_tp, char * E8_p, char * E8_c)
 
   <bb 8> :
 <L5>:
-  return D.6163;
+  return D.6161;
 
 }
 
@@ -3377,7 +3377,7 @@ E7Linha (char * E7Linha_h, char * E7Linha_s, char * E7Linha_hp, char * E7Linha_s
   char E8_c[1000];
   char E8_p[10];
   char E8_tp[10];
-  int D.6156;
+  int D.6154;
 
   <bb 2> :
   token.231_1 = token;
@@ -3406,17 +3406,17 @@ E7Linha (char * E7Linha_h, char * E7Linha_s, char * E7Linha_hp, char * E7Linha_s
   strcpy (E7Linha_s, &E7Linha2_s);
   strcpy (E7Linha_sp, &E7Linha2_sp);
   strcpy (E7Linha_sc, &E7Linha2_sc);
-  D.6156 = 1;
+  D.6154 = 1;
   // predicted unlikely by early return (on trees) predictor.
   goto <bb 9>; [INV]
 
   <bb 6> :
-  D.6156 = 0;
+  D.6154 = 0;
   // predicted unlikely by early return (on trees) predictor.
   goto <bb 9>; [INV]
 
   <bb 7> :
-  D.6156 = 0;
+  D.6154 = 0;
   // predicted unlikely by early return (on trees) predictor.
   goto <bb 9>; [INV]
 
@@ -3424,7 +3424,7 @@ E7Linha (char * E7Linha_h, char * E7Linha_s, char * E7Linha_hp, char * E7Linha_s
   strcpy (E7Linha_s, E7Linha_h);
   strcpy (E7Linha_sp, E7Linha_hp);
   strcpy (E7Linha_sc, E7Linha_hc);
-  D.6156 = 1;
+  D.6154 = 1;
   // predicted unlikely by early return (on trees) predictor.
 
   <bb 9> :
@@ -3440,7 +3440,7 @@ E7Linha (char * E7Linha_h, char * E7Linha_s, char * E7Linha_hp, char * E7Linha_s
 
   <bb 10> :
 <L7>:
-  return D.6156;
+  return D.6154;
 
 }
 
@@ -3459,7 +3459,7 @@ E7 (char * E7_tp, char * E7_p, char * E7_c)
   char E8_c[1000];
   char E8_p[10];
   char E8_tp[10];
-  int D.6147;
+  int D.6145;
 
   <bb 2> :
   _1 = E8 (&E8_tp, &E8_p, &E8_c);
@@ -3482,17 +3482,17 @@ E7 (char * E7_tp, char * E7_p, char * E7_c)
   strcpy (E7_tp, &E7Linha_s);
   strcpy (E7_p, &E7Linha_sp);
   strcpy (E7_c, &E7Linha_sc);
-  D.6147 = 1;
+  D.6145 = 1;
   // predicted unlikely by early return (on trees) predictor.
   goto <bb 7>; [INV]
 
   <bb 5> :
-  D.6147 = 0;
+  D.6145 = 0;
   // predicted unlikely by early return (on trees) predictor.
   goto <bb 7>; [INV]
 
   <bb 6> :
-  D.6147 = 0;
+  D.6145 = 0;
   // predicted unlikely by early return (on trees) predictor.
 
   <bb 7> :
@@ -3508,7 +3508,7 @@ E7 (char * E7_tp, char * E7_p, char * E7_c)
 
   <bb 8> :
 <L5>:
-  return D.6147;
+  return D.6145;
 
 }
 
@@ -3527,7 +3527,7 @@ E6Linha (char * E6Linha_h, char * E6Linha_s, char * E6Linha_hp, char * E6Linha_s
   char E7_c[1000];
   char E7_p[10];
   char E7_tp[10];
-  int D.6140;
+  int D.6138;
 
   <bb 2> :
   token.230_1 = token;
@@ -3556,17 +3556,17 @@ E6Linha (char * E6Linha_h, char * E6Linha_s, char * E6Linha_hp, char * E6Linha_s
   strcpy (E6Linha_s, &E6Linha2_s);
   strcpy (E6Linha_sp, &E6Linha2_sp);
   strcpy (E6Linha_sc, &E6Linha2_sc);
-  D.6140 = 1;
+  D.6138 = 1;
   // predicted unlikely by early return (on trees) predictor.
   goto <bb 9>; [INV]
 
   <bb 6> :
-  D.6140 = 0;
+  D.6138 = 0;
   // predicted unlikely by early return (on trees) predictor.
   goto <bb 9>; [INV]
 
   <bb 7> :
-  D.6140 = 0;
+  D.6138 = 0;
   // predicted unlikely by early return (on trees) predictor.
   goto <bb 9>; [INV]
 
@@ -3574,7 +3574,7 @@ E6Linha (char * E6Linha_h, char * E6Linha_s, char * E6Linha_hp, char * E6Linha_s
   strcpy (E6Linha_s, E6Linha_h);
   strcpy (E6Linha_sp, E6Linha_hp);
   strcpy (E6Linha_sc, E6Linha_hc);
-  D.6140 = 1;
+  D.6138 = 1;
   // predicted unlikely by early return (on trees) predictor.
 
   <bb 9> :
@@ -3590,7 +3590,7 @@ E6Linha (char * E6Linha_h, char * E6Linha_s, char * E6Linha_hp, char * E6Linha_s
 
   <bb 10> :
 <L7>:
-  return D.6140;
+  return D.6138;
 
 }
 
@@ -3609,7 +3609,7 @@ E6 (char * E6_tp, char * E6_p, char * E6_c)
   char E7_c[1000];
   char E7_p[10];
   char E7_tp[10];
-  int D.6131;
+  int D.6129;
 
   <bb 2> :
   _1 = E7 (&E7_tp, &E7_p, &E7_c);
@@ -3632,17 +3632,17 @@ E6 (char * E6_tp, char * E6_p, char * E6_c)
   strcpy (E6_tp, &E6Linha_s);
   strcpy (E6_p, &E6Linha_sp);
   strcpy (E6_c, &E6Linha_sc);
-  D.6131 = 1;
+  D.6129 = 1;
   // predicted unlikely by early return (on trees) predictor.
   goto <bb 7>; [INV]
 
   <bb 5> :
-  D.6131 = 0;
+  D.6129 = 0;
   // predicted unlikely by early return (on trees) predictor.
   goto <bb 7>; [INV]
 
   <bb 6> :
-  D.6131 = 0;
+  D.6129 = 0;
   // predicted unlikely by early return (on trees) predictor.
 
   <bb 7> :
@@ -3658,7 +3658,7 @@ E6 (char * E6_tp, char * E6_p, char * E6_c)
 
   <bb 8> :
 <L5>:
-  return D.6131;
+  return D.6129;
 
 }
 
@@ -3677,7 +3677,7 @@ E5Linha (char * E5Linha_h, char * E5Linha_s, char * E5Linha_hp, char * E5Linha_s
   char E6_c[1000];
   char E6_p[10];
   char E6_tp[10];
-  int D.6124;
+  int D.6122;
 
   <bb 2> :
   token.229_1 = token;
@@ -3706,17 +3706,17 @@ E5Linha (char * E5Linha_h, char * E5Linha_s, char * E5Linha_hp, char * E5Linha_s
   strcpy (E5Linha_s, &E5Linha2_s);
   strcpy (E5Linha_sp, &E5Linha2_sp);
   strcpy (E5Linha_sc, &E5Linha2_sc);
-  D.6124 = 1;
+  D.6122 = 1;
   // predicted unlikely by early return (on trees) predictor.
   goto <bb 9>; [INV]
 
   <bb 6> :
-  D.6124 = 0;
+  D.6122 = 0;
   // predicted unlikely by early return (on trees) predictor.
   goto <bb 9>; [INV]
 
   <bb 7> :
-  D.6124 = 0;
+  D.6122 = 0;
   // predicted unlikely by early return (on trees) predictor.
   goto <bb 9>; [INV]
 
@@ -3724,7 +3724,7 @@ E5Linha (char * E5Linha_h, char * E5Linha_s, char * E5Linha_hp, char * E5Linha_s
   strcpy (E5Linha_s, E5Linha_h);
   strcpy (E5Linha_sp, E5Linha_hp);
   strcpy (E5Linha_sc, E5Linha_hc);
-  D.6124 = 1;
+  D.6122 = 1;
   // predicted unlikely by early return (on trees) predictor.
 
   <bb 9> :
@@ -3740,7 +3740,7 @@ E5Linha (char * E5Linha_h, char * E5Linha_s, char * E5Linha_hp, char * E5Linha_s
 
   <bb 10> :
 <L7>:
-  return D.6124;
+  return D.6122;
 
 }
 
@@ -3759,7 +3759,7 @@ E5 (char * E5_tp, char * E5_p, char * E5_c)
   char E6_c[1000];
   char E6_p[10];
   char E6_tp[10];
-  int D.6115;
+  int D.6113;
 
   <bb 2> :
   _1 = E6 (&E6_tp, &E6_p, &E6_c);
@@ -3782,17 +3782,17 @@ E5 (char * E5_tp, char * E5_p, char * E5_c)
   strcpy (E5_tp, &E5Linha_s);
   strcpy (E5_p, &E5Linha_sp);
   strcpy (E5_c, &E5Linha_sc);
-  D.6115 = 1;
+  D.6113 = 1;
   // predicted unlikely by early return (on trees) predictor.
   goto <bb 7>; [INV]
 
   <bb 5> :
-  D.6115 = 0;
+  D.6113 = 0;
   // predicted unlikely by early return (on trees) predictor.
   goto <bb 7>; [INV]
 
   <bb 6> :
-  D.6115 = 0;
+  D.6113 = 0;
   // predicted unlikely by early return (on trees) predictor.
 
   <bb 7> :
@@ -3808,7 +3808,7 @@ E5 (char * E5_tp, char * E5_p, char * E5_c)
 
   <bb 8> :
 <L5>:
-  return D.6115;
+  return D.6113;
 
 }
 
@@ -3827,7 +3827,7 @@ E4Linha (char * E4Linha_h, char * E4Linha_s, char * E4Linha_hp, char * E4Linha_s
   char E4Linha2_hp[10];
   char E4Linha2_s[10];
   char E4Linha2_h[10];
-  int D.6108;
+  int D.6106;
 
   <bb 2> :
   token.228_1 = token;
@@ -3856,17 +3856,17 @@ E4Linha (char * E4Linha_h, char * E4Linha_s, char * E4Linha_hp, char * E4Linha_s
   strcpy (E4Linha_s, &E4Linha2_s);
   strcpy (E4Linha_sp, &E4Linha2_sp);
   strcpy (E4Linha_sc, &E4Linha2_sc);
-  D.6108 = 1;
+  D.6106 = 1;
   // predicted unlikely by early return (on trees) predictor.
   goto <bb 9>; [INV]
 
   <bb 6> :
-  D.6108 = 0;
+  D.6106 = 0;
   // predicted unlikely by early return (on trees) predictor.
   goto <bb 9>; [INV]
 
   <bb 7> :
-  D.6108 = 0;
+  D.6106 = 0;
   // predicted unlikely by early return (on trees) predictor.
   goto <bb 9>; [INV]
 
@@ -3874,7 +3874,7 @@ E4Linha (char * E4Linha_h, char * E4Linha_s, char * E4Linha_hp, char * E4Linha_s
   strcpy (E4Linha_s, E4Linha_h);
   strcpy (E4Linha_sp, E4Linha_hp);
   strcpy (E4Linha_sc, E4Linha_hc);
-  D.6108 = 1;
+  D.6106 = 1;
   // predicted unlikely by early return (on trees) predictor.
 
   <bb 9> :
@@ -3890,7 +3890,7 @@ E4Linha (char * E4Linha_h, char * E4Linha_s, char * E4Linha_hp, char * E4Linha_s
 
   <bb 10> :
 <L7>:
-  return D.6108;
+  return D.6106;
 
 }
 
@@ -3909,7 +3909,7 @@ E4 (char * E4_tp, char * E4_p, char * E4_c)
   char E4Linha_hp[10];
   char E4Linha_s[10];
   char E4Linha_h[10];
-  int D.6099;
+  int D.6097;
 
   <bb 2> :
   _1 = E5 (&E5_tp, &E5_p, &E5_c);
@@ -3932,17 +3932,17 @@ E4 (char * E4_tp, char * E4_p, char * E4_c)
   strcpy (E4_tp, &E4Linha_s);
   strcpy (E4_p, &E4Linha_sp);
   strcpy (E4_c, &E4Linha_sc);
-  D.6099 = 1;
+  D.6097 = 1;
   // predicted unlikely by early return (on trees) predictor.
   goto <bb 7>; [INV]
 
   <bb 5> :
-  D.6099 = 0;
+  D.6097 = 0;
   // predicted unlikely by early return (on trees) predictor.
   goto <bb 7>; [INV]
 
   <bb 6> :
-  D.6099 = 0;
+  D.6097 = 0;
   // predicted unlikely by early return (on trees) predictor.
 
   <bb 7> :
@@ -3958,7 +3958,7 @@ E4 (char * E4_tp, char * E4_p, char * E4_c)
 
   <bb 8> :
 <L5>:
-  return D.6099;
+  return D.6097;
 
 }
 
@@ -3977,7 +3977,7 @@ E3Linha (char * E3Linha_h, char * E3Linha_s, char * E3Linha_hp, char * E3Linha_s
   char E3Linha2_hp[10];
   char E3Linha2_s[10];
   char E3Linha2_h[10];
-  int D.6089;
+  int D.6087;
 
   <bb 2> :
   token.227_1 = token;
@@ -4006,12 +4006,12 @@ E3Linha (char * E3Linha_h, char * E3Linha_s, char * E3Linha_hp, char * E3Linha_s
   strcpy (E3Linha_s, &E3Linha2_s);
   strcpy (E3Linha_sp, &E3Linha2_sp);
   strcpy (E3Linha_sc, &E3Linha2_sc);
-  D.6089 = 1;
+  D.6087 = 1;
   // predicted unlikely by early return (on trees) predictor.
   goto <bb 9>; [INV]
 
   <bb 6> :
-  D.6089 = 0;
+  D.6087 = 0;
   // predicted unlikely by early return (on trees) predictor.
   goto <bb 9>; [INV]
 
@@ -4019,7 +4019,7 @@ E3Linha (char * E3Linha_h, char * E3Linha_s, char * E3Linha_hp, char * E3Linha_s
   strcpy (E3Linha_s, E3Linha_h);
   strcpy (E3Linha_sp, E3Linha_hp);
   strcpy (E3Linha_sc, E3Linha_hc);
-  D.6089 = 1;
+  D.6087 = 1;
   // predicted unlikely by early return (on trees) predictor.
   goto <bb 9>; [INV]
 
@@ -4048,7 +4048,7 @@ E3Linha (char * E3Linha_h, char * E3Linha_s, char * E3Linha_hp, char * E3Linha_s
 
   <bb 10> :
 <L10>:
-  return D.6089;
+  return D.6087;
 
 }
 
@@ -4067,7 +4067,7 @@ E3 (char * E3_tp, char * E3_p, char * E3_c)
   char E3Linha_hp[10];
   char E3Linha_s[10];
   char E3Linha_h[10];
-  int D.6080;
+  int D.6078;
 
   <bb 2> :
   _1 = E4 (&E4_tp, &E4_p, &E4_c);
@@ -4090,17 +4090,17 @@ E3 (char * E3_tp, char * E3_p, char * E3_c)
   strcpy (E3_tp, &E3Linha_s);
   strcpy (E3_p, &E3Linha_sp);
   strcpy (E3_c, &E3Linha_sc);
-  D.6080 = 1;
+  D.6078 = 1;
   // predicted unlikely by early return (on trees) predictor.
   goto <bb 7>; [INV]
 
   <bb 5> :
-  D.6080 = 0;
+  D.6078 = 0;
   // predicted unlikely by early return (on trees) predictor.
   goto <bb 7>; [INV]
 
   <bb 6> :
-  D.6080 = 0;
+  D.6078 = 0;
   // predicted unlikely by early return (on trees) predictor.
 
   <bb 7> :
@@ -4116,7 +4116,7 @@ E3 (char * E3_tp, char * E3_p, char * E3_c)
 
   <bb 8> :
 <L5>:
-  return D.6080;
+  return D.6078;
 
 }
 
@@ -4135,7 +4135,7 @@ E2 (char * E2_tp, char * E2_h, char * E2_s, char * E2_p, char * E2_c)
   char E2Linha_hp[10];
   char E2Linha_s[10];
   char E2Linha_h[10];
-  int D.6060;
+  int D.6058;
 
   <bb 2> :
   _1 = E3 (&E3_tp, &E3_p, &E3_c);
@@ -4158,17 +4158,17 @@ E2 (char * E2_tp, char * E2_h, char * E2_s, char * E2_p, char * E2_c)
   strcpy (E2_tp, &E2Linha_s);
   strcpy (E2_p, &E2Linha_sp);
   strcpy (E2_c, &E2Linha_sc);
-  D.6060 = 1;
+  D.6058 = 1;
   // predicted unlikely by early return (on trees) predictor.
   goto <bb 7>; [INV]
 
   <bb 5> :
-  D.6060 = 0;
+  D.6058 = 0;
   // predicted unlikely by early return (on trees) predictor.
   goto <bb 7>; [INV]
 
   <bb 6> :
-  D.6060 = 0;
+  D.6058 = 0;
   // predicted unlikely by early return (on trees) predictor.
 
   <bb 7> :
@@ -4184,7 +4184,7 @@ E2 (char * E2_tp, char * E2_h, char * E2_s, char * E2_p, char * E2_c)
 
   <bb 8> :
 <L5>:
-  return D.6060;
+  return D.6058;
 
 }
 
@@ -4204,7 +4204,7 @@ E1 (char * E1_tp, char * E1_h, char * E1_s, char * E1_p, char * E1_c)
   char E1Linha_tp[10];
   char E1Linha_s[10];
   char E1Linha_h[10];
-  int D.6036;
+  int D.6034;
 
   <bb 2> :
   _1 = E2 (&E2_tp, &E2_h, &E2_s, &E2_p, &E2_c);
@@ -4233,12 +4233,12 @@ E1 (char * E1_tp, char * E1_h, char * E1_s, char * E1_p, char * E1_c)
   strcpy (E1_tp, &E1Linha_s);
   strcpy (E1_p, &E2_p);
   sprintf (E1_c, "%s\t%s = %s\n", &E1Linha_c, &E2_p, &E1Linha_p);
-  D.6036 = 1;
+  D.6034 = 1;
   // predicted unlikely by early return (on trees) predictor.
   goto <bb 25>; [INV]
 
   <bb 6> :
-  D.6036 = 0;
+  D.6034 = 0;
   // predicted unlikely by early return (on trees) predictor.
   goto <bb 25>; [INV]
 
@@ -4262,12 +4262,12 @@ E1 (char * E1_tp, char * E1_h, char * E1_s, char * E1_p, char * E1_c)
   strcpy (E1_tp, &E1Linha_s);
   strcpy (E1_p, &E2_p);
   sprintf (E1_c, "%s\t%s = %s * %s\n", &E1Linha_c, &E2_p, &E2_p, &E1Linha_p);
-  D.6036 = 1;
+  D.6034 = 1;
   // predicted unlikely by early return (on trees) predictor.
   goto <bb 25>; [INV]
 
   <bb 10> :
-  D.6036 = 0;
+  D.6034 = 0;
   // predicted unlikely by early return (on trees) predictor.
   goto <bb 25>; [INV]
 
@@ -4291,12 +4291,12 @@ E1 (char * E1_tp, char * E1_h, char * E1_s, char * E1_p, char * E1_c)
   strcpy (E1_tp, &E1Linha_s);
   strcpy (E1_p, &E2_p);
   sprintf (E1_c, "%s\t%s = %s / %s\n", &E1Linha_c, &E2_p, &E2_p, &E1Linha_p);
-  D.6036 = 1;
+  D.6034 = 1;
   // predicted unlikely by early return (on trees) predictor.
   goto <bb 25>; [INV]
 
   <bb 14> :
-  D.6036 = 0;
+  D.6034 = 0;
   // predicted unlikely by early return (on trees) predictor.
   goto <bb 25>; [INV]
 
@@ -4320,12 +4320,12 @@ E1 (char * E1_tp, char * E1_h, char * E1_s, char * E1_p, char * E1_c)
   strcpy (E1_tp, &E1Linha_s);
   strcpy (E1_p, &E2_p);
   sprintf (E1_c, "%s\t%s = %s + %s\n", &E1Linha_c, &E2_p, &E2_p, &E1Linha_p);
-  D.6036 = 1;
+  D.6034 = 1;
   // predicted unlikely by early return (on trees) predictor.
   goto <bb 25>; [INV]
 
   <bb 18> :
-  D.6036 = 0;
+  D.6034 = 0;
   // predicted unlikely by early return (on trees) predictor.
   goto <bb 25>; [INV]
 
@@ -4349,12 +4349,12 @@ E1 (char * E1_tp, char * E1_h, char * E1_s, char * E1_p, char * E1_c)
   strcpy (E1_tp, &E1Linha_s);
   strcpy (E1_p, &E2_p);
   sprintf (E1_c, "%s\t%s = %s - %s\n", &E1Linha_c, &E2_p, &E2_p, &E1Linha_p);
-  D.6036 = 1;
+  D.6034 = 1;
   // predicted unlikely by early return (on trees) predictor.
   goto <bb 25>; [INV]
 
   <bb 22> :
-  D.6036 = 0;
+  D.6034 = 0;
   // predicted unlikely by early return (on trees) predictor.
   goto <bb 25>; [INV]
 
@@ -4362,7 +4362,7 @@ E1 (char * E1_tp, char * E1_h, char * E1_s, char * E1_p, char * E1_c)
   strcpy (E1_tp, &E2_tp);
   strcpy (E1_p, &E2_p);
   strcpy (E1_c, &E2_c);
-  D.6036 = 1;
+  D.6034 = 1;
   // predicted unlikely by early return (on trees) predictor.
   goto <bb 25>; [INV]
 
@@ -4393,7 +4393,7 @@ E1 (char * E1_tp, char * E1_h, char * E1_s, char * E1_p, char * E1_c)
 
   <bb 26> :
 <L24>:
-  return D.6036;
+  return D.6034;
 
 }
 
@@ -4416,7 +4416,7 @@ ELinha (char * ELinha_h, char * ELinha_s, char * ELinha_p, char * ELinha_hp, cha
   char ELinha2_hp[10];
   char ELinha2_sc[1000];
   char ELinha2_sp[10];
-  int D.6027;
+  int D.6025;
 
   <bb 2> :
   token.217_1 = token;
@@ -4445,17 +4445,17 @@ ELinha (char * ELinha_h, char * ELinha_s, char * ELinha_p, char * ELinha_hp, cha
   strcpy (ELinha_s, &ELinha2_s);
   strcpy (ELinha_p, &ELinha2_p);
   sprintf (ELinha_c, "%s %s", &E1_c, &ELinha2_c);
-  D.6027 = 1;
+  D.6025 = 1;
   // predicted unlikely by early return (on trees) predictor.
   goto <bb 9>; [INV]
 
   <bb 6> :
-  D.6027 = 0;
+  D.6025 = 0;
   // predicted unlikely by early return (on trees) predictor.
   goto <bb 9>; [INV]
 
   <bb 7> :
-  D.6027 = 0;
+  D.6025 = 0;
   // predicted unlikely by early return (on trees) predictor.
   goto <bb 9>; [INV]
 
@@ -4463,7 +4463,7 @@ ELinha (char * ELinha_h, char * ELinha_s, char * ELinha_p, char * ELinha_hp, cha
   strcpy (ELinha_s, ELinha_h);
   strcpy (ELinha_sp, ELinha_hp);
   strcpy (ELinha_sc, ELinha_hc);
-  D.6027 = 1;
+  D.6025 = 1;
   // predicted unlikely by early return (on trees) predictor.
 
   <bb 9> :
@@ -4483,7 +4483,7 @@ ELinha (char * ELinha_h, char * ELinha_s, char * ELinha_p, char * ELinha_hp, cha
 
   <bb 10> :
 <L7>:
-  return D.6027;
+  return D.6025;
 
 }
 
@@ -4506,7 +4506,7 @@ E (char * E_tp, char * E_p, char * E_c)
   char ELinha_c[1000];
   char ELinha_s[10];
   char ELinha_h[10];
-  int D.6018;
+  int D.6016;
 
   <bb 2> :
   _1 = E1 (&E1_tp, &E1_h, &E1_s, &E1_p, &E1_c);
@@ -4529,17 +4529,17 @@ E (char * E_tp, char * E_p, char * E_c)
   strcpy (E_tp, &ELinha_s);
   strcpy (E_p, &ELinha_sp);
   strcpy (E_c, &ELinha_sc);
-  D.6018 = 1;
+  D.6016 = 1;
   // predicted unlikely by early return (on trees) predictor.
   goto <bb 7>; [INV]
 
   <bb 5> :
-  D.6018 = 0;
+  D.6016 = 0;
   // predicted unlikely by early return (on trees) predictor.
   goto <bb 7>; [INV]
 
   <bb 6> :
-  D.6018 = 0;
+  D.6016 = 0;
   // predicted unlikely by early return (on trees) predictor.
 
   <bb 7> :
@@ -4559,7 +4559,7 @@ E (char * E_tp, char * E_p, char * E_c)
 
   <bb 8> :
 <L5>:
-  return D.6018;
+  return D.6016;
 
 }
 
@@ -4572,7 +4572,7 @@ EIF (char * EIF_c, char * EIF_p)
   char E_c[1000];
   char E_p[1000];
   char E_tp[10];
-  int D.5958;
+  int D.5956;
 
   <bb 2> :
   _1 = E (&E_tp, &E_p, &E_c);
@@ -4584,12 +4584,12 @@ EIF (char * EIF_c, char * EIF_p)
   <bb 3> :
   strcpy (EIF_c, &E_c);
   strcpy (EIF_p, &E_p);
-  D.5958 = 1;
+  D.5956 = 1;
   // predicted unlikely by early return (on trees) predictor.
   goto <bb 5>; [INV]
 
   <bb 4> :
-  D.5958 = 1;
+  D.5956 = 1;
   // predicted unlikely by early return (on trees) predictor.
 
   <bb 5> :
@@ -4599,7 +4599,7 @@ EIF (char * EIF_c, char * EIF_p)
 
   <bb 6> :
 <L3>:
-  return D.5958;
+  return D.5956;
 
 }
 
@@ -4614,7 +4614,7 @@ COMDOWHILE (char * COMDOWHILE_c)
   char E_c[1000];
   char E_p[1000];
   char E_tp[10];
-  int D.5998;
+  int D.5996;
 
   <bb 2> :
   token.204_1 = token;
@@ -4682,7 +4682,7 @@ COMDOWHILE (char * COMDOWHILE_c)
   leToken ();
   doWhile = 0;
   laco = 0;
-  D.5998 = 1;
+  D.5996 = 1;
   // predicted unlikely by early return (on trees) predictor.
   goto <bb 19>; [INV]
 
@@ -4701,12 +4701,12 @@ COMDOWHILE (char * COMDOWHILE_c)
   coluna.211_11 = coluna;
   linha.212_12 = linha;
   printf ("Erro: esperava token \')\' na linha %d coluna %d\n", linha.212_12, coluna.211_11);
-  D.5998 = 0;
+  D.5996 = 0;
   // predicted unlikely by early return (on trees) predictor.
   goto <bb 19>; [INV]
 
   <bb 13> :
-  D.5998 = 0;
+  D.5996 = 0;
   // predicted unlikely by early return (on trees) predictor.
   goto <bb 19>; [INV]
 
@@ -4714,7 +4714,7 @@ COMDOWHILE (char * COMDOWHILE_c)
   coluna.213_13 = coluna;
   linha.214_14 = linha;
   printf ("Erro: esperava token \'(\' na linha %d coluna %d\n", linha.214_14, coluna.213_13);
-  D.5998 = 0;
+  D.5996 = 0;
   // predicted unlikely by early return (on trees) predictor.
   goto <bb 19>; [INV]
 
@@ -4722,22 +4722,22 @@ COMDOWHILE (char * COMDOWHILE_c)
   coluna.215_15 = coluna;
   linha.216_16 = linha;
   printf ("Erro: esperava token \'while\' na linha %d coluna %d\n", linha.216_16, coluna.215_15);
-  D.5998 = 0;
+  D.5996 = 0;
   // predicted unlikely by early return (on trees) predictor.
   goto <bb 19>; [INV]
 
   <bb 16> :
-  D.5998 = 0;
+  D.5996 = 0;
   // predicted unlikely by early return (on trees) predictor.
   goto <bb 19>; [INV]
 
   <bb 17> :
-  D.5998 = 0;
+  D.5996 = 0;
   // predicted unlikely by early return (on trees) predictor.
   goto <bb 19>; [INV]
 
   <bb 18> :
-  D.5998 = 0;
+  D.5996 = 0;
   // predicted unlikely by early return (on trees) predictor.
 
   <bb 19> :
@@ -4749,7 +4749,7 @@ COMDOWHILE (char * COMDOWHILE_c)
 
   <bb 20> :
 <L25>:
-  return D.5998;
+  return D.5996;
 
 }
 
@@ -4769,7 +4769,7 @@ COM (char * COM_c)
   char E_p[10];
   char E_tp[10];
   char TIPO_t[10];
-  int D.5865;
+  int D.5863;
 
   <bb 2> :
   _1 = E (&E_tp, &E_p, &E_c);
@@ -4788,7 +4788,7 @@ COM (char * COM_c)
   <bb 4> :
   strcpy (COM_c, &E_c);
   leToken ();
-  D.5865 = 1;
+  D.5863 = 1;
   // predicted unlikely by early return (on trees) predictor.
   goto <bb 45>; [INV]
 
@@ -4796,7 +4796,7 @@ COM (char * COM_c)
   coluna.151_3 = coluna;
   linha.152_4 = linha;
   printf ("Erro: esperava token \';\' na linha %d coluna %d\n", linha.152_4, coluna.151_3);
-  D.5865 = 0;
+  D.5863 = 0;
   // predicted unlikely by early return (on trees) predictor.
   goto <bb 45>; [INV]
 
@@ -4809,7 +4809,7 @@ COM (char * COM_c)
 
   <bb 7> :
   strcpy (COM_c, &COMWHILE_c);
-  D.5865 = 1;
+  D.5863 = 1;
   // predicted unlikely by early return (on trees) predictor.
   goto <bb 45>; [INV]
 
@@ -4822,7 +4822,7 @@ COM (char * COM_c)
 
   <bb 9> :
   strcpy (COM_c, &COMDOWHILE_c);
-  D.5865 = 1;
+  D.5863 = 1;
   // predicted unlikely by early return (on trees) predictor.
   goto <bb 45>; [INV]
 
@@ -4835,7 +4835,7 @@ COM (char * COM_c)
 
   <bb 11> :
   strcpy (COM_c, &COMIF_c);
-  D.5865 = 1;
+  D.5863 = 1;
   // predicted unlikely by early return (on trees) predictor.
   goto <bb 45>; [INV]
 
@@ -4848,7 +4848,7 @@ COM (char * COM_c)
 
   <bb 13> :
   strcpy (COM_c, &COMFOR_c);
-  D.5865 = 1;
+  D.5863 = 1;
   // predicted unlikely by early return (on trees) predictor.
   goto <bb 45>; [INV]
 
@@ -4869,7 +4869,7 @@ COM (char * COM_c)
 
   <bb 16> :
   leToken ();
-  D.5865 = 1;
+  D.5863 = 1;
   // predicted unlikely by early return (on trees) predictor.
   goto <bb 45>; [INV]
 
@@ -4877,7 +4877,7 @@ COM (char * COM_c)
   coluna.155_11 = coluna;
   linha.156_12 = linha;
   printf ("Erro: esperava token \';\' na linha %d coluna %d\n", linha.156_12, coluna.155_11);
-  D.5865 = 0;
+  D.5863 = 0;
   // predicted unlikely by early return (on trees) predictor.
   goto <bb 45>; [INV]
 
@@ -4909,7 +4909,7 @@ COM (char * COM_c)
 
   <bb 22> :
   leToken ();
-  D.5865 = 1;
+  D.5863 = 1;
   // predicted unlikely by early return (on trees) predictor.
   goto <bb 45>; [INV]
 
@@ -4917,7 +4917,7 @@ COM (char * COM_c)
   coluna.160_16 = coluna;
   linha.161_17 = linha;
   printf ("Erro: esperava token \';\' na linha %d coluna %d\n", linha.161_17, coluna.160_16);
-  D.5865 = 0;
+  D.5863 = 0;
   // predicted unlikely by early return (on trees) predictor.
   goto <bb 45>; [INV]
 
@@ -4949,7 +4949,7 @@ COM (char * COM_c)
 
   <bb 28> :
   leToken ();
-  D.5865 = 1;
+  D.5863 = 1;
   // predicted unlikely by early return (on trees) predictor.
   goto <bb 45>; [INV]
 
@@ -4957,7 +4957,7 @@ COM (char * COM_c)
   coluna.165_21 = coluna;
   linha.166_22 = linha;
   printf ("Erro: esperava token \';\' na linha %d coluna %d\n", linha.166_22, coluna.165_21);
-  D.5865 = 0;
+  D.5863 = 0;
   // predicted unlikely by early return (on trees) predictor.
   goto <bb 45>; [INV]
 
@@ -4986,7 +4986,7 @@ COM (char * COM_c)
   <bb 33> :
   strcpy (COM_c, &LCD_c);
   leToken ();
-  D.5865 = 1;
+  D.5863 = 1;
   // predicted unlikely by early return (on trees) predictor.
   goto <bb 45>; [INV]
 
@@ -4994,12 +4994,12 @@ COM (char * COM_c)
   coluna.169_26 = coluna;
   linha.170_27 = linha;
   printf ("Erro: esperava token \'}\' na linha %d coluna %d\n", linha.170_27, coluna.169_26);
-  D.5865 = 0;
+  D.5863 = 0;
   // predicted unlikely by early return (on trees) predictor.
   goto <bb 45>; [INV]
 
   <bb 35> :
-  D.5865 = 0;
+  D.5863 = 0;
   // predicted unlikely by early return (on trees) predictor.
   goto <bb 45>; [INV]
 
@@ -5038,12 +5038,12 @@ COM (char * COM_c)
 
   <bb 41> :
   strcpy (COM_c, &RDEC_c);
-  D.5865 = 1;
+  D.5863 = 1;
   // predicted unlikely by early return (on trees) predictor.
   goto <bb 45>; [INV]
 
   <bb 42> :
-  D.5865 = 0;
+  D.5863 = 0;
   // predicted unlikely by early return (on trees) predictor.
   goto <bb 45>; [INV]
 
@@ -5051,12 +5051,12 @@ COM (char * COM_c)
   coluna.173_33 = coluna;
   linha.174_34 = linha;
   printf ("Erro: esperava token \'id\' na linha %d coluna %d\n", linha.174_34, coluna.173_33);
-  D.5865 = 0;
+  D.5863 = 0;
   // predicted unlikely by early return (on trees) predictor.
   goto <bb 45>; [INV]
 
   <bb 44> :
-  D.5865 = 0;
+  D.5863 = 0;
   // predicted unlikely by early return (on trees) predictor.
 
   <bb 45> :
@@ -5073,7 +5073,7 @@ COM (char * COM_c)
 
   <bb 46> :
 <L43>:
-  return D.5865;
+  return D.5863;
 
 }
 
@@ -5086,7 +5086,7 @@ LCD ()
   char COM_c[1000];
   char TIPO_t[10];
   char DV_t[10];
-  int D.5852;
+  int D.5850;
 
   <bb 2> :
   _1 = COM (&COM_c);
@@ -5103,12 +5103,12 @@ LCD ()
     goto <bb 5>; [INV]
 
   <bb 4> :
-  D.5852 = 1;
+  D.5850 = 1;
   // predicted unlikely by early return (on trees) predictor.
   goto <bb 13>; [INV]
 
   <bb 5> :
-  D.5852 = 0;
+  D.5850 = 0;
   // predicted unlikely by early return (on trees) predictor.
   goto <bb 13>; [INV]
 
@@ -5135,22 +5135,22 @@ LCD ()
     goto <bb 10>; [INV]
 
   <bb 9> :
-  D.5852 = 1;
+  D.5850 = 1;
   // predicted unlikely by early return (on trees) predictor.
   goto <bb 13>; [INV]
 
   <bb 10> :
-  D.5852 = 0;
+  D.5850 = 0;
   // predicted unlikely by early return (on trees) predictor.
   goto <bb 13>; [INV]
 
   <bb 11> :
-  D.5852 = 0;
+  D.5850 = 0;
   // predicted unlikely by early return (on trees) predictor.
   goto <bb 13>; [INV]
 
   <bb 12> :
-  D.5852 = 1;
+  D.5850 = 1;
   // predicted unlikely by early return (on trees) predictor.
 
   <bb 13> :
@@ -5160,7 +5160,7 @@ LCD ()
 
   <bb 14> :
 <L11>:
-  return D.5852;
+  return D.5850;
 
 }
 
@@ -5170,7 +5170,7 @@ LCD ()
 
 CORPO ()
 {
-  int D.5846;
+  int D.5844;
 
   <bb 2> :
   _1 = LCD ();
@@ -5180,17 +5180,17 @@ CORPO ()
     goto <bb 4>; [INV]
 
   <bb 3> :
-  D.5846 = 1;
+  D.5844 = 1;
   // predicted unlikely by early return (on trees) predictor.
   goto <bb 5>; [INV]
 
   <bb 4> :
-  D.5846 = 0;
+  D.5844 = 0;
   // predicted unlikely by early return (on trees) predictor.
 
   <bb 5> :
 <L2>:
-  return D.5846;
+  return D.5844;
 
 }
 
@@ -5200,7 +5200,7 @@ CORPO ()
 
 DF ()
 {
-  int D.5818;
+  int D.5816;
 
   <bb 2> :
   _1 = LP ();
@@ -5241,7 +5241,7 @@ DF ()
 
   <bb 7> :
   leToken ();
-  D.5818 = 1;
+  D.5816 = 1;
   // predicted unlikely by early return (on trees) predictor.
   goto <bb 13>; [INV]
 
@@ -5249,12 +5249,12 @@ DF ()
   coluna.135_6 = coluna;
   linha.136_7 = linha;
   printf ("Erro: esperava token \'}\' na linha %d coluna %d\n", linha.136_7, coluna.135_6);
-  D.5818 = 0;
+  D.5816 = 0;
   // predicted unlikely by early return (on trees) predictor.
   goto <bb 13>; [INV]
 
   <bb 9> :
-  D.5818 = 0;
+  D.5816 = 0;
   // predicted unlikely by early return (on trees) predictor.
   goto <bb 13>; [INV]
 
@@ -5262,7 +5262,7 @@ DF ()
   coluna.137_8 = coluna;
   linha.138_9 = linha;
   printf ("Erro: esperava token \'{\' na linha %d coluna %d\n", linha.138_9, coluna.137_8);
-  D.5818 = 0;
+  D.5816 = 0;
   // predicted unlikely by early return (on trees) predictor.
   goto <bb 13>; [INV]
 
@@ -5270,17 +5270,17 @@ DF ()
   coluna.139_10 = coluna;
   linha.140_11 = linha;
   printf ("Erro: esperava token \')\' na linha %d coluna %d\n", linha.140_11, coluna.139_10);
-  D.5818 = 0;
+  D.5816 = 0;
   // predicted unlikely by early return (on trees) predictor.
   goto <bb 13>; [INV]
 
   <bb 12> :
-  D.5818 = 0;
+  D.5816 = 0;
   // predicted unlikely by early return (on trees) predictor.
 
   <bb 13> :
 <L10>:
-  return D.5818;
+  return D.5816;
 
 }
 
@@ -5292,7 +5292,7 @@ RDEC ()
 {
   char DV_t[10];
   char DF_c[1000];
-  int D.5768;
+  int D.5766;
 
   <bb 2> :
   token.108_1 = token;
@@ -5310,12 +5310,12 @@ RDEC ()
     goto <bb 5>; [INV]
 
   <bb 4> :
-  D.5768 = 1;
+  D.5766 = 1;
   // predicted unlikely by early return (on trees) predictor.
   goto <bb 19>; [INV]
 
   <bb 5> :
-  D.5768 = 0;
+  D.5766 = 0;
   // predicted unlikely by early return (on trees) predictor.
   goto <bb 19>; [INV]
 
@@ -5335,12 +5335,12 @@ RDEC ()
     goto <bb 9>; [INV]
 
   <bb 8> :
-  D.5768 = 1;
+  D.5766 = 1;
   // predicted unlikely by early return (on trees) predictor.
   goto <bb 19>; [INV]
 
   <bb 9> :
-  D.5768 = 0;
+  D.5766 = 0;
   // predicted unlikely by early return (on trees) predictor.
   goto <bb 19>; [INV]
 
@@ -5353,7 +5353,7 @@ RDEC ()
 
   <bb 11> :
   leToken ();
-  D.5768 = 1;
+  D.5766 = 1;
   // predicted unlikely by early return (on trees) predictor.
   goto <bb 19>; [INV]
 
@@ -5382,7 +5382,7 @@ RDEC ()
 
   <bb 15> :
   leToken ();
-  D.5768 = 1;
+  D.5766 = 1;
   // predicted unlikely by early return (on trees) predictor.
   goto <bb 19>; [INV]
 
@@ -5390,7 +5390,7 @@ RDEC ()
   coluna.114_9 = coluna;
   linha.115_10 = linha;
   printf ("Erro: esperava token \';\' na linha %d coluna %d\n", linha.115_10, coluna.114_9);
-  D.5768 = 0;
+  D.5766 = 0;
   // predicted unlikely by early return (on trees) predictor.
   goto <bb 19>; [INV]
 
@@ -5398,7 +5398,7 @@ RDEC ()
   coluna.116_11 = coluna;
   linha.117_12 = linha;
   printf ("Erro: esperava token contante inteira na linha %d coluna %d\n", linha.117_12, coluna.116_11);
-  D.5768 = 0;
+  D.5766 = 0;
   // predicted unlikely by early return (on trees) predictor.
   goto <bb 19>; [INV]
 
@@ -5406,7 +5406,7 @@ RDEC ()
   coluna.118_13 = coluna;
   linha.119_14 = linha;
   printf ("Erro: esperava token \';\', \')\' ou \',\' na linha %d coluna %d\n", linha.119_14, coluna.118_13);
-  D.5768 = 0;
+  D.5766 = 0;
   // predicted unlikely by early return (on trees) predictor.
 
   <bb 19> :
@@ -5415,7 +5415,7 @@ RDEC ()
 
   <bb 20> :
 <L17>:
-  return D.5768;
+  return D.5766;
 
 }
 
@@ -5427,7 +5427,7 @@ DEC ()
 {
   char Tipo_t[10];
   char RDEC_t[10];
-  int D.5761;
+  int D.5759;
 
   <bb 2> :
   _1 = TIPO (&Tipo_t);
@@ -5464,12 +5464,12 @@ DEC ()
     goto <bb 8>; [INV]
 
   <bb 7> :
-  D.5761 = 1;
+  D.5759 = 1;
   // predicted unlikely by early return (on trees) predictor.
   goto <bb 11>; [INV]
 
   <bb 8> :
-  D.5761 = 0;
+  D.5759 = 0;
   // predicted unlikely by early return (on trees) predictor.
   goto <bb 11>; [INV]
 
@@ -5477,12 +5477,12 @@ DEC ()
   coluna.106_6 = coluna;
   linha.107_7 = linha;
   printf ("Erro: esperava token \'id\' na linha %d coluna %d\n", linha.107_7, coluna.106_6);
-  D.5761 = 0;
+  D.5759 = 0;
   // predicted unlikely by early return (on trees) predictor.
   goto <bb 11>; [INV]
 
   <bb 10> :
-  D.5761 = 0;
+  D.5759 = 0;
   // predicted unlikely by early return (on trees) predictor.
 
   <bb 11> :
@@ -5491,7 +5491,7 @@ DEC ()
 
   <bb 12> :
 <L9>:
-  return D.5761;
+  return D.5759;
 
 }
 
@@ -5501,7 +5501,7 @@ DEC ()
 
 LD ()
 {
-  int D.5746;
+  int D.5744;
 
   <bb 2> :
   _1 = DEC ();
@@ -5518,22 +5518,22 @@ LD ()
     goto <bb 5>; [INV]
 
   <bb 4> :
-  D.5746 = 1;
+  D.5744 = 1;
   // predicted unlikely by early return (on trees) predictor.
   goto <bb 7>; [INV]
 
   <bb 5> :
-  D.5746 = 0;
+  D.5744 = 0;
   // predicted unlikely by early return (on trees) predictor.
   goto <bb 7>; [INV]
 
   <bb 6> :
-  D.5746 = 0;
+  D.5744 = 0;
   // predicted unlikely by early return (on trees) predictor.
 
   <bb 7> :
 <L4>:
-  return D.5746;
+  return D.5744;
 
 }
 
@@ -5543,7 +5543,7 @@ LD ()
 
 PROGC ()
 {
-  int D.5740;
+  int D.5738;
 
   <bb 2> :
   _1 = LD ();
@@ -5553,17 +5553,17 @@ PROGC ()
     goto <bb 4>; [INV]
 
   <bb 3> :
-  D.5740 = 1;
+  D.5738 = 1;
   // predicted unlikely by early return (on trees) predictor.
   goto <bb 5>; [INV]
 
   <bb 4> :
-  D.5740 = 0;
+  D.5738 = 0;
   // predicted unlikely by early return (on trees) predictor.
 
   <bb 5> :
 <L2>:
-  return D.5740;
+  return D.5738;
 
 }
 
@@ -5574,7 +5574,7 @@ PROGC ()
 RLD (char * RLD_c)
 {
   char LD_c[1000];
-  int D.5750;
+  int D.5748;
 
   <bb 2> :
   _1 = LD (&LD_c);
@@ -5585,12 +5585,12 @@ RLD (char * RLD_c)
 
   <bb 3> :
   strcpy (RLD_c, &LD_c);
-  D.5750 = 1;
+  D.5748 = 1;
   // predicted unlikely by early return (on trees) predictor.
   goto <bb 5>; [INV]
 
   <bb 4> :
-  D.5750 = 1;
+  D.5748 = 1;
   // predicted unlikely by early return (on trees) predictor.
 
   <bb 5> :
@@ -5598,7 +5598,7 @@ RLD (char * RLD_c)
 
   <bb 6> :
 <L3>:
-  return D.5750;
+  return D.5748;
 
 }
 
@@ -5609,7 +5609,7 @@ RLD (char * RLD_c)
 RIF (char * RIF_c)
 {
   char COM_c[1000];
-  int D.5925;
+  int D.5923;
 
   <bb 2> :
   token.182_1 = token;
@@ -5628,17 +5628,17 @@ RIF (char * RIF_c)
 
   <bb 4> :
   strcpy (RIF_c, &COM_c);
-  D.5925 = 1;
+  D.5923 = 1;
   // predicted unlikely by early return (on trees) predictor.
   goto <bb 7>; [INV]
 
   <bb 5> :
-  D.5925 = 0;
+  D.5923 = 0;
   // predicted unlikely by early return (on trees) predictor.
   goto <bb 7>; [INV]
 
   <bb 6> :
-  D.5925 = 1;
+  D.5923 = 1;
   // predicted unlikely by early return (on trees) predictor.
 
   <bb 7> :
@@ -5646,7 +5646,7 @@ RIF (char * RIF_c)
 
   <bb 8> :
 <L5>:
-  return D.5925;
+  return D.5923;
 
 }
 
@@ -5661,7 +5661,7 @@ COMIF (char * COMIF_c)
   char E_c[1000];
   char E_p[1000];
   char E_tp[10];
-  int D.5918;
+  int D.5916;
 
   <bb 2> :
   MEM[(char * {ref-all})&RIF_c] = 0;
@@ -5710,17 +5710,17 @@ COMIF (char * COMIF_c)
     goto <bb 9>; [INV]
 
   <bb 8> :
-  D.5918 = 1;
+  D.5916 = 1;
   // predicted unlikely by early return (on trees) predictor.
   goto <bb 15>; [INV]
 
   <bb 9> :
-  D.5918 = 0;
+  D.5916 = 0;
   // predicted unlikely by early return (on trees) predictor.
   goto <bb 15>; [INV]
 
   <bb 10> :
-  D.5918 = 0;
+  D.5916 = 0;
   // predicted unlikely by early return (on trees) predictor.
   goto <bb 15>; [INV]
 
@@ -5728,12 +5728,12 @@ COMIF (char * COMIF_c)
   coluna.178_7 = coluna;
   linha.179_8 = linha;
   printf ("Erro: esperava token \')\' na linha %d coluna %d\n", linha.179_8, coluna.178_7);
-  D.5918 = 0;
+  D.5916 = 0;
   // predicted unlikely by early return (on trees) predictor.
   goto <bb 15>; [INV]
 
   <bb 12> :
-  D.5918 = 0;
+  D.5916 = 0;
   // predicted unlikely by early return (on trees) predictor.
   goto <bb 15>; [INV]
 
@@ -5741,12 +5741,12 @@ COMIF (char * COMIF_c)
   coluna.180_9 = coluna;
   linha.181_10 = linha;
   printf ("Erro: esperava token \'(\' na linha %d coluna %d\n", linha.181_10, coluna.180_9);
-  D.5918 = 0;
+  D.5916 = 0;
   // predicted unlikely by early return (on trees) predictor.
   goto <bb 15>; [INV]
 
   <bb 14> :
-  D.5918 = 0;
+  D.5916 = 0;
   // predicted unlikely by early return (on trees) predictor.
 
   <bb 15> :
@@ -5758,7 +5758,7 @@ COMIF (char * COMIF_c)
 
   <bb 16> :
 <L13>:
-  return D.5918;
+  return D.5916;
 
 }
 
@@ -5769,7 +5769,7 @@ COMIF (char * COMIF_c)
 RFOR (char * RFOR_c)
 {
   char COM_c[1000];
-  int D.5953;
+  int D.5951;
 
   <bb 2> :
   _1 = COM (&COM_c);
@@ -5780,12 +5780,12 @@ RFOR (char * RFOR_c)
 
   <bb 3> :
   strcpy (RFOR_c, &COM_c);
-  D.5953 = 1;
+  D.5951 = 1;
   // predicted unlikely by early return (on trees) predictor.
   goto <bb 5>; [INV]
 
   <bb 4> :
-  D.5953 = 1;
+  D.5951 = 1;
   // predicted unlikely by early return (on trees) predictor.
 
   <bb 5> :
@@ -5793,7 +5793,7 @@ RFOR (char * RFOR_c)
 
   <bb 6> :
 <L3>:
-  return D.5953;
+  return D.5951;
 
 }
 
@@ -5811,7 +5811,7 @@ COMFOR (char * COMFOR_c)
   char EIF1_c[1000];
   char RFOR_c[1000];
   char COM_c[1000];
-  int D.5948;
+  int D.5946;
 
   <bb 2> :
   token.183_1 = token;
@@ -5891,17 +5891,17 @@ COMFOR (char * COMFOR_c)
     goto <bb 13>; [INV]
 
   <bb 12> :
-  D.5948 = 1;
+  D.5946 = 1;
   // predicted unlikely by early return (on trees) predictor.
   goto <bb 23>; [INV]
 
   <bb 13> :
-  D.5948 = 0;
+  D.5946 = 0;
   // predicted unlikely by early return (on trees) predictor.
   goto <bb 23>; [INV]
 
   <bb 14> :
-  D.5948 = 0;
+  D.5946 = 0;
   // predicted unlikely by early return (on trees) predictor.
   goto <bb 23>; [INV]
 
@@ -5909,12 +5909,12 @@ COMFOR (char * COMFOR_c)
   coluna.188_11 = coluna;
   linha.189_12 = linha;
   printf ("Erro: esperava token \')\' na linha %d coluna %d\n", linha.189_12, coluna.188_11);
-  D.5948 = 0;
+  D.5946 = 0;
   // predicted unlikely by early return (on trees) predictor.
   goto <bb 23>; [INV]
 
   <bb 16> :
-  D.5948 = 0;
+  D.5946 = 0;
   // predicted unlikely by early return (on trees) predictor.
   goto <bb 23>; [INV]
 
@@ -5922,12 +5922,12 @@ COMFOR (char * COMFOR_c)
   coluna.190_13 = coluna;
   linha.191_14 = linha;
   printf ("Erro: esperava token \';\' na linha %d coluna %d\n", linha.191_14, coluna.190_13);
-  D.5948 = 0;
+  D.5946 = 0;
   // predicted unlikely by early return (on trees) predictor.
   goto <bb 23>; [INV]
 
   <bb 18> :
-  D.5948 = 0;
+  D.5946 = 0;
   // predicted unlikely by early return (on trees) predictor.
   goto <bb 23>; [INV]
 
@@ -5935,12 +5935,12 @@ COMFOR (char * COMFOR_c)
   coluna.192_15 = coluna;
   linha.193_16 = linha;
   printf ("Erro: esperava token \';\' na linha %d coluna %d\n", linha.193_16, coluna.192_15);
-  D.5948 = 0;
+  D.5946 = 0;
   // predicted unlikely by early return (on trees) predictor.
   goto <bb 23>; [INV]
 
   <bb 20> :
-  D.5948 = 0;
+  D.5946 = 0;
   // predicted unlikely by early return (on trees) predictor.
   goto <bb 23>; [INV]
 
@@ -5948,12 +5948,12 @@ COMFOR (char * COMFOR_c)
   coluna.194_17 = coluna;
   linha.195_18 = linha;
   printf ("Erro: esperava token \'(\' na linha %d coluna %d\n", linha.195_18, coluna.194_17);
-  D.5948 = 0;
+  D.5946 = 0;
   // predicted unlikely by early return (on trees) predictor.
   goto <bb 23>; [INV]
 
   <bb 22> :
-  D.5948 = 0;
+  D.5946 = 0;
   // predicted unlikely by early return (on trees) predictor.
 
   <bb 23> :
@@ -5968,7 +5968,7 @@ COMFOR (char * COMFOR_c)
 
   <bb 24> :
 <L21>:
-  return D.5948;
+  return D.5946;
 
 }
 
@@ -5979,7 +5979,7 @@ COMFOR (char * COMFOR_c)
 RWHILE (char * RWHILE_c)
 {
   char COM_c[1000];
-  int D.5979;
+  int D.5977;
 
   <bb 2> :
   _1 = COM (&COM_c);
@@ -5990,12 +5990,12 @@ RWHILE (char * RWHILE_c)
 
   <bb 3> :
   strcpy (RWHILE_c, &COM_c);
-  D.5979 = 1;
+  D.5977 = 1;
   // predicted unlikely by early return (on trees) predictor.
   goto <bb 5>; [INV]
 
   <bb 4> :
-  D.5979 = 1;
+  D.5977 = 1;
   // predicted unlikely by early return (on trees) predictor.
 
   <bb 5> :
@@ -6003,7 +6003,7 @@ RWHILE (char * RWHILE_c)
 
   <bb 6> :
 <L3>:
-  return D.5979;
+  return D.5977;
 
 }
 
@@ -6018,7 +6018,7 @@ COMWHILE (char * COMWHILE_c)
   char E_c[1000];
   char E_p[1000];
   char E_tp[10];
-  int D.5974;
+  int D.5972;
 
   <bb 2> :
   token.196_1 = token;
@@ -6075,17 +6075,17 @@ COMWHILE (char * COMWHILE_c)
 
   <bb 9> :
   laco = 0;
-  D.5974 = 1;
+  D.5972 = 1;
   // predicted unlikely by early return (on trees) predictor.
   goto <bb 16>; [INV]
 
   <bb 10> :
-  D.5974 = 0;
+  D.5972 = 0;
   // predicted unlikely by early return (on trees) predictor.
   goto <bb 16>; [INV]
 
   <bb 11> :
-  D.5974 = 0;
+  D.5972 = 0;
   // predicted unlikely by early return (on trees) predictor.
   goto <bb 16>; [INV]
 
@@ -6093,12 +6093,12 @@ COMWHILE (char * COMWHILE_c)
   coluna.200_8 = coluna;
   linha.201_9 = linha;
   printf ("Erro: esperava token \')\' na linha %d coluna %d\n", linha.201_9, coluna.200_8);
-  D.5974 = 0;
+  D.5972 = 0;
   // predicted unlikely by early return (on trees) predictor.
   goto <bb 16>; [INV]
 
   <bb 13> :
-  D.5974 = 0;
+  D.5972 = 0;
   // predicted unlikely by early return (on trees) predictor.
   goto <bb 16>; [INV]
 
@@ -6106,12 +6106,12 @@ COMWHILE (char * COMWHILE_c)
   coluna.202_10 = coluna;
   linha.203_11 = linha;
   printf ("Erro: esperava token \'(\' na linha %d coluna %d\n", linha.203_11, coluna.202_10);
-  D.5974 = 0;
+  D.5972 = 0;
   // predicted unlikely by early return (on trees) predictor.
   goto <bb 16>; [INV]
 
   <bb 15> :
-  D.5974 = 0;
+  D.5972 = 0;
   // predicted unlikely by early return (on trees) predictor.
 
   <bb 16> :
@@ -6123,7 +6123,7 @@ COMWHILE (char * COMWHILE_c)
 
   <bb 17> :
 <L14>:
-  return D.5974;
+  return D.5972;
 
 }
 
@@ -6134,7 +6134,7 @@ COMWHILE (char * COMWHILE_c)
 RDOWHILE (char * RDOWHILE_c)
 {
   char COM_c[1000];
-  int D.6011;
+  int D.6009;
 
   <bb 2> :
   _1 = COM (&COM_c);
@@ -6145,12 +6145,12 @@ RDOWHILE (char * RDOWHILE_c)
 
   <bb 3> :
   strcpy (RDOWHILE_c, &COM_c);
-  D.6011 = 1;
+  D.6009 = 1;
   // predicted unlikely by early return (on trees) predictor.
   goto <bb 5>; [INV]
 
   <bb 4> :
-  D.6011 = 1;
+  D.6009 = 1;
   // predicted unlikely by early return (on trees) predictor.
 
   <bb 5> :
@@ -6158,7 +6158,7 @@ RDOWHILE (char * RDOWHILE_c)
 
   <bb 6> :
 <L3>:
-  return D.6011;
+  return D.6009;
 
 }
 
@@ -6179,7 +6179,7 @@ E2Linha (char * E2Linha_h, char * E2Linha_s, char * E2Linha_hp, char * E2Linha_s
   char E2_s[10];
   char E2_h[10];
   char E2_tp[10];
-  int D.6073;
+  int D.6071;
 
   <bb 2> :
   token.223_1 = token;
@@ -6219,17 +6219,17 @@ E2Linha (char * E2Linha_h, char * E2Linha_s, char * E2Linha_hp, char * E2Linha_s
     goto <bb 8>; [INV]
 
   <bb 7> :
-  D.6073 = 1;
+  D.6071 = 1;
   // predicted unlikely by early return (on trees) predictor.
   goto <bb 13>; [INV]
 
   <bb 8> :
-  D.6073 = 0;
+  D.6071 = 0;
   // predicted unlikely by early return (on trees) predictor.
   goto <bb 13>; [INV]
 
   <bb 9> :
-  D.6073 = 0;
+  D.6071 = 0;
   // predicted unlikely by early return (on trees) predictor.
   goto <bb 13>; [INV]
 
@@ -6237,12 +6237,12 @@ E2Linha (char * E2Linha_h, char * E2Linha_s, char * E2Linha_hp, char * E2Linha_s
   coluna.225_6 = coluna;
   linha.226_7 = linha;
   printf ("Erro: esperava token \':\' na linha %d coluna %d\n", linha.226_7, coluna.225_6);
-  D.6073 = 0;
+  D.6071 = 0;
   // predicted unlikely by early return (on trees) predictor.
   goto <bb 13>; [INV]
 
   <bb 11> :
-  D.6073 = 0;
+  D.6071 = 0;
   // predicted unlikely by early return (on trees) predictor.
   goto <bb 13>; [INV]
 
@@ -6250,7 +6250,7 @@ E2Linha (char * E2Linha_h, char * E2Linha_s, char * E2Linha_hp, char * E2Linha_s
   strcpy (E2Linha_s, E2Linha_h);
   strcpy (E2Linha_sp, E2Linha_hp);
   strcpy (E2Linha_sc, E2Linha_hc);
-  D.6073 = 1;
+  D.6071 = 1;
   // predicted unlikely by early return (on trees) predictor.
 
   <bb 13> :
@@ -6268,13 +6268,13 @@ E2Linha (char * E2Linha_h, char * E2Linha_s, char * E2Linha_hp, char * E2Linha_s
 
   <bb 14> :
 <L11>:
-  return D.6073;
+  return D.6071;
 
 }
 
 
 
-;; Function main (main, funcdef_no=74, decl_uid=5543, cgraph_uid=74, symbol_order=91)
+;; Function main (main, funcdef_no=74, decl_uid=5542, cgraph_uid=74, symbol_order=91)
 
 main ()
 {
@@ -6285,7 +6285,7 @@ main ()
   char lex[20];
   char conteudo[20000];
   struct FILE * codigoFonte;
-  int D.6379;
+  int D.6377;
 
   <bb 2> :
   _1 = __acrt_iob_func (1);
@@ -6295,7 +6295,6 @@ main ()
   i = 0;
   __builtin_puts (&"-----------------------"[0]);
   __builtin_puts (&"-- Analise semantica --"[0]);
-  __builtin_puts (&"-- R E S U L T A D O --"[0]);
   __builtin_puts (&"-----------------------"[0]);
 
   <bb 3> :
@@ -6306,7 +6305,6 @@ main ()
   __builtin_puts (&"5 - ErroVarNaoDeclarada"[0]);
   __builtin_puts (&"6 - TesteErro"[0]);
   __builtin_puts (&"7 - TesteOK"[0]);
-  __builtin_puts (&"0 - Sair"[0]);
   __builtin_puts (&"-----------------------"[0]);
   scanf ("%d", &escolha);
   _2 = __acrt_iob_func (0);
@@ -6330,238 +6328,234 @@ main ()
 
   <bb 6> :
   escolha.261_5 = escolha;
-  switch (escolha.261_5) <default: <L13> [INV], case 0: <L12> [INV], case 1: <L5> [INV], case 2: <L6> [INV], case 3: <L7> [INV], case 4: <L8> [INV], case 5: <L9> [INV], case 6: <L10> [INV], case 7: <L11> [INV]>
+  switch (escolha.261_5) <default: <L12> [INV], case 1: <L5> [INV], case 2: <L6> [INV], case 3: <L7> [INV], case 4: <L8> [INV], case 5: <L9> [INV], case 6: <L10> [INV], case 7: <L11> [INV]>
 
   <bb 7> :
 <L5>:
   __builtin_memcpy (&arquivo, "erroContinue.txt", 17);
   escolha = 0;
-  goto <bb 15>; [INV]
+  goto <bb 14>; [INV]
 
   <bb 8> :
 <L6>:
   __builtin_memcpy (&arquivo, "erroBreak.txt", 14);
   escolha = 0;
-  goto <bb 15>; [INV]
+  goto <bb 14>; [INV]
 
   <bb 9> :
 <L7>:
   __builtin_memcpy (&arquivo, "erroIncompTipo.txt", 19);
   escolha = 0;
-  goto <bb 15>; [INV]
+  goto <bb 14>; [INV]
 
   <bb 10> :
 <L8>:
   __builtin_memcpy (&arquivo, "erroVarDupli.txt", 17);
   escolha = 0;
-  goto <bb 15>; [INV]
+  goto <bb 14>; [INV]
 
   <bb 11> :
 <L9>:
   __builtin_memcpy (&arquivo, "erroVarNaoDeclarada.txt", 24);
   escolha = 0;
-  goto <bb 15>; [INV]
+  goto <bb 14>; [INV]
 
   <bb 12> :
 <L10>:
   __builtin_memcpy (&arquivo, "testeErro.txt", 14);
   escolha = 0;
-  goto <bb 15>; [INV]
+  goto <bb 14>; [INV]
 
   <bb 13> :
 <L11>:
   __builtin_memcpy (&arquivo, "testeOk.txt", 12);
   escolha = 0;
-  goto <bb 15>; [INV]
 
   <bb 14> :
 <L12>:
-  escolha = 0;
+  escolha.262_6 = escolha;
+  if (escolha.262_6 < 0)
+    goto <bb 3>; [INV]
+  else
+    goto <bb 15>; [INV]
 
   <bb 15> :
-<L13>:
-  codigoFonte = fopen (&arquivo, "r");
-  if (codigoFonte == 0B)
+  escolha.263_7 = escolha;
+  if (escolha.263_7 > 7)
+    goto <bb 3>; [INV]
+  else
     goto <bb 16>; [INV]
+
+  <bb 16> :
+  escolha.264_8 = escolha;
+  if (escolha.264_8 != 0)
+    goto <bb 3>; [INV]
   else
     goto <bb 17>; [INV]
 
-  <bb 16> :
-  __builtin_puts (&"Arquivo n\xc3\xa3o pode ser aberto"[0]);
-  exit (1);
-
   <bb 17> :
-  _6 = fgetc (codigoFonte);
-  caracter = (char) _6;
-  _7 = feof (codigoFonte);
-  if (_7 != 0)
+  __builtin_puts (&"-- R E S U L T A D O --"[0]);
+  codigoFonte = fopen (&arquivo, "r");
+  if (codigoFonte == 0B)
     goto <bb 18>; [INV]
   else
     goto <bb 19>; [INV]
 
   <bb 18> :
-  goto <bb 28>; [INV]
+  __builtin_puts (&"Arquivo n\xc3\xa3o pode ser aberto"[0]);
+  exit (1);
 
   <bb 19> :
-  if (caracter != 9)
+  _9 = fgetc (codigoFonte);
+  caracter = (char) _9;
+  _10 = feof (codigoFonte);
+  if (_10 != 0)
     goto <bb 20>; [INV]
   else
-    goto <bb 23>; [INV]
+    goto <bb 21>; [INV]
 
   <bb 20> :
-  if (caracter != 10)
-    goto <bb 21>; [INV]
-  else
-    goto <bb 23>; [INV]
+  goto <bb 30>; [INV]
 
   <bb 21> :
-  if (caracter != 13)
+  if (caracter != 9)
     goto <bb 22>; [INV]
   else
-    goto <bb 23>; [INV]
+    goto <bb 25>; [INV]
 
   <bb 22> :
-  i.262_8 = i;
-  i = i.262_8 + 1;
-  conteudo[i.262_8] = caracter;
-  goto <bb 27>; [INV]
+  if (caracter != 10)
+    goto <bb 23>; [INV]
+  else
+    goto <bb 25>; [INV]
 
   <bb 23> :
-  if (caracter == 10)
+  if (caracter != 13)
     goto <bb 24>; [INV]
   else
     goto <bb 25>; [INV]
 
   <bb 24> :
-  i.263_9 = i;
-  i = i.263_9 + 1;
-  conteudo[i.263_9] = 127;
-  goto <bb 27>; [INV]
+  i.265_11 = i;
+  i = i.265_11 + 1;
+  conteudo[i.265_11] = caracter;
+  goto <bb 29>; [INV]
 
   <bb 25> :
-  if (caracter == 9)
+  if (caracter == 10)
     goto <bb 26>; [INV]
   else
     goto <bb 27>; [INV]
 
   <bb 26> :
-  i.264_10 = i;
-  i = i.264_10 + 1;
-  conteudo[i.264_10] = 9;
+  i.266_12 = i;
+  i = i.266_12 + 1;
+  conteudo[i.266_12] = 127;
+  goto <bb 29>; [INV]
 
   <bb 27> :
-  goto <bb 17>; [INV]
+  if (caracter == 9)
+    goto <bb 28>; [INV]
+  else
+    goto <bb 29>; [INV]
 
   <bb 28> :
-  conteudo[i] = 0;
-  i = 0;
-  goto <bb 30>; [INV]
+  i.267_13 = i;
+  i = i.267_13 + 1;
+  conteudo[i.267_13] = 9;
 
   <bb 29> :
+  goto <bb 19>; [INV]
+
+  <bb 30> :
+  conteudo[i] = 0;
+  i = 0;
+  goto <bb 32>; [INV]
+
+  <bb 31> :
   TKsParser[i] = -1;
   i = i + 1;
 
-  <bb 30> :
-  if (i <= 999)
-    goto <bb 29>; [INV]
-  else
-    goto <bb 31>; [INV]
-
-  <bb 31> :
-  goto <bb 33>; [INV]
-
   <bb 32> :
-  posColuna.265_11 = posColuna;
-  subColuna.266_12 = subColuna;
-  _13 = posColuna.265_11 - subColuna.266_12;
-  coluna = _13;
-  posParser.267_14 = posParser;
-  posParser.268_15 = posParser.267_14;
-  _16 = posParser.268_15 + 1;
-  posParser = _16;
-  token.269_17 = token;
-  TKsParser[posParser.268_15] = token.269_17;
-  posParser.270_18 = posParser;
-  posParser.271_19 = posParser.270_18;
-  _20 = posParser.271_19 + 1;
-  posParser = _20;
-  linha.272_21 = linha;
-  TKsParser[posParser.271_19] = linha.272_21;
-  posParser.273_22 = posParser;
-  posParser.274_23 = posParser.273_22;
-  _24 = posParser.274_23 + 1;
-  posParser = _24;
-  coluna.275_25 = coluna;
-  TKsParser[posParser.274_23] = coluna.275_25;
-  posParserLex.276_26 = posParserLex;
-  posParserLex.277_27 = posParserLex.276_26;
-  _28 = posParserLex.277_27 + 1;
-  posParserLex = _28;
-  _29 = &TKsParserLex[posParserLex.277_27];
-  strcpy (_29, &lex);
+  if (i <= 999)
+    goto <bb 31>; [INV]
+  else
+    goto <bb 33>; [INV]
 
   <bb 33> :
-  _30 = le_token (&conteudo, &lex);
-  token = _30;
-  token.278_31 = token;
-  if (token.278_31 != -1)
-    goto <bb 32>; [INV]
-  else
-    goto <bb 34>; [INV]
+  goto <bb 35>; [INV]
 
   <bb 34> :
+  posColuna.268_14 = posColuna;
+  subColuna.269_15 = subColuna;
+  _16 = posColuna.268_14 - subColuna.269_15;
+  coluna = _16;
+  posParser.270_17 = posParser;
+  posParser.271_18 = posParser.270_17;
+  _19 = posParser.271_18 + 1;
+  posParser = _19;
+  token.272_20 = token;
+  TKsParser[posParser.271_18] = token.272_20;
+  posParser.273_21 = posParser;
+  posParser.274_22 = posParser.273_21;
+  _23 = posParser.274_22 + 1;
+  posParser = _23;
+  linha.275_24 = linha;
+  TKsParser[posParser.274_22] = linha.275_24;
+  posParser.276_25 = posParser;
+  posParser.277_26 = posParser.276_25;
+  _27 = posParser.277_26 + 1;
+  posParser = _27;
+  coluna.278_28 = coluna;
+  TKsParser[posParser.277_26] = coluna.278_28;
+  posParserLex.279_29 = posParserLex;
+  posParserLex.280_30 = posParserLex.279_29;
+  _31 = posParserLex.280_30 + 1;
+  posParserLex = _31;
+  _32 = &TKsParserLex[posParserLex.280_30];
+  strcpy (_32, &lex);
+
+  <bb 35> :
+  _33 = le_token (&conteudo, &lex);
+  token = _33;
+  token.281_34 = token;
+  if (token.281_34 != -1)
+    goto <bb 34>; [INV]
+  else
+    goto <bb 36>; [INV]
+
+  <bb 36> :
   fclose (codigoFonte);
   posParser = 0;
   posParserLex = 0;
   leToken ();
-  _32 = PROGC ();
-  if (_32 != 0)
-    goto <bb 35>; [INV]
+  _35 = PROGC ();
+  if (_35 != 0)
+    goto <bb 37>; [INV]
   else
-    goto <bb 36>; [INV]
+    goto <bb 38>; [INV]
 
-  <bb 35> :
+  <bb 37> :
   __builtin_puts (&"Reconhecimento semantico concluido"[0]);
   __builtin_puts (&"-----------------------"[0]);
   getchar ();
-  goto <bb 37>; [INV]
+  goto <bb 39>; [INV]
 
-  <bb 36> :
+  <bb 38> :
   __builtin_puts (&"Reconhecimento semantico com Falhas"[0]);
   __builtin_puts (&"-----------------------"[0]);
   getchar ();
 
-  <bb 37> :
-  escolha.279_33 = escolha;
-  if (escolha.279_33 < 0)
-    goto <bb 3>; [INV]
-  else
-    goto <bb 38>; [INV]
-
-  <bb 38> :
-  escolha.280_34 = escolha;
-  if (escolha.280_34 > 7)
-    goto <bb 3>; [INV]
-  else
-    goto <bb 39>; [INV]
-
   <bb 39> :
-  escolha.281_35 = escolha;
-  if (escolha.281_35 != 0)
-    goto <bb 3>; [INV]
-  else
-    goto <bb 40>; [INV]
-
-  <bb 40> :
-  D.6379 = 0;
+  D.6377 = 0;
   conteudo = {CLOBBER};
   lex = {CLOBBER};
   arquivo = {CLOBBER};
   escolha = {CLOBBER};
 
-  <bb 41> :
-<L44>:
-  return D.6379;
+  <bb 40> :
+<L43>:
+  return D.6377;
 
 }
 

@@ -4,7 +4,7 @@
 palavra_reservada (char * lex)
 {
   int postab;
-  int D.5576;
+  int D.5574;
   char[20] * _1;
   int _2;
   char[20] * _3;
@@ -56,7 +56,7 @@ palavra_reservada (char * lex)
 
 ;; Function le_token (le_token, funcdef_no=18, decl_uid=4958, cgraph_uid=18, symbol_order=34)
 
-beginning to process the following SWITCH statement (D:\WSCodeblocks\Compiladores\AnaliseSemantica\AnaliseSemantica\main.c:228) : ------- 
+beginning to process the following SWITCH statement (D:\WSCodeblocks\Compiladores\AnaliseSemantica\AnaliseSemantica\main.c:233) : ------- 
 switch (estado_287) <default: <L157> [INV], case 0: <L1> [INV], case 1: <L95> [INV], case 2: <L104> [INV], case 3: <L113> [INV], case 4: <L117> [INV], case 5: <L124> [INV], case 6: <L129> [INV], case 7: <L136> [INV], case 8: <L143> [INV], case 9: <L151> [INV]>
 
 le_token (char * st, char * lex)
@@ -65,7 +65,7 @@ le_token (char * st, char * lex)
   int posl;
   int fim;
   int estado;
-  int D.5596;
+  int D.5594;
   int pos.0_1;
   int pos.1_2;
   sizetype _3;
@@ -1793,7 +1793,7 @@ addTabelaSimbolos (char * id, char * tipo)
 
 verificaDuplicacao (char * lex, struct tabela * tab)
 {
-  int D.5729;
+  int D.5727;
   char[10] * _1;
   int _2;
   int coluna.102_3;
@@ -1889,7 +1889,7 @@ consultaTipo (char * id, char * Tipo, struct tabela * tab)
 
 PROGC ()
 {
-  int D.5740;
+  int D.5738;
   int _1;
   int _2;
   int _5;
@@ -1924,7 +1924,7 @@ PROGC ()
 
 LD ()
 {
-  int D.5746;
+  int D.5744;
   int _1;
   int _2;
   int _3;
@@ -1974,7 +1974,7 @@ LD ()
 RLD (char * RLD_c)
 {
   char LD_c[1000];
-  int D.5750;
+  int D.5748;
   int _1;
   int _2;
   int _8;
@@ -2015,7 +2015,7 @@ DEC ()
 {
   char Tipo_t[10];
   char RDEC_t[10];
-  int D.5761;
+  int D.5759;
   int _1;
   int token.104_2;
   struct tabela * ts.105_3;
@@ -2104,7 +2104,7 @@ RDEC ()
 {
   char DV_t[10];
   char DF_c[1000];
-  int D.5768;
+  int D.5766;
   int token.108_1;
   int _2;
   int token.109_3;
@@ -2263,7 +2263,7 @@ RDEC ()
 DV (char * DV_t)
 {
   char RDV_t[10];
-  int D.5789;
+  int D.5787;
   int token.120_1;
   struct tabela * ts.121_2;
   int _3;
@@ -2336,7 +2336,7 @@ DV (char * DV_t)
 RDV (char * RDV_t)
 {
   char DV_t[10];
-  int D.5796;
+  int D.5794;
   int token.124_1;
   int _2;
   int token.125_3;
@@ -2408,12 +2408,12 @@ RDV (char * RDV_t)
 
 ;; Function TIPO (TIPO, funcdef_no=30, decl_uid=4767, cgraph_uid=30, symbol_order=47)
 
-beginning to process the following SWITCH statement (D:\WSCodeblocks\Compiladores\AnaliseSemantica\AnaliseSemantica\main.c:819) : ------- 
+beginning to process the following SWITCH statement (D:\WSCodeblocks\Compiladores\AnaliseSemantica\AnaliseSemantica\main.c:961) : ------- 
 switch (token.131_4) <default: <L7> [INV], case 4: <L4> [INV], case 6: <L5> [INV], case 7: <L6> [INV], case 69: <L3> [INV]>
 
 TIPO (char * Tipo_t)
 {
-  int D.5806;
+  int D.5804;
   int token.128_1;
   int token.129_2;
   int token.130_3;
@@ -2491,7 +2491,7 @@ Removing basic block 18
 Removing basic block 20
 
 Symbols to be put in SSA form
-{ D.6390 }
+{ D.6388 }
 Incremental SSA update started at block: 0
 Number of blocks in CFG: 17
 Number of blocks to update: 16 ( 94%)
@@ -2499,7 +2499,7 @@ Number of blocks to update: 16 ( 94%)
 
 TIPO (char * Tipo_t)
 {
-  int D.5806;
+  int D.5804;
   int token.128_1;
   int token.129_2;
   int token.130_3;
@@ -2603,7 +2603,7 @@ TIPO (char * Tipo_t)
 
 DF ()
 {
-  int D.5818;
+  int D.5816;
   int _1;
   int token.132_2;
   int token.133_3;
@@ -2713,7 +2713,7 @@ DF ()
 LP ()
 {
   char TIPO_t[10];
-  int D.5828;
+  int D.5826;
   int _1;
   int token.141_2;
   struct tabela * ts.142_3;
@@ -2799,7 +2799,7 @@ LP ()
 RLP ()
 {
   char TIPO_t[10];
-  int D.5841;
+  int D.5839;
   int token.145_1;
   int _2;
   int token.146_3;
@@ -2899,7 +2899,7 @@ RLP ()
 
 CORPO ()
 {
-  int D.5846;
+  int D.5844;
   int _1;
   int _2;
   int _5;
@@ -2937,7 +2937,7 @@ LCD ()
   char COM_c[1000];
   char TIPO_t[10];
   char DV_t[10];
-  int D.5852;
+  int D.5850;
   int _1;
   int _2;
   int _3;
@@ -3044,7 +3044,7 @@ COM (char * COM_c)
   char E_p[10];
   char E_tp[10];
   char TIPO_t[10];
-  int D.5865;
+  int D.5863;
   int _1;
   int token.150_2;
   int coluna.151_3;
@@ -3418,7 +3418,7 @@ COMIF (char * COMIF_c)
   char E_c[1000];
   char E_p[1000];
   char E_tp[10];
-  int D.5918;
+  int D.5916;
   int token.175_1;
   int token.176_2;
   int _3;
@@ -3545,7 +3545,7 @@ COMIF (char * COMIF_c)
 RIF (char * RIF_c)
 {
   char COM_c[1000];
-  int D.5925;
+  int D.5923;
   int token.182_1;
   int _2;
   int _3;
@@ -3607,7 +3607,7 @@ COMFOR (char * COMFOR_c)
   char EIF1_c[1000];
   char RFOR_c[1000];
   char COM_c[1000];
-  int D.5948;
+  int D.5946;
   int token.183_1;
   int token.184_2;
   int _3;
@@ -3806,7 +3806,7 @@ COMFOR (char * COMFOR_c)
 RFOR (char * RFOR_c)
 {
   char COM_c[1000];
-  int D.5953;
+  int D.5951;
   int _1;
   int _2;
   int _8;
@@ -3848,7 +3848,7 @@ EIF (char * EIF_c, char * EIF_p)
   char E_c[1000];
   char E_p[1000];
   char E_tp[10];
-  int D.5958;
+  int D.5956;
   int _1;
   int _2;
   int _10;
@@ -3895,7 +3895,7 @@ COMWHILE (char * COMWHILE_c)
   char E_c[1000];
   char E_p[1000];
   char E_tp[10];
-  int D.5974;
+  int D.5972;
   int token.196_1;
   int doWhile.197_2;
   int token.198_3;
@@ -4031,7 +4031,7 @@ COMWHILE (char * COMWHILE_c)
 RWHILE (char * RWHILE_c)
 {
   char COM_c[1000];
-  int D.5979;
+  int D.5977;
   int _1;
   int _2;
   int _8;
@@ -4075,7 +4075,7 @@ COMDOWHILE (char * COMDOWHILE_c)
   char E_c[1000];
   char E_p[1000];
   char E_tp[10];
-  int D.5998;
+  int D.5996;
   int token.204_1;
   int _2;
   int _3;
@@ -4247,7 +4247,7 @@ COMDOWHILE (char * COMDOWHILE_c)
 RDOWHILE (char * RDOWHILE_c)
 {
   char COM_c[1000];
-  int D.6011;
+  int D.6009;
   int _1;
   int _2;
   int _8;
@@ -4299,7 +4299,7 @@ E (char * E_tp, char * E_p, char * E_c)
   char ELinha_c[1000];
   char ELinha_s[10];
   char ELinha_h[10];
-  int D.6018;
+  int D.6016;
   int _1;
   int _2;
   int _3;
@@ -4382,7 +4382,7 @@ ELinha (char * ELinha_h, char * ELinha_s, char * ELinha_p, char * ELinha_hp, cha
   char ELinha2_hp[10];
   char ELinha2_sc[1000];
   char ELinha2_sp[10];
-  int D.6027;
+  int D.6025;
   int token.217_1;
   int _2;
   int _3;
@@ -4478,7 +4478,7 @@ E1 (char * E1_tp, char * E1_h, char * E1_s, char * E1_p, char * E1_c)
   char E1Linha_tp[10];
   char E1Linha_s[10];
   char E1Linha_h[10];
-  int D.6036;
+  int D.6034;
   int _1;
   int token.218_2;
   int _3;
@@ -4710,7 +4710,7 @@ E2 (char * E2_tp, char * E2_h, char * E2_s, char * E2_p, char * E2_c)
   char E2Linha_hp[10];
   char E2Linha_s[10];
   char E2Linha_h[10];
-  int D.6060;
+  int D.6058;
   int _1;
   int _2;
   int _3;
@@ -4787,7 +4787,7 @@ E2Linha (char * E2Linha_h, char * E2Linha_s, char * E2Linha_hp, char * E2Linha_s
   char E2_s[10];
   char E2_h[10];
   char E2_tp[10];
-  int D.6073;
+  int D.6071;
   int token.223_1;
   int _2;
   int token.224_3;
@@ -4910,7 +4910,7 @@ E3 (char * E3_tp, char * E3_p, char * E3_c)
   char E3Linha_hp[10];
   char E3Linha_s[10];
   char E3Linha_h[10];
-  int D.6080;
+  int D.6078;
   int _1;
   int _2;
   int _3;
@@ -4985,7 +4985,7 @@ E3Linha (char * E3Linha_h, char * E3Linha_s, char * E3Linha_hp, char * E3Linha_s
   char E3Linha2_hp[10];
   char E3Linha2_s[10];
   char E3Linha2_h[10];
-  int D.6089;
+  int D.6087;
   int token.227_1;
   int _2;
   int _3;
@@ -5083,7 +5083,7 @@ E4 (char * E4_tp, char * E4_p, char * E4_c)
   char E4Linha_hp[10];
   char E4Linha_s[10];
   char E4Linha_h[10];
-  int D.6099;
+  int D.6097;
   int _1;
   int _2;
   int _3;
@@ -5158,7 +5158,7 @@ E4Linha (char * E4Linha_h, char * E4Linha_s, char * E4Linha_hp, char * E4Linha_s
   char E4Linha2_hp[10];
   char E4Linha2_s[10];
   char E4Linha2_h[10];
-  int D.6108;
+  int D.6106;
   int token.228_1;
   int _2;
   int _3;
@@ -5249,7 +5249,7 @@ E5 (char * E5_tp, char * E5_p, char * E5_c)
   char E6_c[1000];
   char E6_p[10];
   char E6_tp[10];
-  int D.6115;
+  int D.6113;
   int _1;
   int _2;
   int _3;
@@ -5324,7 +5324,7 @@ E5Linha (char * E5Linha_h, char * E5Linha_s, char * E5Linha_hp, char * E5Linha_s
   char E6_c[1000];
   char E6_p[10];
   char E6_tp[10];
-  int D.6124;
+  int D.6122;
   int token.229_1;
   int _2;
   int _3;
@@ -5415,7 +5415,7 @@ E6 (char * E6_tp, char * E6_p, char * E6_c)
   char E7_c[1000];
   char E7_p[10];
   char E7_tp[10];
-  int D.6131;
+  int D.6129;
   int _1;
   int _2;
   int _3;
@@ -5490,7 +5490,7 @@ E6Linha (char * E6Linha_h, char * E6Linha_s, char * E6Linha_hp, char * E6Linha_s
   char E7_c[1000];
   char E7_p[10];
   char E7_tp[10];
-  int D.6140;
+  int D.6138;
   int token.230_1;
   int _2;
   int _3;
@@ -5581,7 +5581,7 @@ E7 (char * E7_tp, char * E7_p, char * E7_c)
   char E8_c[1000];
   char E8_p[10];
   char E8_tp[10];
-  int D.6147;
+  int D.6145;
   int _1;
   int _2;
   int _3;
@@ -5656,7 +5656,7 @@ E7Linha (char * E7Linha_h, char * E7Linha_s, char * E7Linha_hp, char * E7Linha_s
   char E8_c[1000];
   char E8_p[10];
   char E8_tp[10];
-  int D.6156;
+  int D.6154;
   int token.231_1;
   int _2;
   int _3;
@@ -5747,7 +5747,7 @@ E8 (char * E8_tp, char * E8_p, char * E8_c)
   char E9_c[1000];
   char E9_p[10];
   char E9_tp[10];
-  int D.6163;
+  int D.6161;
   int _1;
   int _2;
   int _3;
@@ -5822,7 +5822,7 @@ E8Linha (char * E8Linha_h, char * E8Linha_s, char * E8Linha_hp, char * E8Linha_s
   char E9_c[1000];
   char E9_p[10];
   char E9_tp[10];
-  int D.6172;
+  int D.6170;
   int token.232_1;
   int _2;
   int _3;
@@ -5960,7 +5960,7 @@ E9 (char * E9_tp, char * E9_p, char * E9_c)
   char E10_c[1000];
   char E10_p[10];
   char E10_tp[10];
-  int D.6185;
+  int D.6183;
   int _1;
   int _2;
   int _3;
@@ -6035,7 +6035,7 @@ E9Linha (char * E9Linha_h, char * E9Linha_s, char * E9Linha_hp, char * E9Linha_s
   char E10_c[1000];
   char E10_p[10];
   char E10_tp[10];
-  int D.6194;
+  int D.6192;
   int token.234_1;
   int _2;
   int _3;
@@ -6267,7 +6267,7 @@ E10 (char * E10_tp, char * E10_p, char * E10_c)
   char E11_c[1000];
   char E11_p[10];
   char E11_tp[10];
-  int D.6219;
+  int D.6217;
   int _1;
   int _2;
   int _3;
@@ -6342,7 +6342,7 @@ E10Linha (char * E10Linha_h, char * E10Linha_s, char * E10Linha_hp, char * E10Li
   char E11_c[1000];
   char E11_p[10];
   char E11_tp[10];
-  int D.6228;
+  int D.6226;
   int token.238_1;
   int _2;
   int _3;
@@ -6480,7 +6480,7 @@ E11 (char * E11_tp, char * E11_p, char * E11_c)
   char E12_c[1000];
   char E12_p[10];
   char E12_tp[10];
-  int D.6241;
+  int D.6239;
   int _1;
   int _2;
   int _3;
@@ -6555,7 +6555,7 @@ E11Linha (char * E11Linha_h, char * E11Linha_s, char * E11Linha_hp, char * E11Li
   char E12_c[1000];
   char E12_p[10];
   char E12_tp[10];
-  int D.6254;
+  int D.6252;
   int token.240_1;
   int _2;
   int _3;
@@ -6738,7 +6738,7 @@ E12 (char * E12_tp, char * E12_p, char * E12_c)
   char E13_c[1000];
   char E13_p[10];
   char E13_tp[10];
-  int D.6274;
+  int D.6272;
   int _1;
   int _2;
   int _3;
@@ -6813,7 +6813,7 @@ E12Linha (char * E12Linha_h, char * E12Linha_s, char * E12Linha_hp, char * E12Li
   char E13_c[1000];
   char E13_p[10];
   char E13_tp[10];
-  int D.6287;
+  int D.6285;
   int token.242_1;
   int _2;
   int _3;
@@ -7059,7 +7059,7 @@ E13 (char * E13_tp, char * E13_p, char * E13_c)
   char E14_c[1000];
   char E14_p[10];
   char E14_tp[10];
-  int D.6316;
+  int D.6314;
   int _1;
   int token.245_2;
   int _3;
@@ -7203,7 +7203,7 @@ E14 (char * E14_tp, char * E14_p, char * E14_c)
   char E_c[1000];
   char E_p[1000];
   char E_tp[10];
-  int D.6329;
+  int D.6327;
   int token.249_1;
   int token.250_2;
   int token.251_3;
@@ -7365,7 +7365,7 @@ E14 (char * E14_tp, char * E14_p, char * E14_c)
 
 RE ()
 {
-  int D.6355;
+  int D.6353;
   int token.255_1;
   int _2;
   int token.256_3;
@@ -7431,10 +7431,10 @@ RE ()
 
 
 
-;; Function main (main, funcdef_no=74, decl_uid=5543, cgraph_uid=74, symbol_order=91)
+;; Function main (main, funcdef_no=74, decl_uid=5542, cgraph_uid=74, symbol_order=91)
 
-beginning to process the following SWITCH statement (D:\WSCodeblocks\Compiladores\AnaliseSemantica\AnaliseSemantica\main.c:2181) : ------- 
-switch (escolha.261_5) <default: <L13> [INV], case 0: <L12> [INV], case 1: <L5> [INV], case 2: <L6> [INV], case 3: <L7> [INV], case 4: <L8> [INV], case 5: <L9> [INV], case 6: <L10> [INV], case 7: <L11> [INV]>
+beginning to process the following SWITCH statement (D:\WSCodeblocks\Compiladores\AnaliseSemantica\AnaliseSemantica\main.c:2728) : ------- 
+switch (escolha.261_5) <default: <L12> [INV], case 1: <L5> [INV], case 2: <L6> [INV], case 3: <L7> [INV], case 4: <L8> [INV], case 5: <L9> [INV], case 6: <L10> [INV], case 7: <L11> [INV]>
 
 main ()
 {
@@ -7445,57 +7445,55 @@ main ()
   char lex[20];
   char conteudo[20000];
   struct FILE * codigoFonte;
-  int D.6379;
+  int D.6377;
   struct FILE * _1;
   struct FILE * _2;
   int escolha.259_3;
   int escolha.260_4;
   int escolha.261_5;
-  int _6;
-  int _7;
-  int i.262_8;
-  int i.263_9;
-  int i.264_10;
-  int posColuna.265_11;
-  int subColuna.266_12;
-  int _13;
-  int posParser.267_14;
-  int posParser.268_15;
+  int escolha.262_6;
+  int escolha.263_7;
+  int escolha.264_8;
+  int _9;
+  int _10;
+  int i.265_11;
+  int i.266_12;
+  int i.267_13;
+  int posColuna.268_14;
+  int subColuna.269_15;
   int _16;
-  int token.269_17;
-  int posParser.270_18;
-  int posParser.271_19;
-  int _20;
-  int linha.272_21;
-  int posParser.273_22;
-  int posParser.274_23;
-  int _24;
-  int coluna.275_25;
-  int posParserLex.276_26;
-  int posParserLex.277_27;
-  int _28;
-  char[20] * _29;
-  int _30;
-  int token.278_31;
-  int _32;
-  int escolha.279_33;
-  int escolha.280_34;
-  int escolha.281_35;
-  int _120;
+  int posParser.270_17;
+  int posParser.271_18;
+  int _19;
+  int token.272_20;
+  int posParser.273_21;
+  int posParser.274_22;
+  int _23;
+  int linha.275_24;
+  int posParser.276_25;
+  int posParser.277_26;
+  int _27;
+  int coluna.278_28;
+  int posParserLex.279_29;
+  int posParserLex.280_30;
+  int _31;
+  char[20] * _32;
+  int _33;
+  int token.281_34;
+  int _35;
+  int _117;
 
   <bb 2> :
   _1 = __acrt_iob_func (1);
   setbuf (_1, 0B);
   ts = 0B;
   escolha = 0;
-  i_53 = 0;
+  i_52 = 0;
   __builtin_puts (&"-----------------------"[0]);
   __builtin_puts (&"-- Analise semantica --"[0]);
-  __builtin_puts (&"-- R E S U L T A D O --"[0]);
   __builtin_puts (&"-----------------------"[0]);
 
   <bb 3> :
-  # i_36 = PHI <i_53(2), i_39(37), i_39(38), i_39(39)>
   __builtin_puts (&"1 - ErroContinue"[0]);
   __builtin_puts (&"2 - ErroBreak"[0]);
   __builtin_puts (&"3 - ErroIncompTipo"[0]);
@@ -7503,7 +7501,6 @@ main ()
   __builtin_puts (&"5 - ErroVarNaoDeclarada"[0]);
   __builtin_puts (&"6 - TesteErro"[0]);
   __builtin_puts (&"7 - TesteOK"[0]);
-  __builtin_puts (&"0 - Sair"[0]);
   __builtin_puts (&"-----------------------"[0]);
   scanf ("%d", &escolha);
   _2 = __acrt_iob_func (0);
@@ -7527,241 +7524,237 @@ main ()
 
   <bb 6> :
   escolha.261_5 = escolha;
-  switch (escolha.261_5) <default: <L13> [INV], case 0: <L12> [INV], case 1: <L5> [INV], case 2: <L6> [INV], case 3: <L7> [INV], case 4: <L8> [INV], case 5: <L9> [INV], case 6: <L10> [INV], case 7: <L11> [INV]>
+  switch (escolha.261_5) <default: <L12> [INV], case 1: <L5> [INV], case 2: <L6> [INV], case 3: <L7> [INV], case 4: <L8> [INV], case 5: <L9> [INV], case 6: <L10> [INV], case 7: <L11> [INV]>
 
   <bb 7> :
 <L5>:
   __builtin_memcpy (&arquivo, "erroContinue.txt", 17);
   escolha = 0;
-  goto <bb 15>; [INV]
+  goto <bb 14>; [INV]
 
   <bb 8> :
 <L6>:
   __builtin_memcpy (&arquivo, "erroBreak.txt", 14);
   escolha = 0;
-  goto <bb 15>; [INV]
+  goto <bb 14>; [INV]
 
   <bb 9> :
 <L7>:
   __builtin_memcpy (&arquivo, "erroIncompTipo.txt", 19);
   escolha = 0;
-  goto <bb 15>; [INV]
+  goto <bb 14>; [INV]
 
   <bb 10> :
 <L8>:
   __builtin_memcpy (&arquivo, "erroVarDupli.txt", 17);
   escolha = 0;
-  goto <bb 15>; [INV]
+  goto <bb 14>; [INV]
 
   <bb 11> :
 <L9>:
   __builtin_memcpy (&arquivo, "erroVarNaoDeclarada.txt", 24);
   escolha = 0;
-  goto <bb 15>; [INV]
+  goto <bb 14>; [INV]
 
   <bb 12> :
 <L10>:
   __builtin_memcpy (&arquivo, "testeErro.txt", 14);
   escolha = 0;
-  goto <bb 15>; [INV]
+  goto <bb 14>; [INV]
 
   <bb 13> :
 <L11>:
   __builtin_memcpy (&arquivo, "testeOk.txt", 12);
   escolha = 0;
-  goto <bb 15>; [INV]
 
   <bb 14> :
 <L12>:
-  escolha = 0;
+  escolha.262_6 = escolha;
+  if (escolha.262_6 < 0)
+    goto <bb 3>; [INV]
+  else
+    goto <bb 15>; [INV]
 
   <bb 15> :
-<L13>:
-  codigoFonte_88 = fopen (&arquivo, "r");
-  if (codigoFonte_88 == 0B)
+  escolha.263_7 = escolha;
+  if (escolha.263_7 > 7)
+    goto <bb 3>; [INV]
+  else
     goto <bb 16>; [INV]
+
+  <bb 16> :
+  escolha.264_8 = escolha;
+  if (escolha.264_8 != 0)
+    goto <bb 3>; [INV]
   else
     goto <bb 17>; [INV]
 
-  <bb 16> :
-  __builtin_puts (&"Arquivo n\xc3\xa3o pode ser aberto"[0]);
-  exit (1);
-
   <bb 17> :
-  # i_37 = PHI <i_36(15), i_38(27)>
-  _6 = fgetc (codigoFonte_88);
-  caracter_92 = (char) _6;
-  _7 = feof (codigoFonte_88);
-  if (_7 != 0)
+  __builtin_puts (&"-- R E S U L T A D O --"[0]);
+  codigoFonte_85 = fopen (&arquivo, "r");
+  if (codigoFonte_85 == 0B)
     goto <bb 18>; [INV]
   else
     goto <bb 19>; [INV]
 
   <bb 18> :
-  goto <bb 28>; [INV]
+  __builtin_puts (&"Arquivo n\xc3\xa3o pode ser aberto"[0]);
+  exit (1);
 
   <bb 19> :
-  if (caracter_92 != 9)
+  # i_36 = PHI <i_52(17), i_37(29)>
+  _9 = fgetc (codigoFonte_85);
+  caracter_89 = (char) _9;
+  _10 = feof (codigoFonte_85);
+  if (_10 != 0)
     goto <bb 20>; [INV]
   else
-    goto <bb 23>; [INV]
+    goto <bb 21>; [INV]
 
   <bb 20> :
-  if (caracter_92 != 10)
-    goto <bb 21>; [INV]
-  else
-    goto <bb 23>; [INV]
+  goto <bb 30>; [INV]
 
   <bb 21> :
-  if (caracter_92 != 13)
+  if (caracter_89 != 9)
     goto <bb 22>; [INV]
   else
-    goto <bb 23>; [INV]
+    goto <bb 25>; [INV]
 
   <bb 22> :
-  i.262_8 = i_37;
-  i_125 = i.262_8 + 1;
-  conteudo[i.262_8] = caracter_92;
-  goto <bb 27>; [INV]
+  if (caracter_89 != 10)
+    goto <bb 23>; [INV]
+  else
+    goto <bb 25>; [INV]
 
   <bb 23> :
-  if (caracter_92 == 10)
+  if (caracter_89 != 13)
     goto <bb 24>; [INV]
   else
     goto <bb 25>; [INV]
 
   <bb 24> :
-  i.263_9 = i_37;
-  i_127 = i.263_9 + 1;
-  conteudo[i.263_9] = 127;
-  goto <bb 27>; [INV]
+  i.265_11 = i_36;
+  i_122 = i.265_11 + 1;
+  conteudo[i.265_11] = caracter_89;
+  goto <bb 29>; [INV]
 
   <bb 25> :
-  if (caracter_92 == 9)
+  if (caracter_89 == 10)
     goto <bb 26>; [INV]
   else
     goto <bb 27>; [INV]
 
   <bb 26> :
-  i.264_10 = i_37;
-  i_129 = i.264_10 + 1;
-  conteudo[i.264_10] = 9;
+  i.266_12 = i_36;
+  i_124 = i.266_12 + 1;
+  conteudo[i.266_12] = 127;
+  goto <bb 29>; [INV]
 
   <bb 27> :
-  # i_38 = PHI <i_125(22), i_127(24), i_37(25), i_129(26)>
-  goto <bb 17>; [INV]
+  if (caracter_89 == 9)
+    goto <bb 28>; [INV]
+  else
+    goto <bb 29>; [INV]
 
   <bb 28> :
-  conteudo[i_37] = 0;
-  i_95 = 0;
-  goto <bb 30>; [INV]
+  i.267_13 = i_36;
+  i_126 = i.267_13 + 1;
+  conteudo[i.267_13] = 9;
 
   <bb 29> :
-  TKsParser[i_39] = -1;
-  i_97 = i_39 + 1;
+  # i_37 = PHI <i_122(24), i_124(26), i_36(27), i_126(28)>
+  goto <bb 19>; [INV]
 
   <bb 30> :
-  # i_39 = PHI <i_95(28), i_97(29)>
-  if (i_39 <= 999)
-    goto <bb 29>; [INV]
-  else
-    goto <bb 31>; [INV]
+  conteudo[i_36] = 0;
+  i_92 = 0;
+  goto <bb 32>; [INV]
 
   <bb 31> :
-  goto <bb 33>; [INV]
+  TKsParser[i_38] = -1;
+  i_94 = i_38 + 1;
 
   <bb 32> :
-  posColuna.265_11 = posColuna;
-  subColuna.266_12 = subColuna;
-  _13 = posColuna.265_11 - subColuna.266_12;
-  coluna = _13;
-  posParser.267_14 = posParser;
-  posParser.268_15 = posParser.267_14;
-  _16 = posParser.268_15 + 1;
-  posParser = _16;
-  token.269_17 = token;
-  TKsParser[posParser.268_15] = token.269_17;
-  posParser.270_18 = posParser;
-  posParser.271_19 = posParser.270_18;
-  _20 = posParser.271_19 + 1;
-  posParser = _20;
-  linha.272_21 = linha;
-  TKsParser[posParser.271_19] = linha.272_21;
-  posParser.273_22 = posParser;
-  posParser.274_23 = posParser.273_22;
-  _24 = posParser.274_23 + 1;
-  posParser = _24;
-  coluna.275_25 = coluna;
-  TKsParser[posParser.274_23] = coluna.275_25;
-  posParserLex.276_26 = posParserLex;
-  posParserLex.277_27 = posParserLex.276_26;
-  _28 = posParserLex.277_27 + 1;
-  posParserLex = _28;
-  _29 = &TKsParserLex[posParserLex.277_27];
-  strcpy (_29, &lex);
+  # i_38 = PHI <i_92(30), i_94(31)>
+  if (i_38 <= 999)
+    goto <bb 31>; [INV]
+  else
+    goto <bb 33>; [INV]
 
   <bb 33> :
-  _30 = le_token (&conteudo, &lex);
-  token = _30;
-  token.278_31 = token;
-  if (token.278_31 != -1)
-    goto <bb 32>; [INV]
-  else
-    goto <bb 34>; [INV]
+  goto <bb 35>; [INV]
 
   <bb 34> :
-  fclose (codigoFonte_88);
-  posParser = 0;
-  posParserLex = 0;
-  leToken ();
-  _32 = PROGC ();
-  if (_32 != 0)
-    goto <bb 35>; [INV]
+  posColuna.268_14 = posColuna;
+  subColuna.269_15 = subColuna;
+  _16 = posColuna.268_14 - subColuna.269_15;
+  coluna = _16;
+  posParser.270_17 = posParser;
+  posParser.271_18 = posParser.270_17;
+  _19 = posParser.271_18 + 1;
+  posParser = _19;
+  token.272_20 = token;
+  TKsParser[posParser.271_18] = token.272_20;
+  posParser.273_21 = posParser;
+  posParser.274_22 = posParser.273_21;
+  _23 = posParser.274_22 + 1;
+  posParser = _23;
+  linha.275_24 = linha;
+  TKsParser[posParser.274_22] = linha.275_24;
+  posParser.276_25 = posParser;
+  posParser.277_26 = posParser.276_25;
+  _27 = posParser.277_26 + 1;
+  posParser = _27;
+  coluna.278_28 = coluna;
+  TKsParser[posParser.277_26] = coluna.278_28;
+  posParserLex.279_29 = posParserLex;
+  posParserLex.280_30 = posParserLex.279_29;
+  _31 = posParserLex.280_30 + 1;
+  posParserLex = _31;
+  _32 = &TKsParserLex[posParserLex.280_30];
+  strcpy (_32, &lex);
+
+  <bb 35> :
+  _33 = le_token (&conteudo, &lex);
+  token = _33;
+  token.281_34 = token;
+  if (token.281_34 != -1)
+    goto <bb 34>; [INV]
   else
     goto <bb 36>; [INV]
 
-  <bb 35> :
+  <bb 36> :
+  fclose (codigoFonte_85);
+  posParser = 0;
+  posParserLex = 0;
+  leToken ();
+  _35 = PROGC ();
+  if (_35 != 0)
+    goto <bb 37>; [INV]
+  else
+    goto <bb 38>; [INV]
+
+  <bb 37> :
   __builtin_puts (&"Reconhecimento semantico concluido"[0]);
   __builtin_puts (&"-----------------------"[0]);
   getchar ();
-  goto <bb 37>; [INV]
+  goto <bb 39>; [INV]
 
-  <bb 36> :
+  <bb 38> :
   __builtin_puts (&"Reconhecimento semantico com Falhas"[0]);
   __builtin_puts (&"-----------------------"[0]);
   getchar ();
 
-  <bb 37> :
-  escolha.279_33 = escolha;
-  if (escolha.279_33 < 0)
-    goto <bb 3>; [INV]
-  else
-    goto <bb 38>; [INV]
-
-  <bb 38> :
-  escolha.280_34 = escolha;
-  if (escolha.280_34 > 7)
-    goto <bb 3>; [INV]
-  else
-    goto <bb 39>; [INV]
-
   <bb 39> :
-  escolha.281_35 = escolha;
-  if (escolha.281_35 != 0)
-    goto <bb 3>; [INV]
-  else
-    goto <bb 40>; [INV]
-
-  <bb 40> :
-  _120 = 0;
+  _117 = 0;
   conteudo ={v} {CLOBBER};
   lex ={v} {CLOBBER};
   arquivo ={v} {CLOBBER};
   escolha ={v} {CLOBBER};
 
-  <bb 41> :
-<L44>:
-  return _120;
+  <bb 40> :
+<L43>:
+  return _117;
 
 }
 

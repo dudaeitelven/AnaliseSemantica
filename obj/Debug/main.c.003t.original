@@ -3784,10 +3784,9 @@
     int i = 0;
   printf ((const char * restrict) "-----------------------\n");
   printf ((const char * restrict) "-- Analise semantica --\n");
-  printf ((const char * restrict) "-- R E S U L T A D O --\n");
   printf ((const char * restrict) "-----------------------\n");
-  <D.5571>:;
-  <D.5569>:;
+  <D.5561>:;
+  <D.5559>:;
   printf ((const char * restrict) "1 - ErroContinue\n");
   printf ((const char * restrict) "2 - ErroBreak\n");
   printf ((const char * restrict) "3 - ErroIncompTipo\n");
@@ -3795,7 +3794,6 @@
   printf ((const char * restrict) "5 - ErroVarNaoDeclarada\n");
   printf ((const char * restrict) "6 - TesteErro\n");
   printf ((const char * restrict) "7 - TesteOK\n");
-  printf ((const char * restrict) "0 - Sair\n");
   printf ((const char * restrict) "-----------------------\n");
   scanf ((const char * restrict) "%d", &escolha);
   fflush (__acrt_iob_func (0));
@@ -3809,46 +3807,48 @@
       case 1:;
       strcpy ((char *) &arquivo, (const char * restrict) "erroContinue.txt");
       escolha = 0;
-      goto <D.5553>;
+      goto <D.5552>;
       case 2:;
       strcpy ((char *) &arquivo, (const char * restrict) "erroBreak.txt");
       escolha = 0;
-      goto <D.5553>;
+      goto <D.5552>;
       case 3:;
       strcpy ((char *) &arquivo, (const char * restrict) "erroIncompTipo.txt");
       escolha = 0;
-      goto <D.5553>;
+      goto <D.5552>;
       case 4:;
       strcpy ((char *) &arquivo, (const char * restrict) "erroVarDupli.txt");
       escolha = 0;
-      goto <D.5553>;
+      goto <D.5552>;
       case 5:;
       strcpy ((char *) &arquivo, (const char * restrict) "erroVarNaoDeclarada.txt");
       escolha = 0;
-      goto <D.5553>;
+      goto <D.5552>;
       case 6:;
       strcpy ((char *) &arquivo, (const char * restrict) "testeErro.txt");
       escolha = 0;
-      goto <D.5553>;
+      goto <D.5552>;
       case 7:;
       strcpy ((char *) &arquivo, (const char * restrict) "testeOk.txt");
       escolha = 0;
-      goto <D.5553>;
-      case 0:;
-      escolha = 0;
-      goto <D.5553>;
-      <D.5553>:;
+      goto <D.5552>;
+      <D.5552>:;
     }
+  if (escolha < 0 || escolha > 7) goto <D.5559>; else goto <D.5560>;
+  <D.5560>:;
+  if (escolha != 0) goto <D.5561>; else goto <D.5562>;
+  <D.5562>:;
+  printf ((const char * restrict) "-- R E S U L T A D O --\n");
   if ((codigoFonte = fopen ((const char * restrict) &arquivo, (const char * restrict) "r")) == 0B)
     {
       printf ((const char * restrict) "Arquivo n\xc3\xa3o pode ser aberto\n");
       exit (1);
     }
-  <D.5562>:;
+  <D.5564>:;
   caracter = (char) fgetc (codigoFonte);
   if (feof (codigoFonte) != 0)
     {
-      goto <D.5561>;
+      goto <D.5563>;
     }
   if ((caracter != 9 && caracter != 10) && caracter != 13)
     {
@@ -3868,27 +3868,27 @@
             }
         }
     }
-  goto <D.5562>;
-  <D.5561>:;
-  conteudo[i] = 0;
-  i = 0;
   goto <D.5564>;
   <D.5563>:;
+  conteudo[i] = 0;
+  i = 0;
+  goto <D.5566>;
+  <D.5565>:;
   TKsParser[i] = -1;
   i++ ;
-  <D.5564>:;
-  if (i <= 999) goto <D.5563>; else goto <D.5565>;
-  <D.5565>:;
-  goto <D.5567>;
   <D.5566>:;
+  if (i <= 999) goto <D.5565>; else goto <D.5567>;
+  <D.5567>:;
+  goto <D.5569>;
+  <D.5568>:;
   coluna = posColuna - subColuna;
   TKsParser[posParser++ ] = token;
   TKsParser[posParser++ ] = linha;
   TKsParser[posParser++ ] = coluna;
   strcpy ((char *) &TKsParserLex[posParserLex++ ], (const char * restrict) &lex);
-  <D.5567>:;
-  if ((token = le_token ((char *) &conteudo, (char *) &lex)) != -1) goto <D.5566>; else goto <D.5568>;
-  <D.5568>:;
+  <D.5569>:;
+  if ((token = le_token ((char *) &conteudo, (char *) &lex)) != -1) goto <D.5568>; else goto <D.5570>;
+  <D.5570>:;
   fclose (codigoFonte);
   posParser = 0;
   posParserLex = 0;
@@ -3905,10 +3905,6 @@
       printf ((const char * restrict) "-----------------------\n");
       getchar ();
     }
-  if (escolha < 0 || escolha > 7) goto <D.5569>; else goto <D.5570>;
-  <D.5570>:;
-  if (escolha != 0) goto <D.5571>; else goto <D.5572>;
-  <D.5572>:;
   return 0;
 }
 return 0;

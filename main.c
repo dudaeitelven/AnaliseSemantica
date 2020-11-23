@@ -823,7 +823,8 @@ int RLD(char *RLD_c)
 
 int DEC()
 {
-    char RDEC_t[10], Tipo_t[10];
+    char RDEC_t[10];
+    char Tipo_t[10];
 
     if (TIPO(Tipo_t))
     {
@@ -1096,7 +1097,9 @@ int CORPO()
 
 int LCD()
 {
-    char DV_t[10], TIPO_t[10], COM_c[MAX_COD];
+    char DV_t[10];
+    char TIPO_t[10];
+    char COM_c[MAX_COD];
 
     if (COM(COM_c))
     {
@@ -1134,8 +1137,16 @@ int LCD()
 
 int COM(char *COM_c)
 {
-    char TIPO_t[10], E_tp[10], E_p[10], E_c[MAX_COD], LCD_c[MAX_COD], RDEC_c[MAX_COD];
-    char COMWHILE_c[MAX_COD], COMFOR_c[MAX_COD], COMDOWHILE_c[MAX_COD], COMIF_c[MAX_COD];
+    char TIPO_t[10];
+    char E_tp[10];
+    char E_p[10];
+    char E_c[MAX_COD];
+    char LCD_c[MAX_COD];
+    char RDEC_c[MAX_COD];
+    char COMWHILE_c[MAX_COD];
+    char COMFOR_c[MAX_COD];
+    char COMDOWHILE_c[MAX_COD];
+    char COMIF_c[MAX_COD];
 
     if (E(E_tp, E_p, E_c))
     {
@@ -1272,7 +1283,10 @@ int COM(char *COM_c)
 
 int COMIF(char *COMIF_c)
 {
-    char E_tp[10], E_p[MAX_COD],E_c[MAX_COD], COM_c[MAX_COD];
+    char E_tp[10];
+    char E_p[MAX_COD];
+    char E_c[MAX_COD];
+    char COM_c[MAX_COD];
     char RIF_c[MAX_COD];
 
     strcpy(RIF_c,"");
@@ -2691,7 +2705,6 @@ int main()
 
     printf("-----------------------\n");
     printf("-- Analise semantica --\n");
-    printf("-- R E S U L T A D O --\n");
     printf("-----------------------\n");
 
     do{
@@ -2749,7 +2762,7 @@ int main()
     }
     while (escolha != 0);
 
-
+      printf("-- R E S U L T A D O --\n");
 
 
     if ((codigoFonte = fopen(arquivo, "r")) == NULL)
