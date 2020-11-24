@@ -3530,7 +3530,7 @@ E (char * E_tp, char * E_p, char * E_c)
 
 ;; Function ELinha (ELinha, funcdef_no=47, decl_uid=4806, cgraph_uid=47, symbol_order=64)
 
-D:\WSCodeblocks\Compiladores\AnaliseSemantica\AnaliseSemantica\main.c:1647: sprintf: objsize = 18446744073709551615, fmtstr = "%s %s"
+D:\WSCodeblocks\Compiladores\AnaliseSemantica\AnaliseSemantica\main.c:1683: sprintf: objsize = 18446744073709551615, fmtstr = "%s %s"
   Directive 1 at offset 0: "%s"
     Result: 0, 999, 999, 999 (0, 999, 999, 999)
   Directive 2 at offset 2: " ", length = 1
@@ -3628,7 +3628,7 @@ ELinha (char * ELinha_h, char * ELinha_s, char * ELinha_p, char * ELinha_hp, cha
 
 ;; Function E1 (E1, funcdef_no=48, decl_uid=4812, cgraph_uid=48, symbol_order=65)
 
-D:\WSCodeblocks\Compiladores\AnaliseSemantica\AnaliseSemantica\main.c:1736: sprintf: objsize = 18446744073709551615, fmtstr = "%s	%s = %s - %s
+D:\WSCodeblocks\Compiladores\AnaliseSemantica\AnaliseSemantica\main.c:1780: sprintf: objsize = 18446744073709551615, fmtstr = "%s	%s = %s - %s
 "
   Directive 1 at offset 0: "%s"
     Result: 0, 999, 999, 999 (0, 999, 999, 999)
@@ -3648,7 +3648,7 @@ D:\WSCodeblocks\Compiladores\AnaliseSemantica\AnaliseSemantica\main.c:1736: spri
 ", length = 1
     Result: 1, 1, 1, 1 (8, 1034, 1034, 1034)
   Directive 9 at offset 16: "", length = 1
-D:\WSCodeblocks\Compiladores\AnaliseSemantica\AnaliseSemantica\main.c:1722: sprintf: objsize = 18446744073709551615, fmtstr = "%s	%s = %s + %s
+D:\WSCodeblocks\Compiladores\AnaliseSemantica\AnaliseSemantica\main.c:1766: sprintf: objsize = 18446744073709551615, fmtstr = "%s	%s = %s + %s
 "
   Directive 1 at offset 0: "%s"
     Result: 0, 999, 999, 999 (0, 999, 999, 999)
@@ -3668,7 +3668,7 @@ D:\WSCodeblocks\Compiladores\AnaliseSemantica\AnaliseSemantica\main.c:1722: spri
 ", length = 1
     Result: 1, 1, 1, 1 (8, 1034, 1034, 1034)
   Directive 9 at offset 16: "", length = 1
-D:\WSCodeblocks\Compiladores\AnaliseSemantica\AnaliseSemantica\main.c:1708: sprintf: objsize = 18446744073709551615, fmtstr = "%s	%s = %s / %s
+D:\WSCodeblocks\Compiladores\AnaliseSemantica\AnaliseSemantica\main.c:1752: sprintf: objsize = 18446744073709551615, fmtstr = "%s	%s = %s / %s
 "
   Directive 1 at offset 0: "%s"
     Result: 0, 999, 999, 999 (0, 999, 999, 999)
@@ -3688,7 +3688,7 @@ D:\WSCodeblocks\Compiladores\AnaliseSemantica\AnaliseSemantica\main.c:1708: spri
 ", length = 1
     Result: 1, 1, 1, 1 (8, 1034, 1034, 1034)
   Directive 9 at offset 16: "", length = 1
-D:\WSCodeblocks\Compiladores\AnaliseSemantica\AnaliseSemantica\main.c:1694: sprintf: objsize = 18446744073709551615, fmtstr = "%s	%s = %s * %s
+D:\WSCodeblocks\Compiladores\AnaliseSemantica\AnaliseSemantica\main.c:1738: sprintf: objsize = 18446744073709551615, fmtstr = "%s	%s = %s * %s
 "
   Directive 1 at offset 0: "%s"
     Result: 0, 999, 999, 999 (0, 999, 999, 999)
@@ -3708,7 +3708,7 @@ D:\WSCodeblocks\Compiladores\AnaliseSemantica\AnaliseSemantica\main.c:1694: spri
 ", length = 1
     Result: 1, 1, 1, 1 (8, 1034, 1034, 1034)
   Directive 9 at offset 16: "", length = 1
-D:\WSCodeblocks\Compiladores\AnaliseSemantica\AnaliseSemantica\main.c:1680: sprintf: objsize = 18446744073709551615, fmtstr = "%s	%s = %s
+D:\WSCodeblocks\Compiladores\AnaliseSemantica\AnaliseSemantica\main.c:1724: sprintf: objsize = 18446744073709551615, fmtstr = "%s	%s = %s
 "
   Directive 1 at offset 0: "%s"
     Result: 0, 999, 999, 999 (0, 999, 999, 999)

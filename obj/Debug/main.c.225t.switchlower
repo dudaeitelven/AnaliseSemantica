@@ -7433,7 +7433,7 @@ RE ()
 
 ;; Function main (main, funcdef_no=74, decl_uid=5542, cgraph_uid=74, symbol_order=91)
 
-beginning to process the following SWITCH statement (D:\WSCodeblocks\Compiladores\AnaliseSemantica\AnaliseSemantica\main.c:2728) : ------- 
+beginning to process the following SWITCH statement (D:\WSCodeblocks\Compiladores\AnaliseSemantica\AnaliseSemantica\main.c:2933) : ------- 
 switch (escolha.261_5) <default: <L12> [INV], case 1: <L5> [INV], case 2: <L6> [INV], case 3: <L7> [INV], case 4: <L8> [INV], case 5: <L9> [INV], case 6: <L10> [INV], case 7: <L11> [INV]>
 
 main ()

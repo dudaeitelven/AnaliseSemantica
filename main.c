@@ -1356,9 +1356,14 @@ int RIF(char *RIF_c)
 
 int COMFOR(char *COMFOR_c)
 {
-    char COM_c[MAX_COD], RFOR_c[MAX_COD];
-    char EIF1_c[MAX_COD], EIF2_c[MAX_COD], EIF3_c[MAX_COD];
-    char EIF1_p[MAX_COD], EIF2_p[MAX_COD], EIF3_p[MAX_COD];
+    char COM_c[MAX_COD];
+    char RFOR_c[MAX_COD];
+    char EIF1_c[MAX_COD];
+    char EIF2_c[MAX_COD];
+    char EIF3_c[MAX_COD];
+    char EIF1_p[MAX_COD];
+    char EIF2_p[MAX_COD];
+    char EIF3_p[MAX_COD];
 
     if (token == TK_For)
     {
@@ -1447,7 +1452,9 @@ int RFOR(char *RFOR_c)
 
 int EIF(char *EIF_c, char *EIF_p)
 {
-    char E_tp[10], E_p[MAX_COD],E_c[MAX_COD];   ;
+    char E_tp[10];
+    char E_p[MAX_COD];
+    char E_c[MAX_COD];   ;
 
     if (E(E_tp, E_p, E_c))
     {
@@ -1461,7 +1468,11 @@ int EIF(char *EIF_c, char *EIF_p)
 
 int COMWHILE(char *COMWHILE_c)
 {
-    char E_tp[10], E_p[MAX_COD],E_c[MAX_COD], COM_c[MAX_COD], RWHILE_c[MAX_COD];
+    char E_tp[10];
+    char E_p[MAX_COD];
+    char E_c[MAX_COD];
+    char COM_c[MAX_COD];
+    char RWHILE_c[MAX_COD];
 
     if (token == TK_While && doWhile != 1)
     {
@@ -1524,7 +1535,11 @@ int RWHILE(char *RWHILE_c)
 
 int COMDOWHILE(char *COMDOWHILE_c)
 {
-    char E_tp[10], E_p[MAX_COD], E_c[MAX_COD], COM_c[MAX_COD], RDOWHILE_c[MAX_COD];
+    char E_tp[10];
+    char E_p[MAX_COD];
+    char E_c[MAX_COD];
+    char COM_c[MAX_COD];
+    char RDOWHILE_c[MAX_COD];
 
     if (token == TK_Do)
     {
@@ -1606,8 +1621,19 @@ int RDOWHILE(char *RDOWHILE_c)
 
 int E(char *E_tp, char *E_p, char *E_c)
 {
-    char ELinha_h[10], ELinha_s[10], ELinha_c[MAX_COD], ELinha_p[10],ELinha_hp[10], ELinha_hc[MAX_COD], ELinha_sp[10], ELinha_sc[MAX_COD];
-    char E1_tp[10], E1_h[10], E1_s[10], E1_p[10], E1_c[MAX_COD];
+    char ELinha_h[10];
+    char ELinha_s[10];
+    char ELinha_c[MAX_COD];
+    char ELinha_p[10];
+    char ELinha_hp[10];
+    char ELinha_hc[MAX_COD];
+    char ELinha_sp[10];
+    char ELinha_sc[MAX_COD];
+    char E1_tp[10];
+    char E1_h[10];
+    char E1_s[10];
+    char E1_p[10];
+    char E1_c[MAX_COD];
 
     if (E1(E1_tp, E1_h, E1_s, E1_p, E1_c))
     {
@@ -1630,9 +1656,19 @@ int E(char *E_tp, char *E_p, char *E_c)
 
 int ELinha(char *ELinha_h, char *ELinha_s, char *ELinha_p, char *ELinha_hp, char *ELinha_sp, char *ELinha_c, char *ELinha_hc, char *ELinha_sc)
 {
-    char ELinha2_sp[10], ELinha2_sc[MAX_COD], ELinha2_hp[10], ELinha2_hc[MAX_COD];
-    char ELinha2_h[10], ELinha2_s[10], ELinha2_p[10], ELinha2_c[MAX_COD];
-    char E1_tp[10], E1_h[10], E1_s[10], E1_p[10], E1_c[MAX_COD];
+    char ELinha2_sp[10];
+    char ELinha2_sc[MAX_COD];
+    char ELinha2_hp[10];
+    char ELinha2_hc[MAX_COD];
+    char ELinha2_h[10];
+    char ELinha2_s[10];
+    char ELinha2_p[10];
+    char ELinha2_c[MAX_COD];
+    char E1_tp[10];
+    char E1_h[10];
+    char E1_s[10];
+    char E1_p[10];
+    char E1_c[MAX_COD];
 
     if (token == TK_Virgula)
     {
@@ -1664,8 +1700,16 @@ int ELinha(char *ELinha_h, char *ELinha_s, char *ELinha_p, char *ELinha_hp, char
 
 int E1(char *E1_tp, char *E1_h, char *E1_s, char *E1_p, char *E1_c)
 {
-    char E1Linha_h[10], E1Linha_s[10], E1Linha_tp[10], E1Linha_p[10], E1Linha_c[MAX_COD];
-    char E2_tp[10], E2_h[10], E2_s[10], E2_p[10], E2_c[MAX_COD];
+    char E1Linha_h[10];
+    char E1Linha_s[10];
+    char E1Linha_tp[10];
+    char E1Linha_p[10];
+    char E1Linha_c[MAX_COD];
+    char E2_tp[10];
+    char E2_h[10];
+    char E2_s[10];
+    char E2_p[10];
+    char E2_c[MAX_COD];
 
     if (E2(E2_tp, E2_h, E2_s, E2_p, E2_c))
     {
@@ -1751,8 +1795,15 @@ int E1(char *E1_tp, char *E1_h, char *E1_s, char *E1_p, char *E1_c)
 
 int E2(char *E2_tp, char *E2_h, char *E2_s, char *E2_p, char *E2_c)
 {
-    char E2Linha_h[10], E2Linha_s[10], E2Linha_hp[10], E2Linha_sp[10], E2Linha_hc[MAX_COD], E2Linha_sc[MAX_COD];
-    char E3_tp[10], E3_p[10], E3_c[MAX_COD];
+    char E2Linha_h[10];
+    char E2Linha_s[10];
+    char E2Linha_hp[10];
+    char E2Linha_sp[10];
+    char E2Linha_hc[MAX_COD];
+    char E2Linha_sc[MAX_COD];
+    char E3_tp[10];
+    char E3_p[10];
+    char E3_c[MAX_COD];
 
     if (E3(E3_tp, E3_p, E3_c))
     {
@@ -1775,8 +1826,17 @@ int E2(char *E2_tp, char *E2_h, char *E2_s, char *E2_p, char *E2_c)
 
 int E2Linha(char *E2Linha_h, char *E2Linha_s, char *E2Linha_hp, char *E2Linha_sp, char *E2Linha_hc, char *E2Linha_sc)
 {
-    char E2_tp[10], E2_h[10], E2_s[10], E2_p[10], E2_c[MAX_COD];
-    char E2Linha2_h[10], E2Linha2_s[10], E2Linha2_hp[10], E2Linha2_sp[10], E2Linha2_hc[MAX_COD], E2Linha2_sc[MAX_COD];
+    char E2_tp[10];
+    char E2_h[10];
+    char E2_s[10];
+    char E2_p[10];
+    char E2_c[MAX_COD];
+    char E2Linha2_h[10];
+    char E2Linha2_s[10];
+    char E2Linha2_hp[10];
+    char E2Linha2_sp[10];
+    char E2Linha2_hc[MAX_COD];
+    char E2Linha2_sc[MAX_COD];
 
     if (token == TK_Ternario)
     {
@@ -1816,8 +1876,15 @@ int E2Linha(char *E2Linha_h, char *E2Linha_s, char *E2Linha_hp, char *E2Linha_sp
 
 int E3(char *E3_tp, char *E3_p, char *E3_c)
 {
-    char E3Linha_h[10], E3Linha_s[10], E3Linha_hp[10], E3Linha_sp[10], E3Linha_hc[MAX_COD], E3Linha_sc[MAX_COD];
-    char E4_tp[10], E4_p[10], E4_c[MAX_COD];
+    char E3Linha_h[10];
+    char E3Linha_s[10];
+    char E3Linha_hp[10];
+    char E3Linha_sp[10];
+    char E3Linha_hc[MAX_COD];
+    char E3Linha_sc[MAX_COD];
+    char E4_tp[10];
+    char E4_p[10];
+    char E4_c[MAX_COD];
 
     if (E4(E4_tp, E4_p, E4_c))
     {
@@ -1840,8 +1907,15 @@ int E3(char *E3_tp, char *E3_p, char *E3_c)
 
 int E3Linha(char *E3Linha_h, char *E3Linha_s, char *E3Linha_hp, char *E3Linha_sp, char *E3Linha_hc, char *E3Linha_sc)
 {
-    char E3Linha2_h[10], E3Linha2_s[10], E3Linha2_hp[10], E3Linha2_sp[10], E3Linha2_hc[MAX_COD], E3Linha2_sc[MAX_COD];
-    char E4_tp[10], E4_p[10], E4_c[MAX_COD];
+    char E3Linha2_h[10];
+    char E3Linha2_s[10];
+    char E3Linha2_hp[10];
+    char E3Linha2_sp[10];
+    char E3Linha2_hc[MAX_COD];
+    char E3Linha2_sc[MAX_COD];
+    char E4_tp[10];
+    char E4_p[10];
+    char E4_c[MAX_COD];
 
     if (token == TK_OU)
     {
@@ -1871,8 +1945,15 @@ int E3Linha(char *E3Linha_h, char *E3Linha_s, char *E3Linha_hp, char *E3Linha_sp
 
 int E4(char *E4_tp, char *E4_p, char *E4_c)
 {
-    char E4Linha_h[10], E4Linha_s[10], E4Linha_hp[10], E4Linha_sp[10], E4Linha_hc[MAX_COD], E4Linha_sc[MAX_COD];
-    char E5_tp[10], E5_p[10], E5_c[MAX_COD];
+    char E4Linha_h[10];
+    char E4Linha_s[10];
+    char E4Linha_hp[10];
+    char E4Linha_sp[10];
+    char E4Linha_hc[MAX_COD];
+    char E4Linha_sc[MAX_COD];
+    char E5_tp[10];
+    char E5_p[10];
+    char E5_c[MAX_COD];
 
     if (E5(E5_tp, E5_p, E5_c))
     {
@@ -1895,8 +1976,15 @@ int E4(char *E4_tp, char *E4_p, char *E4_c)
 
 int E4Linha(char *E4Linha_h, char *E4Linha_s, char *E4Linha_hp, char *E4Linha_sp, char *E4Linha_hc, char *E4Linha_sc)
 {
-    char E4Linha2_h[10], E4Linha2_s[10], E4Linha2_hp[10], E4Linha2_sp[10], E4Linha2_hc[MAX_COD], E4Linha2_sc[MAX_COD];
-    char E5_tp[10], E5_p[10], E5_c[MAX_COD];
+    char E4Linha2_h[10];
+    char E4Linha2_s[10];
+    char E4Linha2_hp[10];
+    char E4Linha2_sp[10];
+    char E4Linha2_hc[MAX_COD];
+    char E4Linha2_sc[MAX_COD];
+    char E5_tp[10];
+    char E5_p[10];
+    char E5_c[MAX_COD];
 
     if (token == TK_AND)
     {
@@ -1928,8 +2016,15 @@ int E4Linha(char *E4Linha_h, char *E4Linha_s, char *E4Linha_hp, char *E4Linha_sp
 
 int E5(char *E5_tp, char *E5_p, char *E5_c)
 {
-    char E6_tp[10], E6_p[10], E6_c[MAX_COD];
-    char E5Linha_h[10], E5Linha_s[10], E5Linha_hp[10], E5Linha_sp[10], E5Linha_hc[MAX_COD], E5Linha_sc[MAX_COD];
+    char E6_tp[10];
+    char E6_p[10];
+    char E6_c[MAX_COD];
+    char E5Linha_h[10];
+    char E5Linha_s[10];
+    char E5Linha_hp[10];
+    char E5Linha_sp[10];
+    char E5Linha_hc[MAX_COD];
+    char E5Linha_sc[MAX_COD];
 
     if (E6(E6_tp, E6_p, E6_c))
     {
@@ -1952,8 +2047,15 @@ int E5(char *E5_tp, char *E5_p, char *E5_c)
 
 int E5Linha(char *E5Linha_h, char *E5Linha_s, char *E5Linha_hp, char *E5Linha_sp, char *E5Linha_hc, char *E5Linha_sc)
 {
-    char E6_tp[10], E6_p[10], E6_c[MAX_COD];
-    char E5Linha2_h[10], E5Linha2_s[10], E5Linha2_hp[10], E5Linha2_sp[10], E5Linha2_hc[MAX_COD], E5Linha2_sc[MAX_COD];
+    char E6_tp[10];
+    char E6_p[10];
+    char E6_c[MAX_COD];
+    char E5Linha2_h[10];
+    char E5Linha2_s[10];
+    char E5Linha2_hp[10];
+    char E5Linha2_sp[10];
+    char E5Linha2_hc[MAX_COD];
+    char E5Linha2_sc[MAX_COD];
 
     if (token == TK_OULogico)
     {
@@ -1985,8 +2087,15 @@ int E5Linha(char *E5Linha_h, char *E5Linha_s, char *E5Linha_hp, char *E5Linha_sp
 
 int E6(char *E6_tp, char *E6_p, char *E6_c)
 {
-    char E7_tp[10], E7_p[10], E7_c[MAX_COD];
-    char E6Linha_h[10], E6Linha_s[10], E6Linha_hp[10], E6Linha_sp[10], E6Linha_hc[MAX_COD], E6Linha_sc[MAX_COD];
+    char E7_tp[10];
+    char E7_p[10];
+    char E7_c[MAX_COD];
+    char E6Linha_h[10];
+    char E6Linha_s[10];
+    char E6Linha_hp[10];
+    char E6Linha_sp[10];
+    char E6Linha_hc[MAX_COD];
+    char E6Linha_sc[MAX_COD];
 
     if (E7(E7_tp, E7_p, E7_c))
     {
@@ -2009,8 +2118,15 @@ int E6(char *E6_tp, char *E6_p, char *E6_c)
 
 int E6Linha(char *E6Linha_h, char *E6Linha_s, char *E6Linha_hp, char *E6Linha_sp, char *E6Linha_hc, char *E6Linha_sc)
 {
-    char E7_tp[10], E7_p[10], E7_c[MAX_COD];
-    char E6Linha2_h[10], E6Linha2_s[10], E6Linha2_hp[10], E6Linha2_sp[10], E6Linha2_hc[MAX_COD], E6Linha2_sc[MAX_COD];
+    char E7_tp[10];
+    char E7_p[10];
+    char E7_c[MAX_COD];
+    char E6Linha2_h[10];
+    char E6Linha2_s[10];
+    char E6Linha2_hp[10];
+    char E6Linha2_sp[10];
+    char E6Linha2_hc[MAX_COD];
+    char E6Linha2_sc[MAX_COD];
 
     if (token == TK_XOR)
     {
@@ -2043,8 +2159,16 @@ int E6Linha(char *E6Linha_h, char *E6Linha_s, char *E6Linha_hp, char *E6Linha_sp
 
 int E7(char *E7_tp, char *E7_p, char *E7_c)
 {
-    char E8_tp[10], E8_p[10], E8_c[MAX_COD];
-    char E7Linha_h[10], E7Linha_s[10], E7Linha_hp[10], E7Linha_sp[10], E7Linha_hc[MAX_COD], E7Linha_sc[MAX_COD];
+    char E8_tp[10];
+    char E8_p[10];
+    char E8_c[MAX_COD];
+    char E7Linha_h[10];
+    char E7Linha_s[10];
+    char E7Linha_hp[10];
+    char E7Linha_sp[10];
+    char E7Linha_hc[MAX_COD];
+    char E7Linha_sc[MAX_COD];
+
 
     if (E8(E8_tp, E8_p, E8_c))
     {
@@ -2067,8 +2191,15 @@ int E7(char *E7_tp, char *E7_p, char *E7_c)
 
 int E7Linha(char *E7Linha_h, char *E7Linha_s, char *E7Linha_hp, char *E7Linha_sp, char *E7Linha_hc, char *E7Linha_sc)
 {
-    char E8_tp[10], E8_p[10], E8_c[MAX_COD];
-    char E7Linha2_h[10], E7Linha2_s[10], E7Linha2_hp[10], E7Linha2_sp[10], E7Linha2_hc[MAX_COD], E7Linha2_sc[MAX_COD];
+    char E8_tp[10];
+    char E8_p[10];
+    char E8_c[MAX_COD];
+    char E7Linha2_h[10];
+    char E7Linha2_s[10];
+    char E7Linha2_hp[10];
+    char E7Linha2_sp[10];
+    char E7Linha2_hc[MAX_COD];
+    char E7Linha2_sc[MAX_COD];
 
     if (token == TK_ELogico)
     {
@@ -2100,8 +2231,15 @@ int E7Linha(char *E7Linha_h, char *E7Linha_s, char *E7Linha_hp, char *E7Linha_sp
 
 int E8(char *E8_tp, char *E8_p, char *E8_c)
 {
-    char E9_tp[10], E9_p[10], E9_c[MAX_COD];
-    char E8Linha_h[10], E8Linha_s[10], E8Linha_hp[10], E8Linha_sp[10], E8Linha_hc[MAX_COD], E8Linha_sc[MAX_COD];
+    char E9_tp[10];
+    char E9_p[10];
+    char E9_c[MAX_COD];
+    char E8Linha_h[10];
+    char E8Linha_s[10];
+    char E8Linha_hp[10];
+    char E8Linha_sp[10];
+    char E8Linha_hc[MAX_COD];
+    char E8Linha_sc[MAX_COD];
 
     if (E9(E9_tp, E9_p, E9_c))
     {
@@ -2124,8 +2262,15 @@ int E8(char *E8_tp, char *E8_p, char *E8_c)
 
 int E8Linha(char *E8Linha_h, char *E8Linha_s, char *E8Linha_hp, char *E8Linha_sp, char *E8Linha_hc, char *E8Linha_sc)
 {
-    char E9_tp[10], E9_p[10], E9_c[MAX_COD];
-    char E8Linha2_h[10], E8Linha2_s[10], E8Linha2_hp[10], E8Linha2_sp[10], E8Linha2_hc[MAX_COD], E8Linha2_sc[MAX_COD];
+    char E9_tp[10];
+    char E9_p[10];
+    char E9_c[MAX_COD];
+    char E8Linha2_h[10];
+    char E8Linha2_s[10];
+    char E8Linha2_hp[10];
+    char E8Linha2_sp[10];
+    char E8Linha2_hc[MAX_COD];
+    char E8Linha2_sc[MAX_COD];
 
     if (token == TK_ComparadorIgual)
     {
@@ -2176,8 +2321,15 @@ int E8Linha(char *E8Linha_h, char *E8Linha_s, char *E8Linha_hp, char *E8Linha_sp
 
 int E9(char *E9_tp, char *E9_p, char *E9_c)
 {
-    char E10_tp[10], E10_p[10], E10_c[MAX_COD];
-    char E9Linha_h[10], E9Linha_s[10], E9Linha_hp[10], E9Linha_sp[10], E9Linha_hc[MAX_COD], E9Linha_sc[MAX_COD];
+    char E10_tp[10];
+    char E10_p[10];
+    char E10_c[MAX_COD];
+    char E9Linha_h[10];
+    char E9Linha_s[10];
+    char E9Linha_hp[10];
+    char E9Linha_sp[10];
+    char E9Linha_hc[MAX_COD];
+    char E9Linha_sc[MAX_COD];
 
     if (E10(E10_tp, E10_p, E10_c))
     {
@@ -2200,8 +2352,15 @@ int E9(char *E9_tp, char *E9_p, char *E9_c)
 
 int E9Linha(char *E9Linha_h, char *E9Linha_s, char *E9Linha_hp, char *E9Linha_sp, char *E9Linha_hc, char *E9Linha_sc)
 {
-    char E10_tp[10], E10_p[10], E10_c[MAX_COD];
-    char E9Linha2_h[10], E9Linha2_s[10], E9Linha2_hp[10], E9Linha2_sp[10], E9Linha2_hc[MAX_COD], E9Linha2_sc[MAX_COD];
+    char E10_tp[10];
+    char E10_p[10];
+    char E10_c[MAX_COD];
+    char E9Linha2_h[10];
+    char E9Linha2_s[10];
+    char E9Linha2_hp[10];
+    char E9Linha2_sp[10];
+    char E9Linha2_hc[MAX_COD];
+    char E9Linha2_sc[MAX_COD];
 
     if (token == TK_Menor)
     {
@@ -2290,8 +2449,15 @@ int E9Linha(char *E9Linha_h, char *E9Linha_s, char *E9Linha_hp, char *E9Linha_sp
 
 int E10(char *E10_tp, char *E10_p, char *E10_c)
 {
-    char E11_tp[10], E11_p[10], E11_c[MAX_COD];
-    char E10Linha_h[10], E10Linha_s[10], E10Linha_hp[10], E10Linha_sp[10], E10Linha_hc[MAX_COD], E10Linha_sc[MAX_COD];
+    char E11_tp[10];
+    char E11_p[10];
+    char E11_c[MAX_COD];
+    char E10Linha_h[10];
+    char E10Linha_s[10];
+    char E10Linha_hp[10];
+    char E10Linha_sp[10];
+    char E10Linha_hc[MAX_COD];
+    char E10Linha_sc[MAX_COD];
 
     if (E11(E11_tp, E11_p, E11_c))
     {
@@ -2314,8 +2480,15 @@ int E10(char *E10_tp, char *E10_p, char *E10_c)
 
 int E10Linha(char *E10Linha_h, char *E10Linha_s, char *E10Linha_hp, char *E10Linha_sp, char *E10Linha_hc, char *E10Linha_sc)
 {
-    char E11_tp[10], E11_p[10], E11_c[MAX_COD];
-    char E10Linha2_h[10], E10Linha2_s[10], E10Linha2_hp[10], E10Linha2_sp[10], E10Linha2_hc[MAX_COD], E10Linha2_sc[MAX_COD];
+    char E11_tp[10];
+    char E11_p[10];
+    char E11_c[MAX_COD];
+    char E10Linha2_h[10];
+    char E10Linha2_s[10];
+    char E10Linha2_hp[10];
+    char E10Linha2_sp[10];
+    char E10Linha2_hc[MAX_COD];
+    char E10Linha2_sc[MAX_COD];
 
     if (token == TK_ShiftLeft)
     {
@@ -2366,8 +2539,15 @@ int E10Linha(char *E10Linha_h, char *E10Linha_s, char *E10Linha_hp, char *E10Lin
 
 int E11(char *E11_tp, char *E11_p, char *E11_c)
 {
-    char E12_tp[10], E12_p[10], E12_c[MAX_COD];
-    char E11Linha_h[10], E11Linha_s[10], E11Linha_hp[10], E11Linha_sp[10], E11Linha_hc[MAX_COD], E11Linha_sc[MAX_COD];
+    char E12_tp[10];
+    char E12_p[10];
+    char E12_c[MAX_COD];
+    char E11Linha_h[10];
+    char E11Linha_s[10];
+    char E11Linha_hp[10];
+    char E11Linha_sp[10];
+    char E11Linha_hc[MAX_COD];
+    char E11Linha_sc[MAX_COD];
 
     if (E12(E12_tp, E12_p, E12_c))
     {
@@ -2390,8 +2570,15 @@ int E11(char *E11_tp, char *E11_p, char *E11_c)
 
 int E11Linha(char *E11Linha_h, char *E11Linha_s, char *E11Linha_hp, char *E11Linha_sp, char *E11Linha_hc, char *E11Linha_sc)
 {
-    char E12_tp[10], E12_p[10], E12_c[MAX_COD];
-    char E11Linha2_h[10], E11Linha2_s[10], E11Linha2_hp[10], E11Linha2_sp[10], E11Linha2_hc[MAX_COD], E11Linha2_sc[MAX_COD];
+    char E12_tp[10];
+    char E12_p[10];
+    char E12_c[MAX_COD];
+    char E11Linha2_h[10];
+    char E11Linha2_s[10];
+    char E11Linha2_hp[10];
+    char E11Linha2_sp[10];
+    char E11Linha2_hc[MAX_COD];
+    char E11Linha2_sc[MAX_COD];
 
     if (token == TK_Mais)
     {
@@ -2444,8 +2631,15 @@ int E11Linha(char *E11Linha_h, char *E11Linha_s, char *E11Linha_hp, char *E11Lin
 
 int E12(char *E12_tp, char *E12_p, char *E12_c)
 {
-    char E13_tp[10], E13_p[10], E13_c[MAX_COD];
-    char E12Linha_h[10], E12Linha_s[10], E12Linha_hp[10], E12Linha_sp[10], E12Linha_hc[MAX_COD], E12Linha_sc[MAX_COD];
+    char E13_tp[10];
+    char E13_p[10];
+    char E13_c[MAX_COD];
+    char E12Linha_h[10];
+    char E12Linha_s[10];
+    char E12Linha_hp[10];
+    char E12Linha_sp[10];
+    char E12Linha_hc[MAX_COD];
+    char E12Linha_sc[MAX_COD];
 
     if (E13(E13_tp, E13_p, E13_c))
     {
@@ -2469,8 +2663,15 @@ int E12(char *E12_tp, char *E12_p, char *E12_c)
 
 int E12Linha(char *E12Linha_h, char *E12Linha_s, char *E12Linha_hp, char *E12Linha_sp, char *E12Linha_hc, char *E12Linha_sc)
 {
-    char E13_tp[10], E13_p[10], E13_c[MAX_COD];
-    char E12Linha2_h[10], E12Linha2_s[10], E12Linha2_hp[10], E12Linha2_sp[10], E12Linha2_hc[MAX_COD], E12Linha2_sc[MAX_COD];
+    char E13_tp[10];
+    char E13_p[10];
+    char E13_c[MAX_COD];
+    char E12Linha2_h[10];
+    char E12Linha2_s[10];
+    char E12Linha2_hp[10];
+    char E12Linha2_sp[10];
+    char E12Linha2_hc[MAX_COD];
+    char E12Linha2_sc[MAX_COD];
 
     if (token == TK_Multiplicacao)
     {
@@ -2553,8 +2754,12 @@ int E12Linha(char *E12Linha_h, char *E12Linha_s, char *E12Linha_hp, char *E12Lin
 
 int E13(char *E13_tp, char *E13_p, char *E13_c)
 {
-    char E14_tp[10], E14_p[10], E14_c[MAX_COD];
-    char E13Linha_tp[10], E13Linha_h[10], E13Linha_s[10];
+    char E14_tp[10];
+    char E14_p[10];
+    char E14_c[MAX_COD];
+    char E13Linha_tp[10];
+    char E13Linha_h[10];
+    char E13Linha_s[10];
 
     if (E14(E14_tp, E14_p, E14_c))
     {
