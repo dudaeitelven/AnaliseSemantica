@@ -3688,38 +3688,47 @@
             }
           else
             {
-              if (token == 34)
+              if (token == 69)
                 {
-                  {
-                    char E_p[1000];
-                    char E_c[1000];
-
-                                        char E_p[1000];
-                                        char E_c[1000];
-                    leToken ();
-                    if (E ((char *) &E_tp, (char *) &E_p, (char *) &E_c) != 0)
+                  strcpy (E14_tp, (const char * restrict) "char");
+                  leToken ();
+                  return 1;
+                }
+              else
+                {
+                  if (token == 34)
+                    {
                       {
-                        if (token == 35)
+                        char E_p[1000];
+                        char E_c[1000];
+
+                                                char E_p[1000];
+                                                char E_c[1000];
+                        leToken ();
+                        if (E ((char *) &E_tp, (char *) &E_p, (char *) &E_c) != 0)
                           {
-                            leToken ();
-                            strcpy (E14_c, (const char * restrict) &E_c);
-                            strcpy (E14_p, (const char * restrict) &E_p);
-                            return 1;
+                            if (token == 35)
+                              {
+                                leToken ();
+                                strcpy (E14_c, (const char * restrict) &E_c);
+                                strcpy (E14_p, (const char * restrict) &E_p);
+                                return 1;
+                              }
+                            else
+                              {
+                                return 0;
+                              }
                           }
                         else
                           {
                             return 0;
                           }
                       }
-                    else
-                      {
-                        return 0;
-                      }
-                  }
-                }
-              else
-                {
-                  return 0;
+                    }
+                  else
+                    {
+                      return 0;
+                    }
                 }
             }
         }

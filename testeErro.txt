@@ -1,5 +1,3 @@
 int main(){
-    int i;
-    int cont=0;
-    int v;
-    i++;
+    int a=0;
+}

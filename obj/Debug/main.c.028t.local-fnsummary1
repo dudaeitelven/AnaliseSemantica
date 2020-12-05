@@ -2562,12 +2562,12 @@ IPA function summary for RE/90
 
 RE ()
 {
-  int D.6353;
-  int token.255_1;
+  int D.6355;
+  int token.256_1;
   int _2;
-  int token.256_3;
-  int coluna.257_4;
-  int linha.258_5;
+  int token.257_3;
+  int coluna.258_4;
+  int linha.259_5;
   int _6;
   int _12;
   int _14;
@@ -2575,8 +2575,8 @@ RE ()
   int _16;
 
   <bb 2> :
-  token.255_1 = token;
-  if (token.255_1 == 34)
+  token.256_1 = token;
+  if (token.256_1 == 34)
     goto <bb 3>; [INV]
   else
     goto <bb 8>; [INV]
@@ -2590,8 +2590,8 @@ RE ()
     goto <bb 7>; [INV]
 
   <bb 4> :
-  token.256_3 = token;
-  if (token.256_3 == 35)
+  token.257_3 = token;
+  if (token.257_3 == 35)
     goto <bb 5>; [INV]
   else
     goto <bb 6>; [INV]
@@ -2603,9 +2603,9 @@ RE ()
   goto <bb 9>; [INV]
 
   <bb 6> :
-  coluna.257_4 = coluna;
-  linha.258_5 = linha;
-  printf ("Erro: esperava token \')\' na linha %d coluna %d\n", linha.258_5, coluna.257_4);
+  coluna.258_4 = coluna;
+  linha.259_5 = linha;
+  printf ("Erro: esperava token \')\' na linha %d coluna %d\n", linha.259_5, coluna.258_4);
   _14 = 0;
   // predicted unlikely by early return (on trees) predictor.
   goto <bb 9>; [INV]
@@ -2634,13 +2634,13 @@ RE ()
 Analyzing function body size: E14
 
 IPA function summary for E14/89
-  global time:     238.000000
-  self size:       77
+  global time:     264.000000
+  self size:       85
   global size:     0
   min size:       0
   self stack:      0
   global stack:    0
-    size:25.000000, time:26.000000
+    size:28.000000, time:29.000000
     size:2.000000, time:0.000000,  executed if:(not inlined)
   calls:
     strcpy/93 function body not available
@@ -2653,6 +2653,10 @@ IPA function summary for E14/89
       loop depth: 0 freq:1.00 size: 5 time: 14 callee size: 0 stack: 0
     leToken/35 function not considered for inlining
       loop depth: 0 freq:1.00 size: 1 time: 10 callee size:12 stack: 0
+    leToken/35 function not considered for inlining
+      loop depth: 0 freq:1.00 size: 1 time: 10 callee size:12 stack: 0
+    __builtin_memcpy/97 function body not available
+      loop depth: 0 freq:1.00 size: 4 time: 13 callee size: 0 stack: 0
     RE/90 function not considered for inlining
       loop depth: 0 freq:1.00 size: 2 time: 11 callee size:10 stack: 0
     leToken/35 function not considered for inlining
@@ -2694,18 +2698,20 @@ E14 (char * E14_tp, char * E14_p, char * E14_c)
   int _6;
   int _7;
   int token.253_8;
-  int _9;
-  int token.254_10;
-  int _11;
+  int token.254_9;
+  int _10;
+  int token.255_11;
   int _12;
-  int _19;
-  int _22;
-  int _32;
+  int _13;
+  int _20;
+  int _23;
   int _33;
-  int _39;
-  int _40;
-  int _41;
+  int _34;
+  int _37;
+  int _43;
   int _44;
+  int _45;
+  int _48;
 
   <bb 2> :
   token.249_1 = token;
@@ -2715,11 +2721,11 @@ E14 (char * E14_tp, char * E14_p, char * E14_c)
     goto <bb 4>; [INV]
 
   <bb 3> :
-  __builtin_memcpy (E14_tp_16(D), "int", 4);
+  __builtin_memcpy (E14_tp_17(D), "int", 4);
   leToken ();
-  _19 = 1;
+  _20 = 1;
   // predicted unlikely by early return (on trees) predictor.
-  goto <bb 21>; [INV]
+  goto <bb 23>; [INV]
 
   <bb 4> :
   token.250_2 = token;
@@ -2729,11 +2735,11 @@ E14 (char * E14_tp, char * E14_p, char * E14_c)
     goto <bb 6>; [INV]
 
   <bb 5> :
-  __builtin_memcpy (E14_tp_16(D), "float", 6);
+  __builtin_memcpy (E14_tp_17(D), "float", 6);
   leToken ();
-  _22 = 1;
+  _23 = 1;
   // predicted unlikely by early return (on trees) predictor.
-  goto <bb 21>; [INV]
+  goto <bb 23>; [INV]
 
   <bb 6> :
   token.251_3 = token;
@@ -2744,15 +2750,15 @@ E14 (char * E14_tp, char * E14_p, char * E14_c)
 
   <bb 7> :
   ts.252_4 = ts;
-  consultaTipo (&lex, E14_tp_16(D), ts.252_4);
-  _5 = strcmp (E14_tp_16(D), "int");
+  consultaTipo (&lex, E14_tp_17(D), ts.252_4);
+  _5 = strcmp (E14_tp_17(D), "int");
   if (_5 != 0)
     goto <bb 8>; [INV]
   else
     goto <bb 10>; [INV]
 
   <bb 8> :
-  _6 = strcmp (E14_tp_16(D), "float");
+  _6 = strcmp (E14_tp_17(D), "float");
   if (_6 != 0)
     goto <bb 9>; [INV]
   else
@@ -2763,8 +2769,8 @@ E14 (char * E14_tp, char * E14_p, char * E14_c)
   exit (0);
 
   <bb 10> :
-  strcpy (E14_p_26(D), &lex);
-  __builtin_memcpy (E14_c_28(D), "", 1);
+  strcpy (E14_p_27(D), &lex);
+  __builtin_memcpy (E14_c_29(D), "", 1);
   leToken ();
   _7 = RE ();
   if (_7 != 0)
@@ -2773,71 +2779,85 @@ E14 (char * E14_tp, char * E14_p, char * E14_c)
     goto <bb 12>; [INV]
 
   <bb 11> :
-  _32 = 1;
+  _33 = 1;
   // predicted unlikely by early return (on trees) predictor.
-  goto <bb 21>; [INV]
+  goto <bb 23>; [INV]
 
   <bb 12> :
-  _33 = 0;
+  _34 = 0;
   // predicted unlikely by early return (on trees) predictor.
-  goto <bb 21>; [INV]
+  goto <bb 23>; [INV]
 
   <bb 13> :
   token.253_8 = token;
-  if (token.253_8 == 34)
+  if (token.253_8 == 69)
     goto <bb 14>; [INV]
   else
-    goto <bb 20>; [INV]
+    goto <bb 15>; [INV]
 
   <bb 14> :
+  __builtin_memcpy (E14_tp_17(D), "char", 5);
   leToken ();
-  _9 = E (&E_tp, &E_p, &E_c);
-  if (_9 != 0)
-    goto <bb 15>; [INV]
-  else
-    goto <bb 18>; [INV]
+  _37 = 1;
+  // predicted unlikely by early return (on trees) predictor.
+  goto <bb 23>; [INV]
 
   <bb 15> :
-  token.254_10 = token;
-  if (token.254_10 == 35)
+  token.254_9 = token;
+  if (token.254_9 == 34)
     goto <bb 16>; [INV]
   else
-    goto <bb 17>; [INV]
+    goto <bb 22>; [INV]
 
   <bb 16> :
   leToken ();
-  strcpy (E14_c_28(D), &E_c);
-  strcpy (E14_p_26(D), &E_p);
-  _39 = 1;
-  // predicted unlikely by early return (on trees) predictor.
-  goto <bb 19>; [INV]
+  _10 = E (&E_tp, &E_p, &E_c);
+  if (_10 != 0)
+    goto <bb 17>; [INV]
+  else
+    goto <bb 20>; [INV]
 
   <bb 17> :
-  _40 = 0;
-  // predicted unlikely by early return (on trees) predictor.
-  goto <bb 19>; [INV]
+  token.255_11 = token;
+  if (token.255_11 == 35)
+    goto <bb 18>; [INV]
+  else
+    goto <bb 19>; [INV]
 
   <bb 18> :
-  _41 = 0;
+  leToken ();
+  strcpy (E14_c_29(D), &E_c);
+  strcpy (E14_p_27(D), &E_p);
+  _43 = 1;
   // predicted unlikely by early return (on trees) predictor.
+  goto <bb 21>; [INV]
 
   <bb 19> :
-  # _11 = PHI <_39(16), _40(17), _41(18)>
-  E_p ={v} {CLOBBER};
-  E_c ={v} {CLOBBER};
+  _44 = 0;
+  // predicted unlikely by early return (on trees) predictor.
   goto <bb 21>; [INV]
 
   <bb 20> :
-  _44 = 0;
+  _45 = 0;
   // predicted unlikely by early return (on trees) predictor.
 
   <bb 21> :
-  # _12 = PHI <_19(3), _22(5), _32(11), _33(12), _11(19), _44(20)>
-  E_tp ={v} {CLOBBER};
+  # _12 = PHI <_43(18), _44(19), _45(20)>
+  E_p ={v} {CLOBBER};
+  E_c ={v} {CLOBBER};
+  goto <bb 23>; [INV]
 
   <bb 22> :
-<L20>:
-  return _12;
+  _48 = 0;
+  // predicted unlikely by early return (on trees) predictor.
+
+  <bb 23> :
+  # _13 = PHI <_20(3), _23(5), _33(11), _34(12), _37(14), _12(21), _48(22)>
+  E_tp ={v} {CLOBBER};
+
+  <bb 24> :
+<L22>:
+  return _13;
 
 }
 
@@ -2893,7 +2913,7 @@ IPA function summary for E13/88
     strcpy/93 function body not available
       loop depth: 0 freq:1.00 size: 3 time: 12 callee size: 0 stack: 0
     E14/89 function not considered for inlining
-      loop depth: 0 freq:1.00 size: 5 time: 14 callee size:38 stack: 0
+      loop depth: 0 freq:1.00 size: 5 time: 14 callee size:42 stack: 0
 
 E13 (char * E13_tp, char * E13_p, char * E13_c)
 {
@@ -9287,41 +9307,41 @@ main ()
   char lex[20];
   char conteudo[20000];
   struct FILE * codigoFonte;
-  int D.6377;
+  int D.6379;
   struct FILE * _1;
   struct FILE * _2;
-  int escolha.259_3;
-  int escolha.260_4;
-  int escolha.261_5;
-  int escolha.262_6;
-  int escolha.263_7;
-  int escolha.264_8;
+  int escolha.260_3;
+  int escolha.261_4;
+  int escolha.262_5;
+  int escolha.263_6;
+  int escolha.264_7;
+  int escolha.265_8;
   int _9;
   int _10;
-  int i.265_11;
-  int i.266_12;
-  int i.267_13;
-  int posColuna.268_14;
-  int subColuna.269_15;
+  int i.266_11;
+  int i.267_12;
+  int i.268_13;
+  int posColuna.269_14;
+  int subColuna.270_15;
   int _16;
-  int posParser.270_17;
-  int posParser.271_18;
+  int posParser.271_17;
+  int posParser.272_18;
   int _19;
-  int token.272_20;
-  int posParser.273_21;
-  int posParser.274_22;
+  int token.273_20;
+  int posParser.274_21;
+  int posParser.275_22;
   int _23;
-  int linha.275_24;
-  int posParser.276_25;
-  int posParser.277_26;
+  int linha.276_24;
+  int posParser.277_25;
+  int posParser.278_26;
   int _27;
-  int coluna.278_28;
-  int posParserLex.279_29;
-  int posParserLex.280_30;
+  int coluna.279_28;
+  int posParserLex.280_29;
+  int posParserLex.281_30;
   int _31;
   char[20] * _32;
   int _33;
-  int token.281_34;
+  int token.282_34;
   int _35;
   int _117;
 
@@ -9347,15 +9367,15 @@ main ()
   scanf ("%d", &escolha);
   _2 = __acrt_iob_func (0);
   fflush (_2);
-  escolha.259_3 = escolha;
-  if (escolha.259_3 < 0)
+  escolha.260_3 = escolha;
+  if (escolha.260_3 < 0)
     goto <bb 5>; [INV]
   else
     goto <bb 4>; [INV]
 
   <bb 4> :
-  escolha.260_4 = escolha;
-  if (escolha.260_4 > 7)
+  escolha.261_4 = escolha;
+  if (escolha.261_4 > 7)
     goto <bb 5>; [INV]
   else
     goto <bb 6>; [INV]
@@ -9365,8 +9385,8 @@ main ()
   system ("pause");
 
   <bb 6> :
-  escolha.261_5 = escolha;
-  switch (escolha.261_5) <default: <L12> [INV], case 1: <L5> [INV], case 2: <L6> [INV], case 3: <L7> [INV], case 4: <L8> [INV], case 5: <L9> [INV], case 6: <L10> [INV], case 7: <L11> [INV]>
+  escolha.262_5 = escolha;
+  switch (escolha.262_5) <default: <L12> [INV], case 1: <L5> [INV], case 2: <L6> [INV], case 3: <L7> [INV], case 4: <L8> [INV], case 5: <L9> [INV], case 6: <L10> [INV], case 7: <L11> [INV]>
 
   <bb 7> :
 <L5>:
@@ -9411,22 +9431,22 @@ main ()
 
   <bb 14> :
 <L12>:
-  escolha.262_6 = escolha;
-  if (escolha.262_6 < 0)
+  escolha.263_6 = escolha;
+  if (escolha.263_6 < 0)
     goto <bb 3>; [INV]
   else
     goto <bb 15>; [INV]
 
   <bb 15> :
-  escolha.263_7 = escolha;
-  if (escolha.263_7 > 7)
+  escolha.264_7 = escolha;
+  if (escolha.264_7 > 7)
     goto <bb 3>; [INV]
   else
     goto <bb 16>; [INV]
 
   <bb 16> :
-  escolha.264_8 = escolha;
-  if (escolha.264_8 != 0)
+  escolha.265_8 = escolha;
+  if (escolha.265_8 != 0)
     goto <bb 3>; [INV]
   else
     goto <bb 17>; [INV]
@@ -9475,9 +9495,9 @@ main ()
     goto <bb 25>; [INV]
 
   <bb 24> :
-  i.265_11 = i_36;
-  i_122 = i.265_11 + 1;
-  conteudo[i.265_11] = caracter_89;
+  i.266_11 = i_36;
+  i_122 = i.266_11 + 1;
+  conteudo[i.266_11] = caracter_89;
   goto <bb 29>; [INV]
 
   <bb 25> :
@@ -9487,9 +9507,9 @@ main ()
     goto <bb 27>; [INV]
 
   <bb 26> :
-  i.266_12 = i_36;
-  i_124 = i.266_12 + 1;
-  conteudo[i.266_12] = 127;
+  i.267_12 = i_36;
+  i_124 = i.267_12 + 1;
+  conteudo[i.267_12] = 127;
   goto <bb 29>; [INV]
 
   <bb 27> :
@@ -9499,9 +9519,9 @@ main ()
     goto <bb 29>; [INV]
 
   <bb 28> :
-  i.267_13 = i_36;
-  i_126 = i.267_13 + 1;
-  conteudo[i.267_13] = 9;
+  i.268_13 = i_36;
+  i_126 = i.268_13 + 1;
+  conteudo[i.268_13] = 9;
 
   <bb 29> :
   # i_37 = PHI <i_122(24), i_124(26), i_36(27), i_126(28)>
@@ -9527,40 +9547,40 @@ main ()
   goto <bb 35>; [INV]
 
   <bb 34> :
-  posColuna.268_14 = posColuna;
-  subColuna.269_15 = subColuna;
-  _16 = posColuna.268_14 - subColuna.269_15;
+  posColuna.269_14 = posColuna;
+  subColuna.270_15 = subColuna;
+  _16 = posColuna.269_14 - subColuna.270_15;
   coluna = _16;
-  posParser.270_17 = posParser;
-  posParser.271_18 = posParser.270_17;
-  _19 = posParser.271_18 + 1;
+  posParser.271_17 = posParser;
+  posParser.272_18 = posParser.271_17;
+  _19 = posParser.272_18 + 1;
   posParser = _19;
-  token.272_20 = token;
-  TKsParser[posParser.271_18] = token.272_20;
-  posParser.273_21 = posParser;
-  posParser.274_22 = posParser.273_21;
-  _23 = posParser.274_22 + 1;
+  token.273_20 = token;
+  TKsParser[posParser.272_18] = token.273_20;
+  posParser.274_21 = posParser;
+  posParser.275_22 = posParser.274_21;
+  _23 = posParser.275_22 + 1;
   posParser = _23;
-  linha.275_24 = linha;
-  TKsParser[posParser.274_22] = linha.275_24;
-  posParser.276_25 = posParser;
-  posParser.277_26 = posParser.276_25;
-  _27 = posParser.277_26 + 1;
+  linha.276_24 = linha;
+  TKsParser[posParser.275_22] = linha.276_24;
+  posParser.277_25 = posParser;
+  posParser.278_26 = posParser.277_25;
+  _27 = posParser.278_26 + 1;
   posParser = _27;
-  coluna.278_28 = coluna;
-  TKsParser[posParser.277_26] = coluna.278_28;
-  posParserLex.279_29 = posParserLex;
-  posParserLex.280_30 = posParserLex.279_29;
-  _31 = posParserLex.280_30 + 1;
+  coluna.279_28 = coluna;
+  TKsParser[posParser.278_26] = coluna.279_28;
+  posParserLex.280_29 = posParserLex;
+  posParserLex.281_30 = posParserLex.280_29;
+  _31 = posParserLex.281_30 + 1;
   posParserLex = _31;
-  _32 = &TKsParserLex[posParserLex.280_30];
+  _32 = &TKsParserLex[posParserLex.281_30];
   strcpy (_32, &lex);
 
   <bb 35> :
   _33 = le_token (&conteudo, &lex);
   token = _33;
-  token.281_34 = token;
-  if (token.281_34 != -1)
+  token.282_34 = token;
+  if (token.282_34 != -1)
     goto <bb 34>; [INV]
   else
     goto <bb 36>; [INV]

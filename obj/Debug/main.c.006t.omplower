@@ -4498,8 +4498,17 @@ E14 (char * E14_tp, char * E14_p, char * E14_c)
       return D.6327;
       <D.6331>:
       token.253_8 = token;
-      if (token.253_8 == 34) goto <D.6338>; else goto <D.6339>;
+      if (token.253_8 == 69) goto <D.6338>; else goto <D.6339>;
       <D.6338>:
+      __builtin_memcpy (E14_tp, "char", 5);
+      leToken ();
+      D.6327 = 1;
+      // predicted unlikely by early return (on trees) predictor.
+      return D.6327;
+      <D.6339>:
+      token.254_9 = token;
+      if (token.254_9 == 34) goto <D.6340>; else goto <D.6341>;
+      <D.6340>:
       {
         char E_p[1000];
         char E_c[1000];
@@ -4507,23 +4516,23 @@ E14 (char * E14_tp, char * E14_p, char * E14_c)
         try
           {
             leToken ();
-            _9 = E (&E_tp, &E_p, &E_c);
-            if (_9 != 0) goto <D.6340>; else goto <D.6341>;
-            <D.6340>:
-            token.254_10 = token;
-            if (token.254_10 == 35) goto <D.6342>; else goto <D.6343>;
+            _10 = E (&E_tp, &E_p, &E_c);
+            if (_10 != 0) goto <D.6342>; else goto <D.6343>;
             <D.6342>:
+            token.255_11 = token;
+            if (token.255_11 == 35) goto <D.6344>; else goto <D.6345>;
+            <D.6344>:
             leToken ();
             strcpy (E14_c, &E_c);
             strcpy (E14_p, &E_p);
             D.6327 = 1;
             // predicted unlikely by early return (on trees) predictor.
             return D.6327;
-            <D.6343>:
+            <D.6345>:
             D.6327 = 0;
             // predicted unlikely by early return (on trees) predictor.
             return D.6327;
-            <D.6341>:
+            <D.6343>:
             D.6327 = 0;
             // predicted unlikely by early return (on trees) predictor.
             return D.6327;
@@ -4534,7 +4543,7 @@ E14 (char * E14_tp, char * E14_p, char * E14_c)
             E_c = {CLOBBER};
           }
       }
-      <D.6339>:
+      <D.6341>:
       D.6327 = 0;
       // predicted unlikely by early return (on trees) predictor.
       return D.6327;
@@ -4551,37 +4560,37 @@ E14 (char * E14_tp, char * E14_p, char * E14_c)
 
 RE ()
 {
-  int D.6353;
+  int D.6355;
 
-  token.255_1 = token;
-  if (token.255_1 == 34) goto <D.6347>; else goto <D.6348>;
-  <D.6347>:
+  token.256_1 = token;
+  if (token.256_1 == 34) goto <D.6349>; else goto <D.6350>;
+  <D.6349>:
   leToken ();
   _2 = LP ();
-  if (_2 != 0) goto <D.6349>; else goto <D.6350>;
-  <D.6349>:
-  token.256_3 = token;
-  if (token.256_3 == 35) goto <D.6351>; else goto <D.6352>;
+  if (_2 != 0) goto <D.6351>; else goto <D.6352>;
   <D.6351>:
+  token.257_3 = token;
+  if (token.257_3 == 35) goto <D.6353>; else goto <D.6354>;
+  <D.6353>:
   leToken ();
-  D.6353 = 1;
+  D.6355 = 1;
   // predicted unlikely by early return (on trees) predictor.
-  return D.6353;
+  return D.6355;
+  <D.6354>:
+  coluna.258_4 = coluna;
+  linha.259_5 = linha;
+  printf ("Erro: esperava token \')\' na linha %d coluna %d\n", linha.259_5, coluna.258_4);
+  D.6355 = 0;
+  // predicted unlikely by early return (on trees) predictor.
+  return D.6355;
   <D.6352>:
-  coluna.257_4 = coluna;
-  linha.258_5 = linha;
-  printf ("Erro: esperava token \')\' na linha %d coluna %d\n", linha.258_5, coluna.257_4);
-  D.6353 = 0;
+  D.6355 = 0;
   // predicted unlikely by early return (on trees) predictor.
-  return D.6353;
+  return D.6355;
   <D.6350>:
-  D.6353 = 0;
+  D.6355 = 1;
   // predicted unlikely by early return (on trees) predictor.
-  return D.6353;
-  <D.6348>:
-  D.6353 = 1;
-  // predicted unlikely by early return (on trees) predictor.
-  return D.6353;
+  return D.6355;
 }
 
 
@@ -4590,7 +4599,7 @@ RE ()
 
 main ()
 {
-  int D.6377;
+  int D.6379;
 
   {
     struct FILE * codigoFonte;
@@ -4624,17 +4633,17 @@ main ()
         scanf ("%d", &escolha);
         _2 = __acrt_iob_func (0);
         fflush (_2);
-        escolha.259_3 = escolha;
-        if (escolha.259_3 < 0) goto <D.6355>; else goto <D.6357>;
+        escolha.260_3 = escolha;
+        if (escolha.260_3 < 0) goto <D.6357>; else goto <D.6359>;
+        <D.6359>:
+        escolha.261_4 = escolha;
+        if (escolha.261_4 > 7) goto <D.6357>; else goto <D.6358>;
         <D.6357>:
-        escolha.260_4 = escolha;
-        if (escolha.260_4 > 7) goto <D.6355>; else goto <D.6356>;
-        <D.6355>:
         __builtin_puts (&"Opcao incorreta, tente novamente ! "[0]);
         system ("pause");
-        <D.6356>:
-        escolha.261_5 = escolha;
-        switch (escolha.261_5) <default: <D.6358>, case 1: <D.5551>, case 2: <D.5553>, case 3: <D.5554>, case 4: <D.5555>, case 5: <D.5556>, case 6: <D.5557>, case 7: <D.5558>>
+        <D.6358>:
+        escolha.262_5 = escolha;
+        switch (escolha.262_5) <default: <D.6360>, case 1: <D.5551>, case 2: <D.5553>, case 3: <D.5554>, case 4: <D.5555>, case 5: <D.5556>, case 6: <D.5557>, case 7: <D.5558>>
         <D.5551>:
         __builtin_memcpy (&arquivo, "erroContinue.txt", 17);
         escolha = 0;
@@ -4664,57 +4673,57 @@ main ()
         escolha = 0;
         goto <D.5552>;
         <D.5552>:
-        <D.6358>:
-        escolha.262_6 = escolha;
-        if (escolha.262_6 < 0) goto <D.5559>; else goto <D.6359>;
-        <D.6359>:
-        escolha.263_7 = escolha;
-        if (escolha.263_7 > 7) goto <D.5559>; else goto <D.5560>;
+        <D.6360>:
+        escolha.263_6 = escolha;
+        if (escolha.263_6 < 0) goto <D.5559>; else goto <D.6361>;
+        <D.6361>:
+        escolha.264_7 = escolha;
+        if (escolha.264_7 > 7) goto <D.5559>; else goto <D.5560>;
         <D.5560>:
-        escolha.264_8 = escolha;
-        if (escolha.264_8 != 0) goto <D.5561>; else goto <D.5562>;
+        escolha.265_8 = escolha;
+        if (escolha.265_8 != 0) goto <D.5561>; else goto <D.5562>;
         <D.5562>:
         __builtin_puts (&"-- R E S U L T A D O --"[0]);
         codigoFonte = fopen (&arquivo, "r");
-        if (codigoFonte == 0B) goto <D.6360>; else goto <D.6361>;
-        <D.6360>:
+        if (codigoFonte == 0B) goto <D.6362>; else goto <D.6363>;
+        <D.6362>:
         __builtin_puts (&"Arquivo n\xc3\xa3o pode ser aberto"[0]);
         exit (1);
-        <D.6361>:
+        <D.6363>:
         <D.5564>:
         _9 = fgetc (codigoFonte);
         caracter = (char) _9;
         _10 = feof (codigoFonte);
-        if (_10 != 0) goto <D.6362>; else goto <D.6363>;
-        <D.6362>:
-        goto <D.5563>;
-        <D.6363>:
-        if (caracter != 9) goto <D.6366>; else goto <D.6364>;
-        <D.6366>:
-        if (caracter != 10) goto <D.6367>; else goto <D.6364>;
-        <D.6367>:
-        if (caracter != 13) goto <D.6368>; else goto <D.6364>;
-        <D.6368>:
-        i.265_11 = i;
-        i = i.265_11 + 1;
-        conteudo[i.265_11] = caracter;
-        goto <D.6365>;
+        if (_10 != 0) goto <D.6364>; else goto <D.6365>;
         <D.6364>:
-        if (caracter == 10) goto <D.6369>; else goto <D.6370>;
-        <D.6369>:
-        i.266_12 = i;
-        i = i.266_12 + 1;
-        conteudo[i.266_12] = 127;
-        goto <D.6371>;
-        <D.6370>:
-        if (caracter == 9) goto <D.6372>; else goto <D.6373>;
-        <D.6372>:
-        i.267_13 = i;
-        i = i.267_13 + 1;
-        conteudo[i.267_13] = 9;
-        <D.6373>:
-        <D.6371>:
+        goto <D.5563>;
         <D.6365>:
+        if (caracter != 9) goto <D.6368>; else goto <D.6366>;
+        <D.6368>:
+        if (caracter != 10) goto <D.6369>; else goto <D.6366>;
+        <D.6369>:
+        if (caracter != 13) goto <D.6370>; else goto <D.6366>;
+        <D.6370>:
+        i.266_11 = i;
+        i = i.266_11 + 1;
+        conteudo[i.266_11] = caracter;
+        goto <D.6367>;
+        <D.6366>:
+        if (caracter == 10) goto <D.6371>; else goto <D.6372>;
+        <D.6371>:
+        i.267_12 = i;
+        i = i.267_12 + 1;
+        conteudo[i.267_12] = 127;
+        goto <D.6373>;
+        <D.6372>:
+        if (caracter == 9) goto <D.6374>; else goto <D.6375>;
+        <D.6374>:
+        i.268_13 = i;
+        i = i.268_13 + 1;
+        conteudo[i.268_13] = 9;
+        <D.6375>:
+        <D.6373>:
+        <D.6367>:
         goto <D.5564>;
         <D.5563>:
         conteudo[i] = 0;
@@ -4728,58 +4737,58 @@ main ()
         <D.5567>:
         goto <D.5569>;
         <D.5568>:
-        posColuna.268_14 = posColuna;
-        subColuna.269_15 = subColuna;
-        _16 = posColuna.268_14 - subColuna.269_15;
+        posColuna.269_14 = posColuna;
+        subColuna.270_15 = subColuna;
+        _16 = posColuna.269_14 - subColuna.270_15;
         coluna = _16;
-        posParser.270_17 = posParser;
-        posParser.271_18 = posParser.270_17;
-        _19 = posParser.271_18 + 1;
+        posParser.271_17 = posParser;
+        posParser.272_18 = posParser.271_17;
+        _19 = posParser.272_18 + 1;
         posParser = _19;
-        token.272_20 = token;
-        TKsParser[posParser.271_18] = token.272_20;
-        posParser.273_21 = posParser;
-        posParser.274_22 = posParser.273_21;
-        _23 = posParser.274_22 + 1;
+        token.273_20 = token;
+        TKsParser[posParser.272_18] = token.273_20;
+        posParser.274_21 = posParser;
+        posParser.275_22 = posParser.274_21;
+        _23 = posParser.275_22 + 1;
         posParser = _23;
-        linha.275_24 = linha;
-        TKsParser[posParser.274_22] = linha.275_24;
-        posParser.276_25 = posParser;
-        posParser.277_26 = posParser.276_25;
-        _27 = posParser.277_26 + 1;
+        linha.276_24 = linha;
+        TKsParser[posParser.275_22] = linha.276_24;
+        posParser.277_25 = posParser;
+        posParser.278_26 = posParser.277_25;
+        _27 = posParser.278_26 + 1;
         posParser = _27;
-        coluna.278_28 = coluna;
-        TKsParser[posParser.277_26] = coluna.278_28;
-        posParserLex.279_29 = posParserLex;
-        posParserLex.280_30 = posParserLex.279_29;
-        _31 = posParserLex.280_30 + 1;
+        coluna.279_28 = coluna;
+        TKsParser[posParser.278_26] = coluna.279_28;
+        posParserLex.280_29 = posParserLex;
+        posParserLex.281_30 = posParserLex.280_29;
+        _31 = posParserLex.281_30 + 1;
         posParserLex = _31;
-        _32 = &TKsParserLex[posParserLex.280_30];
+        _32 = &TKsParserLex[posParserLex.281_30];
         strcpy (_32, &lex);
         <D.5569>:
         _33 = le_token (&conteudo, &lex);
         token = _33;
-        token.281_34 = token;
-        if (token.281_34 != -1) goto <D.5568>; else goto <D.5570>;
+        token.282_34 = token;
+        if (token.282_34 != -1) goto <D.5568>; else goto <D.5570>;
         <D.5570>:
         fclose (codigoFonte);
         posParser = 0;
         posParserLex = 0;
         leToken ();
         _35 = PROGC ();
-        if (_35 != 0) goto <D.6374>; else goto <D.6375>;
-        <D.6374>:
+        if (_35 != 0) goto <D.6376>; else goto <D.6377>;
+        <D.6376>:
         __builtin_puts (&"Reconhecimento semantico concluido"[0]);
         __builtin_puts (&"-----------------------"[0]);
         getchar ();
-        goto <D.6376>;
-        <D.6375>:
+        goto <D.6378>;
+        <D.6377>:
         __builtin_puts (&"Reconhecimento semantico com Falhas"[0]);
         __builtin_puts (&"-----------------------"[0]);
         getchar ();
-        <D.6376>:
-        D.6377 = 0;
-        return D.6377;
+        <D.6378>:
+        D.6379 = 0;
+        return D.6379;
       }
     finally
       {
@@ -4789,8 +4798,8 @@ main ()
         escolha = {CLOBBER};
       }
   }
-  D.6377 = 0;
-  return D.6377;
+  D.6379 = 0;
+  return D.6379;
 }
 
 

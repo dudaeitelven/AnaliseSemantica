@@ -1857,11 +1857,11 @@ LP ()
 
 RE ()
 {
-  int D.6353;
+  int D.6355;
 
   <bb 2> :
-  token.255_1 = token;
-  if (token.255_1 == 34)
+  token.256_1 = token;
+  if (token.256_1 == 34)
     goto <bb 3>; [INV]
   else
     goto <bb 8>; [INV]
@@ -1875,38 +1875,38 @@ RE ()
     goto <bb 7>; [INV]
 
   <bb 4> :
-  token.256_3 = token;
-  if (token.256_3 == 35)
+  token.257_3 = token;
+  if (token.257_3 == 35)
     goto <bb 5>; [INV]
   else
     goto <bb 6>; [INV]
 
   <bb 5> :
   leToken ();
-  D.6353 = 1;
+  D.6355 = 1;
   // predicted unlikely by early return (on trees) predictor.
   goto <bb 9>; [INV]
 
   <bb 6> :
-  coluna.257_4 = coluna;
-  linha.258_5 = linha;
-  printf ("Erro: esperava token \')\' na linha %d coluna %d\n", linha.258_5, coluna.257_4);
-  D.6353 = 0;
+  coluna.258_4 = coluna;
+  linha.259_5 = linha;
+  printf ("Erro: esperava token \')\' na linha %d coluna %d\n", linha.259_5, coluna.258_4);
+  D.6355 = 0;
   // predicted unlikely by early return (on trees) predictor.
   goto <bb 9>; [INV]
 
   <bb 7> :
-  D.6353 = 0;
+  D.6355 = 0;
   // predicted unlikely by early return (on trees) predictor.
   goto <bb 9>; [INV]
 
   <bb 8> :
-  D.6353 = 1;
+  D.6355 = 1;
   // predicted unlikely by early return (on trees) predictor.
 
   <bb 9> :
 <L6>:
-  return D.6353;
+  return D.6355;
 
 }
 
@@ -1933,7 +1933,7 @@ E14 (char * E14_tp, char * E14_p, char * E14_c)
   leToken ();
   D.6327 = 1;
   // predicted unlikely by early return (on trees) predictor.
-  goto <bb 21>; [INV]
+  goto <bb 23>; [INV]
 
   <bb 4> :
   token.250_2 = token;
@@ -1947,7 +1947,7 @@ E14 (char * E14_tp, char * E14_p, char * E14_c)
   leToken ();
   D.6327 = 1;
   // predicted unlikely by early return (on trees) predictor.
-  goto <bb 21>; [INV]
+  goto <bb 23>; [INV]
 
   <bb 6> :
   token.251_3 = token;
@@ -1989,55 +1989,60 @@ E14 (char * E14_tp, char * E14_p, char * E14_c)
   <bb 11> :
   D.6327 = 1;
   // predicted unlikely by early return (on trees) predictor.
-  goto <bb 21>; [INV]
+  goto <bb 23>; [INV]
 
   <bb 12> :
   D.6327 = 0;
   // predicted unlikely by early return (on trees) predictor.
-  goto <bb 21>; [INV]
+  goto <bb 23>; [INV]
 
   <bb 13> :
   token.253_8 = token;
-  if (token.253_8 == 34)
+  if (token.253_8 == 69)
     goto <bb 14>; [INV]
+  else
+    goto <bb 15>; [INV]
+
+  <bb 14> :
+  __builtin_memcpy (E14_tp, "char", 5);
+  leToken ();
+  D.6327 = 1;
+  // predicted unlikely by early return (on trees) predictor.
+  goto <bb 23>; [INV]
+
+  <bb 15> :
+  token.254_9 = token;
+  if (token.254_9 == 34)
+    goto <bb 16>; [INV]
+  else
+    goto <bb 22>; [INV]
+
+  <bb 16> :
+  leToken ();
+  _10 = E (&E_tp, &E_p, &E_c);
+  if (_10 != 0)
+    goto <bb 17>; [INV]
   else
     goto <bb 20>; [INV]
 
-  <bb 14> :
-  leToken ();
-  _9 = E (&E_tp, &E_p, &E_c);
-  if (_9 != 0)
-    goto <bb 15>; [INV]
-  else
+  <bb 17> :
+  token.255_11 = token;
+  if (token.255_11 == 35)
     goto <bb 18>; [INV]
-
-  <bb 15> :
-  token.254_10 = token;
-  if (token.254_10 == 35)
-    goto <bb 16>; [INV]
   else
-    goto <bb 17>; [INV]
+    goto <bb 19>; [INV]
 
-  <bb 16> :
+  <bb 18> :
   leToken ();
   strcpy (E14_c, &E_c);
   strcpy (E14_p, &E_p);
   D.6327 = 1;
   // predicted unlikely by early return (on trees) predictor.
-  goto <bb 19>; [INV]
-
-  <bb 17> :
-  D.6327 = 0;
-  // predicted unlikely by early return (on trees) predictor.
-  goto <bb 19>; [INV]
-
-  <bb 18> :
-  D.6327 = 0;
-  // predicted unlikely by early return (on trees) predictor.
+  goto <bb 21>; [INV]
 
   <bb 19> :
-  E_p = {CLOBBER};
-  E_c = {CLOBBER};
+  D.6327 = 0;
+  // predicted unlikely by early return (on trees) predictor.
   goto <bb 21>; [INV]
 
   <bb 20> :
@@ -2045,10 +2050,19 @@ E14 (char * E14_tp, char * E14_p, char * E14_c)
   // predicted unlikely by early return (on trees) predictor.
 
   <bb 21> :
-  E_tp = {CLOBBER};
+  E_p = {CLOBBER};
+  E_c = {CLOBBER};
+  goto <bb 23>; [INV]
 
   <bb 22> :
-<L20>:
+  D.6327 = 0;
+  // predicted unlikely by early return (on trees) predictor.
+
+  <bb 23> :
+  E_tp = {CLOBBER};
+
+  <bb 24> :
+<L22>:
   return D.6327;
 
 }
@@ -6285,7 +6299,7 @@ main ()
   char lex[20];
   char conteudo[20000];
   struct FILE * codigoFonte;
-  int D.6377;
+  int D.6379;
 
   <bb 2> :
   _1 = __acrt_iob_func (1);
@@ -6309,15 +6323,15 @@ main ()
   scanf ("%d", &escolha);
   _2 = __acrt_iob_func (0);
   fflush (_2);
-  escolha.259_3 = escolha;
-  if (escolha.259_3 < 0)
+  escolha.260_3 = escolha;
+  if (escolha.260_3 < 0)
     goto <bb 5>; [INV]
   else
     goto <bb 4>; [INV]
 
   <bb 4> :
-  escolha.260_4 = escolha;
-  if (escolha.260_4 > 7)
+  escolha.261_4 = escolha;
+  if (escolha.261_4 > 7)
     goto <bb 5>; [INV]
   else
     goto <bb 6>; [INV]
@@ -6327,8 +6341,8 @@ main ()
   system ("pause");
 
   <bb 6> :
-  escolha.261_5 = escolha;
-  switch (escolha.261_5) <default: <L12> [INV], case 1: <L5> [INV], case 2: <L6> [INV], case 3: <L7> [INV], case 4: <L8> [INV], case 5: <L9> [INV], case 6: <L10> [INV], case 7: <L11> [INV]>
+  escolha.262_5 = escolha;
+  switch (escolha.262_5) <default: <L12> [INV], case 1: <L5> [INV], case 2: <L6> [INV], case 3: <L7> [INV], case 4: <L8> [INV], case 5: <L9> [INV], case 6: <L10> [INV], case 7: <L11> [INV]>
 
   <bb 7> :
 <L5>:
@@ -6373,22 +6387,22 @@ main ()
 
   <bb 14> :
 <L12>:
-  escolha.262_6 = escolha;
-  if (escolha.262_6 < 0)
+  escolha.263_6 = escolha;
+  if (escolha.263_6 < 0)
     goto <bb 3>; [INV]
   else
     goto <bb 15>; [INV]
 
   <bb 15> :
-  escolha.263_7 = escolha;
-  if (escolha.263_7 > 7)
+  escolha.264_7 = escolha;
+  if (escolha.264_7 > 7)
     goto <bb 3>; [INV]
   else
     goto <bb 16>; [INV]
 
   <bb 16> :
-  escolha.264_8 = escolha;
-  if (escolha.264_8 != 0)
+  escolha.265_8 = escolha;
+  if (escolha.265_8 != 0)
     goto <bb 3>; [INV]
   else
     goto <bb 17>; [INV]
@@ -6436,9 +6450,9 @@ main ()
     goto <bb 25>; [INV]
 
   <bb 24> :
-  i.265_11 = i;
-  i = i.265_11 + 1;
-  conteudo[i.265_11] = caracter;
+  i.266_11 = i;
+  i = i.266_11 + 1;
+  conteudo[i.266_11] = caracter;
   goto <bb 29>; [INV]
 
   <bb 25> :
@@ -6448,9 +6462,9 @@ main ()
     goto <bb 27>; [INV]
 
   <bb 26> :
-  i.266_12 = i;
-  i = i.266_12 + 1;
-  conteudo[i.266_12] = 127;
+  i.267_12 = i;
+  i = i.267_12 + 1;
+  conteudo[i.267_12] = 127;
   goto <bb 29>; [INV]
 
   <bb 27> :
@@ -6460,9 +6474,9 @@ main ()
     goto <bb 29>; [INV]
 
   <bb 28> :
-  i.267_13 = i;
-  i = i.267_13 + 1;
-  conteudo[i.267_13] = 9;
+  i.268_13 = i;
+  i = i.268_13 + 1;
+  conteudo[i.268_13] = 9;
 
   <bb 29> :
   goto <bb 19>; [INV]
@@ -6486,40 +6500,40 @@ main ()
   goto <bb 35>; [INV]
 
   <bb 34> :
-  posColuna.268_14 = posColuna;
-  subColuna.269_15 = subColuna;
-  _16 = posColuna.268_14 - subColuna.269_15;
+  posColuna.269_14 = posColuna;
+  subColuna.270_15 = subColuna;
+  _16 = posColuna.269_14 - subColuna.270_15;
   coluna = _16;
-  posParser.270_17 = posParser;
-  posParser.271_18 = posParser.270_17;
-  _19 = posParser.271_18 + 1;
+  posParser.271_17 = posParser;
+  posParser.272_18 = posParser.271_17;
+  _19 = posParser.272_18 + 1;
   posParser = _19;
-  token.272_20 = token;
-  TKsParser[posParser.271_18] = token.272_20;
-  posParser.273_21 = posParser;
-  posParser.274_22 = posParser.273_21;
-  _23 = posParser.274_22 + 1;
+  token.273_20 = token;
+  TKsParser[posParser.272_18] = token.273_20;
+  posParser.274_21 = posParser;
+  posParser.275_22 = posParser.274_21;
+  _23 = posParser.275_22 + 1;
   posParser = _23;
-  linha.275_24 = linha;
-  TKsParser[posParser.274_22] = linha.275_24;
-  posParser.276_25 = posParser;
-  posParser.277_26 = posParser.276_25;
-  _27 = posParser.277_26 + 1;
+  linha.276_24 = linha;
+  TKsParser[posParser.275_22] = linha.276_24;
+  posParser.277_25 = posParser;
+  posParser.278_26 = posParser.277_25;
+  _27 = posParser.278_26 + 1;
   posParser = _27;
-  coluna.278_28 = coluna;
-  TKsParser[posParser.277_26] = coluna.278_28;
-  posParserLex.279_29 = posParserLex;
-  posParserLex.280_30 = posParserLex.279_29;
-  _31 = posParserLex.280_30 + 1;
+  coluna.279_28 = coluna;
+  TKsParser[posParser.278_26] = coluna.279_28;
+  posParserLex.280_29 = posParserLex;
+  posParserLex.281_30 = posParserLex.280_29;
+  _31 = posParserLex.281_30 + 1;
   posParserLex = _31;
-  _32 = &TKsParserLex[posParserLex.280_30];
+  _32 = &TKsParserLex[posParserLex.281_30];
   strcpy (_32, &lex);
 
   <bb 35> :
   _33 = le_token (&conteudo, &lex);
   token = _33;
-  token.281_34 = token;
-  if (token.281_34 != -1)
+  token.282_34 = token;
+  if (token.282_34 != -1)
     goto <bb 34>; [INV]
   else
     goto <bb 36>; [INV]
@@ -6547,7 +6561,7 @@ main ()
   getchar ();
 
   <bb 39> :
-  D.6377 = 0;
+  D.6379 = 0;
   conteudo = {CLOBBER};
   lex = {CLOBBER};
   arquivo = {CLOBBER};
@@ -6555,7 +6569,7 @@ main ()
 
   <bb 40> :
 <L43>:
-  return D.6377;
+  return D.6379;
 
 }
 

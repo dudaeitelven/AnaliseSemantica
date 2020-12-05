@@ -81,15 +81,15 @@ int  token = 0;
 int  doWhile = 0;
 int  laco = 0;
 
-int PROGC();
+int PROGC(char *PROGC_c);
 
-int LD();
+int LD(char *LD_c);
 
-int RLD();
+int RLD(char *RLD_c);
 
-int DEC();
+int DEC(char *RLD_c);
 
-int RDEC();
+int RDEC(char *RDEC_t, char *RDEC_c);
 
 int DV(char *DV_t);
 
@@ -97,15 +97,15 @@ int RDV(char *RDV_t);
 
 int TIPO(char *Tipo_t);
 
-int DF();
+int DF(char *DF_c);
 
 int LP();
 
 int RLP();
 
-int CORPO();
+int CORPO(char *CORPO_c);
 
-int LCD();
+int LCD(char *LCD_c);
 
 int COM(char *COM_c);
 
@@ -776,35 +776,50 @@ void consultaTipo(char *id, char *Tipo, tabela *tab)
         return;
 
     if (!strcmp(tab->id, id))
-    {
         strcpy(Tipo,tab->tipo);
-    }
 
-    consultaTipo(id, Tipo, tab->prox);
+   consultaTipo(id, Tipo, tab->prox);
 }
 
-int PROGC()
+void geralabel(char label[])
 {
-    if (LD())
-    {
+    static int numlabel=0;
+    sprintf(label,"LB%03d",numlabel++);
+}
+
+void geratemp(char temp[])
+{
+    static int numtemp=0;
+    sprintf(temp,"T%03d",numtemp++);
+}
+
+
+int PROGC(char *PROGC_c)
+{
+    char LD_c[MAX_COD];
+
+    if (LD(LD_c)) {
+        strcpy(PROGC_c, LD_c);
         return 1;
     }
     else
         return 0;
 }
 
-int LD()
+
+int LD(char *LD_c)
 {
-    if (DEC())
-    {
-        if (RLD())
-        {
+   char DEC_c[MAX_COD];
+   char RLD_c[MAX_COD];
+
+    if (DEC(DEC_c)) {
+        if (RLD(RLD_c)) {
+            sprintf(LD_c, "%s%s\n", DEC_c, RLD_c);
             return 1;
         }
         else
             return 0;
-    }
-    else
+    } else
         return 0;
 }
 
@@ -821,43 +836,40 @@ int RLD(char *RLD_c)
         return 1;
 }
 
-int DEC()
+int DEC(char *DEC_c)
 {
     char RDEC_t[10];
     char Tipo_t[10];
+    char RDEC_c[MAX_COD];
 
-    if (TIPO(Tipo_t))
-    {
+    if (TIPO(Tipo_t)) {
         strcpy(RDEC_t, Tipo_t);
-        if (token == TK_Id)
-        {
+        if (token == TK_Id) {
             if (verificaDuplicacao(lex,ts))
                 addTabelaSimbolos(lex, Tipo_t);
             leToken();
-            if (RDEC(RDEC_t))
-            {
+            if (RDEC(RDEC_t, RDEC_c)) {
+                strcpy(DEC_c, RDEC_c);
                 return 1;
             }
             else
                 return 0;
-        }
-        else
-        {
+        } else {
             printf("Erro: esperava token 'id' na linha %d coluna %d\n", linha, coluna);
             return 0;
         }
-    }
-    else
+    } else
         return 0;
 }
 
-int RDEC()
+int RDEC(char *RDEC_t, char *RDEC_c)
 {
     char DF_c[MAX_COD];
-
     char DV_t[10];
+
     if (token == TK_Virgula)
     {
+        strcpy(DV_t, RDEC_t);
         leToken();
         if (DV(DV_t))
             return 1;
@@ -869,6 +881,7 @@ int RDEC()
         leToken();
         if (DF(DF_c))
         {
+            strcpy(DV_t, RDEC_t);
             return 1;
         }
         else
@@ -982,9 +995,9 @@ int TIPO(char *Tipo_t)
     }
 }
 
-int DF()
+int DF(char *DF_c)
 {
-
+    char CORPO_c[MAX_COD];
     if (LP())
     {
         if (token == TK_FechaPar)
@@ -993,10 +1006,11 @@ int DF()
             if (token == TK_AbreChave)
             {
                 leToken();
-                if (CORPO())
+                if (CORPO(CORPO_c))
                 {
                     if (token == TK_FechaChave)
                     {
+                        strcpy(DF_c, CORPO_c);
                         leToken();
                         return 1;
                     }
@@ -1083,10 +1097,12 @@ int RLP()
         return 1;
 }
 
-int CORPO()
+int CORPO(char *CORPO_c)
 {
-    if (LCD())
+    char LCD_c[MAX_COD];
+    if (LCD(LCD_c))
     {
+        strcpy(CORPO_c, LCD_c);
         return 1;
     }
     else
@@ -1095,43 +1111,35 @@ int CORPO()
     }
 }
 
-int LCD()
+int LCD(char *LCD_c)
 {
     char DV_t[10];
     char TIPO_t[10];
     char COM_c[MAX_COD];
+    char LCDLinha_c[MAX_COD];
+
+    //strcpy(LCDLinha_c,"");
 
     if (COM(COM_c))
     {
-        if (LCD())
-        {
+        if (LCD(LCDLinha_c)) {
+            sprintf(LCD_c, "%s%s", COM_c, LCDLinha_c);
             return 1;
         }
         else
-        {
             return 0;
-        }
-    }
-    else if (TIPO(TIPO_t))
-    {
+    } else if (TIPO(TIPO_t)) {
         strcpy(DV_t,TIPO_t);
-        if (DV(DV_t))
-        {
-            if (LCD())
-            {
+        if (DV(DV_t)) {
+            if (LCD(LCDLinha_c)) {
+                strcpy(LCD_c, LCDLinha_c);
                 return 1;
             }
             else
-            {
                 return 0;
-            }
-        }
-        else
-        {
+        } else
             return 0;
-        }
-    }
-    else
+    } else
         return 1;
 }
 
@@ -1147,6 +1155,7 @@ int COM(char *COM_c)
     char COMFOR_c[MAX_COD];
     char COMDOWHILE_c[MAX_COD];
     char COMIF_c[MAX_COD];
+    char RDEC_t[10];
 
     if (E(E_tp, E_p, E_c))
     {
@@ -1256,12 +1265,13 @@ int COM(char *COM_c)
     }
     else if (TIPO(TIPO_t))
     {
+        strcpy(RDEC_t,TIPO_t);
         if (token == TK_Id)
         {
             if (verificaDuplicacao(lex,ts))
                 addTabelaSimbolos(lex, TIPO_t);
             leToken();
-            if (RDEC())
+            if (RDEC(RDEC_t, RDEC_c))
             {
                 strcpy(COM_c, RDEC_c);
                 return 1;
@@ -1288,6 +1298,7 @@ int COMIF(char *COMIF_c)
     char E_c[MAX_COD];
     char COM_c[MAX_COD];
     char RIF_c[MAX_COD];
+    char labelelse[10],labelfim[10];
 
     strcpy(RIF_c,"");
 
@@ -1306,6 +1317,12 @@ int COMIF(char *COMIF_c)
                     {
                         if (RIF(RIF_c))
                         {
+                            geralabel(labelelse);
+                            geralabel(labelfim);
+                            if(strcmp(RIF_c,""))
+                                sprintf(COMIF_c,"%s\tif %s==0 goto %s\n%s\tgoto %s\n%s:\n%s%s:\n",E_c,E_p,labelelse,COM_c,labelfim,labelelse,RIF_c,labelfim);
+                            else
+                                sprintf(COMIF_c,"%s\tif %s==0 goto %s\n%s%s:\n",E_c,E_p,labelfim,COM_c,labelfim);
                             return 1;
                         }
                         else
@@ -1364,6 +1381,8 @@ int COMFOR(char *COMFOR_c)
     char EIF1_p[MAX_COD];
     char EIF2_p[MAX_COD];
     char EIF3_p[MAX_COD];
+    char labellaco[MAX_COD];
+    char labelfim[MAX_COD];
 
     if (token == TK_For)
     {
@@ -1392,6 +1411,10 @@ int COMFOR(char *COMFOR_c)
                                         laco = 0;
                                         if (RFOR(RFOR_c))
                                         {
+                                            geralabel(labellaco);
+                                            geralabel(labelfim);
+                                            sprintf(COMFOR_c, "%s%s:\n%s\tif %s == 0 goto %s\n%s%s\tgoto %s\n%s:\n%s", EIF1_c,                                              labellaco,
+                                                    EIF2_c, EIF2_p, labelfim, COM_c, EIF3_c, labellaco, labelfim, RFOR_c);
                                             return 1;
                                         }
                                         else
@@ -1454,7 +1477,7 @@ int EIF(char *EIF_c, char *EIF_p)
 {
     char E_tp[10];
     char E_p[MAX_COD];
-    char E_c[MAX_COD];   ;
+    char E_c[MAX_COD];
 
     if (E(E_tp, E_p, E_c))
     {
@@ -1473,6 +1496,9 @@ int COMWHILE(char *COMWHILE_c)
     char E_c[MAX_COD];
     char COM_c[MAX_COD];
     char RWHILE_c[MAX_COD];
+    char labelinicio[10];
+    char labelfim[10];
+
 
     if (token == TK_While && doWhile != 1)
     {
@@ -1490,6 +1516,9 @@ int COMWHILE(char *COMWHILE_c)
                     {
                         if (RWHILE(RWHILE_c))
                         {
+                            geralabel(labelinicio);
+                            geralabel(labelfim);
+                            sprintf(COMWHILE_c,"%s:\n%s\tif %s==0 goto %s\n%s\tgoto %s\n%s:\n%s",labelinicio,E_c,E_p,labelfim,COM_c,labelinicio,labelfim,RWHILE_c);
                             laco = 0;
                             return 1;
                         }
@@ -1540,6 +1569,7 @@ int COMDOWHILE(char *COMDOWHILE_c)
     char E_c[MAX_COD];
     char COM_c[MAX_COD];
     char RDOWHILE_c[MAX_COD];
+    char label[10];
 
     if (token == TK_Do)
     {
@@ -1565,6 +1595,8 @@ int COMDOWHILE(char *COMDOWHILE_c)
                                 {
                                     leToken();
                                     doWhile = 0;
+                                    geralabel(label);
+                                    sprintf(COMDOWHILE_c,"%s:\n%s%s\tif %s==1 goto %s\n%s",label,COM_c,E_c,E_p,label,RDOWHILE_c);
                                     laco = 0;
                                     return 1;
                                 }
@@ -1923,6 +1955,8 @@ int E3Linha(char *E3Linha_h, char *E3Linha_s, char *E3Linha_hp, char *E3Linha_sp
         if (E4(E4_tp, E4_p, E4_c))
         {
             strcpy(E3Linha2_h,"int");
+            geratemp(E3Linha2_hp);
+            sprintf(E3Linha2_hc, "%s%s\t%s = %s || %s\n", E3Linha_hc, E4_c, E3Linha2_hp, E3Linha_hp, E4_p);
             if (E3Linha(E3Linha2_h, E3Linha2_s, E3Linha2_hp, E3Linha2_sp, E3Linha2_hc, E3Linha2_sc))
             {
                 strcpy(E3Linha_s,E3Linha2_s);
@@ -1992,6 +2026,8 @@ int E4Linha(char *E4Linha_h, char *E4Linha_s, char *E4Linha_hp, char *E4Linha_sp
         if (E5(E5_tp, E5_p, E5_c))
         {
             strcpy(E4Linha2_h, "int");
+            geratemp(E4Linha2_hp);
+            sprintf(E4Linha2_hc, "%s%s\t%s = %s && %s\n", E4Linha_hc, E5_c, E4Linha2_hp, E4Linha_hp, E5_p);
             if (E4Linha(E4Linha2_h, E4Linha2_s, E4Linha2_hp, E4Linha2_sp, E4Linha2_hc, E4Linha2_sc))
             {
                 strcpy(E4Linha_s, E4Linha2_s);
@@ -2063,6 +2099,8 @@ int E5Linha(char *E5Linha_h, char *E5Linha_s, char *E5Linha_hp, char *E5Linha_sp
         if (E6(E6_tp, E6_p, E6_c))
         {
             strcpy(E5Linha2_h, "int");
+            geratemp(E5Linha2_hp);
+            sprintf(E5Linha2_hc, "%s%s\t%s = %s | %s\n", E5Linha_hc, E6_c, E5Linha2_hp, E5Linha_hp, E6_p);
             if (E5Linha(E5Linha2_h, E5Linha2_s, E5Linha2_hp, E5Linha2_sp, E5Linha2_hc, E5Linha2_sc))
             {
                 strcpy(E5Linha_s, E5Linha2_s);
@@ -2134,6 +2172,8 @@ int E6Linha(char *E6Linha_h, char *E6Linha_s, char *E6Linha_hp, char *E6Linha_sp
         if (E7(E7_tp, E7_p, E7_c))
         {
             strcpy(E6Linha2_h, "int");
+            geratemp(E6Linha2_hp);
+            sprintf(E6Linha2_hc, "%s%s\t%s = %s ^ %s\n", E6Linha_hc, E7_c, E6Linha2_hp, E6Linha_hp, E7_p);
             if (E6Linha(E6Linha2_h, E6Linha2_s, E6Linha2_hp, E6Linha2_sp, E6Linha2_hc, E6Linha2_sc))
             {
                 strcpy(E6Linha_s, E6Linha2_s);
@@ -2207,6 +2247,8 @@ int E7Linha(char *E7Linha_h, char *E7Linha_s, char *E7Linha_hp, char *E7Linha_sp
         if (E8(E8_tp, E8_p, E8_c))
         {
             strcpy(E7Linha2_h, "int");
+            geratemp(E7Linha2_hp);
+            sprintf(E7Linha2_hc, "%s%s\t%s = %s & %s\n", E7Linha_hc, E8_c, E7Linha2_hp, E7Linha_hp, E8_p);
             if (E7Linha(E7Linha2_h, E7Linha2_s, E7Linha2_hp, E7Linha2_sp, E7Linha2_hc, E7Linha2_sc))
             {
                 strcpy(E7Linha_s, E7Linha2_s);
@@ -2278,6 +2320,8 @@ int E8Linha(char *E8Linha_h, char *E8Linha_s, char *E8Linha_hp, char *E8Linha_sp
         if (E9(E9_tp, E9_p, E9_c))
         {
             strcpy(E8Linha2_h, "int");
+            geratemp(E8Linha2_hp);
+            sprintf(E8Linha2_hc, "%s%s\t%s = %s == %s\n", E8Linha_hc, E9_c, E8Linha2_hp, E8Linha_hp, E9_p);
             if (E8Linha(E8Linha2_h, E8Linha2_s, E8Linha2_hp, E8Linha2_sp, E8Linha2_hc, E8Linha2_sc))
             {
                 strcpy(E8Linha_s, E8Linha2_s);
@@ -2297,6 +2341,8 @@ int E8Linha(char *E8Linha_h, char *E8Linha_s, char *E8Linha_hp, char *E8Linha_sp
         if (E9(E9_tp, E9_p, E9_c))
         {
             strcpy(E8Linha2_h, "int");
+            geratemp(E8Linha2_hp);
+            sprintf(E8Linha2_hc, "%s%s\t%s = %s != %s\n", E8Linha_hc, E9_c, E8Linha2_hp, E8Linha_hp, E9_p);
             if (E8Linha(E8Linha2_h, E8Linha2_s, E8Linha2_hp, E8Linha2_sp, E8Linha2_hc, E8Linha2_sc))
             {
                 strcpy(E8Linha_s, E8Linha2_s);
@@ -2368,6 +2414,8 @@ int E9Linha(char *E9Linha_h, char *E9Linha_s, char *E9Linha_hp, char *E9Linha_sp
         if (E10(E10_tp, E10_p, E10_c))
         {
             strcpy(E9Linha2_h, "int");
+            geratemp(E9Linha2_hp);
+            sprintf(E9Linha2_hc, "%s%s\t%s = %s < %s\n", E9Linha_hc, E10_c, E9Linha2_hp, E9Linha_hp, E10_p);
             if (E9Linha(E9Linha2_h, E9Linha2_s, E9Linha2_hp, E9Linha2_sp, E9Linha2_hc, E9Linha2_sc))
             {
                 strcpy(E9Linha_s, E9Linha2_s);
@@ -2387,6 +2435,8 @@ int E9Linha(char *E9Linha_h, char *E9Linha_s, char *E9Linha_hp, char *E9Linha_sp
         if (E10(E10_tp, E10_p, E10_c))
         {
             strcpy(E9Linha2_h, "int");
+            geratemp(E9Linha2_hp);
+            sprintf(E9Linha2_hc, "%s%s\t%s = %s > %s\n", E9Linha_hc, E10_c, E9Linha2_hp, E9Linha_hp, E10_p);
             if (E9Linha(E9Linha2_h, E9Linha2_s, E9Linha2_hp, E9Linha2_sp, E9Linha2_hc, E9Linha2_sc))
             {
                 strcpy(E9Linha_s, E9Linha2_s);
@@ -2406,6 +2456,8 @@ int E9Linha(char *E9Linha_h, char *E9Linha_s, char *E9Linha_hp, char *E9Linha_sp
         if (E10(E10_tp, E10_p, E10_c))
         {
             strcpy(E9Linha2_h, "int");
+            geratemp(E9Linha2_hp);
+            sprintf(E9Linha2_hc, "%s%s\t%s = %s <= %s\n", E9Linha_hc, E10_c, E9Linha2_hp, E9Linha_hp, E10_p);
             if (E9Linha(E9Linha2_h, E9Linha2_s, E9Linha2_hp, E9Linha2_sp, E9Linha2_hc, E9Linha2_sc))
             {
                 strcpy(E9Linha_s, E9Linha2_s);
@@ -2425,6 +2477,8 @@ int E9Linha(char *E9Linha_h, char *E9Linha_s, char *E9Linha_hp, char *E9Linha_sp
         if (E10(E10_tp, E10_p, E10_c))
         {
             strcpy(E9Linha2_h, "int");
+            geratemp(E9Linha2_hp);
+            sprintf(E9Linha2_hc, "%s%s\t%s = %s >= %s\n", E9Linha_hc, E10_c, E9Linha2_hp, E9Linha_hp, E10_p);
             if (E9Linha(E9Linha2_h, E9Linha2_s, E9Linha2_hp, E9Linha2_sp, E9Linha2_hc, E9Linha2_sc))
             {
                 strcpy(E9Linha_s, E9Linha2_s);
@@ -2496,6 +2550,8 @@ int E10Linha(char *E10Linha_h, char *E10Linha_s, char *E10Linha_hp, char *E10Lin
         if (E11(E11_tp, E11_p, E11_c))
         {
             strcpy(E10Linha2_h, "int");
+            geratemp(E10Linha2_hp);
+            sprintf(E10Linha2_hc, "%s%s\t%s = %s << %s\n", E10Linha_hc, E11_c, E10Linha2_hp, E10Linha_hp, E11_p);
             if (E10Linha(E10Linha2_h, E10Linha2_s, E10Linha2_hp, E10Linha2_sp, E10Linha2_hc, E10Linha2_sc))
             {
                 strcpy(E10Linha_s, E10Linha2_s);
@@ -2515,6 +2571,8 @@ int E10Linha(char *E10Linha_h, char *E10Linha_s, char *E10Linha_hp, char *E10Lin
         if (E11(E11_tp, E11_p, E11_c))
         {
             strcpy(E10Linha2_h, "int");
+            geratemp(E10Linha2_hp);
+            sprintf(E10Linha2_hc, "%s%s\t%s = %s >> %s\n", E10Linha_hc, E11_c, E10Linha2_hp, E10Linha_hp, E11_p);
             if (E10Linha(E10Linha2_h, E10Linha2_s, E10Linha2_hp, E10Linha2_sp, E10Linha2_hc, E10Linha2_sc))
             {
                 strcpy(E10Linha_s, E10Linha2_s);
@@ -2589,6 +2647,8 @@ int E11Linha(char *E11Linha_h, char *E11Linha_s, char *E11Linha_hp, char *E11Lin
                 strcpy(E11Linha2_h, "int");
             else
                 strcpy(E11Linha2_h, "float");
+            geratemp(E11Linha2_hp);
+            sprintf(E11Linha2_hc, "%s%s\t%s = %s + %s\n", E11Linha_hc, E12_c, E11Linha2_hp, E11Linha_hp, E12_p);
             if (E11Linha(E11Linha2_h, E11Linha2_s, E11Linha2_hp, E11Linha2_sp, E11Linha2_hc, E11Linha2_sc))
             {
                 strcpy(E11Linha_s, E11Linha2_s);
@@ -2609,6 +2669,8 @@ int E11Linha(char *E11Linha_h, char *E11Linha_s, char *E11Linha_hp, char *E11Lin
                 strcpy(E11Linha2_h, "int");
             else
                 strcpy(E11Linha2_h, "float");
+            geratemp(E11Linha2_hp);
+            sprintf(E11Linha2_hc, "%s%s\t%s = %s - %s\n", E11Linha_hc, E12_c, E11Linha2_hp, E11Linha_hp, E12_p);
             if (E11Linha(E11Linha2_h, E11Linha2_s, E11Linha2_hp, E11Linha2_sp, E11Linha2_hc, E11Linha2_sc))
             {
                 strcpy(E11Linha_s, E11Linha2_s);
@@ -2683,6 +2745,8 @@ int E12Linha(char *E12Linha_h, char *E12Linha_s, char *E12Linha_hp, char *E12Lin
                 strcpy(E12Linha2_h, "int");
             else
                 strcpy(E12Linha2_h, "float");
+            geratemp(E12Linha2_hp);
+            sprintf(E12Linha2_hc, "%s%s\t%s = %s * %s\n", E12Linha_hc, E13_c, E12Linha2_hp, E12Linha_hp, E13_p);
             if (E12Linha(E12Linha2_h, E12Linha2_s, E12Linha2_hp, E12Linha2_sp, E12Linha2_hc, E12Linha2_sc))
             {
                 strcpy(E12Linha_s, E12Linha2_s);
@@ -2705,6 +2769,8 @@ int E12Linha(char *E12Linha_h, char *E12Linha_s, char *E12Linha_hp, char *E12Lin
                 strcpy(E12Linha2_h, "int");
             else
                 strcpy(E12Linha2_h, "float");
+            geratemp(E12Linha2_hp);
+            sprintf(E12Linha2_hc, "%s%s\t%s = %s / %s\n", E12Linha_hc, E13_c, E12Linha2_hp, E12Linha_hp, E13_p);
             if (E12Linha(E12Linha2_h, E12Linha2_s, E12Linha2_hp, E12Linha2_sp, E12Linha2_hc, E12Linha2_sc))
             {
                 strcpy(E12Linha_s, E12Linha2_s);
@@ -2730,6 +2796,8 @@ int E12Linha(char *E12Linha_h, char *E12Linha_s, char *E12Linha_hp, char *E12Lin
                 printf("Erro: operação de resto inválida");
                 exit(0);
             }
+            geratemp(E12Linha2_hp);
+            sprintf(E12Linha2_hc, "%s%s\t%s = %s %c %s\n", E12Linha_hc, E13_c, E12Linha2_hp, E12Linha_hp, 37, E13_p);
             if (E12Linha(E12Linha2_h, E12Linha2_s, E12Linha2_hp, E12Linha2_sp, E12Linha2_hc, E12Linha2_sc))
             {
                 strcpy(E12Linha_s, E12Linha2_s);
@@ -2821,12 +2889,16 @@ int E14(char *E14_tp, char *E14_p, char *E14_c)
     if (token == TK_ConstInt)
     {
         strcpy(E14_tp, "int");
+        geratemp(E14_p);
+        sprintf(E14_c,"\t%s = %s\n",E14_p,lex);
         leToken();
         return 1;
     }
     else if (token == TK_ConstFloat)
     {
         strcpy(E14_tp, "float");
+        geratemp(E14_p);
+        sprintf(E14_c,"\t%s = %s\n",E14_p,lex);
         leToken();
         return 1;
     }
@@ -2847,6 +2919,16 @@ int E14(char *E14_tp, char *E14_p, char *E14_c)
         else
             return 0;
     }
+    else if (token == TK_Char)
+    {
+        strcpy(E14_tp, "char");
+        geratemp(E14_p);
+        sprintf(E14_c,"\t%s = %s\n",E14_p,lex);
+        leToken();
+        return 1;
+    }
+
+
     else if (token == TK_AbrePar)
     {
         char E_p[MAX_COD],E_c[MAX_COD];
@@ -2905,6 +2987,8 @@ int main()
     char caracter;
     char arquivo[20];
     int escolha = 0;
+    char PROGC_c[MAX_COD];
+    setbuf(stdout, NULL);
 
     int i = 0;
 
@@ -3004,6 +3088,10 @@ int main()
     while ((token = le_token(conteudo, lex)) != -1)
     {
         coluna = posColuna - subColuna;
+        char linhaSt[3];
+        char colunaSt[3];
+        snprintf(linhaSt, sizeof(linhaSt), "%d", linha);
+        snprintf(colunaSt, sizeof(colunaSt), "%d", coluna);
 
         TKsParser[posParser++] = token;
         TKsParser[posParser++] = linha;
@@ -3016,8 +3104,9 @@ int main()
     posParserLex = 0;
     leToken();
 
-    if (PROGC())
+    if (PROGC(PROGC_c))
     {
+        printf("%s", PROGC_c);
         printf("Reconhecimento semantico concluido\n");
         printf("-----------------------\n");
         getchar();
@@ -3028,8 +3117,5 @@ int main()
         printf("-----------------------\n");
         getchar();
     }
-
-
-
     return 0;
 }
