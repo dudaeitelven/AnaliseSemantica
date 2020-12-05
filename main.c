@@ -1118,7 +1118,7 @@ int LCD(char *LCD_c)
     char COM_c[MAX_COD];
     char LCDLinha_c[MAX_COD];
 
-    //strcpy(LCDLinha_c,"");
+    strcpy(LCDLinha_c,"");
 
     if (COM(COM_c))
     {
@@ -2975,6 +2975,72 @@ int RE()
     }
     else
         return 1;
+}
+
+char * retornaToken(int toke)
+{
+    if (toke == TK_Id)                    	return "TK_Id";
+    if (toke == TK_Void)					return "TK_Void";
+    if (toke == TK_Int)                     return "TK_Int";
+    if (toke == TK_Float)                   return "TK_Float";
+    if (toke == TK_Double)                  return "TK_Double";
+    if (toke == TK_Char)                    return "TK_Char";
+    if (toke == TK_Break)                   return "TK_Break";
+    if (toke == TK_If)                      return "TK_If";
+    if (toke == TK_Else)                    return "TK_Else";
+    if (toke == TK_While)                   return "TK_While";
+    if (toke == TK_Do)                      return "TK_Do";
+    if (toke == TK_For)                     return "TK_For";
+    if (toke == TK_Switch)                  return "TK_Switch";
+    if (toke == TK_Case)                    return "TK_Case";
+    if (toke == TK_Continue)                return "TK_Continue";
+    if (toke == TK_Return)                  return "TK_Return";
+    if (toke == TK_AbrePar)                 return "TK_AbrePar";
+    if (toke == TK_FechaPar)                return "TK_FechaPar";
+    if (toke == TK_AbreChave)               return "TK_AbreChave";
+    if (toke == TK_FechaChave)              return "TK_FechaChave";
+    if (toke == TK_AbreColchete)            return "TK_AbreColchete";
+    if (toke == TK_FechaColchete)           return "TK_FechaColchete";
+    if (toke == TK_PontoeVirg)              return "TK_PontoeVirg";
+    if (toke == TK_DoisPontos)              return "TK_DoisPontos";
+    if (toke == TK_Virgula)                 return "TK_Virgula";
+    if (toke == TK_Atrib)                   return "TK_Atrib";
+    if (toke == TK_Mais)                    return "TK_Mais";
+    if (toke == TK_Menos)                   return "TK_Menos";
+    if (toke == TK_Multiplicacao)           return "TK_Multiplicacao";
+    if (toke == TK_Divisao)                 return "TK_Divisao";
+    if (toke == TK_RestoDivisao)            return "TK_RestoDivisao";
+    if (toke == TK_Maior)                   return "TK_Maior";
+    if (toke == TK_Menor)                   return "TK_Menor";
+    if (toke == TK_MenosIgual)              return "TK_MenosIgual";
+    if (toke == TK_MaisIgual)               return "TK_MaisIgual";
+    if (toke == TK_MultiplicacaoIgual)      return "TK_MultiplicacaoIgual";
+    if (toke == TK_DivisaoIgual)            return "TK_DivisaoIgual";
+    if (toke == TK_ComparadorMaiorIgual)    return "TK_ComparadorMaiorIgual";
+    if (toke == TK_ComparadorMenorIgual)    return "TK_ComparadorMenorIgual";
+    if (toke == TK_MenosMenos)              return "TK_MenosMenos";
+    if (toke == TK_MaisMais)                return "TK_MaisMais";
+    if (toke == TK_ComparadorIgual)         return "TK_ComparadorIgual";
+    if (toke == TK_ComparadorDiferente)     return "TK_ComparadorDiferente";
+    if (toke == TK_Negacao)                 return "TK_Negacao";
+    if (toke == TK_Ternario)                return "TK_Ternario";
+    if (toke == TK_ShiftLeft)               return "TK_ShiftLeft";
+    if (toke == TK_ShiftRight)              return "TK_ShiftRight";
+    if (toke == TK_OU)                      return "TK_OU";
+    if (toke == TK_AND)                     return "TK_AND";
+    if (toke == TK_ELogico)                 return "TK_ELogico";
+    if (toke == TK_OULogico)                return "TK_OULogico";
+    if (toke == TK_XOR)                     return "TK_XOR";
+    if (toke == TK_ConstInt)                return "TK_ConstInt";
+    if (toke == TK_ConstFloat)              return "TK_ConstFloat";
+    if (toke == TK_ConstOctal)              return "TK_ConstOctal";
+    if (toke == TK_ConstHexa)               return "TK_ConstHexa";
+    if (toke == TK_ErroE)                   return "TK_ErroE";
+    if (toke == TK_ErroConstFloat)          return "TK_ErroConstFloat";
+    if (toke == TK_ErroOU)                  return "TK_ErroOU";
+    if (toke == TK_ErroAND)                 return "TK_ErroAND";
+    if (toke == TK_ErroConstHexa)           return "TK_ErroConstHexa";
+
 }
 
 int main()
