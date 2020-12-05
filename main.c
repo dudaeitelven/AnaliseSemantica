@@ -879,9 +879,15 @@ int RDEC(char *RDEC_t, char *RDEC_c)
     else if (token == TK_AbrePar)
     {
         leToken();
-        if (DF(DF_c))
-        {
-            strcpy(DV_t, RDEC_t);
+//        if (DF(DF_c))
+//        {
+//            strcpy(DV_t, RDEC_t);
+//            return 1;
+//        }
+//        else
+//            return 0;
+        if (DF(DF_c)) {
+            strcpy(RDEC_c, DF_c);
             return 1;
         }
         else
