@@ -879,13 +879,6 @@ int RDEC(char *RDEC_t, char *RDEC_c)
     else if (token == TK_AbrePar)
     {
         leToken();
-//        if (DF(DF_c))
-//        {
-//            strcpy(DV_t, RDEC_t);
-//            return 1;
-//        }
-//        else
-//            return 0;
         if (DF(DF_c)) {
             strcpy(RDEC_c, DF_c);
             return 1;
@@ -901,7 +894,7 @@ int RDEC(char *RDEC_t, char *RDEC_c)
     else if (token == TK_Atrib)
     {
         leToken();
-        if (token == TK_ConstInt)
+        if (token == TK_ConstInt || token == TK_ConstFloat)
         {
             leToken();
             if (token == TK_PontoeVirg)
@@ -1392,7 +1385,7 @@ int COMFOR(char *COMFOR_c)
 
     if (token == TK_For)
     {
-        laco = 1;
+        laco++;
         leToken();
         if (token == TK_AbrePar)
         {
@@ -1414,7 +1407,7 @@ int COMFOR(char *COMFOR_c)
                                     leToken();
                                     if (COM(COM_c))
                                     {
-                                        laco = 0;
+                                        laco--;
                                         if (RFOR(RFOR_c))
                                         {
                                             geralabel(labellaco);
@@ -1506,9 +1499,9 @@ int COMWHILE(char *COMWHILE_c)
     char labelfim[10];
 
 
-    if (token == TK_While && doWhile != 1)
+    if (token == TK_While && doWhile == 0)
     {
-        laco = 1;
+        laco++;
         leToken();
         if (token == TK_AbrePar)
         {
@@ -1525,7 +1518,7 @@ int COMWHILE(char *COMWHILE_c)
                             geralabel(labelinicio);
                             geralabel(labelfim);
                             sprintf(COMWHILE_c,"%s:\n%s\tif %s==0 goto %s\n%s\tgoto %s\n%s:\n%s",labelinicio,E_c,E_p,labelfim,COM_c,labelinicio,labelfim,RWHILE_c);
-                            laco = 0;
+                            laco--;
                             return 1;
                         }
                         else
@@ -1579,8 +1572,8 @@ int COMDOWHILE(char *COMDOWHILE_c)
 
     if (token == TK_Do)
     {
-        laco = 1;
-        doWhile = 1;
+        laco++;
+        doWhile++;
         leToken();
         if (COM(COM_c))
         {
@@ -1600,10 +1593,10 @@ int COMDOWHILE(char *COMDOWHILE_c)
                                 if (token == TK_PontoeVirg)
                                 {
                                     leToken();
-                                    doWhile = 0;
+                                    doWhile--;
                                     geralabel(label);
                                     sprintf(COMDOWHILE_c,"%s:\n%s%s\tif %s==1 goto %s\n%s",label,COM_c,E_c,E_p,label,RDOWHILE_c);
-                                    laco = 0;
+                                    laco--;
                                     return 1;
                                 }
                                 else

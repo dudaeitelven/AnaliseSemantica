@@ -1,15 +1,7 @@
 int main(){
-int cont=0;
-int v;
-int j, i;
-while (i=0){
-while (j=0){
-if (i == j) continue;
-else break;
-}
-
-if (i == j) continue;
-else break;
-
-}
+    int cont=0;
+    int v,j;
+    for (j=0;j<10;j=j+1)
+        if (v>v)
+            cont=cont+1;
 }
