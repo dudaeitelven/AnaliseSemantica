@@ -739,6 +739,7 @@ void leToken()
 
 typedef struct TS
 {
+	int  identificadorEscopo;
     char id[10];
     char tipo[10];
     struct TS *prox;
@@ -751,6 +752,7 @@ void addTabelaSimbolos(char *id, char *tipo)
     tabela *aux = (tabela *) malloc(sizeof(tabela));
     strcpy(aux->id, id);
     strcpy(aux->tipo, tipo);
+    aux->identificadorEscopo = laco;
     aux->prox = ts;
     ts = aux;
 }
@@ -760,7 +762,7 @@ int verificaDuplicacao(char *lex, tabela *tab)
     if (tab == NULL)
         return 1;
 
-    if (!strcmp(tab->id, lex))
+    if (!strcmp(tab->id, lex) && tab->identificadorEscopo == laco)
     {
         printf("Variavel %s ja foi declarada\n", lex);
         printf("Erro ocorreu na linha %d, coluna %d",linha,coluna);

@@ -1,7 +1,13 @@
 int main(){
-    int cont=0;
-    int v,j;
-    for (j=0;j<10;j=j+1)
-        if (v>v)
-            cont=cont+1;
+    int a=0;
+    int b=1;
+    int t;
+    int i;
+    for (i=0;i<10;i++)
+    {
+	int i;
+        t=a+b;
+        a=b;
+        b=t;
+    }
 }
