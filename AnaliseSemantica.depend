@@ -1,5 +1,5 @@
 # depslib dependency file v1.0
-1605575128 source:c:\users\eduardo\documents\wscodeblocks\compiladores\analisesemantica\main.c
+1607646500 source:c:\users\eduardo\documents\wscodeblocks\compiladores\analisesemantica\main.c
 	<string.h>
 	<stdio.h>
 	<stdlib.h>
