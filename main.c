@@ -420,8 +420,9 @@ int le_token(char st[], char lex[])
                     pos++;
                     estado_anterior = 0;
                     return TK_OU;
+                }else {
+                    return TK_OULogico;
                 }
-                return TK_ErroOU;
             }
 
             if (c == '&')
@@ -435,8 +436,10 @@ int le_token(char st[], char lex[])
                     pos++;
                     estado_anterior = 0;
                     return TK_AND;
+                }else {
+                    return TK_ELogico;
                 }
-                return TK_ErroAND;
+
             }
 
             if (c == '>')
